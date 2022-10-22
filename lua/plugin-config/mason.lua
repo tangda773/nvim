@@ -9,7 +9,8 @@ require("mason-tool-installer").setup({
 		-- formatter
 		"stylua",
 		"clang-format",
-    "yapf",
+    -- "yapf",
+    "autopep8",
 		-- linter
 		"markdownlint",
 	},

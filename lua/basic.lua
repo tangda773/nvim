@@ -32,11 +32,11 @@ vim.o.smartindent = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 -- 搜索不要高亮
-vim.o.hlsearch = false 
+vim.o.hlsearch = false
 -- 邊输入邊搜索
 vim.o.incsearch = true
 -- 使用增强状態欄后不再需要 vim 的模式提示
-vim.o.showmode = false 
+vim.o.showmode = false
 -- 命令行高為2，提供足夠的顯示空間
 vim.o.cmdheight = 2
 -- 當文件被外部程序修改时，自動加载
@@ -79,3 +79,5 @@ vim.o.shortmess = vim.o.shortmess .. 'c'
 vim.o.pumheight = 10
 -- always show tabline
 vim.o.showtabline = 2
+-- enable copy between clipboard and terminals
+vim.opt.clipboard = "unnamedplus"
