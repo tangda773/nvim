@@ -178,4 +178,8 @@ return require("packer").startup(function()
 
   -- Terminal
 	use{"akinsho/toggleterm.nvim", tag='*'}
+
+  -- TODO Plugin
+  use { "folke/todo-comments.nvim",requires = "nvim-lua/plenary.nvim"}
+
 end)

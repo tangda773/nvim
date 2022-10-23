@@ -110,3 +110,6 @@ lua require('plugin-config/toggletasks')
 
 " Terminal
 lua require('plugin-config/toggleterm')
+
+" TODO comment setting
+lua require('plugin-config/todo')
