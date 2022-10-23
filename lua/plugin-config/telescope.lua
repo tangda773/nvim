@@ -3,7 +3,7 @@ require('telescope').setup{
     -- Default configuration for telescope goes here:
     -- config_key = value,
     -- 窗口內快捷鍵
-    mappings = require("keybindings").telescopelist,
+    mappings = require("keybindings").telescopeList,
   },
   pickers = {
     -- Default configuration for builtin pickers goes here:
