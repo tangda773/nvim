@@ -74,6 +74,11 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["Abstract-cs"] = {
+    loaded = true,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/Abstract-cs",
+    url = "https://github.com/Abstract-IDE/Abstract-cs"
+  },
   ["Comment.nvim"] = {
     loaded = true,
     path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/Comment.nvim",
@@ -83,6 +88,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
+  },
+  ["bufdelete.nvim"] = {
+    loaded = true,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/bufdelete.nvim",
+    url = "https://github.com/famiu/bufdelete.nvim"
   },
   ["bufferline.nvim"] = {
     loaded = true,
@@ -104,10 +114,20 @@ _G.packer_plugins = {
     path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
   },
+  ["cmp-nvim-lua"] = {
+    loaded = true,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/cmp-nvim-lua",
+    url = "https://github.com/hrsh7th/cmp-nvim-lua"
+  },
   ["cmp-path"] = {
     loaded = true,
     path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/cmp-path",
     url = "https://github.com/hrsh7th/cmp-path"
+  },
+  ["cmp-under-comparator"] = {
+    loaded = true,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/cmp-under-comparator",
+    url = "https://github.com/lukas-reineke/cmp-under-comparator"
   },
   cmp_luasnip = {
     loaded = true,
@@ -129,11 +149,6 @@ _G.packer_plugins = {
     path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
   },
-  ["glow.nvim"] = {
-    loaded = true,
-    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/glow.nvim",
-    url = "https://github.com/ellisonleao/glow.nvim"
-  },
   ["hop.nvim"] = {
     loaded = true,
     path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/hop.nvim",
@@ -144,15 +159,15 @@ _G.packer_plugins = {
     path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
     url = "https://github.com/lukas-reineke/indent-blankline.nvim"
   },
+  ["kanagawa.nvim"] = {
+    loaded = true,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/kanagawa.nvim",
+    url = "https://github.com/rebelot/kanagawa.nvim"
+  },
   knap = {
     loaded = true,
     path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/knap",
     url = "https://github.com/frabjous/knap"
-  },
-  ["lazygit.nvim"] = {
-    loaded = true,
-    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/lazygit.nvim",
-    url = "https://github.com/kdheepak/lazygit.nvim"
   },
   ["lsp_signature.nvim"] = {
     loaded = true,
@@ -204,10 +219,25 @@ _G.packer_plugins = {
     path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
     url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
   },
+  ["nvim-autopairs"] = {
+    loaded = true,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
+    url = "https://github.com/windwp/nvim-autopairs"
+  },
+  ["nvim-bqf"] = {
+    loaded = true,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/nvim-bqf",
+    url = "https://github.com/kevinhwang91/nvim-bqf"
+  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
+  },
+  ["nvim-cmp-lua-latex-symbols"] = {
+    loaded = true,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/nvim-cmp-lua-latex-symbols",
+    url = "https://github.com/amarakon/nvim-cmp-lua-latex-symbols"
   },
   ["nvim-dap"] = {
     loaded = true,
@@ -233,6 +263,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/nvim-notify",
     url = "https://github.com/rcarriga/nvim-notify"
+  },
+  ["nvim-surround"] = {
+    loaded = true,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/nvim-surround",
+    url = "https://github.com/kylechui/nvim-surround"
   },
   ["nvim-tree.lua"] = {
     loaded = true,
@@ -264,10 +299,10 @@ _G.packer_plugins = {
     path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
-  ["symbols-outline.nvim"] = {
+  ["project.nvim"] = {
     loaded = true,
-    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/symbols-outline.nvim",
-    url = "https://github.com/simrat39/symbols-outline.nvim"
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/project.nvim",
+    url = "https://github.com/ahmedkhalf/project.nvim"
   },
   ["telescope-fzf-native.nvim"] = {
     loaded = true,
@@ -283,6 +318,21 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
+  },
+  ["todo-comments.nvim"] = {
+    loaded = true,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/todo-comments.nvim",
+    url = "https://github.com/folke/todo-comments.nvim"
+  },
+  ["toggletasks.nvim"] = {
+    loaded = true,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/toggletasks.nvim",
+    url = "https://github.com/jedrzejboczar/toggletasks.nvim"
+  },
+  ["toggleterm.nvim"] = {
+    loaded = true,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
+    url = "https://github.com/akinsho/toggleterm.nvim"
   },
   ["tokyonight.nvim"] = {
     loaded = true,

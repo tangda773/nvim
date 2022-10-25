@@ -84,7 +84,7 @@ lua require('plugin-config/crates')
 " lua require('plugin-config/tmux')
 
 " Symbols Outline 設定
-lua require('plugin-config/symbols-outline')
+" lua require('plugin-config/symbols-outline')
 
 " Git 相關設定
 " lua require('plugin-config/lazygit')
@@ -103,7 +103,7 @@ lua require('lsp/nvim-cmp')
 lua require('plugin-config/neodev')
 
 " Project management
-lua require('plugin-config/project')
+" lua require('plugin-config/project')
 
 " Code Runner
 lua require('plugin-config/toggletasks')
@@ -120,4 +120,5 @@ lua require('plugin-config/nvim-surround')
 " QuickFix improve
 lua require('plugin-config/nvim-bqf')
 
+" autopairs plugin
 lua require('plugin-config/nvim-autopairs')

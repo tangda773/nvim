@@ -78,7 +78,7 @@ return require("packer").startup(function()
 	use("tami5/lspsaga.nvim")
 
 	-- LSP Symbols Tree
-	use("simrat39/symbols-outline.nvim")
+	-- use("simrat39/symbols-outline.nvim")
 
 	-- lua 語法補全增強
 	use("folke/neodev.nvim")
@@ -96,7 +96,7 @@ return require("packer").startup(function()
 	use("frabjous/knap")
 
 	-- Markdown Rendere in CLI
-	use({ "ellisonleao/glow.nvim" })
+	-- use({ "ellisonleao/glow.nvim" })
 
 	-- notification manager
 	use("rcarriga/nvim-notify")

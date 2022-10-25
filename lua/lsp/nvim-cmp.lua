@@ -27,11 +27,8 @@ cmp.setup({
     -- { name = 'ultisnips' }, -- For ultisnips users.
     -- { name = 'snippy' }, -- For snippy users.
   }, {
-    { name = "buffer" },
-    { name = "path" },
-    { name = "cmdline" },
-    { name = "crates" },
     { name = "nvim_lua" },
+    { name = "path" },
   }),
   sorting = {
     comparators = {
@@ -72,10 +69,16 @@ cmp.setup.cmdline("/", {
 -- Use cmdline & path source for ':'.
 cmp.setup.cmdline(":", {
   sources = cmp.config.sources({
-    { name = "path" },
   }, {
     { name = "cmdline" },
   }),
+})
+
+-- Only enable `lua-latex-symbols` for `tex` and `plaintex` and `markdown` file types
+cmp.setup.filetype({ "toml" }, {
+  sources = {
+    { name = "crates" },
+  },
 })
 
 -- Only enable `lua-latex-symbols` for `tex` and `plaintex` and `markdown` file types
