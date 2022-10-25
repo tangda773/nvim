@@ -87,7 +87,7 @@ lua require('plugin-config/crates')
 lua require('plugin-config/symbols-outline')
 
 " Git 相關設定
-lua require('plugin-config/lazygit')
+" lua require('plugin-config/lazygit')
 lua require('plugin-config/gitsigns')
 
 " nvim-dap 相關設定
@@ -113,3 +113,11 @@ lua require('plugin-config/toggleterm')
 
 " TODO comment setting
 lua require('plugin-config/todo')
+
+" Surround plugin"
+lua require('plugin-config/nvim-surround')
+
+" QuickFix improve
+lua require('plugin-config/nvim-bqf')
+
+lua require('plugin-config/nvim-autopairs')

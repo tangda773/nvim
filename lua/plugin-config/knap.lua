@@ -2,9 +2,10 @@ local gknapsettings = {
     texoutputext = "pdf",
     textopdf = "xelatex -synctex=1 -halt-on-error -interaction=batchmode %docroot%",
     -- for html
-    htmltohtmlviewerlaunch = "live-server --quiet --browser=firefox --open=%outputfile% --watch=%outputfile% --wait=800",
+    htmltohtmlviewerlaunch = "live-server --quiet --browser=safari --open=%outputfile% --watch=%outputfile% --wait=800",
     htmltohtmlviewerrefresh = "none",
-    mdtohtmlviewerlaunch = "live-server --quiet --browser=firefox --open=%outputfile% --watch=%outputfile% --wait=800",
+    mdtohtml = "pandoc --standalone --mathjax %docroot% -o %outputfile%",
+    mdtohtmlviewerlaunch = "live-server --quiet --browser=safari --open=%outputfile% --watch=%outputfile% --wait=800",
     mdtohtmlviewerrefresh = "none",
     -- for pdf
     textopdfviewerlaunch = "sioyek --inverse-search 'nvim --headless -es --cmd \"lua require('\"'\"'knaphelper'\"'\"').relayjump('\"'\"'%servername%'\"'\"','\"'\"'%1'\"'\"',%2,0)\"' --reuse-instance %outputfile%",

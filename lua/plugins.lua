@@ -62,6 +62,9 @@ return require("packer").startup(function()
 	use("hrsh7th/cmp-buffer") -- { name = 'buffer' },
 	use("hrsh7th/cmp-path") -- { name = 'path' }
 	use("hrsh7th/cmp-cmdline") -- { name = 'cmdline' }
+  use("hrsh7th/cmp-nvim-lua")
+  use("lukas-reineke/cmp-under-comparator")
+  use("amarakon/nvim-cmp-lua-latex-symbols")
 	use("hrsh7th/nvim-cmp")
 
 	-- For luasnip users.
@@ -167,7 +170,7 @@ return require("packer").startup(function()
 	use("wakatime/vim-wakatime")
 
 	-- Git
-	use("kdheepak/lazygit.nvim")
+	-- use("kdheepak/lazygit.nvim")
 	use("lewis6991/gitsigns.nvim")
 
   -- Project Management
@@ -182,4 +185,12 @@ return require("packer").startup(function()
   -- TODO Plugin
   use { "folke/todo-comments.nvim",requires = "nvim-lua/plenary.nvim"}
 
+  -- QuickFix Improve
+  use {"kevinhwang91/nvim-bqf"}
+
+  -- Surrounded Selection
+  use {"kylechui/nvim-surround"}
+
+  -- autopair plugin
+  use {"windwp/nvim-autopairs"}
 end)
