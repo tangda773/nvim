@@ -84,6 +84,11 @@ _G.packer_plugins = {
     path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/Comment.nvim",
     url = "https://github.com/numToStr/Comment.nvim"
   },
+  ["FixCursorHold.nvim"] = {
+    loaded = true,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/FixCursorHold.nvim",
+    url = "https://github.com/antoinemadec/FixCursorHold.nvim"
+  },
   LuaSnip = {
     loaded = true,
     path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/LuaSnip",
@@ -209,6 +214,26 @@ _G.packer_plugins = {
     path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/neodev.nvim",
     url = "https://github.com/folke/neodev.nvim"
   },
+  neotest = {
+    loaded = true,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/neotest",
+    url = "https://github.com/nvim-neotest/neotest"
+  },
+  ["neotest-plenary"] = {
+    loaded = true,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/neotest-plenary",
+    url = "https://github.com/nvim-neotest/neotest-plenary"
+  },
+  ["neotest-python"] = {
+    loaded = true,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/neotest-python",
+    url = "https://github.com/nvim-neotest/neotest-python"
+  },
+  ["neotest-vim-test"] = {
+    loaded = true,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/neotest-vim-test",
+    url = "https://github.com/nvim-neotest/neotest-vim-test"
+  },
   ["neovim-session-manager"] = {
     loaded = true,
     path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/neovim-session-manager",
@@ -285,8 +310,9 @@ _G.packer_plugins = {
     url = "https://github.com/p00f/nvim-ts-rainbow"
   },
   ["nvim-web-devicons"] = {
-    loaded = true,
-    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
+    loaded = false,
+    needs_bufread = false,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/opt/nvim-web-devicons",
     url = "https://github.com/kyazdani42/nvim-web-devicons"
   },
   ["packer.nvim"] = {
@@ -303,6 +329,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/project.nvim",
     url = "https://github.com/ahmedkhalf/project.nvim"
+  },
+  sniprun = {
+    loaded = true,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/sniprun",
+    url = "https://github.com/michaelb/sniprun"
   },
   ["telescope-fzf-native.nvim"] = {
     loaded = true,
@@ -324,11 +355,6 @@ _G.packer_plugins = {
     path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/todo-comments.nvim",
     url = "https://github.com/folke/todo-comments.nvim"
   },
-  ["toggletasks.nvim"] = {
-    loaded = true,
-    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/toggletasks.nvim",
-    url = "https://github.com/jedrzejboczar/toggletasks.nvim"
-  },
   ["toggleterm.nvim"] = {
     loaded = true,
     path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
@@ -348,6 +374,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/vim-illuminate",
     url = "https://github.com/RRethy/vim-illuminate"
+  },
+  ["vim-test"] = {
+    loaded = true,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/vim-test",
+    url = "https://github.com/vim-test/vim-test"
   },
   ["vim-wakatime"] = {
     loaded = true,

@@ -106,7 +106,13 @@ lua require('plugin-config/neodev')
 " lua require('plugin-config/project')
 
 " Code Runner
-lua require('plugin-config/toggletasks')
+" lua require('plugin-config/toggletasks')
+
+" Code Runner
+lua require('plugin-config/sniprun')
+
+" Code Tester
+lua require('plugin-config/neotest')
 
 " Terminal
 lua require('plugin-config/toggleterm')
