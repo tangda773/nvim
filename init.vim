@@ -21,7 +21,6 @@ lua require('plugin-config/lualine')
 
 " tab 頁相關設定
 lua require('plugin-config/bufferline')
-
 " 檔案管理器設定
 lua require('plugin-config/nvim-tree')
 " 檔案管理自動關閉
@@ -102,11 +101,11 @@ lua require('lsp/nvim-cmp')
 " For dev development
 lua require('plugin-config/neodev')
 
-" Project management
-" lua require('plugin-config/project')
+" For file icon support
+lua require('plugin-config/web-devicons')
 
-" Code Runner
-" lua require('plugin-config/toggletasks')
+" Run Code Like vscode task
+lua require('overseer/setup')
 
 " Code Runner
 lua require('plugin-config/sniprun')

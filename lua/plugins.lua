@@ -9,23 +9,25 @@ return require("packer").startup(function()
   use("folke/tokyonight.nvim")
   use("Abstract-IDE/Abstract-cs")
   use("rebelot/kanagawa.nvim")
+
+  use("nvim-tree/nvim-web-devicons")
   -- 狀態欄插件
   use({
     "nvim-lualine/lualine.nvim",
-    requires = { "kyazdani42/nvim-web-devicons", opt = true },
+    requires = { "nvim-tree/nvim-web-devicons", opt = true },
   })
 
   -- 檔案管理插件
   use({
-    "kyazdani42/nvim-tree.lua",
+    "nvim-tree/nvim-tree.lua",
     requires = {
-      "kyazdani42/nvim-web-devicons", -- optional, for file icon
+      "nvim-tree/nvim-web-devicons", -- optional, for file icon
     },
     tag = "nightly", -- optional, updated every week. (see issue #1193)
   })
 
   -- tab頁插件
-  use({ "akinsho/bufferline.nvim", requires = "kyazdani42/nvim-web-devicons" })
+  use({ "akinsho/bufferline.nvim", requires = "nvim-tree/nvim-web-devicons" })
 
   -- 語法高亮插件
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
@@ -75,9 +77,6 @@ return require("packer").startup(function()
   -- LSP UI 美化
   use("tami5/lspsaga.nvim")
 
-  -- LSP Symbols Tree
-  -- use("simrat39/symbols-outline.nvim")
-
   -- lua 語法補全增強
   use("folke/neodev.nvim")
 
@@ -93,9 +92,6 @@ return require("packer").startup(function()
   -- LaTeX/Markdown Previewer
   use("frabjous/knap")
 
-  -- Markdown Rendere in CLI
-  -- use({ "ellisonleao/glow.nvim" })
-
   -- notification manager
   use("rcarriga/nvim-notify")
 
@@ -106,7 +102,7 @@ return require("packer").startup(function()
 
   use({
     "folke/trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
+    requires = "nvim-tree/nvim-web-devicons",
   })
 
   -- help you learn keymap
@@ -135,20 +131,8 @@ return require("packer").startup(function()
   -- fixed bufdelete
   use("famiu/bufdelete.nvim")
 
-  -- Code Runner
-  -- use({ "michaelb/sniprun", run = "bash ./install.sh" })
-
   -- 顯示空格
   use("lukas-reineke/indent-blankline.nvim")
-
-  -- Auto Save File
-  -- use({ "Pocco81/auto-save.nvim", branch = "dev" })
-
-  -- Lsp Linter
-  -- use("mfussenegger/nvim-lint")
-
-  -- Lsp formatter
-  -- use({ "mhartington/formatter.nvim" })
 
   -- Lsp Linter & formatter
   use("jose-elias-alvarez/null-ls.nvim")
@@ -175,11 +159,12 @@ return require("packer").startup(function()
   use("ahmedkhalf/project.nvim")
 
   -- Code Runner
-  -- use("jedrzejboczar/toggletasks.nvim")
-
-  -- Code Runner
   use({ "michaelb/sniprun", run = "bash ./install.sh" })
 
+  -- Run Code like vscode.task
+  use({
+    "stevearc/overseer.nvim",
+  })
   -- Code Tester
   use({
     "nvim-neotest/neotest",
@@ -187,7 +172,7 @@ return require("packer").startup(function()
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
       -- NOTE: This Plugin is not needed after https://github.com/neovim/neovim/pull/20198
-      "antoinemadec/FixCursorHold.nvim",
+      -- "antoinemadec/FixCursorHold.nvim",
       -- Need Adapter
       "nvim-neotest/neotest-python",
       "nvim-neotest/neotest-plenary",

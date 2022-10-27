@@ -74,9 +74,11 @@ pluginKeys.mappings = {
       D = "Gitsigns Diff This(~)",
     },
     t = {
-      name = "+Gitsigns",
+      name = "+Gitsigns & Overseer Task",
       b = "Gitsigns Toggle Current Line Blame",
       d = "Gitsigns Toggle Deleted",
+      r = {"<cmd>: OverseerRun<CR>", "Overseer Run Tasks"},
+      o = {"<cmd>: OverseerQuickAction open float<CR>", "Overseer Show Tasks Output"},
     },
     ["gg"] = { "<cmd>:LazyGit<CR>", "LazyGit" },
   },
