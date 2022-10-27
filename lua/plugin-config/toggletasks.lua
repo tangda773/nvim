@@ -1,1 +1,0 @@
-require('toggletasks').setup({})
