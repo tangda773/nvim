@@ -31,7 +31,10 @@ return require("packer").startup(function()
 
   -- 語法高亮插件
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
-
+  use({ "nvim-treesitter/nvim-treesitter-refactor" })
+  use({ "nvim-treesitter/nvim-treesitter-textobjects" })
+  use({ "nvim-treesitter/nvim-treesitter-context" })
+  use({ "nvim-treesitter/playground" })
   use("p00f/nvim-ts-rainbow")
 
   -- 模糊搜詢插件

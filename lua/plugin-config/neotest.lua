@@ -8,4 +8,5 @@ require("neotest").setup({
       ignore_file_types = { "python", "vim", "lua" },
     }),
   },
+  consumers = { overseer = require("neotest.consumers.overseer") },
 })
