@@ -21,6 +21,7 @@ lua require('plugin-config/lualine')
 
 " tab 頁相關設定
 lua require('plugin-config/bufferline')
+
 " 檔案管理器設定
 lua require('plugin-config/nvim-tree')
 " 檔案管理自動關閉

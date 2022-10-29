@@ -76,7 +76,7 @@ return require("packer").startup(function()
   use("onsails/lspkind-nvim")
 
   -- LSP UI 美化
-  use({"glepnir/lspsaga.nvim", branch = "main"})
+  use({ "glepnir/lspsaga.nvim", branch = "main" })
 
   -- lua 語法補全增強
   use("folke/neodev.nvim")
