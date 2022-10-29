@@ -4,7 +4,8 @@ require("lualine").setup({
   options = {
     icons_enabled = true,
     theme = "auto",
-    component_separators = { left = "", right = "" },
+    -- component_separators = { left = "", right = "" },
+    component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
     disabled_filetypes = {},
     always_divide_middle = true,
@@ -15,7 +16,6 @@ require("lualine").setup({
     lualine_b = { "branch", "diff", "diagnostics" },
     lualine_c = {
       "filename",
-      { navic.get_location, cond = navic.is_available },
       {
         function()
           return "%="

@@ -31,12 +31,10 @@ return require("packer").startup(function()
 
   -- 語法高亮插件
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
-  use({ "nvim-treesitter/nvim-treesitter-refactor" })
   use({ "nvim-treesitter/nvim-treesitter-textobjects" })
   use({ "nvim-treesitter/nvim-treesitter-context" })
   use({ "nvim-treesitter/playground" })
   use("p00f/nvim-ts-rainbow")
-
   -- 模糊搜詢插件
   use({
     "nvim-telescope/telescope.nvim",
@@ -78,7 +76,7 @@ return require("packer").startup(function()
   use("onsails/lspkind-nvim")
 
   -- LSP UI 美化
-  use("tami5/lspsaga.nvim")
+  use({"glepnir/lspsaga.nvim", branch = "main"})
 
   -- lua 語法補全增強
   use("folke/neodev.nvim")
@@ -86,7 +84,7 @@ return require("packer").startup(function()
   -- 游標快速移動插件
   use({
     "phaazon/hop.nvim",
-    branch = "v1", -- optional but strongly recommended
+    branch = "v2", -- optional but strongly recommended
   })
 
   -- Session 管理插件
@@ -97,11 +95,6 @@ return require("packer").startup(function()
 
   -- notification manager
   use("rcarriga/nvim-notify")
-
-  use({
-    "SmiteshP/nvim-navic",
-    requires = "neovim/nvim-lspconfig",
-  })
 
   use({
     "folke/trouble.nvim",
@@ -125,8 +118,6 @@ return require("packer").startup(function()
   use("mfussenegger/nvim-dap")
   -- debugger UI
   use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
-  -- debugger installer
-  -- use 'Pocco81/DAPInstall.nvim'
 
   -- Comment plugin
   use("numToStr/Comment.nvim")
@@ -175,7 +166,9 @@ return require("packer").startup(function()
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
       -- NOTE: This Plugin is not needed after https://github.com/neovim/neovim/pull/20198
+      --
       -- "antoinemadec/FixCursorHold.nvim",
+      --
       -- Need Adapter
       "nvim-neotest/neotest-python",
       "nvim-neotest/neotest-plenary",

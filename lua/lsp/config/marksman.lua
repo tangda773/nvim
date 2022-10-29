@@ -5,7 +5,6 @@ local opts = {
         vim.api.nvim_buf_set_keymap(bufnr, ...)
      end
      require('keybindings').mapLSP(buf_set_keymap)
-     -- require("nvim-navic").attach(client, bufnr)
      require("illuminate").on_attach(client)
      require("lsp_signature").on_attach(client, bufnr)
   end

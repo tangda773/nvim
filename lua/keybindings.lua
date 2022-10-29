@@ -14,6 +14,14 @@ pluginKeys.mappings = {
     "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>",
     "Find Previous Char",
   },
+  t = {
+    "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<cr>",
+    "Find Next Char(Before Char)",
+  },
+  T = {
+    "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<cr>",
+    "Find Previous Char(After Char)",
+  },
   ["<F9>"] = { "<cmd>lua require'dap'.toggle_breakpoint()<CR>", "Toggle Breakpoint" },
   ["<F5>"] = { "<cmd>lua require'dap'.continue()<CR>", "Continue" },
   ["<F11>"] = { "<cmd>lua require'dap'.step_into()<CR>", "Step Into" },
@@ -77,16 +85,17 @@ pluginKeys.mappings = {
       name = "+Gitsigns & Overseer Task",
       b = "Gitsigns Toggle Current Line Blame",
       d = "Gitsigns Toggle Deleted",
-      r = {"<cmd>: OverseerRun<CR>", "Overseer Run Tasks"},
-      o = {"<cmd>: OverseerQuickAction open float<CR>", "Overseer Show Tasks Output"},
+      r = { "<cmd>: OverseerRun<CR>", "Overseer Run Tasks" },
+      o = { "<cmd>: OverseerQuickAction open float<CR>", "Overseer Show Tasks Output" },
     },
     ["gg"] = { "<cmd>:LazyGit<CR>", "LazyGit" },
   },
   g = {
     name = "+LSP Function",
     o = { "Show Line Diagnostics" },
+    s = { "Show Symbol Outline" },
     D = { "Show Declaration" },
-    d = { "Show Definitions" },
+    d = { "Peek Definitions" },
     h = { "Show Hover Doc" },
     i = { "Show Implementation" },
     r = { "Show Finder" },
@@ -112,18 +121,20 @@ pluginKeys.telescopeList = {
 -- lsp 回調函數快捷鍵設置
 pluginKeys.mapLSP = function(mapbuf)
   -- rename
-  mapbuf("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opt)
+  mapbuf("n", "<leader>rn", ":Lspsaga rename<CR>", opt)
   -- code action
-  mapbuf("n", "<leader>xa", "<cmd>Lspsaga code_action<CR>", opt)
+  mapbuf("n", "<leader>xa", ":Lspsaga code_action<CR>", opt)
   -- go xx
-  mapbuf("n", "gd", "<cmd>lua require'telescope.builtin'.lsp_definitions({ initial_mode = 'normal', })<CR>", opt)
-  mapbuf("n", "gh", "<cmd>Lspsaga hover_doc<CR>", opt)
+  mapbuf("n", "gf", ":Lspsaga lsp_finder<CR>", opt)
+  mapbuf("n", "gd", ":Lspsaga peek_definition<CR>", opt)
+  mapbuf("n", "gh", ":Lspsaga hover_doc<CR>", opt)
   mapbuf("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opt)
   mapbuf("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opt)
   mapbuf("n", "gr", ":Lspsaga lsp_finder<CR>", opt) -- diagnostic
-  mapbuf("n", "go", "<cmd>Lspsaga show_line_diagnostics<CR>", opt)
-  mapbuf("n", "gn", "<cmd>Lspsaga diagnostic_jump_next<cr>", opt)
-  mapbuf("n", "gp", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opt)
+  mapbuf("n", "go", ":Lspsaga show_line_diagnostics<CR>", opt)
+  mapbuf("n", "gs", ":LSoutlineToggle<CR>", opt)
+  mapbuf("n", "gn", ":Lspsaga diagnostic_jump_next<cr>", opt)
+  mapbuf("n", "gp", ":Lspsaga diagnostic_jump_prev<cr>", opt)
   -- formatter
   mapbuf("n", "<leader>=", "<cmd>lua vim.lsp.buf.format{async = true}<CR>", opt)
 end

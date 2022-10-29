@@ -41,8 +41,6 @@ local opts = {
 		-- local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 		-- 绑定快捷键
 		require("keybindings").mapLSP(buf_set_keymap)
-		-- show current context
-		require("nvim-navic").attach(client, bufnr)
 		require("illuminate").on_attach(client)
 		require("lsp_signature").on_attach(client, bufnr)
 	end,
