@@ -71,7 +71,7 @@ local function config_winbar_or_statusline()
     end
     vim.wo.winbar = win_val
     -- if work in statusline
-    vim.wo.stl = win_val
+    -- vim.wo.stl = win_val
   end
 end
 
