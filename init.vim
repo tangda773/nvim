@@ -5,11 +5,6 @@ if has('termguicolors')
   set termguicolors
 endif
 
-if has('nvim') && executable('nvr')
-  let $GIT_EDITOR = "nvr -cc split --remote-wait +'set bufhidden=wipe'"
-  let g:lazygit_use_neovim_remote = 0
-endif
-
 " 基礎設置
 lua require('basic')
 
@@ -128,3 +123,8 @@ lua require('plugin-config/nvim-bqf')
 
 " autopairs plugin
 lua require('plugin-config/nvim-autopairs')
+
+" startup menu config
+lua require('plugin-config/alpha')
+" disable the tabline when alpha buffer
+ autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2

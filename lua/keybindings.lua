@@ -41,9 +41,7 @@ pluginKeys.mappings = {
   ["<BS>"] = "node_decremental",
   ["<TAB>"] = "scope_incremental",
   ["<leader>"] = {
-    name = "+Trouble & Formatter & Crates",
-    f = { ":Format<CR>", "Format File" },
-    F = { ":FormatWrite<CR>", "Format & Save File" },
+    name = "+Trouble & Crates & Gitsigns & Overseer Tasks",
     ["="] = { "Lsp Formatting" },
     x = {
       name = "+Trouble",
@@ -156,8 +154,11 @@ pluginKeys.cmp = function(cmp)
       behavior = cmp.ConfirmBehavior.Replace,
     }),
     -- ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+    ["<C-k>"] = cmp.mapping.select_prev_item(),
+    ["<C-j>"] = cmp.mapping.select_next_item(),
     ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
     ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
+    ["<C-e>"] = cmp.mapping.abort(),
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()

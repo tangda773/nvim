@@ -30,7 +30,13 @@ return require("packer").startup(function()
   use({ "akinsho/bufferline.nvim", requires = "nvim-tree/nvim-web-devicons" })
 
   -- 語法高亮插件
-  use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+  use({
+    "nvim-treesitter/nvim-treesitter",
+    run = function()
+      local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
+      ts_update()
+    end,
+  })
   use({ "nvim-treesitter/nvim-treesitter-textobjects" })
   use({ "nvim-treesitter/nvim-treesitter-context" })
   use({ "nvim-treesitter/playground" })
@@ -192,4 +198,10 @@ return require("packer").startup(function()
 
   -- autopair plugin
   use({ "windwp/nvim-autopairs" })
+
+  -- startup menu
+  use({
+    "goolord/alpha-nvim",
+    requires = { "kyazdani42/nvim-web-devicons" },
+  })
 end)
