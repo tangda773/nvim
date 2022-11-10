@@ -18,7 +18,8 @@ lua require('plugin-config/lualine')
 lua require('plugin-config/bufferline')
 
 " 檔案管理器設定
-lua require('plugin-config/nvim-tree')
+" lua require('plugin-config/nvim-tree')
+"
 " 檔案管理自動關閉
 autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
 
@@ -128,3 +129,6 @@ lua require('plugin-config/nvim-autopairs')
 lua require('plugin-config/alpha')
 " disable the tabline when alpha buffer
  autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
+
+" required nnn file manager
+lua require('plugin-config/nnn')

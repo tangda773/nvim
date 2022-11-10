@@ -19,7 +19,7 @@ dashboard.section.buttons.val = {
   dashboard.button("f", "  > Find file", ":cd $HOME/Documents | Telescope find_files<CR>"),
   dashboard.button("r", "  > Recent file", ":Telescope oldfiles<CR>"),
   dashboard.button("c", "  > Open session", ":SessionManager load_session<CR>"),
-  dashboard.button("s", "  > Settings", ":e $MYVIMRC | :cd %:p:h | split . | wincmd k | pwd<CR>"),
+  dashboard.button("s", "  > Settings", ":e $MYVIMRC<CR>"),
   dashboard.button("q", "  > Quit NVIM", ":qa<CR>"),
 }
 

@@ -86,7 +86,6 @@ pluginKeys.mappings = {
       r = { "<cmd>: OverseerRun<CR>", "Overseer Run Tasks" },
       o = { "<cmd>: OverseerQuickAction open float<CR>", "Overseer Show Tasks Output" },
     },
-    ["gg"] = { "<cmd>:LazyGit<CR>", "LazyGit" },
   },
   g = {
     name = "+LSP Function",

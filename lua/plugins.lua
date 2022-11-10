@@ -10,7 +10,9 @@ return require("packer").startup(function()
   use("Abstract-IDE/Abstract-cs")
   use("rebelot/kanagawa.nvim")
 
+  -- For terminal Icon
   use("nvim-tree/nvim-web-devicons")
+
   -- 狀態欄插件
   use({
     "nvim-lualine/lualine.nvim",
@@ -18,13 +20,13 @@ return require("packer").startup(function()
   })
 
   -- 檔案管理插件
-  use({
-    "nvim-tree/nvim-tree.lua",
-    requires = {
-      "nvim-tree/nvim-web-devicons", -- optional, for file icon
-    },
-    tag = "nightly", -- optional, updated every week. (see issue #1193)
-  })
+  -- use({
+  --   "nvim-tree/nvim-tree.lua",
+  --   requires = {
+  --     "nvim-tree/nvim-web-devicons", -- optional, for file icon
+  --   },
+  --   tag = "nightly", -- optional, updated every week. (see issue #1193)
+  -- })
 
   -- tab頁插件
   use({ "akinsho/bufferline.nvim", requires = "nvim-tree/nvim-web-devicons" })
@@ -203,5 +205,10 @@ return require("packer").startup(function()
   use({
     "goolord/alpha-nvim",
     requires = { "kyazdani42/nvim-web-devicons" },
+  })
+
+  -- required nnn file manager
+  use({
+    "luukvbaal/nnn.nvim",
   })
 end)
