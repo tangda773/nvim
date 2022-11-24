@@ -80,11 +80,13 @@ pluginKeys.mappings = {
       D = "Gitsigns Diff This(~)",
     },
     t = {
-      name = "+Gitsigns & Overseer Task",
+      name = "+Gitsigns & Overseer Task & Neotest",
       b = "Gitsigns Toggle Current Line Blame",
       d = "Gitsigns Toggle Deleted",
       r = { "<cmd>: OverseerRun<CR>", "Overseer Run Tasks" },
       o = { "<cmd>: OverseerQuickAction open float<CR>", "Overseer Show Tasks Output" },
+      t = {"<cmd> lua require('neotest').run.run()<CR>", "Neotest Run Current Line"},
+      a = {"<cmd> lua require('neotest').run.run(vim.fn.expand('%'))<CR>", "Neotest Run Current File"},
     },
   },
   g = {
@@ -95,7 +97,7 @@ pluginKeys.mappings = {
     d = { "Peek Definitions" },
     h = { "Show Hover Doc" },
     i = { "Show Implementation" },
-    r = { "Show Finder" },
+    f = { "Show Finder" },
     n = { "Diagnostics Jump Next" },
     p = { "Diagnostics Jump Prev" },
     ["cc"] = { "Comment Current Line" },
