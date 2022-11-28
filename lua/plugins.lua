@@ -20,13 +20,13 @@ return require("packer").startup(function()
   })
 
   -- 檔案管理插件
-  -- use({
-  --   "nvim-tree/nvim-tree.lua",
-  --   requires = {
-  --     "nvim-tree/nvim-web-devicons", -- optional, for file icon
-  --   },
-  --   tag = "nightly", -- optional, updated every week. (see issue #1193)
-  -- })
+  use({
+    "nvim-tree/nvim-tree.lua",
+    requires = {
+      "nvim-tree/nvim-web-devicons", -- optional, for file icon
+    },
+    tag = "nightly", -- optional, updated every week. (see issue #1193)
+  })
 
   -- tab頁插件
   use({ "akinsho/bufferline.nvim", requires = "nvim-tree/nvim-web-devicons" })
@@ -41,7 +41,7 @@ return require("packer").startup(function()
   })
   use({ "nvim-treesitter/nvim-treesitter-textobjects" })
   use({ "nvim-treesitter/nvim-treesitter-context" })
-  use({ "nvim-treesitter/playground" })
+  -- use({ "nvim-treesitter/playground" })
   use("p00f/nvim-ts-rainbow")
   -- 模糊搜詢插件
   use({
@@ -99,7 +99,7 @@ return require("packer").startup(function()
   use("Shatur/neovim-session-manager")
 
   -- LaTeX/Markdown Previewer
-  use("frabjous/knap")
+  -- use("frabjous/knap")
 
   -- notification manager
   use("rcarriga/nvim-notify")
@@ -141,14 +141,12 @@ return require("packer").startup(function()
 
   -- For Rust Language
   -- use("simrat39/rust-tools.nvim")
+  --
   use({
     "saecki/crates.nvim",
     tag = "v0.2.1",
     requires = { "nvim-lua/plenary.nvim" },
   })
-
-  -- For tmux
-  -- use("aserowy/tmux.nvim")
 
   -- record coding history
   use("wakatime/vim-wakatime")
@@ -161,7 +159,7 @@ return require("packer").startup(function()
   use("ahmedkhalf/project.nvim")
 
   -- Code Runner
-  use({ "michaelb/sniprun", run = "bash ./install.sh" })
+  -- use({ "michaelb/sniprun", run = "bash ./install.sh" })
 
   -- Run Code like vscode.task
   use({
@@ -207,8 +205,14 @@ return require("packer").startup(function()
     requires = { "kyazdani42/nvim-web-devicons" },
   })
 
-  -- required nnn file manager
-  use({
-    "luukvbaal/nnn.nvim",
-  })
+  -- make background transparent
+  use("xiyaowong/nvim-transparent")
+
+  -- draw ascii diagram
+  use("jbyuki/venn.nvim")
+
+  -- auto save files
+  use("pocco81/auto-save.nvim")
+
+  -- use("anuvyklack/hydra.nvim")
 end)

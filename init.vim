@@ -1,4 +1,4 @@
-let g:python3_host_prog="/usr/bin/python3"
+let g:python3_host_prog="~/scoop/apps/python/current/python"
 " neovim theme
 colorscheme kanagawa
 " If terminal has true colors (24-bits colors)
@@ -22,7 +22,7 @@ lua require('plugin-config/bufferline')
 lua require('plugin-config/nvim-tree')
 "
 " 檔案管理自動關閉
-" autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
+autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
 
 " 語法高亮設定
 lua require('plugin-config/treesitter')
@@ -40,7 +40,7 @@ lua require('plugin-config/hop')
 lua require('plugin-config/neovim-session-manager')
 
 " LaTeX/Markdown Previewer
-lua require('plugin-config/knap')
+" lua require('plugin-config/knap')
 
 " notification manager
 lua require('plugin-config/nvim-notify')
@@ -85,6 +85,7 @@ lua require('plugin-config/crates')
 
 " Git 相關設定
 " lua require('plugin-config/lazygit')
+
 lua require('plugin-config/gitsigns')
 
 " nvim-dap 相關設定
@@ -106,7 +107,7 @@ lua require('plugin-config/web-devicons')
 lua require('overseer/setup')
 
 " Code Runner
-lua require('plugin-config/sniprun')
+" lua require('plugin-config/sniprun')
 
 " Code Tester
 lua require('plugin-config/neotest')
@@ -133,3 +134,12 @@ lua require('plugin-config/alpha')
 
 " required nnn file manager
 " lua require('plugin-config/nnn')
+"
+" enable neovim transparent
+lua require('plugin-config/transparent')
+
+" draw ascii diagram
+lua require('plugin-config/venn')
+
+" auto save files
+lua require('plugin-config/auto-save')
