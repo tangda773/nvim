@@ -14,6 +14,7 @@ require("nvim-treesitter.configs").setup({
     "toml",
     "json",
     "query",
+    "help",
   },
   -- 啟用代碼高亮功能
   highlight = {
@@ -50,7 +51,7 @@ require("nvim-treesitter.configs").setup({
       enable = true,
 
       -- FIXME: rust parser:let expression remove caused treesitter-texobject error
-      disable = {"rust"},
+      disable = { "rust" },
 
       -- Automatically jump forward to textobj, similar to targets.vim
       lookahead = true,
@@ -91,7 +92,7 @@ require("nvim-treesitter.configs").setup({
       enable = true,
 
       -- FIXME: rust parser:let expression remove caused treesitter-texobject error
-      disable = {"rust"},
+      disable = { "rust" },
 
       swap_next = {
         ["<leader>a"] = "@parameter.inner",
@@ -104,7 +105,7 @@ require("nvim-treesitter.configs").setup({
       enable = true,
 
       -- FIXME: rust parser:let expression remove caused treesitter-texobject error
-      disable = {"rust"},
+      disable = { "rust" },
 
       set_jumps = true, -- whether to set jumps in the jumplist
       goto_next_start = {
@@ -128,7 +129,7 @@ require("nvim-treesitter.configs").setup({
       enable = true,
 
       -- FIXME: rust parser:let expression remove caused treesitter-texobject error
-      disable = {"rust"},
+      disable = { "rust" },
 
       border = "none",
       peek_definition_code = {
@@ -170,4 +171,5 @@ vim.wo.foldmethod = "expr"
 vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
 -- 默認不要折疊
 -- https://stackoverflow.com/questions/8316139/how-to-set-the-default-to-unfolded-when-you-open-a-file
-vim.wo.foldlevel = 99
+vim.wo.foldenable = false
+-- OR: vim.wo.foldlevel = 99

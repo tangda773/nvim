@@ -85,9 +85,10 @@ pluginKeys.mappings = {
       d = "Gitsigns Toggle Deleted",
       r = { "<cmd>: OverseerRun<CR>", "Overseer Run Tasks" },
       o = { "<cmd>: OverseerQuickAction open float<CR>", "Overseer Show Tasks Output" },
-      t = {"<cmd> lua require('neotest').run.run()<CR>", "Neotest Run Current Line"},
-      a = {"<cmd> lua require('neotest').run.run(vim.fn.expand('%'))<CR>", "Neotest Run Current File"},
+      t = { "<cmd> lua require('neotest').run.run()<CR>", "Neotest Run Current Line" },
+      a = { "<cmd> lua require('neotest').run.run(vim.fn.expand('%'))<CR>", "Neotest Run Current File" },
     },
+    v = "Toggle_venn",
   },
   g = {
     name = "+LSP Function",

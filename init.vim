@@ -20,7 +20,7 @@ lua require('plugin-config/bufferline')
 
 " 檔案管理器設定
 lua require('plugin-config/nvim-tree')
-"
+
 " 檔案管理自動關閉
 autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
 
@@ -57,16 +57,11 @@ lua require('plugin-config/comment')
 " Easy Way to Learn KeyMap
 lua require('plugin-config/WhichKey')
 
-" Lsp Linters
-" lua require('plugin-config/nvim-lint')
-
-" Lsp Formatters
-" lua require('plugin-config/formatter')
-
+" Linter/Formatter plugin
 lua require('plugin-config/null-ls')
 
 " Auto Save File
-" lua require('plugin-config/auto-save')
+lua require('plugin-config/auto-save')
 
 " For luasnip config
 lua require('plugin-config/luasnip')
@@ -77,15 +72,7 @@ lua require('plugin-config/luasnip')
 " For Crates Manager
 lua require('plugin-config/crates')
 
-" For tmux config
-" lua require('plugin-config/tmux')
-
-" Symbols Outline 設定
-" lua require('plugin-config/symbols-outline')
-
 " Git 相關設定
-" lua require('plugin-config/lazygit')
-
 lua require('plugin-config/gitsigns')
 
 " nvim-dap 相關設定
@@ -118,7 +105,7 @@ lua require('plugin-config/toggleterm')
 " TODO comment setting
 lua require('plugin-config/todo')
 
-" Surround plugin"
+" Surround plugin
 lua require('plugin-config/nvim-surround')
 
 " QuickFix improve
@@ -132,14 +119,11 @@ lua require('plugin-config/alpha')
 " disable the tabline when alpha buffer
  autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
 
-" required nnn file manager
-" lua require('plugin-config/nnn')
-"
 " enable neovim transparent
 lua require('plugin-config/transparent')
 
 " draw ascii diagram
 lua require('plugin-config/venn')
 
-" auto save files
-lua require('plugin-config/auto-save')
+" git resolve conflict
+" lua require('plugin-config/conflict')

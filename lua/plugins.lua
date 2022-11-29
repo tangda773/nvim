@@ -215,4 +215,7 @@ return require("packer").startup(function()
   use("pocco81/auto-save.nvim")
 
   -- use("anuvyklack/hydra.nvim")
+
+  -- git resolve conflict
+  -- use("akinsho/git-conflict.nvim")
 end)
