@@ -1,4 +1,10 @@
 let g:python3_host_prog="~/scoop/apps/python/current/python"
+
+if exists("g:neovide")
+  " Put anying you want to happen only in Neovide
+  let g:neovide_transparency=0.8
+endif
+
 " neovim theme
 colorscheme kanagawa
 " If terminal has true colors (24-bits colors)
