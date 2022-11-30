@@ -55,7 +55,10 @@ return require("packer").startup(function()
     "nvim-telescope/telescope-fzf-native.nvim",
     run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
   })
-
+  -- luasnip view by telescope
+  use({
+    "benfowler/telescope-luasnip.nvim",
+  })
   -- LSP Client插件
   use({
     "williamboman/mason.nvim", -- Packager Manager for Lsp Servers, DAP Servers, linters, and formatters
@@ -214,8 +217,6 @@ return require("packer").startup(function()
   -- auto save files
   use("pocco81/auto-save.nvim")
 
-  -- use("anuvyklack/hydra.nvim")
-
-  -- git resolve conflict
-  -- use("akinsho/git-conflict.nvim")
+  -- mark plugin
+  use("ThePrimeagen/harpoon")
 end)

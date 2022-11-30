@@ -121,3 +121,6 @@ lua require('plugin-config/transparent')
 
 " draw ascii diagram
 lua require('plugin-config/venn')
+
+" mark plugin
+lua require('plugin-config/harpoon')

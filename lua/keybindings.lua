@@ -89,6 +89,14 @@ pluginKeys.mappings = {
       a = { "<cmd> lua require('neotest').run.run(vim.fn.expand('%'))<CR>", "Neotest Run Current File" },
     },
     v = "Toggle_venn",
+    m = {
+      name = "+Harpoon",
+      a = {"<cmd> lua require('harpoon.mark').add_file()<CR>", "Harpoon Add Mark"},
+      n = {"<cmd> lua require('harpoon.ui').nav_next()<CR>", "Harpoon Next Mark" },
+      p = {"<cmd> lua require('harpoon.ui').nav_prev()<CR>", "Harpoon Prev Mark" },
+      o = {"<cmd> lua require('harpoon.ui').toggle_quick_menu()<CR>", "Harpoon Show Quick Menu"}
+    },
+    ["@"] = {"<cmd>: Telescope lsp_dynamic_workspace_symbols theme=dropdown<CR>", "Telescope Find Workspace LSP Symbols"}
   },
   g = {
     name = "+LSP Function",
