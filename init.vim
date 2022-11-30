@@ -45,9 +45,6 @@ lua require('plugin-config/hop')
 " session管理插件
 lua require('plugin-config/neovim-session-manager')
 
-" LaTeX/Markdown Previewer
-" lua require('plugin-config/knap')
-
 " notification manager
 lua require('plugin-config/nvim-notify')
 
@@ -72,9 +69,6 @@ lua require('plugin-config/auto-save')
 " For luasnip config
 lua require('plugin-config/luasnip')
 
-" For Rust Progamming
-" lua require('plugin-config/rust-tools')
-
 " For Crates Manager
 lua require('plugin-config/crates')
 
@@ -98,9 +92,6 @@ lua require('plugin-config/web-devicons')
 
 " Run Code Like vscode task
 lua require('overseer/setup')
-
-" Code Runner
-" lua require('plugin-config/sniprun')
 
 " Code Tester
 lua require('plugin-config/neotest')
@@ -130,6 +121,3 @@ lua require('plugin-config/transparent')
 
 " draw ascii diagram
 lua require('plugin-config/venn')
-
-" git resolve conflict
-" lua require('plugin-config/conflict')
