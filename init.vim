@@ -125,8 +125,5 @@ lua require('plugin-config/venn')
 " mark/tabpage/buffer/colorscheme switcher
 lua require('plugin-config/reach')
 
-" enhance vim marks
-lua require('plugin-config/marks')
-
 " ehance ui for notify/message/cmdline
 lua require('plugin-config/noice')

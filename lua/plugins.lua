@@ -212,9 +212,6 @@ return require("packer").startup(function()
   -- mark/buffer/tabpage/colorscheme switcher
   use("toppair/reach.nvim")
 
-  -- enhance vim marks
-  use("chentoast/marks.nvim")
-
   -- improve ui for notify/cmdline/messages
   use({
     "folke/noice.nvim",
