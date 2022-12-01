@@ -174,11 +174,6 @@ _G.packer_plugins = {
     path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\kanagawa.nvim",
     url = "https://github.com/rebelot/kanagawa.nvim"
   },
-  ["lsp_signature.nvim"] = {
-    loaded = true,
-    path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\lsp_signature.nvim",
-    url = "https://github.com/ray-x/lsp_signature.nvim"
-  },
   ["lspkind-nvim"] = {
     loaded = true,
     path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\lspkind-nvim",
@@ -248,6 +243,16 @@ _G.packer_plugins = {
     loaded = true,
     path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\neovim-session-manager",
     url = "https://github.com/Shatur/neovim-session-manager"
+  },
+  ["noice.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\noice.nvim",
+    url = "https://github.com/folke/noice.nvim"
+  },
+  ["nui.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nui.nvim",
+    url = "https://github.com/MunifTanjim/nui.nvim"
   },
   ["null-ls.nvim"] = {
     loaded = true,
@@ -364,15 +369,15 @@ _G.packer_plugins = {
     path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\telescope-fzf-native.nvim",
     url = "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
   },
+  ["telescope-live-grep-args.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\telescope-live-grep-args.nvim",
+    url = "https://github.com/nvim-telescope/telescope-live-grep-args.nvim"
+  },
   ["telescope-luasnip.nvim"] = {
     loaded = true,
     path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\telescope-luasnip.nvim",
     url = "https://github.com/benfowler/telescope-luasnip.nvim"
-  },
-  ["telescope-ui-select.nvim"] = {
-    loaded = true,
-    path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\telescope-ui-select.nvim",
-    url = "https://github.com/nvim-telescope/telescope-ui-select.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,
