@@ -122,5 +122,11 @@ lua require('plugin-config/transparent')
 " draw ascii diagram
 lua require('plugin-config/venn')
 
-" mark plugin
-lua require('plugin-config/harpoon')
+" git resolve conflict
+lua require('plugin-config/conflict')
+
+" mark/tabpage/buffer/colorscheme switcher
+lua require('plugin-config/reach')
+
+" enhance vim marks
+lua require('plugin-config/marks')
