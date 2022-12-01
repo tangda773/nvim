@@ -6,7 +6,6 @@ local opts = {
      end
      require('keybindings').mapLSP(buf_set_keymap)
      require("illuminate").on_attach(client)
-     require("lsp_signature").on_attach(client, bufnr)
   end
 }
 

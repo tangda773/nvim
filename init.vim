@@ -45,9 +45,6 @@ lua require('plugin-config/knap')
 " notification manager
 lua require('plugin-config/nvim-notify')
 
-" function signature
-lua require('plugin-config/lsp_signature')
-
 " Package Manager for Lsp Servers, Dap Servers, Linters, and formatters
 lua require('plugin-config/mason')
 
@@ -127,3 +124,13 @@ lua require('plugin-config/venn')
 
 " git resolve conflict
 lua require('plugin-config/conflict')
+
+" enhance vim marks
+lua require("plugin-config/marks")
+
+" mark/tabpage/buffer/colorscheme switcher
+lua require("plugin-config/reach")
+
+" ehnance ui for notify/message/cmdline
+lua require("plugin-config/noice")
+

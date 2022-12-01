@@ -47,8 +47,7 @@ return require("packer").startup(function()
   use({
     "nvim-telescope/telescope.nvim",
     requires = { "nvim-lua/plenary.nvim" },
-    -- vim.ui.select to telescope
-    "nvim-telescope/telescope-ui-select.nvim",
+    "nvim-telescope/telescope-live-grep-args.nvim",
   })
   -- fzf 搜尋加強
   use({
@@ -119,11 +118,6 @@ return require("packer").startup(function()
 
   -- auto highlight other used current world
   use("RRethy/vim-illuminate")
-
-  -- funciton signature
-  use({
-    "ray-x/lsp_signature.nvim",
-  })
 
   -- debugger
   use("mfussenegger/nvim-dap")
@@ -218,4 +212,23 @@ return require("packer").startup(function()
 
   -- git resolve conflict
   use("akinsho/git-conflict.nvim")
+
+  -- mark/buffer/tabpage/colorscheme switcher
+  use ("toppair/reach.nvim")
+
+  -- enhance vim mark
+  use ("chentoast/marks.nvim")
+
+  -- improve ui for notify/cmdline/messages
+  use({
+    "folke/noice.nvim",
+    requires = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      "rcarriga/nvim-notify",
+      }
+})
 end)
