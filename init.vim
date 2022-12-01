@@ -122,9 +122,6 @@ lua require('plugin-config/transparent')
 " draw ascii diagram
 lua require('plugin-config/venn')
 
-" git resolve conflict
-lua require('plugin-config/conflict')
-
 " mark/tabpage/buffer/colorscheme switcher
 lua require('plugin-config/reach')
 

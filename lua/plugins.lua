@@ -217,9 +217,6 @@ return require("packer").startup(function()
   -- auto save files
   use("pocco81/auto-save.nvim")
 
-  -- git resolve conflict
-  use("akinsho/git-conflict.nvim")
-
   -- mark/buffer/tabpage/colorscheme switcher
   use("toppair/reach.nvim")
 
