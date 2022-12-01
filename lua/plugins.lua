@@ -49,6 +49,7 @@ return require("packer").startup(function()
     requires = { "nvim-lua/plenary.nvim" },
     -- vim.ui.select to telescope
     "nvim-telescope/telescope-ui-select.nvim",
+    "nvim-telescope/telescope-live-grep-args.nvim",
   })
   -- fzf 搜尋加強
   use({
