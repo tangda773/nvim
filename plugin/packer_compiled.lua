@@ -194,6 +194,11 @@ _G.packer_plugins = {
     path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
+  ["marks.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\marks.nvim",
+    url = "https://github.com/chentoast/marks.nvim"
+  },
   ["mason-lspconfig.nvim"] = {
     loaded = true,
     path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\mason-lspconfig.nvim",
@@ -349,10 +354,20 @@ _G.packer_plugins = {
     path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\project.nvim",
     url = "https://github.com/ahmedkhalf/project.nvim"
   },
+  ["reach.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\reach.nvim",
+    url = "https://github.com/toppair/reach.nvim"
+  },
   ["telescope-fzf-native.nvim"] = {
     loaded = true,
     path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\telescope-fzf-native.nvim",
     url = "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
+  },
+  ["telescope-luasnip.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\telescope-luasnip.nvim",
+    url = "https://github.com/benfowler/telescope-luasnip.nvim"
   },
   ["telescope-ui-select.nvim"] = {
     loaded = true,

@@ -161,9 +161,6 @@ return require("packer").startup(function()
   -- Project Management
   use("ahmedkhalf/project.nvim")
 
-  -- Code Runner
-  -- use({ "michaelb/sniprun", run = "bash ./install.sh" })
-
   -- Run Code like vscode.task
   use({
     "stevearc/overseer.nvim",
