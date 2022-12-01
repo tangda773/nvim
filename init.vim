@@ -49,7 +49,7 @@ lua require('plugin-config/neovim-session-manager')
 lua require('plugin-config/nvim-notify')
 
 " function signature
-lua require('plugin-config/lsp_signature')
+" lua require('plugin-config/lsp_signature')
 
 " Package Manager for Lsp Servers, Dap Servers, Linters, and formatters
 lua require('plugin-config/mason')
@@ -127,3 +127,6 @@ lua require('plugin-config/reach')
 
 " enhance vim marks
 lua require('plugin-config/marks')
+
+" ehance ui for notify/message/cmdline
+lua require('plugin-config/noice')

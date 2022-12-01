@@ -47,8 +47,6 @@ return require("packer").startup(function()
   use({
     "nvim-telescope/telescope.nvim",
     requires = { "nvim-lua/plenary.nvim" },
-    -- vim.ui.select to telescope
-    "nvim-telescope/telescope-ui-select.nvim",
     "nvim-telescope/telescope-live-grep-args.nvim",
   })
   -- fzf 搜尋加強
@@ -102,9 +100,6 @@ return require("packer").startup(function()
   -- Session 管理插件
   use("Shatur/neovim-session-manager")
 
-  -- LaTeX/Markdown Previewer
-  -- use("frabjous/knap")
-
   -- notification manager
   use("rcarriga/nvim-notify")
 
@@ -122,9 +117,9 @@ return require("packer").startup(function()
   use("RRethy/vim-illuminate")
 
   -- funciton signature
-  use({
-    "ray-x/lsp_signature.nvim",
-  })
+  -- use({
+  --   "ray-x/lsp_signature.nvim",
+  -- })
 
   -- debugger
   use("mfussenegger/nvim-dap")
@@ -156,7 +151,6 @@ return require("packer").startup(function()
   use("wakatime/vim-wakatime")
 
   -- Git
-  -- use("kdheepak/lazygit.nvim")
   use("lewis6991/gitsigns.nvim")
 
   -- Project Management
@@ -220,4 +214,17 @@ return require("packer").startup(function()
 
   -- enhance vim marks
   use("chentoast/marks.nvim")
+
+  -- improve ui for notify/cmdline/messages
+  use({
+    "folke/noice.nvim",
+    requires = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      "rcarriga/nvim-notify",
+    },
+  })
 end)
