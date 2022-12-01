@@ -1,4 +1,4 @@
-let g:python3_host_prog="~/scoop/apps/python/current/python"
+let g:python3_host_prog="/opt/homebrew/bin/python3"
 " neovim theme
 colorscheme kanagawa
 " If terminal has true colors (24-bits colors)
@@ -40,7 +40,7 @@ lua require('plugin-config/hop')
 lua require('plugin-config/neovim-session-manager')
 
 " LaTeX/Markdown Previewer
-" lua require('plugin-config/knap')
+lua require('plugin-config/knap')
 
 " notification manager
 lua require('plugin-config/nvim-notify')
@@ -94,7 +94,7 @@ lua require('plugin-config/web-devicons')
 lua require('overseer/setup')
 
 " Code Runner
-" lua require('plugin-config/sniprun')
+lua require('plugin-config/sniprun')
 
 " Code Tester
 lua require('plugin-config/neotest')
@@ -126,4 +126,4 @@ lua require('plugin-config/transparent')
 lua require('plugin-config/venn')
 
 " git resolve conflict
-" lua require('plugin-config/conflict')
+lua require('plugin-config/conflict')

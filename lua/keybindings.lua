@@ -89,6 +89,10 @@ pluginKeys.mappings = {
       a = { "<cmd> lua require('neotest').run.run(vim.fn.expand('%'))<CR>", "Neotest Run Current File" },
     },
     v = "Toggle_venn",
+    ["@"] = {
+      "<cmd>: Telescope lsp_dynamic_workspace_symbols theme=dropdown<CR>",
+      "Telescope Find Workspace LSP Symbols",
+    },
   },
   g = {
     name = "+LSP Function",

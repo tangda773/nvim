@@ -55,7 +55,10 @@ return require("packer").startup(function()
     "nvim-telescope/telescope-fzf-native.nvim",
     run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
   })
-
+  -- luasnip view by telescope
+  use({
+    "benfowler/telescope-luasnip.nvim",
+  })
   -- LSP Client插件
   use({
     "williamboman/mason.nvim", -- Packager Manager for Lsp Servers, DAP Servers, linters, and formatters
@@ -99,7 +102,7 @@ return require("packer").startup(function()
   use("Shatur/neovim-session-manager")
 
   -- LaTeX/Markdown Previewer
-  -- use("frabjous/knap")
+  use("frabjous/knap")
 
   -- notification manager
   use("rcarriga/nvim-notify")
@@ -152,14 +155,13 @@ return require("packer").startup(function()
   use("wakatime/vim-wakatime")
 
   -- Git
-  -- use("kdheepak/lazygit.nvim")
   use("lewis6991/gitsigns.nvim")
 
   -- Project Management
   use("ahmedkhalf/project.nvim")
 
   -- Code Runner
-  -- use({ "michaelb/sniprun", run = "bash ./install.sh" })
+  use({ "michaelb/sniprun", run = "bash ./install.sh" })
 
   -- Run Code like vscode.task
   use({
@@ -214,8 +216,6 @@ return require("packer").startup(function()
   -- auto save files
   use("pocco81/auto-save.nvim")
 
-  -- use("anuvyklack/hydra.nvim")
-
   -- git resolve conflict
-  -- use("akinsho/git-conflict.nvim")
+  use("akinsho/git-conflict.nvim")
 end)
