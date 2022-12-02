@@ -37,7 +37,7 @@ lua require('plugin-config/Lspsaga')
 lua require('plugin-config/hop')
 
 " session管理插件
-lua require('plugin-config/neovim-session-manager')
+lua require('plugin-config/persisted')
 
 " LaTeX/Markdown Previewer
 lua require('plugin-config/knap')
@@ -125,8 +125,6 @@ lua require('plugin-config/venn')
 " git resolve conflict
 lua require('plugin-config/conflict')
 
-" enhance vim marks
-lua require("plugin-config/marks")
 
 " mark/tabpage/buffer/colorscheme switcher
 lua require("plugin-config/reach")

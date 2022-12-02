@@ -98,8 +98,10 @@ return require("packer").startup(function()
   })
 
   -- Session 管理插件
-  use("Shatur/neovim-session-manager")
-
+  use({
+    "olimorris/persisted.nvim",
+    --module = "persisted", -- For lazy loading
+  })
   -- LaTeX/Markdown Previewer
   use("frabjous/knap")
 
@@ -214,10 +216,8 @@ return require("packer").startup(function()
   use("akinsho/git-conflict.nvim")
 
   -- mark/buffer/tabpage/colorscheme switcher
-  use ("toppair/reach.nvim")
+  use("toppair/reach.nvim")
 
-  -- enhance vim mark
-  use ("chentoast/marks.nvim")
 
   -- improve ui for notify/cmdline/messages
   use({
@@ -229,6 +229,6 @@ return require("packer").startup(function()
       --   `nvim-notify` is only needed, if you want to use the notification view.
       --   If not available, we use `mini` as the fallback
       "rcarriga/nvim-notify",
-      }
-})
+    },
+  })
 end)

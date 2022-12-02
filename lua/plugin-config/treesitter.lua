@@ -8,6 +8,8 @@ require("nvim-treesitter.configs").setup({
     "markdown",
     "markdown_inline",
     "vim",
+    "regex",
+    "bash",
     "cmake",
     "rust",
     "python",
