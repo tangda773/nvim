@@ -10,6 +10,8 @@ require("nvim-treesitter.configs").setup({
     "vim",
     "cmake",
     "rust",
+    "bash",
+    "regex",
     "python",
     "toml",
     "json",

@@ -5,7 +5,7 @@ require("mason-tool-installer").setup({
 	-- start; they should be the names Mason uses for each tool
 	ensure_installed = {
 		-- dap
-		"codelldb",
+    "cpptools",
 		-- formatter
 		"stylua",
 		"clang-format",

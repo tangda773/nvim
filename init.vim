@@ -43,7 +43,10 @@ lua require('plugin-config/Lspsaga')
 lua require('plugin-config/hop')
 
 " session管理插件
-lua require('plugin-config/neovim-session-manager')
+" lua require('plugin-config/neovim-session-manager')
+lua require('plugin-config/auto-session')
+" auto-session with telescope
+lua require('plugin-config/session-lens')
 
 " notification manager
 lua require('plugin-config/nvim-notify')

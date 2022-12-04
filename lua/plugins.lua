@@ -98,8 +98,11 @@ return require("packer").startup(function()
   })
 
   -- Session 管理插件
-  use("Shatur/neovim-session-manager")
-
+  use({
+    "rmagatti/auto-session",
+    -- auto-sessioon with telescope
+    "rmagatti/session-lens",
+  })
   -- notification manager
   use("rcarriga/nvim-notify")
 
