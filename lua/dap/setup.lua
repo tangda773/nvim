@@ -16,7 +16,8 @@ end
 local adapters = {
   cpp = require('dap.config.cpptools'),
   rust = require('dap.config.cpptools'),
-  python = require('dap.config.debugpy')
+  python = require('dap.config.debugpy'),
+  lua = require('dap.config.neovim_lua')
 }
 
 

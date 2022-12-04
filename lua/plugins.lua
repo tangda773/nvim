@@ -128,6 +128,8 @@ return require("packer").startup(function()
   use("mfussenegger/nvim-dap")
   -- debugger UI
   use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
+  -- debugger for neovim lua
+  use("jbyuki/one-small-step-for-vimkind")
 
   -- Comment plugin
   use("numToStr/Comment.nvim")
