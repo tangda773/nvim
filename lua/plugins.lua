@@ -99,8 +99,9 @@ return require("packer").startup(function()
 
   -- Session 管理插件
   use({
-    "olimorris/persisted.nvim",
-    --module = "persisted", -- For lazy loading
+    "rmagatti/auto-session",
+    -- auto-sessioon with telescope
+    "rmagatti/session-lens",
   })
   -- LaTeX/Markdown Previewer
   use("frabjous/knap")
@@ -125,7 +126,8 @@ return require("packer").startup(function()
   use("mfussenegger/nvim-dap")
   -- debugger UI
   use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
-
+  -- debugger for neovim lua
+  use("jbyuki/one-small-step-for-vimkind")
   -- Comment plugin
   use("numToStr/Comment.nvim")
 
@@ -217,7 +219,6 @@ return require("packer").startup(function()
 
   -- mark/buffer/tabpage/colorscheme switcher
   use("toppair/reach.nvim")
-
 
   -- improve ui for notify/cmdline/messages
   use({

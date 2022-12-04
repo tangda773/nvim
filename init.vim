@@ -37,7 +37,9 @@ lua require('plugin-config/Lspsaga')
 lua require('plugin-config/hop')
 
 " session管理插件
-lua require('plugin-config/persisted')
+lua require('plugin-config/auto-session')
+" Telescope for auto-session
+lua require('plugin-config/auto-session')
 
 " LaTeX/Markdown Previewer
 lua require('plugin-config/knap')

@@ -14,8 +14,9 @@ dap.listeners.before.event_exited["dapui_config"] = function()
 end
 
 local adapters = {
-  cpp = require('dap.config.codelldb')
-  -- cpp = require('dap.config.cpptools')
+  python = require('dap.config.debugpy'),
+  cpp = require('dap.config.cpptools'),
+  rust = require('dap.config.cpptools')
 }
 
 
