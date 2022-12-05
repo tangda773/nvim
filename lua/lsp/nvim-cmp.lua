@@ -86,7 +86,6 @@ cmp.setup.filetype({ "tex", "plaintex", "markdown" }, {
   sources = {
     { name = "luasnip" },
     { name = "path" },
-    { name = "lua-latex-symbols" },
   },
 })
 

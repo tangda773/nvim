@@ -81,6 +81,9 @@ lua require('plugin-config/gitsigns')
 " nvim-dap 相關設定
 lua require('dap/setup')
 
+" LaTeX build engine(with texlab)
+lua require('plugin-config/texmagic')
+
 " LSP Client 相關設定
 lua require('lsp/setup')
 
@@ -130,3 +133,8 @@ lua require('plugin-config/reach')
 
 " ehance ui for notify/message/cmdline
 lua require('plugin-config/noice')
+
+" Markdown Previewer
+lua require('plugin-config/markdown-preview')
+" LaTeX Previewer
+" lua require('plugin-config/vimtex')

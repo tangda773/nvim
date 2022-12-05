@@ -58,6 +58,12 @@ return require("packer").startup(function()
   use({
     "benfowler/telescope-luasnip.nvim",
   })
+
+  -- LaTeX build engine(with texlab)
+  use({
+    "jakewvincent/texmagic.nvim",
+  })
+
   -- LSP Client插件
   use({
     "williamboman/mason.nvim", -- Packager Manager for Lsp Servers, DAP Servers, linters, and formatters
@@ -229,4 +235,9 @@ return require("packer").startup(function()
       "rcarriga/nvim-notify",
     },
   })
+  -- Markdwon Previewer
+  use("davidgranstrom/nvim-markdown-preview")
+
+  -- LaTeX Previewer
+  -- use("lervag/vimtex")
 end)
