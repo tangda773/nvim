@@ -21,6 +21,7 @@ require("nvim-treesitter.configs").setup({
   -- 啟用代碼高亮功能
   highlight = {
     enable = true,
+    disable = {"latex"},
     additional_vim_regex_highlighting = false,
   },
   -- rainbow parentheses

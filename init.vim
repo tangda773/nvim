@@ -1,3 +1,5 @@
+lua require('impatient')
+
 let g:python3_host_prog="~/scoop/apps/python/current/python"
 
 if exists("g:neovide")
@@ -43,16 +45,12 @@ lua require('plugin-config/Lspsaga')
 lua require('plugin-config/hop')
 
 " session管理插件
-" lua require('plugin-config/neovim-session-manager')
 lua require('plugin-config/auto-session')
 " auto-session with telescope
 lua require('plugin-config/session-lens')
 
 " notification manager
 lua require('plugin-config/nvim-notify')
-
-" function signature
-" lua require('plugin-config/lsp_signature')
 
 " Package Manager for Lsp Servers, Dap Servers, Linters, and formatters
 lua require('plugin-config/mason')
@@ -72,26 +70,14 @@ lua require('plugin-config/auto-save')
 " For luasnip config
 lua require('plugin-config/luasnip')
 
-" For Crates Manager
-lua require('plugin-config/crates')
-
 " Git 相關設定
 lua require('plugin-config/gitsigns')
-
-" nvim-dap 相關設定
-lua require('dap/setup')
-
-" LaTeX build engine(with texlab)
-lua require('plugin-config/texmagic')
 
 " LSP Client 相關設定
 lua require('lsp/setup')
 
 " nvim-cmp 語法自動補全設定
 lua require('lsp/nvim-cmp')
-
-" For dev development
-lua require('plugin-config/neodev')
 
 " For file icon support
 lua require('plugin-config/web-devicons')
@@ -125,16 +111,8 @@ lua require('plugin-config/alpha')
 " enable neovim transparent
 lua require('plugin-config/transparent')
 
-" draw ascii diagram
-lua require('plugin-config/venn')
-
 " mark/tabpage/buffer/colorscheme switcher
 lua require('plugin-config/reach')
 
 " ehance ui for notify/message/cmdline
 lua require('plugin-config/noice')
-
-" Markdown Previewer
-lua require('plugin-config/markdown-preview')
-" LaTeX Previewer
-" lua require('plugin-config/vimtex')

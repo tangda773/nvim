@@ -24,7 +24,7 @@ pluginKeys.mappings = {
   },
   ["<F9>"] = { "<cmd>lua require'dap'.toggle_breakpoint()<CR>", "Toggle Breakpoint" },
   ["<F5>"] = { "<cmd>lua require'dap'.continue()<CR>", "Continue" },
-  ["<F11>"] = { "<cmd>lua require'dap'.step_into()<CR>", "Step Into" },
+  ["<F10>"] = { "<cmd>lua require'dap'.step_into()<CR>", "Step Into" },
   ["<F12>"] = { "<cmd>lua require'dap'.step_over()<CR>", "Step Over" },
   ["<A-n>"] = { "<cmd>lua require'illuminate'.next_reference{wrap=true}<cr>", "Next Reference" },
   ["<A-p>"] = {

@@ -5,6 +5,9 @@ return require("packer").startup(function()
   -- Packer can manage itself
   use("wbthomason/packer.nvim")
 
+  -- speedup startup time
+  use("lewis6991/impatient.nvim")
+
   -- Colortheme 主題
   use("folke/tokyonight.nvim")
   use("Abstract-IDE/Abstract-cs")
@@ -62,6 +65,10 @@ return require("packer").startup(function()
   -- LaTeX build engine(with texlab)
   use({
     "jakewvincent/texmagic.nvim",
+    ft = { "tex" },
+    config = function()
+      require("./plugin-config/texmagic")
+    end,
   })
 
   -- LSP Client插件
@@ -81,7 +88,7 @@ return require("packer").startup(function()
   use("hrsh7th/cmp-cmdline") -- { name = 'cmdline' }
   use("hrsh7th/cmp-nvim-lua")
   use("lukas-reineke/cmp-under-comparator")
-  use("amarakon/nvim-cmp-lua-latex-symbols")
+  use({ "amarakon/nvim-cmp-lua-latex-symbols", ft = "tex" })
   use("hrsh7th/nvim-cmp")
 
   -- For luasnip users.
@@ -95,7 +102,13 @@ return require("packer").startup(function()
   use({ "glepnir/lspsaga.nvim", branch = "main" })
 
   -- lua 語法補全增強
-  use("folke/neodev.nvim")
+  use({
+    "folke/neodev.nvim",
+    ft = { "lua" },
+    config = function()
+      require("./plugin-config/neodev")
+    end,
+  })
 
   -- 游標快速移動插件
   use({
@@ -131,11 +144,21 @@ return require("packer").startup(function()
   -- })
 
   -- debugger
-  use("mfussenegger/nvim-dap")
-  -- debugger UI
-  use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
+  use({
+    "mfussenegger/nvim-dap",
+    ft = { "cpp", "rust", "python", "lua" },
+  })
+
+  --debugger UI
+  use({
+    "rcarriga/nvim-dap-ui",
+    ft = { "cpp", "rust", "python", "lua" },
+    config = function()
+      require("./dap/setup")
+    end,
+  })
   -- debugger for neovim lua
-  use("jbyuki/one-small-step-for-vimkind")
+  use({ "jbyuki/one-small-step-for-vimkind", ft = "lua" })
 
   -- Comment plugin
   use("numToStr/Comment.nvim")
@@ -156,6 +179,10 @@ return require("packer").startup(function()
     "saecki/crates.nvim",
     tag = "v0.2.1",
     requires = { "nvim-lua/plenary.nvim" },
+    ft = { "rust", "toml" },
+    config = function ()
+     require('./plugin-config/crates') 
+    end
   })
 
   -- record coding history
@@ -215,7 +242,13 @@ return require("packer").startup(function()
   use("xiyaowong/nvim-transparent")
 
   -- draw ascii diagram
-  use("jbyuki/venn.nvim")
+  use({
+    "jbyuki/venn.nvim",
+    ft = { "tex", "markdown" },
+    config = function()
+      require("./plugin-config/venn")
+    end,
+  })
 
   -- auto save files
   use("pocco81/auto-save.nvim")
@@ -235,9 +268,21 @@ return require("packer").startup(function()
       "rcarriga/nvim-notify",
     },
   })
-  -- Markdwon Previewer
-  use("davidgranstrom/nvim-markdown-preview")
+  -- Markdown Previewer
+  use({
+    "davidgranstrom/nvim-markdown-preview",
+    ft = "markdown",
+    config = function()
+      require("./plugin-config/markdown-preview")
+    end,
+  })
 
   -- LaTeX Previewer
-  -- use("lervag/vimtex")
+  use({
+    "lervag/vimtex",
+    ft = "tex",
+    config = function()
+      require("./plugin-config/vimtex")
+    end,
+  })
 end)
