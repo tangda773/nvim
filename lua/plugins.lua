@@ -1,14 +1,6 @@
 -- This file can be loaded by calling `lua require('plugins')`
 -- from your init.vim
 
-function is_git_respository()
-  local path = vim.fn.getcwd()
-  for _ in io.popen([[fd -H ".git$"]] .. path):lines() do
-    return true
-  end
-  return false
-end
-
 return require("packer").startup(function()
   -- Packer can manage itself
   use("wbthomason/packer.nvim")
@@ -188,7 +180,6 @@ return require("packer").startup(function()
   -- Git
   use({
     "lewis6991/gitsigns.nvim",
-    cond = is_git_respository,
     config = function()
       require("./plugin-config/gitsigns")
     end,
@@ -256,7 +247,6 @@ return require("packer").startup(function()
   -- git resolve conflict
   use({
     "akinsho/git-conflict.nvim",
-    cond = is_git_respository,
     config = function()
       require("./plugin-config/conflict")
     end,
