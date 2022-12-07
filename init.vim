@@ -1,4 +1,8 @@
 let g:python3_host_prog="/opt/homebrew/bin/python3"
+
+"Speedup Loading Plugin"
+lua require('impatient').enable_profile()
+
 " neovim theme
 colorscheme kanagawa
 " If terminal has true colors (24-bits colors)
@@ -41,9 +45,6 @@ lua require('plugin-config/auto-session')
 " Telescope for auto-session
 lua require('plugin-config/auto-session')
 
-" LaTeX/Markdown Previewer
-lua require('plugin-config/knap')
-
 " notification manager
 lua require('plugin-config/nvim-notify')
 
@@ -68,23 +69,11 @@ lua require('plugin-config/luasnip')
 " For Rust Progamming
 " lua require('plugin-config/rust-tools')
 
-" For Crates Manager
-lua require('plugin-config/crates')
-
-" Git 相關設定
-lua require('plugin-config/gitsigns')
-
-" nvim-dap 相關設定
-lua require('dap/setup')
-
 " LSP Client 相關設定
 lua require('lsp/setup')
 
 " nvim-cmp 語法自動補全設定
 lua require('lsp/nvim-cmp')
-
-" For dev development
-lua require('plugin-config/neodev')
 
 " For file icon support
 lua require('plugin-config/web-devicons')
@@ -123,10 +112,6 @@ lua require('plugin-config/transparent')
 
 " draw ascii diagram
 lua require('plugin-config/venn')
-
-" git resolve conflict
-lua require('plugin-config/conflict')
-
 
 " mark/tabpage/buffer/colorscheme switcher
 lua require("plugin-config/reach")

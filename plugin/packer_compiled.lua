@@ -99,6 +99,11 @@ _G.packer_plugins = {
     path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/auto-save.nvim",
     url = "https://github.com/pocco81/auto-save.nvim"
   },
+  ["auto-session"] = {
+    loaded = true,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/auto-session",
+    url = "https://github.com/rmagatti/auto-session"
+  },
   ["bufdelete.nvim"] = {
     loaded = true,
     path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/bufdelete.nvim",
@@ -145,8 +150,12 @@ _G.packer_plugins = {
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
   ["crates.nvim"] = {
-    loaded = true,
-    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/crates.nvim",
+    after_files = { "/Users/tangda/.local/share/nvim/site/pack/packer/opt/crates.nvim/after/plugin/cmp_crates.lua" },
+    config = { "\27LJ\2\n6\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\27./plugin-config/crates\frequire\0" },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/opt/crates.nvim",
     url = "https://github.com/saecki/crates.nvim"
   },
   ["friendly-snippets"] = {
@@ -155,19 +164,32 @@ _G.packer_plugins = {
     url = "https://github.com/rafamadriz/friendly-snippets"
   },
   ["git-conflict.nvim"] = {
-    loaded = true,
-    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/git-conflict.nvim",
+    cond = { "\27LJ\2\n‚\1\0\0\b\0\a\0\0206\0\0\0009\0\1\0009\0\2\0B\0\1\0026\1\3\0009\1\4\1'\3\5\0\18\4\0\0&\3\4\3B\1\2\2\18\3\1\0009\1\6\1B\1\2\4X\4\2€+\5\2\0L\5\2\0E\4\3\2R\4ü\127+\1\1\0L\1\2\0\nlines\18fd -H \".git$\"\npopen\aio\vgetcwd\afn\bvim\0" },
+    config = { "\27LJ\2\n8\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\29./plugin-config/conflict\frequire\0" },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = true,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/opt/git-conflict.nvim",
     url = "https://github.com/akinsho/git-conflict.nvim"
   },
   ["gitsigns.nvim"] = {
-    loaded = true,
-    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
+    cond = { "\27LJ\2\n‚\1\0\0\b\0\a\0\0206\0\0\0009\0\1\0009\0\2\0B\0\1\0026\1\3\0009\1\4\1'\3\5\0\18\4\0\0&\3\4\3B\1\2\2\18\3\1\0009\1\6\1B\1\2\4X\4\2€+\5\2\0L\5\2\0E\4\3\2R\4ü\127+\1\1\0L\1\2\0\nlines\18fd -H \".git$\"\npopen\aio\vgetcwd\afn\bvim\0" },
+    config = { "\27LJ\2\n8\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\29./plugin-config/gitsigns\frequire\0" },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = true,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/opt/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
   },
   ["hop.nvim"] = {
     loaded = true,
     path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/hop.nvim",
     url = "https://github.com/phaazon/hop.nvim"
+  },
+  ["impatient.nvim"] = {
+    loaded = true,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/impatient.nvim",
+    url = "https://github.com/lewis6991/impatient.nvim"
   },
   ["indent-blankline.nvim"] = {
     loaded = true,
@@ -180,8 +202,11 @@ _G.packer_plugins = {
     url = "https://github.com/rebelot/kanagawa.nvim"
   },
   knap = {
-    loaded = true,
-    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/knap",
+    config = { "\27LJ\2\n4\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\25./plugin-config/knap\frequire\0" },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/opt/knap",
     url = "https://github.com/frabjous/knap"
   },
   ["lspkind-nvim"] = {
@@ -199,11 +224,6 @@ _G.packer_plugins = {
     path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
-  ["marks.nvim"] = {
-    loaded = true,
-    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/marks.nvim",
-    url = "https://github.com/chentoast/marks.nvim"
-  },
   ["mason-lspconfig.nvim"] = {
     loaded = true,
     path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
@@ -220,8 +240,11 @@ _G.packer_plugins = {
     url = "https://github.com/williamboman/mason.nvim"
   },
   ["neodev.nvim"] = {
-    loaded = true,
-    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/neodev.nvim",
+    config = { "\27LJ\2\n6\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\27./plugin-config/neodev\frequire\0" },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/opt/neodev.nvim",
     url = "https://github.com/folke/neodev.nvim"
   },
   neotest = {
@@ -248,11 +271,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/neotest-vim-test",
     url = "https://github.com/nvim-neotest/neotest-vim-test"
-  },
-  ["neovim-session-manager"] = {
-    loaded = true,
-    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/neovim-session-manager",
-    url = "https://github.com/Shatur/neovim-session-manager"
   },
   ["noice.nvim"] = {
     loaded = true,
@@ -290,13 +308,18 @@ _G.packer_plugins = {
     url = "https://github.com/amarakon/nvim-cmp-lua-latex-symbols"
   },
   ["nvim-dap"] = {
-    loaded = true,
-    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/nvim-dap",
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/opt/nvim-dap",
     url = "https://github.com/mfussenegger/nvim-dap"
   },
   ["nvim-dap-ui"] = {
-    loaded = true,
-    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/nvim-dap-ui",
+    config = { "\27LJ\2\n+\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\16./dap/setup\frequire\0" },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/opt/nvim-dap-ui",
     url = "https://github.com/rcarriga/nvim-dap-ui"
   },
   ["nvim-lspconfig"] = {
@@ -349,6 +372,13 @@ _G.packer_plugins = {
     path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
     url = "https://github.com/nvim-tree/nvim-web-devicons"
   },
+  ["one-small-step-for-vimkind"] = {
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/opt/one-small-step-for-vimkind",
+    url = "https://github.com/jbyuki/one-small-step-for-vimkind"
+  },
   ["overseer.nvim"] = {
     loaded = true,
     path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/overseer.nvim",
@@ -373,6 +403,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/reach.nvim",
     url = "https://github.com/toppair/reach.nvim"
+  },
+  ["session-lens"] = {
+    loaded = true,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/session-lens",
+    url = "https://github.com/rmagatti/session-lens"
   },
   sniprun = {
     loaded = true,
@@ -420,8 +455,9 @@ _G.packer_plugins = {
     url = "https://github.com/folke/trouble.nvim"
   },
   ["venn.nvim"] = {
-    loaded = true,
-    path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/venn.nvim",
+    loaded = false,
+    needs_bufread = false,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/opt/venn.nvim",
     url = "https://github.com/jbyuki/venn.nvim"
   },
   ["vim-illuminate"] = {
@@ -447,6 +483,26 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Conditional loads
+time([[Conditional loading of gitsigns.nvim]], true)
+  require("packer.load")({"gitsigns.nvim"}, {}, _G.packer_plugins)
+time([[Conditional loading of gitsigns.nvim]], false)
+time([[Conditional loading of git-conflict.nvim]], true)
+  require("packer.load")({"git-conflict.nvim"}, {}, _G.packer_plugins)
+time([[Conditional loading of git-conflict.nvim]], false)
+vim.cmd [[augroup packer_load_aucmds]]
+vim.cmd [[au!]]
+  -- Filetype lazy-loads
+time([[Defining lazy-load filetype autocommands]], true)
+vim.cmd [[au FileType cpp ++once lua require("packer.load")({'nvim-dap-ui', 'nvim-dap'}, { ft = "cpp" }, _G.packer_plugins)]]
+vim.cmd [[au FileType tex ++once lua require("packer.load")({'knap'}, { ft = "tex" }, _G.packer_plugins)]]
+vim.cmd [[au FileType python ++once lua require("packer.load")({'nvim-dap-ui', 'nvim-dap'}, { ft = "python" }, _G.packer_plugins)]]
+vim.cmd [[au FileType lua ++once lua require("packer.load")({'neodev.nvim', 'one-small-step-for-vimkind', 'nvim-dap-ui', 'nvim-dap'}, { ft = "lua" }, _G.packer_plugins)]]
+vim.cmd [[au FileType toml ++once lua require("packer.load")({'crates.nvim'}, { ft = "toml" }, _G.packer_plugins)]]
+vim.cmd [[au FileType rust ++once lua require("packer.load")({'nvim-dap-ui', 'crates.nvim', 'nvim-dap'}, { ft = "rust" }, _G.packer_plugins)]]
+vim.cmd [[au FileType markdown ++once lua require("packer.load")({'knap'}, { ft = "markdown" }, _G.packer_plugins)]]
+time([[Defining lazy-load filetype autocommands]], false)
+vim.cmd("augroup END")
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

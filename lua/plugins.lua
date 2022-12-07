@@ -1,9 +1,19 @@
 -- This file can be loaded by calling `lua require('plugins')`
 -- from your init.vim
 
+function is_git_respository()
+  local path = vim.fn.getcwd()
+  for _ in io.popen([[fd -H ".git$"]] .. path):lines() do
+    return true
+  end
+  return false
+end
+
 return require("packer").startup(function()
   -- Packer can manage itself
   use("wbthomason/packer.nvim")
+  -- Speedup Loading plugins
+  use("lewis6991/impatient.nvim")
 
   -- Colortheme 主題
   use("folke/tokyonight.nvim")
@@ -89,7 +99,13 @@ return require("packer").startup(function()
   use({ "glepnir/lspsaga.nvim", branch = "main" })
 
   -- lua 語法補全增強
-  use("folke/neodev.nvim")
+  use({
+    "folke/neodev.nvim",
+    ft = "lua",
+    config = function()
+      require("./plugin-config/neodev")
+    end,
+  })
 
   -- 游標快速移動插件
   use({
@@ -104,7 +120,13 @@ return require("packer").startup(function()
     "rmagatti/session-lens",
   })
   -- LaTeX/Markdown Previewer
-  use("frabjous/knap")
+  use({
+    "frabjous/knap",
+    ft = { "markdown", "tex" },
+    config = function()
+      require("./plugin-config/knap")
+    end,
+  })
 
   -- notification manager
   use("rcarriga/nvim-notify")
@@ -123,11 +145,18 @@ return require("packer").startup(function()
   use("RRethy/vim-illuminate")
 
   -- debugger
-  use("mfussenegger/nvim-dap")
+  use({ "mfussenegger/nvim-dap", ft = { "cpp", "rust", "python", "lua" } })
   -- debugger UI
-  use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
+  use({
+    "rcarriga/nvim-dap-ui",
+    -- requires = { "mfussenegger/nvim-dap" },
+    ft = { "cpp", "rust", "python", "lua" },
+    config = function()
+      require("./dap/setup")
+    end,
+  })
   -- debugger for neovim lua
-  use("jbyuki/one-small-step-for-vimkind")
+  use({ "jbyuki/one-small-step-for-vimkind", ft = "lua" })
   -- Comment plugin
   use("numToStr/Comment.nvim")
 
@@ -147,13 +176,23 @@ return require("packer").startup(function()
     "saecki/crates.nvim",
     tag = "v0.2.1",
     requires = { "nvim-lua/plenary.nvim" },
+    ft = { "rust", "toml" },
+    config = function()
+      require("./plugin-config/crates")
+    end,
   })
 
   -- record coding history
   use("wakatime/vim-wakatime")
 
   -- Git
-  use("lewis6991/gitsigns.nvim")
+  use({
+    "lewis6991/gitsigns.nvim",
+    cond = is_git_respository,
+    config = function()
+      require("./plugin-config/gitsigns")
+    end,
+  })
 
   -- Project Management
   use("ahmedkhalf/project.nvim")
@@ -209,13 +248,19 @@ return require("packer").startup(function()
   use("xiyaowong/nvim-transparent")
 
   -- draw ascii diagram
-  use("jbyuki/venn.nvim")
+  use({ "jbyuki/venn.nvim", opt = true })
 
   -- auto save files
   use("pocco81/auto-save.nvim")
 
   -- git resolve conflict
-  use("akinsho/git-conflict.nvim")
+  use({
+    "akinsho/git-conflict.nvim",
+    cond = is_git_respository,
+    config = function()
+      require("./plugin-config/conflict")
+    end,
+  })
 
   -- mark/buffer/tabpage/colorscheme switcher
   use("toppair/reach.nvim")
