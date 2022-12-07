@@ -10,7 +10,7 @@ local opts = {
   end,
   settings = {
     texlab = {
-      rootDirectory = "C:\\Users\\tangd\\Documents\\MdFiles",
+      rootDirectory = nil,
       build = _G.TeXMagicBuildConfig,
       forwardSearch = {
         executable = "C:\\Users\\tangd\\scoop\\apps\\sioyek\\current\\sioyek",
