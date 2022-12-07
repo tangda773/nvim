@@ -180,9 +180,9 @@ return require("packer").startup(function()
     tag = "v0.2.1",
     requires = { "nvim-lua/plenary.nvim" },
     ft = { "rust", "toml" },
-    config = function ()
-     require('./plugin-config/crates') 
-    end
+    config = function()
+      require("./plugin-config/crates")
+    end,
   })
 
   -- record coding history
@@ -191,8 +191,8 @@ return require("packer").startup(function()
   -- Git
   use("lewis6991/gitsigns.nvim")
 
-  -- Project Management
-  use("ahmedkhalf/project.nvim")
+  -- -- Project Management
+  use("gnikdroy/projections.nvim")
 
   -- Run Code like vscode.task
   use({

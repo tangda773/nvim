@@ -116,3 +116,6 @@ lua require('plugin-config/reach')
 
 " ehance ui for notify/message/cmdline
 lua require('plugin-config/noice')
+
+" project manager
+" lua require('plugin-config/projections')
