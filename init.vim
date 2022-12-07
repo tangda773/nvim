@@ -44,11 +44,6 @@ lua require('plugin-config/Lspsaga')
 " 游標快速移動插件設定
 lua require('plugin-config/hop')
 
-" session管理插件
-lua require('plugin-config/auto-session')
-" auto-session with telescope
-lua require('plugin-config/session-lens')
-
 " notification manager
 lua require('plugin-config/nvim-notify')
 
@@ -118,4 +113,7 @@ lua require('plugin-config/reach')
 lua require('plugin-config/noice')
 
 " project manager
-" lua require('plugin-config/projections')
+lua require('plugin-config/projections')
+
+" Session Manager
+lua require('plugin-config/persist')

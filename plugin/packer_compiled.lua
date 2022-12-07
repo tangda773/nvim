@@ -14,7 +14,7 @@ _G._packer.inside_compile = true
 
 local time
 local profile_info
-local should_profile = true
+local should_profile = false
 if should_profile then
   local hrtime = vim.loop.hrtime
   profile_info = {}
@@ -98,11 +98,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\auto-save.nvim",
     url = "https://github.com/pocco81/auto-save.nvim"
-  },
-  ["auto-session"] = {
-    loaded = true,
-    path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\auto-session",
-    url = "https://github.com/rmagatti/auto-session"
   },
   ["bufdelete.nvim"] = {
     loaded = true,
@@ -379,25 +374,26 @@ _G.packer_plugins = {
     path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
   },
+  ["persisted.nvim"] = {
+    config = { "\27LJ\2\nå\1\0\0\3\0\6\0\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\0016\0\0\0'\2\3\0B\0\2\0029\0\4\0'\2\1\0B\0\2\0016\0\0\0'\2\5\0B\0\2\1K\0\1\0\28./plugin-config/persist\19load_extension\14telescope\nsetup\14persisted\frequire\0" },
+    loaded = true,
+    path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\persisted.nvim",
+    url = "https://github.com/olimorris/persisted.nvim"
+  },
   ["plenary.nvim"] = {
     loaded = true,
     path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
-  ["project.nvim"] = {
+  ["projections.nvim"] = {
     loaded = true,
-    path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\project.nvim",
-    url = "https://github.com/ahmedkhalf/project.nvim"
+    path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\projections.nvim",
+    url = "https://github.com/gnikdroy/projections.nvim"
   },
   ["reach.nvim"] = {
     loaded = true,
     path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\reach.nvim",
     url = "https://github.com/toppair/reach.nvim"
-  },
-  ["session-lens"] = {
-    loaded = true,
-    path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\session-lens",
-    url = "https://github.com/rmagatti/session-lens"
   },
   ["telescope-fzf-native.nvim"] = {
     loaded = true,
@@ -486,17 +482,21 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: persisted.nvim
+time([[Config for persisted.nvim]], true)
+try_loadstring("\27LJ\2\nå\1\0\0\3\0\6\0\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\0016\0\0\0'\2\3\0B\0\2\0029\0\4\0'\2\1\0B\0\2\0016\0\0\0'\2\5\0B\0\2\1K\0\1\0\28./plugin-config/persist\19load_extension\14telescope\nsetup\14persisted\frequire\0", "config", "persisted.nvim")
+time([[Config for persisted.nvim]], false)
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
-vim.cmd [[au FileType markdown ++once lua require("packer.load")({'venn.nvim', 'nvim-markdown-preview'}, { ft = "markdown" }, _G.packer_plugins)]]
+vim.cmd [[au FileType python ++once lua require("packer.load")({'nvim-dap', 'nvim-dap-ui'}, { ft = "python" }, _G.packer_plugins)]]
+vim.cmd [[au FileType lua ++once lua require("packer.load")({'nvim-dap', 'neodev.nvim', 'nvim-dap-ui', 'one-small-step-for-vimkind'}, { ft = "lua" }, _G.packer_plugins)]]
 vim.cmd [[au FileType toml ++once lua require("packer.load")({'crates.nvim'}, { ft = "toml" }, _G.packer_plugins)]]
-vim.cmd [[au FileType tex ++once lua require("packer.load")({'venn.nvim', 'texmagic.nvim', 'nvim-cmp-lua-latex-symbols', 'vimtex'}, { ft = "tex" }, _G.packer_plugins)]]
-vim.cmd [[au FileType lua ++once lua require("packer.load")({'one-small-step-for-vimkind', 'nvim-dap-ui', 'nvim-dap', 'neodev.nvim'}, { ft = "lua" }, _G.packer_plugins)]]
-vim.cmd [[au FileType rust ++once lua require("packer.load")({'nvim-dap-ui', 'nvim-dap', 'crates.nvim'}, { ft = "rust" }, _G.packer_plugins)]]
-vim.cmd [[au FileType cpp ++once lua require("packer.load")({'nvim-dap-ui', 'nvim-dap'}, { ft = "cpp" }, _G.packer_plugins)]]
-vim.cmd [[au FileType python ++once lua require("packer.load")({'nvim-dap-ui', 'nvim-dap'}, { ft = "python" }, _G.packer_plugins)]]
+vim.cmd [[au FileType markdown ++once lua require("packer.load")({'venn.nvim', 'nvim-markdown-preview'}, { ft = "markdown" }, _G.packer_plugins)]]
+vim.cmd [[au FileType tex ++once lua require("packer.load")({'nvim-cmp-lua-latex-symbols', 'vimtex', 'venn.nvim', 'texmagic.nvim'}, { ft = "tex" }, _G.packer_plugins)]]
+vim.cmd [[au FileType rust ++once lua require("packer.load")({'nvim-dap', 'nvim-dap-ui', 'crates.nvim'}, { ft = "rust" }, _G.packer_plugins)]]
+vim.cmd [[au FileType cpp ++once lua require("packer.load")({'nvim-dap', 'nvim-dap-ui'}, { ft = "cpp" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
 vim.cmd("augroup END")
 vim.cmd [[augroup filetypedetect]]

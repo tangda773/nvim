@@ -118,9 +118,7 @@ return require("packer").startup(function()
 
   -- Session 管理插件
   use({
-    "rmagatti/auto-session",
-    -- auto-sessioon with telescope
-    "rmagatti/session-lens",
+    "olimorris/persisted.nvim",
   })
   -- notification manager
   use("rcarriga/nvim-notify")
