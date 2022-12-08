@@ -202,6 +202,10 @@ return require("packer").startup(function()
 
   -- Git
   use("lewis6991/gitsigns.nvim")
+  -- Git Conflict improve
+  use({
+    "akinsho/git-conflict.nvim",
+  })
 
   -- -- Project Management
   use("gnikdroy/projections.nvim")

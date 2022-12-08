@@ -67,6 +67,8 @@ lua require('plugin-config/luasnip')
 
 " Git 相關設定
 lua require('plugin-config/gitsigns')
+" Fix Git Conflict
+lua require('plugin-config/conflict')
 
 " LSP Client 相關設定
 lua require('lsp/setup')
