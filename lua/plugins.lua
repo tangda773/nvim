@@ -85,6 +85,15 @@ return require("packer").startup(function()
     end,
   })
 
+  -- lua 語法補全增強
+  use({
+    "folke/neodev.nvim",
+    ft = { "lua" },
+    config = function()
+      require("./plugin-config/neodev")
+    end,
+  })
+
   -- LSP Client插件
   use({
     "williamboman/mason.nvim", -- Packager Manager for Lsp Servers, DAP Servers, linters, and formatters
@@ -114,15 +123,6 @@ return require("packer").startup(function()
 
   -- LSP UI 美化
   use({ "glepnir/lspsaga.nvim", branch = "main" })
-
-  -- lua 語法補全增強
-  use({
-    "folke/neodev.nvim",
-    ft = { "lua" },
-    config = function()
-      require("./plugin-config/neodev")
-    end,
-  })
 
   -- 游標快速移動插件
   use({

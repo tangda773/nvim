@@ -22,12 +22,12 @@ pluginKeys.mappings = {
     "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<cr>",
     "Find Previous Char(After Char)",
   },
-  ["co"] = {"Git Conflicts choose ours"},
-  ["ct"] = {"Git Conflicts choose theirs"},
-  ["cb"] = {"Git Conflicts choose both"},
-  ["c0"] = {"Git Conflicts choose none"},
-  ["]x"] = {"Git Conflicts move to previous conflict"},
-  ["[x"] = {"Git Conflicts move to next conflict"},
+  ["co"] = { "Git Conflicts choose ours" },
+  ["ct"] = { "Git Conflicts choose theirs" },
+  ["cb"] = { "Git Conflicts choose both" },
+  ["c0"] = { "Git Conflicts choose none" },
+  ["]x"] = { "Git Conflicts move to previous conflict" },
+  ["[x"] = { "Git Conflicts move to next conflict" },
   ["<F9>"] = { "<cmd>lua require'dap'.toggle_breakpoint()<CR>", "Toggle Breakpoint" },
   ["<F5>"] = { "<cmd>lua require'dap'.continue()<CR>", "Continue" },
   ["<F10>"] = { "<cmd>lua require'dap'.step_into()<CR>", "Step Into" },
@@ -42,7 +42,10 @@ pluginKeys.mappings = {
   ["<A-F7>"] = { "<cmd>lua require('knap').toggle_autopreviewing()<cr> ", "Toggle Autopreviewing" },
   ["<A-F8>"] = { "<cmd>lua require('knap').forward_jump()<cr>", "Forward Jump" },
   ["<C-p>"] = { ":Telescope find_files<cr>", "Telescope Find Files" },
-  ["<C-f>"] = { "<cmd>:lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>", "Telescope Live Grep Args" },
+  ["<C-f>"] = {
+    "<cmd>:lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>",
+    "Telescope Live Grep Args",
+  },
   ["<CR>"] = "init_selection/node_incremental",
   ["<BS>"] = "node_decremental",
   ["<TAB>"] = "scope_incremental",
@@ -97,12 +100,15 @@ pluginKeys.mappings = {
     v = "Toggle_venn",
     m = {
       name = "+Harpoon",
-      a = {"<cmd> lua require('harpoon.mark').add_file()<CR>", "Harpoon Add Mark"},
-      n = {"<cmd> lua require('harpoon.ui').nav_next()<CR>", "Harpoon Next Mark" },
-      p = {"<cmd> lua require('harpoon.ui').nav_prev()<CR>", "Harpoon Prev Mark" },
-      o = {"<cmd> lua require('harpoon.ui').toggle_quick_menu()<CR>", "Harpoon Show Quick Menu"}
+      a = { "<cmd> lua require('harpoon.mark').add_file()<CR>", "Harpoon Add Mark" },
+      n = { "<cmd> lua require('harpoon.ui').nav_next()<CR>", "Harpoon Next Mark" },
+      p = { "<cmd> lua require('harpoon.ui').nav_prev()<CR>", "Harpoon Prev Mark" },
+      o = { "<cmd> lua require('harpoon.ui').toggle_quick_menu()<CR>", "Harpoon Show Quick Menu" },
     },
-    ["@"] = {"<cmd>: Telescope lsp_dynamic_workspace_symbols theme=dropdown<CR>", "Telescope Find Workspace LSP Symbols"}
+    ["@"] = {
+      "<cmd>: Telescope lsp_dynamic_workspace_symbols theme=dropdown<CR>",
+      "Telescope Find Workspace LSP Symbols",
+    },
   },
   g = {
     name = "+LSP Function",
@@ -135,20 +141,25 @@ pluginKeys.telescopeList = {
 -- lsp 回調函數快捷鍵設置
 pluginKeys.mapLSP = function(mapbuf)
   -- rename
-  mapbuf("n", "<leader>rn", ":Lspsaga rename<CR>", opt)
+  -- mapbuf("n", "<leader>rn", ":Lspsaga rename<CR>", opt)
+  mapbuf("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opt)
   -- code action
-  mapbuf("n", "<leader>xa", ":Lspsaga code_action<CR>", opt)
+  -- mapbuf("n", "<leader>xa", ":Lspsaga code_action<CR>", opt)
+  mapbuf("n", "<leader>xa", "<cmd>lua vim.lsp.buf.code_action()<CR>", opt)
   -- go xx
   mapbuf("n", "gf", ":Lspsaga lsp_finder<CR>", opt)
-  mapbuf("n", "gd", ":Lspsaga peek_definition<CR>", opt)
-  mapbuf("n", "gh", ":Lspsaga hover_doc<CR>", opt)
+  -- mapbuf("n", "gd", ":Lspsaga peek_definition<CR>", opt)
+  mapbuf("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opt)
+  mapbuf("n", "gh", "<cmd>lua vim.lsp.buf.hover()<CR>", opt)
   mapbuf("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opt)
   mapbuf("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opt)
-  mapbuf("n", "gr", ":Lspsaga lsp_finder<CR>", opt) -- diagnostic
-  mapbuf("n", "go", ":Lspsaga show_line_diagnostics<CR>", opt)
+  -- mapbuf("n", "go", ":Lspsaga show_line_diagnostics<CR>", opt)
+  mapbuf("n", "go", "<cmd>lua vim.diagnostic.open_float()<CR>", opt)
   mapbuf("n", "gs", ":LSoutlineToggle<CR>", opt)
-  mapbuf("n", "gn", ":Lspsaga diagnostic_jump_next<cr>", opt)
-  mapbuf("n", "gp", ":Lspsaga diagnostic_jump_prev<cr>", opt)
+  -- mapbuf("n", "gn", ":Lspsaga diagnostic_jump_next<cr>", opt)
+  mapbuf("n", "gn", "<cmd>lua vim.diagnostic_jump_prev()<cr>", opt)
+  -- mapbuf("n", "gp", ":Lspsaga diagnostic_jump_prev<cr>", opt)
+  mapbuf("n", "gp", "<cmd>lua vim.diagnostic_jump_next()<cr>", opt)
   -- formatter
   mapbuf("n", "<leader>=", "<cmd>lua vim.lsp.buf.format{async = true}<CR>", opt)
 end
