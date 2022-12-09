@@ -16,3 +16,16 @@ require("noice").setup({
     lsp_doc_border = false, -- add a border to hover docs and signature help
   },
 })
+
+-- Lsp Hover Doc Scrolling
+vim.keymap.set("n", "<c-d>", function()
+    if not require("noice.lsp").scroll(4) then
+      return "<c-f>"
+    end
+  end, { silent = true, expr = true })
+
+  vim.keymap.set("n", "<c-u>", function()
+    if not require("noice.lsp").scroll(-4) then
+      return "<c-b>"
+    end
+  end, { silent = true, expr = true })
