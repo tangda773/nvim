@@ -100,7 +100,6 @@ return require("packer").startup(function()
   -- LSP UI 美化
   use({ "glepnir/lspsaga.nvim", branch = "main" })
 
-
   -- 游標快速移動插件
   use({
     "phaazon/hop.nvim",
@@ -268,5 +267,14 @@ return require("packer").startup(function()
       --   If not available, we use `mini` as the fallback
       "rcarriga/nvim-notify",
     },
+  })
+
+  -- image viewer
+  use({
+    "edluffy/hologram.nvim",
+    ft = "markdown",
+    config = function()
+      require("./plugin-config/hologram")
+    end,
   })
 end)

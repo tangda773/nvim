@@ -175,6 +175,14 @@ _G.packer_plugins = {
     path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
   },
+  ["hologram.nvim"] = {
+    config = { "\27LJ\2\n8\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\29./plugin-config/hologram\frequire\0" },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/Users/tangda/.local/share/nvim/site/pack/packer/opt/hologram.nvim",
+    url = "https://github.com/edluffy/hologram.nvim"
+  },
   ["hop.nvim"] = {
     loaded = true,
     path = "/Users/tangda/.local/share/nvim/site/pack/packer/start/hop.nvim",
@@ -477,25 +485,25 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: gitsigns.nvim
-time([[Config for gitsigns.nvim]], true)
-try_loadstring("\27LJ\2\n8\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\29./plugin-config/gitsigns\frequire\0", "config", "gitsigns.nvim")
-time([[Config for gitsigns.nvim]], false)
 -- Config for: git-conflict.nvim
 time([[Config for git-conflict.nvim]], true)
 try_loadstring("\27LJ\2\n8\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\29./plugin-config/conflict\frequire\0", "config", "git-conflict.nvim")
 time([[Config for git-conflict.nvim]], false)
+-- Config for: gitsigns.nvim
+time([[Config for gitsigns.nvim]], true)
+try_loadstring("\27LJ\2\n8\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\29./plugin-config/gitsigns\frequire\0", "config", "gitsigns.nvim")
+time([[Config for gitsigns.nvim]], false)
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
-vim.cmd [[au FileType lua ++once lua require("packer.load")({'one-small-step-for-vimkind', 'nvim-dap', 'neodev.nvim', 'nvim-dap-ui'}, { ft = "lua" }, _G.packer_plugins)]]
-vim.cmd [[au FileType rust ++once lua require("packer.load")({'nvim-dap', 'crates.nvim', 'nvim-dap-ui'}, { ft = "rust" }, _G.packer_plugins)]]
-vim.cmd [[au FileType toml ++once lua require("packer.load")({'crates.nvim'}, { ft = "toml" }, _G.packer_plugins)]]
-vim.cmd [[au FileType cpp ++once lua require("packer.load")({'nvim-dap', 'nvim-dap-ui'}, { ft = "cpp" }, _G.packer_plugins)]]
-vim.cmd [[au FileType python ++once lua require("packer.load")({'nvim-dap', 'nvim-dap-ui'}, { ft = "python" }, _G.packer_plugins)]]
+vim.cmd [[au FileType lua ++once lua require("packer.load")({'one-small-step-for-vimkind', 'nvim-dap-ui', 'nvim-dap', 'neodev.nvim'}, { ft = "lua" }, _G.packer_plugins)]]
+vim.cmd [[au FileType rust ++once lua require("packer.load")({'crates.nvim', 'nvim-dap-ui', 'nvim-dap'}, { ft = "rust" }, _G.packer_plugins)]]
+vim.cmd [[au FileType cpp ++once lua require("packer.load")({'nvim-dap-ui', 'nvim-dap'}, { ft = "cpp" }, _G.packer_plugins)]]
+vim.cmd [[au FileType markdown ++once lua require("packer.load")({'knap', 'hologram.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
 vim.cmd [[au FileType tex ++once lua require("packer.load")({'knap'}, { ft = "tex" }, _G.packer_plugins)]]
-vim.cmd [[au FileType markdown ++once lua require("packer.load")({'knap'}, { ft = "markdown" }, _G.packer_plugins)]]
+vim.cmd [[au FileType python ++once lua require("packer.load")({'nvim-dap-ui', 'nvim-dap'}, { ft = "python" }, _G.packer_plugins)]]
+vim.cmd [[au FileType toml ++once lua require("packer.load")({'crates.nvim'}, { ft = "toml" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
 vim.cmd("augroup END")
 
