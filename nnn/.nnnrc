@@ -1,8 +1,13 @@
-#!/bin/bash
-#
+#!/bin/zsh
 # for nnn file manager
-# export NNN_PLUG='d:fzopen;m:nmount;x:!chmod +x $nnn'
-export NNN_PLUG='f:finder;o:fzopen;d:diffs;t:nmount;p:preview-tui;b:nbak'
+#
+# auto install nnn plugins
+NNN_PLUGINS_HOME=${XDG_CONFIG_HOME:-$HOME/.config}/nnn/plugins
+if [[ ! -a $NNN_PLUGINS_HOME ]]; then
+    sh -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"
+fi
+
+export NNN_PLUG='f:finder;o:fzopen;d:diffs;t:nmount;p:preview-tui;b:nbak;v:imgview;j:autojump'
 export NNN_ARCHIVE='\\.(7z|bz2|gz|tar|tgz|zip)$'
 export NNN_SEL='tmp/.sel'
 export NNN_TMPFILE='/tmp/.lastd'
@@ -11,4 +16,4 @@ export NNN_FIFO='/tmp/nnn.fifo'
 export NNN_COLORS='1234'
 export EDITOR='nvim'
 alias nnn="nnn -e"
-alias ls="nnn -de"
+alias ls="nnn -de -Pp"
