@@ -2,8 +2,6 @@ export PATH=$PATH:~/.local/share/nvim/mason/bin:/usr/local/nnn
 
 source ~/.nnnrc
 
-eval "$(jump shell)"
-
 eval "$(zoxide init zsh)"
 
 # auto install zinit to manage zsh plugins
@@ -21,6 +19,10 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-history-substring-search
+
+# fix fzf-tab bug
+# BUG: command not found:_complete
+zpcompinit; zpcdreplay
 zinit light Aloxaf/fzf-tab
 
 # vi mode like in zsh
