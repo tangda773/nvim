@@ -4,10 +4,6 @@ source ~/.nnnrc
 
 eval "$(zoxide init zsh)"
 
-eval "$(starship init zsh)"
-
-source /Users/tangda/.config/broot/launcher/bash/br
-
 # auto install zinit to manage zsh plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -22,3 +18,8 @@ source "${ZINIT_HOME}/zinit.zsh"
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-syntax-highlighting
+# Load starship theme
+zinit ice as"command" from"gh-r" \
+          atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
+          atpull"%atclone" src"init.zsh"
+zinit light starship/starship
