@@ -19,6 +19,7 @@ local servers = {
   taplo = require("lsp.config.taplo"),
   pyright = require("lsp.config.pyright"),
   jsonls = require("lsp.config.jsonls"),
+  bashls = require("lsp.config.bashls"),
 }
 
 for name, config in pairs(servers) do
