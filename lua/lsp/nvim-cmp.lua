@@ -68,9 +68,7 @@ cmp.setup.cmdline("/", {
 
 -- Use cmdline & path source for ':'.
 cmp.setup.cmdline(":", {
-  sources = {
-    -- { name = "cmdline" },
-  },
+  sources = {},
 })
 
 -- Only enable `lua-latex-symbols` for `tex` and `plaintex` and `markdown` file types

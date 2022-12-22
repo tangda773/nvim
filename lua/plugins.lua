@@ -1,7 +1,7 @@
 -- This file can be loaded by calling `lua require('plugins')`
 -- from your init.vim
 --
--- auto install packer.nvim on any machine
+-- auto install packer.nvim
 local ensure_packer = function()
   local fn = vim.fn
   local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
@@ -18,8 +18,7 @@ local packer_bootstrap = ensure_packer()
 return require("packer").startup(function()
   -- Packer can manage itself
   use("wbthomason/packer.nvim")
-
-  -- speedup startup time
+  -- Speedup Loading plugins
   use("lewis6991/impatient.nvim")
 
   -- Colortheme 主題
@@ -76,19 +75,10 @@ return require("packer").startup(function()
     "benfowler/telescope-luasnip.nvim",
   })
 
-  -- LaTeX build engine(with texlab)
-  use({
-    "jakewvincent/texmagic.nvim",
-    ft = { "tex" },
-    config = function()
-      require("./plugin-config/texmagic")
-    end,
-  })
-
   -- lua 語法補全增強
   use({
     "folke/neodev.nvim",
-    ft = { "lua" },
+    ft = "lua",
     config = function()
       require("./plugin-config/neodev")
     end,
@@ -111,7 +101,7 @@ return require("packer").startup(function()
   use("hrsh7th/cmp-cmdline") -- { name = 'cmdline' }
   use("hrsh7th/cmp-nvim-lua")
   use("lukas-reineke/cmp-under-comparator")
-  use({ "amarakon/nvim-cmp-lua-latex-symbols", ft = "tex" })
+  use("amarakon/nvim-cmp-lua-latex-symbols")
   use("hrsh7th/nvim-cmp")
 
   -- For luasnip users.
@@ -132,8 +122,11 @@ return require("packer").startup(function()
 
   -- Session 管理插件
   use({
-    "olimorris/persisted.nvim",
+    "rmagatti/auto-session",
+    -- auto-sessioon with telescope
+    "rmagatti/session-lens",
   })
+
   -- notification manager
   use("rcarriga/nvim-notify")
 
@@ -150,20 +143,12 @@ return require("packer").startup(function()
   -- auto highlight other used current world
   use("RRethy/vim-illuminate")
 
-  -- funciton signature
-  -- use({
-  --   "ray-x/lsp_signature.nvim",
-  -- })
-
   -- debugger
-  use({
-    "mfussenegger/nvim-dap",
-    ft = { "cpp", "rust", "python", "lua" },
-  })
-
-  --debugger UI
+  use({ "mfussenegger/nvim-dap", ft = { "cpp", "rust", "python", "lua" } })
+  -- debugger UI
   use({
     "rcarriga/nvim-dap-ui",
+    -- requires = { "mfussenegger/nvim-dap" },
     ft = { "cpp", "rust", "python", "lua" },
     config = function()
       require("./dap/setup")
@@ -171,7 +156,6 @@ return require("packer").startup(function()
   })
   -- debugger for neovim lua
   use({ "jbyuki/one-small-step-for-vimkind", ft = "lua" })
-
   -- Comment plugin
   use("numToStr/Comment.nvim")
 
@@ -201,14 +185,15 @@ return require("packer").startup(function()
   use("wakatime/vim-wakatime")
 
   -- Git
-  use("lewis6991/gitsigns.nvim")
-  -- Git Conflict improve
   use({
-    "akinsho/git-conflict.nvim",
+    "lewis6991/gitsigns.nvim",
+    config = function()
+      require("./plugin-config/gitsigns")
+    end,
   })
 
-  -- -- Project Management
-  use("gnikdroy/projections.nvim")
+  -- Project Management
+  use("ahmedkhalf/project.nvim")
 
   -- Run Code like vscode.task
   use({
@@ -258,16 +243,18 @@ return require("packer").startup(function()
   use("xiyaowong/nvim-transparent")
 
   -- draw ascii diagram
-  use({
-    "jbyuki/venn.nvim",
-    ft = { "tex", "markdown" },
-    config = function()
-      require("./plugin-config/venn")
-    end,
-  })
+  use({ "jbyuki/venn.nvim", opt = true })
 
   -- auto save files
   use("pocco81/auto-save.nvim")
+
+  -- git resolve conflict
+  use({
+    "akinsho/git-conflict.nvim",
+    config = function()
+      require("./plugin-config/conflict")
+    end,
+  })
 
   -- mark/buffer/tabpage/colorscheme switcher
   use("toppair/reach.nvim")
@@ -284,26 +271,7 @@ return require("packer").startup(function()
       "rcarriga/nvim-notify",
     },
   })
-  -- Markdown Previewer
-  use({
-    "davidgranstrom/nvim-markdown-preview",
-    ft = "markdown",
-    config = function()
-      require("./plugin-config/markdown-preview")
-    end,
-  })
 
-  -- LaTeX Previewer
-  use({
-    "lervag/vimtex",
-    ft = "tex",
-    config = function()
-      require("./plugin-config/vimtex")
-    end,
-  })
-
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
   if packer_bootstrap then
     require("packer").sync()
   end

@@ -2,7 +2,7 @@
 -- Utility functions shared between progress reports for LSP and DAP
 
 -- local client_notifs = {}
-
+--
 -- local function get_notif_data(client_id, token)
 --   if not client_notifs[client_id] then
 --     client_notifs[client_id] = {}
@@ -14,7 +14,7 @@
 --
 --   return client_notifs[client_id][token]
 -- end
-
+--
 -- local spinner_frames = { "⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷" }
 --
 -- local function update_spinner(client_id, token)
@@ -43,10 +43,10 @@
 -- local function format_message(message, percentage)
 --   return (percentage and percentage .. "%\t" or "") .. (message or "")
 -- end
-
--- LSP integration
--- Make sure to also have the snippet with the common helper functions in your config!
-
+--
+-- -- LSP integration
+-- -- Make sure to also have the snippet with the common helper functions in your config!
+--
 -- vim.lsp.handlers["$/progress"] = function(_, result, ctx)
 --   local client_id = ctx.client_id
 --
@@ -85,8 +85,8 @@
 --     notif_data.spinner = nil
 --   end
 -- end
-
--- table from lsp severity to vim severity.
+--
+-- -- table from lsp severity to vim severity.
 -- local severity = {
 --   "error",
 --   "warn",

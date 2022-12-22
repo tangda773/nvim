@@ -99,6 +99,11 @@ _G.packer_plugins = {
     path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\auto-save.nvim",
     url = "https://github.com/pocco81/auto-save.nvim"
   },
+  ["auto-session"] = {
+    loaded = true,
+    path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\auto-session",
+    url = "https://github.com/rmagatti/auto-session"
+  },
   ["bufdelete.nvim"] = {
     loaded = true,
     path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\bufdelete.nvim",
@@ -158,7 +163,14 @@ _G.packer_plugins = {
     path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\friendly-snippets",
     url = "https://github.com/rafamadriz/friendly-snippets"
   },
+  ["git-conflict.nvim"] = {
+    config = { "\27LJ\2\n8\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\29./plugin-config/conflict\frequire\0" },
+    loaded = true,
+    path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\git-conflict.nvim",
+    url = "https://github.com/akinsho/git-conflict.nvim"
+  },
   ["gitsigns.nvim"] = {
+    config = { "\27LJ\2\n8\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\29./plugin-config/gitsigns\frequire\0" },
     loaded = true,
     path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
@@ -277,11 +289,8 @@ _G.packer_plugins = {
     url = "https://github.com/hrsh7th/nvim-cmp"
   },
   ["nvim-cmp-lua-latex-symbols"] = {
-    after_files = { "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\opt\\nvim-cmp-lua-latex-symbols\\after\\plugin\\cmp-lua-latex-symbols.lua" },
-    loaded = false,
-    needs_bufread = false,
-    only_cond = false,
-    path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\opt\\nvim-cmp-lua-latex-symbols",
+    loaded = true,
+    path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-cmp-lua-latex-symbols",
     url = "https://github.com/amarakon/nvim-cmp-lua-latex-symbols"
   },
   ["nvim-dap"] = {
@@ -303,14 +312,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
-  },
-  ["nvim-markdown-preview"] = {
-    config = { "\27LJ\2\n@\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0%./plugin-config/markdown-preview\frequire\0" },
-    loaded = false,
-    needs_bufread = true,
-    only_cond = false,
-    path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\opt\\nvim-markdown-preview",
-    url = "https://github.com/davidgranstrom/nvim-markdown-preview"
   },
   ["nvim-notify"] = {
     loaded = true,
@@ -374,26 +375,25 @@ _G.packer_plugins = {
     path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
   },
-  ["persisted.nvim"] = {
-    config = { "\27LJ\2\nå\1\0\0\3\0\6\0\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\0016\0\0\0'\2\3\0B\0\2\0029\0\4\0'\2\1\0B\0\2\0016\0\0\0'\2\5\0B\0\2\1K\0\1\0\28./plugin-config/persist\19load_extension\14telescope\nsetup\14persisted\frequire\0" },
-    loaded = true,
-    path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\persisted.nvim",
-    url = "https://github.com/olimorris/persisted.nvim"
-  },
   ["plenary.nvim"] = {
     loaded = true,
     path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
-  ["projections.nvim"] = {
+  ["project.nvim"] = {
     loaded = true,
-    path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\projections.nvim",
-    url = "https://github.com/gnikdroy/projections.nvim"
+    path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\project.nvim",
+    url = "https://github.com/ahmedkhalf/project.nvim"
   },
   ["reach.nvim"] = {
     loaded = true,
     path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\reach.nvim",
     url = "https://github.com/toppair/reach.nvim"
+  },
+  ["session-lens"] = {
+    loaded = true,
+    path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\session-lens",
+    url = "https://github.com/rmagatti/session-lens"
   },
   ["telescope-fzf-native.nvim"] = {
     loaded = true,
@@ -414,14 +414,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
-  },
-  ["texmagic.nvim"] = {
-    config = { "\27LJ\2\n8\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\29./plugin-config/texmagic\frequire\0" },
-    loaded = false,
-    needs_bufread = false,
-    only_cond = false,
-    path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\opt\\texmagic.nvim",
-    url = "https://github.com/jakewvincent/texmagic.nvim"
   },
   ["todo-comments.nvim"] = {
     loaded = true,
@@ -444,10 +436,8 @@ _G.packer_plugins = {
     url = "https://github.com/folke/trouble.nvim"
   },
   ["venn.nvim"] = {
-    config = { "\27LJ\2\n4\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\25./plugin-config/venn\frequire\0" },
     loaded = false,
     needs_bufread = false,
-    only_cond = false,
     path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\opt\\venn.nvim",
     url = "https://github.com/jbyuki/venn.nvim"
   },
@@ -466,14 +456,6 @@ _G.packer_plugins = {
     path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\vim-wakatime",
     url = "https://github.com/wakatime/vim-wakatime"
   },
-  vimtex = {
-    config = { "\27LJ\2\n6\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\27./plugin-config/vimtex\frequire\0" },
-    loaded = false,
-    needs_bufread = true,
-    only_cond = false,
-    path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\opt\\vimtex",
-    url = "https://github.com/lervag/vimtex"
-  },
   ["which-key.nvim"] = {
     loaded = true,
     path = "C:\\Users\\tangd\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\which-key.nvim",
@@ -482,33 +464,24 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: persisted.nvim
-time([[Config for persisted.nvim]], true)
-try_loadstring("\27LJ\2\nå\1\0\0\3\0\6\0\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\0016\0\0\0'\2\3\0B\0\2\0029\0\4\0'\2\1\0B\0\2\0016\0\0\0'\2\5\0B\0\2\1K\0\1\0\28./plugin-config/persist\19load_extension\14telescope\nsetup\14persisted\frequire\0", "config", "persisted.nvim")
-time([[Config for persisted.nvim]], false)
+-- Config for: git-conflict.nvim
+time([[Config for git-conflict.nvim]], true)
+try_loadstring("\27LJ\2\n8\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\29./plugin-config/conflict\frequire\0", "config", "git-conflict.nvim")
+time([[Config for git-conflict.nvim]], false)
+-- Config for: gitsigns.nvim
+time([[Config for gitsigns.nvim]], true)
+try_loadstring("\27LJ\2\n8\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\29./plugin-config/gitsigns\frequire\0", "config", "gitsigns.nvim")
+time([[Config for gitsigns.nvim]], false)
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
+vim.cmd [[au FileType cpp ++once lua require("packer.load")({'nvim-dap', 'nvim-dap-ui'}, { ft = "cpp" }, _G.packer_plugins)]]
 vim.cmd [[au FileType python ++once lua require("packer.load")({'nvim-dap', 'nvim-dap-ui'}, { ft = "python" }, _G.packer_plugins)]]
 vim.cmd [[au FileType lua ++once lua require("packer.load")({'nvim-dap', 'neodev.nvim', 'nvim-dap-ui', 'one-small-step-for-vimkind'}, { ft = "lua" }, _G.packer_plugins)]]
+vim.cmd [[au FileType rust ++once lua require("packer.load")({'nvim-dap', 'crates.nvim', 'nvim-dap-ui'}, { ft = "rust" }, _G.packer_plugins)]]
 vim.cmd [[au FileType toml ++once lua require("packer.load")({'crates.nvim'}, { ft = "toml" }, _G.packer_plugins)]]
-vim.cmd [[au FileType markdown ++once lua require("packer.load")({'venn.nvim', 'nvim-markdown-preview'}, { ft = "markdown" }, _G.packer_plugins)]]
-vim.cmd [[au FileType tex ++once lua require("packer.load")({'nvim-cmp-lua-latex-symbols', 'vimtex', 'venn.nvim', 'texmagic.nvim'}, { ft = "tex" }, _G.packer_plugins)]]
-vim.cmd [[au FileType rust ++once lua require("packer.load")({'nvim-dap', 'nvim-dap-ui', 'crates.nvim'}, { ft = "rust" }, _G.packer_plugins)]]
-vim.cmd [[au FileType cpp ++once lua require("packer.load")({'nvim-dap', 'nvim-dap-ui'}, { ft = "cpp" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
-vim.cmd("augroup END")
-vim.cmd [[augroup filetypedetect]]
-time([[Sourcing ftdetect script at: C:\Users\tangd\AppData\Local\nvim-data\site\pack\packer\opt\vimtex\ftdetect\cls.vim]], true)
-vim.cmd [[source C:\Users\tangd\AppData\Local\nvim-data\site\pack\packer\opt\vimtex\ftdetect\cls.vim]]
-time([[Sourcing ftdetect script at: C:\Users\tangd\AppData\Local\nvim-data\site\pack\packer\opt\vimtex\ftdetect\cls.vim]], false)
-time([[Sourcing ftdetect script at: C:\Users\tangd\AppData\Local\nvim-data\site\pack\packer\opt\vimtex\ftdetect\tex.vim]], true)
-vim.cmd [[source C:\Users\tangd\AppData\Local\nvim-data\site\pack\packer\opt\vimtex\ftdetect\tex.vim]]
-time([[Sourcing ftdetect script at: C:\Users\tangd\AppData\Local\nvim-data\site\pack\packer\opt\vimtex\ftdetect\tex.vim]], false)
-time([[Sourcing ftdetect script at: C:\Users\tangd\AppData\Local\nvim-data\site\pack\packer\opt\vimtex\ftdetect\tikz.vim]], true)
-vim.cmd [[source C:\Users\tangd\AppData\Local\nvim-data\site\pack\packer\opt\vimtex\ftdetect\tikz.vim]]
-time([[Sourcing ftdetect script at: C:\Users\tangd\AppData\Local\nvim-data\site\pack\packer\opt\vimtex\ftdetect\tikz.vim]], false)
 vim.cmd("augroup END")
 
 _G._packer.inside_compile = false

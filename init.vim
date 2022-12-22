@@ -1,11 +1,5 @@
-lua require('impatient')
-
-let g:python3_host_prog="~/scoop/apps/python/current/python"
-
-if exists("g:neovide")
-  " Put anying you want to happen only in Neovide
-  let g:neovide_transparency=0.8
-endif
+"Speedup Loading Plugin"
+lua require('impatient').enable_profile()
 
 " neovim theme
 colorscheme kanagawa
@@ -44,6 +38,9 @@ lua require('plugin-config/Lspsaga')
 " 游標快速移動插件設定
 lua require('plugin-config/hop')
 
+" session管理插件
+lua require('plugin-config/auto-session')
+
 " notification manager
 lua require('plugin-config/nvim-notify')
 
@@ -65,11 +62,8 @@ lua require('plugin-config/auto-save')
 " For luasnip config
 lua require('plugin-config/luasnip')
 
-" Git 相關設定
-lua require('plugin-config/gitsigns')
-
-" Fix Git Conflict
-lua require('plugin-config/conflict')
+" For Rust Progamming
+" lua require('plugin-config/rust-tools')
 
 " LSP Client 相關設定
 lua require('lsp/setup')
@@ -109,14 +103,12 @@ lua require('plugin-config/alpha')
 " enable neovim transparent
 lua require('plugin-config/transparent')
 
+" draw ascii diagram
+lua require('plugin-config/venn')
+
 " mark/tabpage/buffer/colorscheme switcher
-lua require('plugin-config/reach')
+lua require("plugin-config/reach")
 
-" ehance ui for notify/message/cmdline
-lua require('plugin-config/noice')
+" ehnance ui for notify/message/cmdline
+lua require("plugin-config/noice")
 
-" project manager
-lua require('plugin-config/projections')
-
-" Session Manager
-lua require('plugin-config/persist')
