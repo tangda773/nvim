@@ -53,7 +53,7 @@ require("nvim-treesitter.configs").setup({
       enable = true,
 
       -- FIXME: rust parser:let expression remove caused treesitter-texobject error
-      disable = { "rust" },
+      -- disable = { "rust" },
 
       -- Automatically jump forward to textobj, similar to targets.vim
       lookahead = true,
@@ -94,7 +94,7 @@ require("nvim-treesitter.configs").setup({
       enable = true,
 
       -- FIXME: rust parser:let expression remove caused treesitter-texobject error
-      disable = { "rust" },
+      -- disable = { "rust" },
 
       swap_next = {
         ["<leader>a"] = "@parameter.inner",
@@ -107,7 +107,7 @@ require("nvim-treesitter.configs").setup({
       enable = true,
 
       -- FIXME: rust parser:let expression remove caused treesitter-texobject error
-      disable = { "rust" },
+      -- disable = { "rust" },
 
       set_jumps = true, -- whether to set jumps in the jumplist
       goto_next_start = {
@@ -131,7 +131,7 @@ require("nvim-treesitter.configs").setup({
       enable = true,
 
       -- FIXME: rust parser:let expression remove caused treesitter-texobject error
-      disable = { "rust" },
+      -- disable = { "rust" },
 
       border = "none",
       peek_definition_code = {
