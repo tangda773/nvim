@@ -1,0 +1,31 @@
+
+Name         Version            Source     Updated             Info
+----         -------            ------     -------             ----
+7zip         22.01              main       2022-11-25 23:51:13 
+alacritty    0.11.0             extras     2022-12-18 22:12:54 
+archwsl      22.10.16.0         extras     2022-12-12 23:51:56 
+aria2        1.36.0-1           main       2022-11-25 17:59:25 
+broot        1.17.1             main       2022-12-16 23:27:25 
+cacert       2022-10-11         main       2022-11-26 01:25:13 
+dark         3.11.2             main       2022-11-26 00:38:08 
+fd           8.6.0              main       2022-12-11 00:07:00 
+fzf          0.35.1             main       2022-12-01 20:57:42 
+git          2.39.0.windows.1   main       2022-12-16 23:27:42 
+lsd          0.23.1             main       2022-12-22 22:27:39 
+mingw        12.2.0-rt_v10-rev1 main       2022-12-04 14:24:37 
+mpv-git      20221211           extras     2022-12-16 23:27:52 
+neovide      0.10.3             extras     2022-11-30 01:12:27 
+pandoc       2.19.2             main       2022-12-05 18:07:25 
+python       3.11.1             main       2022-12-11 00:07:28 
+ripgrep      13.0.0             main       2022-11-26 00:55:30 
+sioyek       1.5.0              extras     2022-12-05 22:55:06 
+starship     1.12.0             main       2022-12-16 23:27:54 
+sumatrapdf   3.4.6              extras     2022-12-06 21:04:54 
+tldr         0.6.1              main       2022-12-05 00:41:02 
+vcredist2022 14.34.31931.0      extras     2022-11-30 17:56:17 
+vscode       1.74.2             extras     2022-12-22 11:05:37 
+wget         1.21.3             main       2022-11-26 01:25:21 
+yt-dlp       2022.11.11         main       2022-12-10 20:12:46 
+zoxide       0.8.3              main       2022-11-27 12:27:39 
+Hack-NF      2.2.2              nerd-fonts 2022-11-26 01:00:47 Global install
+
