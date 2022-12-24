@@ -292,6 +292,10 @@ return require("packer").startup(function()
     end,
   })
 
+  -- remote editing
+  use({
+    "chipsenkbeil/distant.nvim",
+  })
   if packer_bootstrap then
     require("packer").sync()
   end
