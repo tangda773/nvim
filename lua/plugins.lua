@@ -1,219 +1,210 @@
--- This file can be loaded by calling `lua require('plugins')`
--- from your init.vim
---
--- auto install packer.nvim
-local ensure_packer = function()
-  local fn = vim.fn
-  local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-  if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
-    vim.cmd([[packadd packer.nvim]])
-    return true
-  end
-  return false
-end
-
-local packer_bootstrap = ensure_packer()
-
-return require("packer").startup(function()
-  -- Packer can manage itself
-  use("wbthomason/packer.nvim")
-  -- Speedup Loading plugins
-  use("lewis6991/impatient.nvim")
-
-  -- Colortheme 主題
-  use("folke/tokyonight.nvim")
-  use("Abstract-IDE/Abstract-cs")
-  use("rebelot/kanagawa.nvim")
-
-  -- For terminal Icon
-  use("nvim-tree/nvim-web-devicons")
-
-  -- 狀態欄插件
-  use({
-    "nvim-lualine/lualine.nvim",
-    requires = { "nvim-tree/nvim-web-devicons", opt = true },
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
   })
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup({
+  -- Colortheme 主題
+  "folke/tokyonight.nvim",
+  "Abstract-IDE/Abstract-cs",
+  {
+    "rebelot/kanagawa.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd([[colorscheme kanagawa]])
+    end,
+  },
+  -- 狀態欄插件
+  {
+    "nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons", lazy = true },
+  },
 
   -- 檔案管理插件
-  use({
+  {
     "nvim-tree/nvim-tree.lua",
-    requires = {
+    dependencies = {
       "nvim-tree/nvim-web-devicons", -- optional, for file icon
     },
-    tag = "nightly", -- optional, updated every week. (see issue #1193)
-  })
+    version = "nightly", -- optional, updated every week. (see issue #1193)
+  },
 
   -- tab頁插件
-  use({ "akinsho/bufferline.nvim", requires = "nvim-tree/nvim-web-devicons" })
+  { "akinsho/bufferline.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
 
   -- 語法高亮插件
-  use({
+  {
     "nvim-treesitter/nvim-treesitter",
-    run = function()
-      local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
-      ts_update()
-    end,
-  })
-  use({ "nvim-treesitter/nvim-treesitter-textobjects" })
-  use({ "nvim-treesitter/nvim-treesitter-context" })
+    build = ":TSUpdate",
+  },
+  { "nvim-treesitter/nvim-treesitter-textobjects" },
+  { "nvim-treesitter/nvim-treesitter-context" },
   -- use({ "nvim-treesitter/playground" })
-  use("p00f/nvim-ts-rainbow")
+  "p00f/nvim-ts-rainbow",
   -- 模糊搜詢插件
-  use({
+  {
     "nvim-telescope/telescope.nvim",
-    requires = { "nvim-lua/plenary.nvim" },
+    dependencies = { "nvim-lua/plenary.nvim" },
     "nvim-telescope/telescope-live-grep-args.nvim",
-  })
+  },
   -- fzf 搜尋加強
-  use({
+  {
     "nvim-telescope/telescope-fzf-native.nvim",
-    run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
-  })
+    build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+  },
   -- luasnip view by telescope
-  use({
+  {
     "benfowler/telescope-luasnip.nvim",
-  })
+  },
 
   -- lua 語法補全增強
-  use({
+  {
     "folke/neodev.nvim",
     ft = "lua",
     config = function()
       require("./plugin-config/neodev")
     end,
-  })
+  },
 
   -- LSP Client插件
-  use({
+  {
     "williamboman/mason.nvim", -- Packager Manager for Lsp Servers, DAP Servers, linters, and formatters
     "williamboman/mason-lspconfig.nvim", -- Server Lsp Installer
     "WhoIsSethDaniel/mason-tool-installer.nvim", -- Install or updated third-party tool
     "neovim/nvim-lspconfig", -- Collection of configurations for the built-in
     -- LSP client
-  })
+  },
 
   -- 語法自動補全相關插件
   -- nvim-cmp
-  use("hrsh7th/cmp-nvim-lsp") -- { name = nvim_lsp }
-  use("hrsh7th/cmp-buffer") -- { name = 'buffer' },
-  use("hrsh7th/cmp-path") -- { name = 'path' }
-  use("hrsh7th/cmp-cmdline") -- { name = 'cmdline' }
-  use("hrsh7th/cmp-nvim-lua")
-  use("lukas-reineke/cmp-under-comparator")
-  use("amarakon/nvim-cmp-lua-latex-symbols")
-  use("hrsh7th/nvim-cmp")
+  "hrsh7th/cmp-nvim-lsp", -- { name = nvim_lsp }
+  "hrsh7th/cmp-buffer", -- { name = 'buffer' },
+  "hrsh7th/cmp-path", -- { name = 'path' }
+  "hrsh7th/cmp-cmdline", -- { name = 'cmdline' }
+  "hrsh7th/cmp-nvim-lua",
+  "lukas-reineke/cmp-under-comparator",
+  "amarakon/nvim-cmp-lua-latex-symbols",
+  "hrsh7th/nvim-cmp",
 
   -- For luasnip users.
-  use("L3MON4D3/LuaSnip")
-  use("saadparwaiz1/cmp_luasnip")
-  use("rafamadriz/friendly-snippets")
+  "L3MON4D3/LuaSnip",
+  "saadparwaiz1/cmp_luasnip",
+  "rafamadriz/friendly-snippets",
   -- lspkind
-  use("onsails/lspkind-nvim")
+  "onsails/lspkind-nvim",
 
   -- LSP UI 美化
-  use({ "glepnir/lspsaga.nvim", branch = "main" })
+  { "glepnir/lspsaga.nvim", branch = "main" },
 
   -- 游標快速移動插件
-  use({
+  {
     "phaazon/hop.nvim",
     branch = "v2", -- optional but strongly recommended
-  })
+  },
 
   -- Session 管理插件
-  use({
+  {
     "rmagatti/auto-session",
     -- auto-sessioon with telescope
     "rmagatti/session-lens",
-  })
+  },
   -- LaTeX/Markdown Previewer
-  use({
+  {
     "frabjous/knap",
     ft = { "markdown", "tex" },
     config = function()
       require("./plugin-config/knap")
     end,
-  })
+  },
 
   -- notification manager
-  use("rcarriga/nvim-notify")
+  "rcarriga/nvim-notify",
 
-  use({
+  {
     "folke/trouble.nvim",
-    requires = "nvim-tree/nvim-web-devicons",
-  })
+    dependencies = "nvim-tree/nvim-web-devicons",
+  },
 
   -- help you learn keymap
-  use({
+  {
     "folke/which-key.nvim",
-  })
+  },
 
   -- auto highlight other used current world
-  use("RRethy/vim-illuminate")
+  "RRethy/vim-illuminate",
 
   -- debugger
-  use({ "mfussenegger/nvim-dap", ft = { "cpp", "rust", "python", "lua" } })
+  { "mfussenegger/nvim-dap", ft = { "cpp", "rust", "python", "lua" } },
   -- debugger UI
-  use({
+  {
     "rcarriga/nvim-dap-ui",
-    -- requires = { "mfussenegger/nvim-dap" },
+    dependencies = { "mfussenegger/nvim-dap" },
     ft = { "cpp", "rust", "python", "lua" },
     config = function()
       require("./dap/setup")
     end,
-  })
+  },
   -- debugger for neovim lua
-  use({ "jbyuki/one-small-step-for-vimkind", ft = "lua" })
+  { "jbyuki/one-small-step-for-vimkind", ft = "lua" },
   -- Comment plugin
-  use("numToStr/Comment.nvim")
+  "numToStr/Comment.nvim",
 
   -- fixed bufdelete
-  use("famiu/bufdelete.nvim")
+  "famiu/bufdelete.nvim",
 
   -- 顯示空格
-  use("lukas-reineke/indent-blankline.nvim")
+  "lukas-reineke/indent-blankline.nvim",
 
   -- Lsp Linter & formatter
-  use("jose-elias-alvarez/null-ls.nvim")
+  "jose-elias-alvarez/null-ls.nvim",
 
   -- For Rust Language
   -- use("simrat39/rust-tools.nvim")
   --
-  use({
+  {
     "saecki/crates.nvim",
-    tag = "v0.2.1",
-    requires = { "nvim-lua/plenary.nvim" },
+    version = "v0.2.1",
+    dependencies = { "nvim-lua/plenary.nvim" },
     ft = { "rust", "toml" },
     config = function()
       require("./plugin-config/crates")
     end,
-  })
+  },
 
   -- record coding history
-  use("wakatime/vim-wakatime")
+  "wakatime/vim-wakatime",
 
   -- Git
-  use({
+  {
     "lewis6991/gitsigns.nvim",
     config = function()
       require("./plugin-config/gitsigns")
     end,
-  })
+  },
 
   -- Project Management
-  use("ahmedkhalf/project.nvim")
+  "ahmedkhalf/project.nvim",
 
   -- Code Runner
-  use({ "michaelb/sniprun", run = "bash ./install.sh" })
+  { "michaelb/sniprun", build = "bash ./install.sh" },
 
   -- Run Code like vscode.task
-  use({
+  {
     "stevearc/overseer.nvim",
-  })
+  },
   -- Code Tester
-  use({
+  {
     "nvim-neotest/neotest",
-    requires = {
+    dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
       -- NOTE: This Plugin is not needed after https://github.com/neovim/neovim/pull/20198
@@ -227,53 +218,53 @@ return require("packer").startup(function()
       "nvim-neotest/neotest-vim-test",
       "vim-test/vim-test", -- required by neotest-vim-test
     },
-  })
+  },
 
   -- Terminal
-  use({ "akinsho/toggleterm.nvim", tag = "*" })
+  { "akinsho/toggleterm.nvim", version = "*" },
 
   -- TODO Plugin
-  use({ "folke/todo-comments.nvim", requires = "nvim-lua/plenary.nvim" })
+  { "folke/todo-comments.nvim", dependencies = "nvim-lua/plenary.nvim" },
 
   -- QuickFix Improve
-  use({ "kevinhwang91/nvim-bqf" })
+  { "kevinhwang91/nvim-bqf" },
 
   -- Surrounded Selection
-  use({ "kylechui/nvim-surround" })
+  { "kylechui/nvim-surround" },
 
   -- autopair plugin
-  use({ "windwp/nvim-autopairs" })
+  { "windwp/nvim-autopairs" },
 
   -- startup menu
-  use({
+  {
     "goolord/alpha-nvim",
-    requires = { "kyazdani42/nvim-web-devicons" },
-  })
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
 
   -- make background transparent
-  use("xiyaowong/nvim-transparent")
+  "xiyaowong/nvim-transparent",
 
   -- draw ascii diagram
-  use({ "jbyuki/venn.nvim", opt = true })
+  { "jbyuki/venn.nvim", lazy = true },
 
   -- auto save files
-  use("pocco81/auto-save.nvim")
+  "pocco81/auto-save.nvim",
 
   -- git resolve conflict
-  use({
+  {
     "akinsho/git-conflict.nvim",
     config = function()
       require("./plugin-config/conflict")
     end,
-  })
+  },
 
   -- mark/buffer/tabpage/colorscheme switcher
-  use("toppair/reach.nvim")
+  "toppair/reach.nvim",
 
   -- improve ui for notify/cmdline/messages
-  use({
+  {
     "folke/noice.nvim",
-    requires = {
+    dependencies = {
       -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
       "MunifTanjim/nui.nvim",
       -- OPTIONAL:
@@ -281,22 +272,19 @@ return require("packer").startup(function()
       --   If not available, we use `mini` as the fallback
       "rcarriga/nvim-notify",
     },
-  })
+  },
 
   -- image viewer
-  use({
+  {
     "edluffy/hologram.nvim",
     ft = { "markdown", "tex" },
     config = function()
       require("./plugin-config/hologram")
     end,
-  })
+  },
 
   -- remote editing
-  use({
+  {
     "chipsenkbeil/distant.nvim",
-  })
-  if packer_bootstrap then
-    require("packer").sync()
-  end
-end)
+  },
+})

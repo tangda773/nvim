@@ -1,10 +1,5 @@
 let g:python3_host_prog="/opt/homebrew/bin/python3"
 
-"Speedup Loading Plugin"
-lua require('impatient').enable_profile()
-
-" neovim theme
-colorscheme kanagawa
 " If terminal has true colors (24-bits colors)
 if has('termguicolors')
   set termguicolors
@@ -13,7 +8,7 @@ endif
 " 基礎設置
 lua require('basic')
 
-" packer插件管理
+" lazy插件管理
 lua require('plugins')
 
 " 狀態欄插件設定
@@ -41,8 +36,6 @@ lua require('plugin-config/Lspsaga')
 lua require('plugin-config/hop')
 
 " session管理插件
-lua require('plugin-config/auto-session')
-" Telescope for auto-session
 lua require('plugin-config/auto-session')
 
 " notification manager
@@ -109,9 +102,6 @@ lua require('plugin-config/alpha')
 
 " enable neovim transparent
 lua require('plugin-config/transparent')
-
-" draw ascii diagram
-lua require('plugin-config/venn')
 
 " mark/tabpage/buffer/colorscheme switcher
 lua require("plugin-config/reach")
