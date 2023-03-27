@@ -11,159 +11,110 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup({
-  -- Colortheme 主題
-  ("folke/tokyonight.nvim"),
-  ("Abstract-IDE/Abstract-cs"),
-  {"rebelot/kanagawa.nvim",
+require("lazy").setup({
+  "folke/tokyonight.nvim",
+  "Abstract-IDE/Abstract-cs",
+  {
+    "rebelot/kanagawa.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-    vim.cmd([[colorscheme kanagawa]])
-    end
+      vim.cmd([[colorscheme kanagawa]])
+    end,
   },
-  -- 狀態欄插件
-  ({
+  {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons", lazy = true },
-  }),
-
-  -- 檔案管理插件
-  ({
+  },
+  {
     "nvim-tree/nvim-tree.lua",
     dependencies = {
       "nvim-tree/nvim-web-devicons", -- optional, for file icon
     },
     version = "nightly", -- optional, updated every week. (see issue #1193)
-  }),
-
-  -- tab頁插件
-  ({ "akinsho/bufferline.nvim", dependencies = "nvim-tree/nvim-web-devicons" }),
-
-  -- 語法高亮插件
-  ({
+  },
+  { "akinsho/bufferline.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
+  {
     "nvim-treesitter/nvim-treesitter",
     build = function()
       local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
       ts_update()
     end,
-  }),
-  ({ "nvim-treesitter/nvim-treesitter-textobjects" }),
-  ({ "nvim-treesitter/nvim-treesitter-context" }),
-  -- ({ "nvim-treesitter/playground" })
-  ("p00f/nvim-ts-rainbow"),
-  -- 模糊搜詢插件
-  ({
+  },
+  { "nvim-treesitter/nvim-treesitter-textobjects" },
+  { "nvim-treesitter/nvim-treesitter-context" },
+  "p00f/nvim-ts-rainbow",
+  {
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
     "nvim-telescope/telescope-live-grep-args.nvim",
-  }),
-  -- fzf 搜尋加強
-  ({
+  },
+  {
     "nvim-telescope/telescope-fzf-native.nvim",
     build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
-  }),
-  -- luasnip view by telescope
-  ({
+  },
+  {
     "benfowler/telescope-luasnip.nvim",
-  }),
-
-  -- lua 語法補全增強
-  ({
+  },
+  {
     "folke/neodev.nvim",
     ft = "lua",
     config = function()
       require("./plugin-config/neodev")
     end,
-  }),
-
-  -- LSP Client插件
-  ({
+  },
+  {
     "williamboman/mason.nvim", -- Packager Manager for Lsp Servers, DAP Servers, linters, and formatters
     "williamboman/mason-lspconfig.nvim", -- Server Lsp Installer
     "WhoIsSethDaniel/mason-tool-installer.nvim", -- Install or updated third-party tool
     "neovim/nvim-lspconfig", -- Collection of configurations for the built-in
     -- LSP client
-  }),
-
-  -- 語法自動補全相關插件
-  -- nvim-cmp
-  ("hrsh7th/cmp-nvim-lsp"), -- { name = nvim_lsp }
-  ("hrsh7th/cmp-buffer"), -- { name = 'buffer' },
-  ("hrsh7th/cmp-path"), -- { name = 'path' }
-  ("hrsh7th/cmp-cmdline"), -- { name = 'cmdline' }
-  ("hrsh7th/cmp-nvim-lua"),
-  ("lukas-reineke/cmp-under-comparator"),
-  ("hrsh7th/nvim-cmp"),
-
-  -- For luasnip rs.
-  ("L3MON4D3/LuaSnip"),
-  ("saadparwaiz1/cmp_luasnip"),
-  ("rafamadriz/friendly-snippets"),
-  -- lspkind
-  ("onsails/lspkind-nvim"),
-
-  -- LSP UI 美化
-  ({ "glepnir/lspsaga.nvim", branch = "main" }),
-
-  -- 游標快速移動插件
-  ({
+  },
+  "hrsh7th/cmp-nvim-lsp", -- { name = nvim_lsp }
+  "hrsh7th/cmp-buffer", -- { name = 'buffer' },
+  "hrsh7th/cmp-path", -- { name = 'path' }
+  "hrsh7th/cmp-cmdline", -- { name = 'cmdline' }
+  "hrsh7th/cmp-nvim-lua",
+  "lukas-reineke/cmp-under-comparator",
+  "hrsh7th/nvim-cmp",
+  "L3MON4D3/LuaSnip",
+  "saadparwaiz1/cmp_luasnip",
+  "rafamadriz/friendly-snippets",
+  "onsails/lspkind-nvim",
+  { "glepnir/lspsaga.nvim", branch = "main" },
+  {
     "phaazon/hop.nvim",
     branch = "v2", -- optional but strongly recommended
-  }),
-
-  -- Session 管理插件
-  ({
+  },
+  {
     "rmagatti/auto-session",
     -- auto-sessioon with telescope
     "rmagatti/session-lens",
-  }),
-
-  -- notification manager
-  ("rcarriga/nvim-notify"),
-
-  ({
+  },
+  "rcarriga/nvim-notify",
+  {
     "folke/trouble.nvim",
     dependencies = "nvim-tree/nvim-web-devicons",
-  }),
-
-  -- help you learn keymap
-  ({
+  },
+  {
     "folke/which-key.nvim",
-  }),
-
-  -- auto highlight other d current world
-  ("RRethy/vim-illuminate"),
-
-  -- debugger
-  ({ "mfussenegger/nvim-dap", ft = { "cpp", "rust", "python", "lua" } }),
-  -- debugger UI
-  ({
+  },
+  "RRethy/vim-illuminate",
+  { "mfussenegger/nvim-dap", ft = { "cpp", "rust", "python", "lua" } },
+  {
     "rcarriga/nvim-dap-ui",
     -- dependencies = { "mfussenegger/nvim-dap" },
     ft = { "cpp", "rust", "python", "lua" },
     config = function()
       require("./dap/setup")
     end,
-  }),
-  -- debugger for neovim lua
-  ({ "jbyuki/one-small-step-for-vimkind", ft = "lua" }),
-  -- Comment plugin
-  ("numToStr/Comment.nvim"),
-
-  -- fixed bufdelete
-  ("famiu/bufdelete.nvim"),
-
-  -- 顯示空格
-  ("lukas-reineke/indent-blankline.nvim"),
-
-  -- Lsp Linter & formatter
-  ("jose-elias-alvarez/null-ls.nvim"),
-
-  -- For Rust Language
-  -- ("simrat39/rust-tools.nvim")
-  --
-  ({
+  },
+  { "jbyuki/one-small-step-for-vimkind", ft = "lua" },
+  "numToStr/Comment.nvim",
+  "famiu/bufdelete.nvim",
+  "lukas-reineke/indent-blankline.nvim",
+  "jose-elias-alvarez/null-ls.nvim",
+  {
     "saecki/crates.nvim",
     version = "v0.2.1",
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -171,28 +122,19 @@ require('lazy').setup({
     config = function()
       require("./plugin-config/crates")
     end,
-  }),
-
-  -- record coding history
-  ("wakatime/vim-wakatime"),
-
-  -- Git
-  ({
+  },
+  "wakatime/vim-wakatime",
+  {
     "lewis6991/gitsigns.nvim",
     config = function()
       require("./plugin-config/gitsigns")
     end,
-  }),
-
-  -- Project Management
-  ("ahmedkhalf/project.nvim"),
-
-  -- Run Code like vscode.task
-  ({
+  },
+  "ahmedkhalf/project.nvim",
+  {
     "stevearc/overseer.nvim",
-  }),
-  -- Code Tester
-  ({
+  },
+  {
     "nvim-neotest/neotest",
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -208,51 +150,27 @@ require('lazy').setup({
       "nvim-neotest/neotest-vim-test",
       "vim-test/vim-test", -- required by neotest-vim-test
     },
-  }),
-
-  -- Terminal
-  ({ "akinsho/toggleterm.nvim", version = "*" }),
-
-  -- TODO Plugin
-  ({ "folke/todo-comments.nvim", dependencies = "nvim-lua/plenary.nvim" }),
-
-  -- QuickFix Improve
-  ({ "kevinhwang91/nvim-bqf" }),
-
-  -- Surrounded Selection
-  ({ "kylechui/nvim-surround" }),
-
-  -- autopair plugin
-  ({ "windwp/nvim-autopairs" }),
-
-  -- startup menu
-  ({
+  },
+  { "akinsho/toggleterm.nvim", version = "*" },
+  { "folke/todo-comments.nvim", dependencies = "nvim-lua/plenary.nvim" },
+  { "kevinhwang91/nvim-bqf" },
+  { "kylechui/nvim-surround" },
+  { "windwp/nvim-autopairs" },
+  {
     "goolord/alpha-nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-  }),
-
-  -- make background transparent
-  ("xiyaowong/nvim-transparent"),
-
-  -- draw ascii diagram
-  ({ "jbyuki/venn.nvim", lazy = true }),
-
-  -- auto save files
-  ("pocco81/auto-save.nvim"),
-
-  -- git resolve conflict
-  ({
+  },
+  "xiyaowong/nvim-transparent",
+  { "jbyuki/venn.nvim", lazy = true },
+  "pocco81/auto-save.nvim",
+  {
     "akinsho/git-conflict.nvim",
     config = function()
       require("./plugin-config/conflict")
     end,
-  }),
-
-  -- mark/buffer/tabpage/colorscheme switcher
-  ("toppair/reach.nvim"),
-
-  -- improve ui for notify/cmdline/messages
-  ({
+  },
+  "toppair/reach.nvim",
+  {
     "folke/noice.nvim",
     dependencies = {
       -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
@@ -262,8 +180,7 @@ require('lazy').setup({
       --   If not available, we  `mini` as the fallback
       "rcarriga/nvim-notify",
     },
-  }),
-
-  -- remote editing
-  ({ "chipsenkbeil/distant.nvim", branch = "v0.2" }),
-  })
+  },
+  { "chipsenkbeil/distant.nvim", branch = "v0.2" },
+  { "lervag/vimtex", ft = "tex" },
+})
