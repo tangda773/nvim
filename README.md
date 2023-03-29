@@ -10,38 +10,34 @@ My Neovim Config file
 - 7zip(Only For Windows)
 - curl, wget
 - git
-- gcc, clang, or MinGW(Only For Windows)  and libstdc++
+- gcc, clang, or MinGW (Only For Windows)  and libstdc++
 - Microsoft C++ Build Tools(Only For Windows)
 - python
 - pynvim (pip packages)
-- nodejs & npm
-- neovim (npm packages)
-- cmake
+- nodejs & npm (not necessary)
+- neovim (npm packages) (not necessary)
+- cmake (not necessary)
 - ripgrep & fd & fzf
 
 ## How to Install
 
-For this Config we use  [packer.nvim]("") for plugin Management
+ Copy or use `git clone https://github.com/tangda773/algo.git`
+ command to neovim config path
 
-You need to install packer.nvim with the following commands
+## Use Plugins
 
-### For Unix Like System
-
-```bash
-
-```
-
-### For Windows
-
-```powershell
-
-```
-
-Then use the git commands to clone the proj to your neovim path
-
-```shell
-
-```
-
-Then you can run `:PackerInstall` commands to install all the plugins
-and for fun.
+- Lazy.nvim
+- nvim-lspconfig
+- nvim-cmp
+- Trouble.nvim
+- mason.nvim
+- Telescope.nvim
+- bufferline.nvim
+- lualine.nvim
+- Noice.nvim
+- alpha.nvim
+- sniprun.nvim
+- kanagawa.nvim
+- nvim-dap
+- null-ls.nvim
+- ...

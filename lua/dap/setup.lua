@@ -15,8 +15,8 @@ end
 
 local adapters = {
   python = require('dap.config.debugpy'),
-  -- cpp = require('dap.config.cpptools'),
-  -- c = require('dap.config.cpptools'),
+  cpp = require('dap.config.cpptools'),
+  c = require('dap.config.cpptools'),
   -- rust = require('dap.config.cpptools'),
 }
 

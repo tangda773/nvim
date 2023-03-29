@@ -111,3 +111,6 @@ lua require("plugin-config/noice")
 
 " remote editing
 lua require("plugin-config/distant")
+
+"Diagnostics, references, telescope results, quickfix
+lua require("plugin-config/trouble")

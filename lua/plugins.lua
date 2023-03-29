@@ -245,7 +245,13 @@ require("lazy").setup({
   "xiyaowong/nvim-transparent",
 
   -- draw ascii diagram
-  { "jbyuki/venn.nvim", lazy = true },
+  {
+    "jbyuki/venn.nvim",
+    lazy = true,
+    config = function()
+      require("./plugin-config/venn")
+    end,
+  },
 
   -- auto save files
   "pocco81/auto-save.nvim",
@@ -275,13 +281,13 @@ require("lazy").setup({
   },
 
   -- image viewer
-  {
-    "edluffy/hologram.nvim",
-    ft = { "markdown", "tex" },
-    config = function()
-      require("./plugin-config/hologram")
-    end,
-  },
+  -- {
+  --   "edluffy/hologram.nvim",
+  --   ft = { "markdown", "tex" },
+  --   config = function()
+  --     require("./plugin-config/hologram")
+  --   end,
+  -- },
 
   -- remote editing
   {
