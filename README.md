@@ -1,7 +1,7 @@
 
 # nvim
 
-My Neovim Config file
+My Neovim Config files
 
 ## Requirement
 
@@ -41,3 +41,9 @@ My Neovim Config file
 - nvim-dap
 - null-ls.nvim
 - ...
+
+## ScreenShot
+
+![screenshot1](./jpg/screenshot1.png)
+
+![screenshot2](./jpg/screenshot2.png)
