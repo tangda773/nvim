@@ -18,7 +18,7 @@ lua require('plugin-config/lualine')
 lua require('plugin-config/bufferline')
 
 " 檔案管理器設定
-lua require('plugin-config/nvim-tree')
+lua require('plugin-config/neo-tree')
 
 " 檔案管理自動關閉
 autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
