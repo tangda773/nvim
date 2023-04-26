@@ -148,7 +148,16 @@ require("lazy").setup({
       require("./plugin-config/gitsigns")
     end,
   },
-  "ahmedkhalf/project.nvim",
+  -- vim git command
+  "tpope/vim-fugitive",
+  "rbong/vim-flog",
+  -- git resolve conflict
+  {
+    "akinsho/git-conflict.nvim",
+    config = function()
+      require("./plugin-config/conflict")
+    end,
+  },
   -- Run Code like vscode.task
   {
     "stevearc/overseer.nvim",
@@ -191,6 +200,8 @@ require("lazy").setup({
       require("./plugin-config/conflict")
     end,
   },
+
+  -- mark/buffer/tabpage/colorscheme switcher
   "toppair/reach.nvim",
   {
     "folke/noice.nvim",

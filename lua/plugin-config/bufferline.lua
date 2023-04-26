@@ -1,15 +1,13 @@
 require("bufferline").setup({
-	options = {
-		-- 使用 nvim 内置lsp
-		diagnostics = "nvim_lsp",
-		-- 左側讓出 nvim-tree 的位置
-		offsets = {
-			{
-				filetype = "NvimTree",
-				text = "File Explorer",
-				highlight = "Directory",
-				text_align = "left",
-			},
-		},
-	},
+  options = {
+    diagnostics = "nvim_lsp",
+    --- count is an integer representing total count of errors
+    --- level is a string "error" | "warning"
+    --- this should return a string
+    --- Don't get too fancy as this function will be executed a lot
+    diagnostics_indicator = function(count, level)
+      local icon = level:match("error") and " " or ""
+      return " " .. icon .. count
+    end,
+  },
 })
