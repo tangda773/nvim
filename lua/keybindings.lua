@@ -32,7 +32,10 @@ pluginKeys.mappings = {
     "Next Reference Reverse",
   },
   ["<C-p>"] = { ":Telescope find_files<cr>", "Telescope Find Files" },
-  ["<C-f>"] = { "<cmd>:lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>", "Telescope Live Grep args" },
+  ["<C-f>"] = {
+    "<cmd>:lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>",
+    "Telescope Live Grep args",
+  },
   ["<CR>"] = "init_selection/node_incremental",
   ["<BS>"] = "node_decremental",
   ["<TAB>"] = "scope_incremental",
@@ -51,17 +54,17 @@ pluginKeys.mappings = {
     },
     c = {
       name = "+Crates",
-      v = { "<cmd> lua require('crates').show_versions_popup()<CR>", "Show Crates Version" },
-      f = { "<cmd> lua require('crates').show_features_popup()<CR>", "Show Crates Feature" },
-      d = { "<cmd> lua require('crates').show_dependencies_popup()<CR>", "Show Crates Dependencies" },
-      t = { "<cmd> lua require('crates').toggle()<CR>", "Crates Toggle" },
-      r = { "<cmd> lua require('crates').reload()<CR>", "Crates Reload" },
-      u = { "<cmd> lua require('crates').update_crate()<CR>", "Update Crate" },
-      a = { "<cmd> lua require('crates').update_all_crates()<CR>", "Update All Crates" },
-      H = { "<cmd> lua require('crates').open_homepage<CR>", "Crates Open Homepage" },
-      R = { "<cmd> lua require('crates').open_repository<CR>", "Crates Open Repository" },
-      D = { "<cmd> lua require('crates').open_documentation<CR>", "Crates Open Documentation" },
-      C = { "<cmd> lua require('crates').open_crates_io()<CR>", "Crates Open Crates IO" },
+      v = { ":lua require('crates').show_versions_popup()<CR>", "Show Crates Version" },
+      f = { ":lua require('crates').show_features_popup()<CR>", "Show Crates Feature" },
+      d = { ":lua require('crates').show_dependencies_popup()<CR>", "Show Crates Dependencies" },
+      t = { ":lua require('crates').toggle()<CR>", "Crates Toggle" },
+      r = { ":lua require('crates').reload()<CR>", "Crates Reload" },
+      u = { ":lua require('crates').update_crate()<CR>", "Update Crate" },
+      a = { ":lua require('crates').update_all_crates()<CR>", "Update All Crates" },
+      H = { ":lua require('crates').open_homepage<CR>", "Crates Open Homepage" },
+      R = { ":lua require('crates').open_repository<CR>", "Crates Open Repository" },
+      D = { ":lua require('crates').open_documentation<CR>", "Crates Open Documentation" },
+      C = { ":lua require('crates').open_crates_io()<CR>", "Crates Open Crates IO" },
     },
     h = {
       name = "+Gitsigns",
@@ -79,16 +82,17 @@ pluginKeys.mappings = {
       name = "+Gitsigns & Overseer Task & Neotest",
       b = "Gitsigns Toggle Current Line Blame",
       d = "Gitsigns Toggle Deleted",
-      r = { "<cmd>: OverseerRun<CR>", "Overseer Run Tasks" },
-      o = { "<cmd>: OverseerQuickAction open float<CR>", "Overseer Show Tasks Output" },
-      t = { "<cmd> lua require('neotest').run.run()<CR>", "Neotest Run Current Line" },
-      a = { "<cmd> lua require('neotest').run.run(vim.fn.expand('%'))<CR>", "Neotest Run Current File" },
+      r = { ":OverseerRun<CR>", "Overseer Run Tasks" },
+      o = { ":OverseerQuickAction open float<CR>", "Overseer Show Tasks Output" },
+      t = { ":lua require('neotest').run.run()<CR>", "Neotest Run Current Line" },
+      a = { ":lua require('neotest').run.run(vim.fn.expand('%'))<CR>", "Neotest Run Current File" },
     },
     v = "Toggle_venn",
     ["@"] = {
-      "<cmd>: Telescope lsp_dynamic_workspace_symbols theme=dropdown<CR>",
+      ":Telescope lsp_dynamic_workspace_symbols theme=dropdown<CR>",
       "Telescope Find Workspace LSP Symbols",
     },
+    f = { ":NvimTreeOpen<CR>", "Open File Explorer" },
   },
   g = {
     name = "+LSP Function",
@@ -112,7 +116,6 @@ pluginKeys.telescopeList = {
   i = {
     ["<C-n>"] = require("telescope.actions").cycle_history_next,
     ["<C-p>"] = require("telescope.actions").cycle_history_prev,
-
     ["<C-j>"] = require("telescope.actions").move_selection_next,
     ["<C-k>"] = require("telescope.actions").move_selection_previous,
   },
@@ -173,7 +176,6 @@ pluginKeys.cmp = function(cmp)
         fallback()
       end
     end, { "i", "s" }),
-
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()

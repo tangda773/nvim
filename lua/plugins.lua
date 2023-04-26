@@ -27,13 +27,26 @@ require("lazy").setup({
     dependencies = { "nvim-tree/nvim-web-devicons", lazy = true },
   },
   {
-    "nvim-tree/nvim-tree.lua",
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
     dependencies = {
-      "nvim-tree/nvim-web-devicons", -- optional, for file icon
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+      {
+        -- only needed if you want to use the commands with "_with_window_picker" suffix
+        "s1n7ax/nvim-window-picker",
+        version = "v1.*",
+        config = function()
+          require("plugin-config.window-picker")
+        end,
+      },
     },
-    version = "nightly", -- optional, updated every week. (see issue #1193)
   },
-  { "akinsho/bufferline.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
+  -- tab頁插件
+  { "akinsho/bufferline.nvim",                    dependencies = "nvim-tree/nvim-web-devicons" },
+
+  -- 語法高亮插件
   {
     "nvim-treesitter/nvim-treesitter",
     build = function()
@@ -51,7 +64,8 @@ require("lazy").setup({
   },
   {
     "nvim-telescope/telescope-fzf-native.nvim",
-    build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+    build =
+    "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
   },
   {
     "benfowler/telescope-luasnip.nvim",
@@ -64,15 +78,15 @@ require("lazy").setup({
     end,
   },
   {
-    "williamboman/mason.nvim", -- Packager Manager for Lsp Servers, DAP Servers, linters, and formatters
-    "williamboman/mason-lspconfig.nvim", -- Server Lsp Installer
+    "williamboman/mason.nvim",                 -- Packager Manager for Lsp Servers, DAP Servers, linters, and formatters
+    "williamboman/mason-lspconfig.nvim",       -- Server Lsp Installer
     "WhoIsSethDaniel/mason-tool-installer.nvim", -- Install or updated third-party tool
-    "neovim/nvim-lspconfig", -- Collection of configurations for the built-in
+    "neovim/nvim-lspconfig",                   -- Collection of configurations for the built-in
     -- LSP client
   },
   "hrsh7th/cmp-nvim-lsp", -- { name = nvim_lsp }
-  "hrsh7th/cmp-buffer", -- { name = 'buffer' },
-  "hrsh7th/cmp-path", -- { name = 'path' }
+  "hrsh7th/cmp-buffer",  -- { name = 'buffer' },
+  "hrsh7th/cmp-path",    -- { name = 'path' }
   "hrsh7th/cmp-cmdline", -- { name = 'cmdline' }
   "hrsh7th/cmp-nvim-lua",
   "lukas-reineke/cmp-under-comparator",
@@ -81,7 +95,11 @@ require("lazy").setup({
   "saadparwaiz1/cmp_luasnip",
   "rafamadriz/friendly-snippets",
   "onsails/lspkind-nvim",
-  { "glepnir/lspsaga.nvim", branch = "main" },
+
+  -- LSP UI 美化
+  { "glepnir/lspsaga.nvim",  branch = "main" },
+
+  -- 游標快速移動插件
   {
     "phaazon/hop.nvim",
     branch = "v2", -- optional but strongly recommended
@@ -131,6 +149,7 @@ require("lazy").setup({
     end,
   },
   "ahmedkhalf/project.nvim",
+  -- Run Code like vscode.task
   {
     "stevearc/overseer.nvim",
   },
@@ -151,7 +170,11 @@ require("lazy").setup({
       "vim-test/vim-test", -- required by neotest-vim-test
     },
   },
-  { "akinsho/toggleterm.nvim", version = "*" },
+
+  -- Terminal
+  { "akinsho/toggleterm.nvim",  version = "*" },
+
+  -- TODO Plugin
   { "folke/todo-comments.nvim", dependencies = "nvim-lua/plenary.nvim" },
   { "kevinhwang91/nvim-bqf" },
   { "kylechui/nvim-surround" },

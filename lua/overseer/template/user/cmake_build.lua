@@ -1,3 +1,4 @@
+local efm = "%f:%l:%c: %trror: %m,%f:%l:%c: %tarning: %m,%f:%l:%c: %t: %m"
 return {
   name = "cmake build",
   builder = function()
@@ -6,10 +7,10 @@ return {
     return {
       cmd = { "cmake" },
       args = { "--build", file },
-      components = { { "on_output_quickfix", open = true }, "default" },
+      components = { { "on_output_quickfix", open = true, errorformat = efm }, "default" },
     }
   end,
   condition = {
-    filetype = { "cpp" },
+    filetype = { "cpp", "c" },
   },
 }
