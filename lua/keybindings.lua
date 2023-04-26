@@ -96,7 +96,7 @@ pluginKeys.mappings = {
       ":Telescope lsp_dynamic_workspace_symbols theme=dropdown<CR>",
       "Telescope Find Workspace LSP Symbols",
     },
-    f = { ":NvimTreeOpen<CR>", "Open File Explorer" },
+    f = { ":NeoTreeReveal<CR>", "NeoTree Reveal" },
   },
   g = {
     name = "+LSP Function",

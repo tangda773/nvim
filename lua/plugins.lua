@@ -207,6 +207,17 @@ require("lazy").setup({
     end,
   },
 
+  -- vim git command
+  "tpope/vim-fugitive",
+  "rbong/vim-flog",
+  -- git resolve conflict
+  {
+    "akinsho/git-conflict.nvim",
+    config = function()
+      require("./plugin-config/conflict")
+    end,
+  },
+
   -- Project Management
   "ahmedkhalf/project.nvim",
 
@@ -271,14 +282,6 @@ require("lazy").setup({
 
   -- auto save files
   "pocco81/auto-save.nvim",
-
-  -- git resolve conflict
-  {
-    "akinsho/git-conflict.nvim",
-    config = function()
-      require("./plugin-config/conflict")
-    end,
-  },
 
   -- mark/buffer/tabpage/colorscheme switcher
   "toppair/reach.nvim",
