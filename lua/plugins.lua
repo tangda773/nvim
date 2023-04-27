@@ -107,7 +107,7 @@ require("lazy").setup({
   {
     "rmagatti/auto-session",
     -- auto-sessioon with telescope
-    "rmagatti/session-lens",
+    -- "rmagatti/session-lens",
   },
   "rcarriga/nvim-notify",
   {
@@ -117,6 +117,12 @@ require("lazy").setup({
   {
     "folke/which-key.nvim",
   },
+  {
+    "mrjones2014/legendary.nvim",
+    -- sqlite is only needed if you want to use frecency sorting
+    dependencies = "kkharji/sqlite.lua",
+  },
+  -- auto highlight other used current world
   "RRethy/vim-illuminate",
   { "mfussenegger/nvim-dap", ft = { "cpp", "rust", "python", "lua" } },
   {
@@ -214,6 +220,13 @@ require("lazy").setup({
       "rcarriga/nvim-notify",
     },
   },
-  { "chipsenkbeil/distant.nvim", branch = "v0.2" },
   { "lervag/vimtex", ft = "tex" },
+  -- improve vim.ui.interface
+  {
+    "stevearc/dressing.nvim",
+  },
+  -- remote editing
+  {
+    "chipsenkbeil/distant.nvim",
+  },
 })
