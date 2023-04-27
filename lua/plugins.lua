@@ -146,11 +146,6 @@ require("lazy").setup({
   {
     "folke/which-key.nvim",
   },
-  {
-    "mrjones2014/legendary.nvim",
-    -- sqlite is only needed if you want to use frecency sorting
-    dependencies = "kkharji/sqlite.lua",
-  },
   -- auto highlight other used current world
   "RRethy/vim-illuminate",
 
@@ -168,7 +163,7 @@ require("lazy").setup({
   -- debugger for neovim lua
   { "jbyuki/one-small-step-for-vimkind", ft = "lua" },
   -- Comment plugin
-  "numToStr/Comment.nvim",
+  -- "numToStr/Comment.nvim",
 
   -- fixed bufdelete
   "famiu/bufdelete.nvim",
@@ -253,7 +248,7 @@ require("lazy").setup({
   { "kevinhwang91/nvim-bqf" },
 
   -- Surrounded Selection
-  { "kylechui/nvim-surround" },
+  -- { "kylechui/nvim-surround" },
 
   -- autopair plugin
   { "windwp/nvim-autopairs" },
@@ -295,9 +290,9 @@ require("lazy").setup({
     },
   },
   -- improve vim.ui.interface
-  {
-    "stevearc/dressing.nvim",
-  },
+  -- {
+  --   "stevearc/dressing.nvim",
+  -- },
 
   -- image viewer
   -- {

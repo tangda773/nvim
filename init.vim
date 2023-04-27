@@ -42,15 +42,10 @@ lua require('plugin-config/nvim-notify')
 lua require('plugin-config/mason')
 
 " comment plugin
-lua require('plugin-config/comment')
+" lua require('plugin-config/comment')
 
 " Easy Way to Learn KeyMap
 lua require('plugin-config/WhichKey')
-
-lua require('plugin-config/legendary')
-
-" Improve vim.ui interface
-lua require('plugin-config/dressing')
 
 " Linter/Formatter plugin
 lua require('plugin-config/null-ls')
@@ -89,7 +84,7 @@ lua require('plugin-config/toggleterm')
 lua require('plugin-config/todo')
 
 " Surround plugin
-lua require('plugin-config/nvim-surround')
+" lua require('plugin-config/nvim-surround')
 
 " QuickFix improve
 lua require('plugin-config/nvim-bqf')
