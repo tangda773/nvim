@@ -28,14 +28,6 @@ require("lazy").setup({
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons", lazy = true },
   },
-  -- 檔案管理插件
-  -- {
-  --   "nvim-tree/nvim-tree.lua",
-  --   dependencies = {
-  --     "nvim-tree/nvim-web-devicons", -- optional, for file icon
-  --   },
-  --   version = "nightly",          -- optional, updated every week. (see issue #1193)
-  -- },
   {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v2.x",
@@ -131,7 +123,7 @@ require("lazy").setup({
   {
     "rmagatti/auto-session",
     -- auto-sessioon with telescope
-    "rmagatti/session-lens",
+    -- "rmagatti/session-lens",
   },
   -- LaTeX/Markdown Previewer
   {
@@ -154,7 +146,11 @@ require("lazy").setup({
   {
     "folke/which-key.nvim",
   },
-
+  {
+    "mrjones2014/legendary.nvim",
+    -- sqlite is only needed if you want to use frecency sorting
+    dependencies = "kkharji/sqlite.lua",
+  },
   -- auto highlight other used current world
   "RRethy/vim-illuminate",
 
@@ -297,6 +293,10 @@ require("lazy").setup({
       --   If not available, we use `mini` as the fallback
       "rcarriga/nvim-notify",
     },
+  },
+  -- improve vim.ui.interface
+  {
+    "stevearc/dressing.nvim",
   },
 
   -- image viewer

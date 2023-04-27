@@ -20,9 +20,6 @@ lua require('plugin-config/bufferline')
 " 檔案管理器設定
 lua require('plugin-config/neo-tree')
 
-" 檔案管理自動關閉
-autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
-
 " 語法高亮設定
 lua require('plugin-config/treesitter')
 
@@ -49,6 +46,11 @@ lua require('plugin-config/comment')
 
 " Easy Way to Learn KeyMap
 lua require('plugin-config/WhichKey')
+
+lua require('plugin-config/legendary')
+
+" Improve vim.ui interface
+lua require('plugin-config/dressing')
 
 " Linter/Formatter plugin
 lua require('plugin-config/null-ls')
