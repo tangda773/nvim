@@ -117,11 +117,6 @@ require("lazy").setup({
   {
     "folke/which-key.nvim",
   },
-  {
-    "mrjones2014/legendary.nvim",
-    -- sqlite is only needed if you want to use frecency sorting
-    dependencies = "kkharji/sqlite.lua",
-  },
   -- auto highlight other used current world
   "RRethy/vim-illuminate",
   { "mfussenegger/nvim-dap", ft = { "cpp", "rust", "python", "lua" } },
@@ -134,7 +129,14 @@ require("lazy").setup({
     end,
   },
   { "jbyuki/one-small-step-for-vimkind", ft = "lua" },
+<<<<<<< HEAD
   "numToStr/Comment.nvim",
+=======
+  -- Comment plugin
+  -- "numToStr/Comment.nvim",
+
+  -- fixed bufdelete
+>>>>>>> 7f066d9 (remove legendary and fix bug)
   "famiu/bufdelete.nvim",
   "lukas-reineke/indent-blankline.nvim",
   "jose-elias-alvarez/null-ls.nvim",
@@ -192,7 +194,15 @@ require("lazy").setup({
   -- TODO Plugin
   { "folke/todo-comments.nvim", dependencies = "nvim-lua/plenary.nvim" },
   { "kevinhwang91/nvim-bqf" },
+<<<<<<< HEAD
   { "kylechui/nvim-surround" },
+=======
+
+  -- Surrounded Selection
+  -- { "kylechui/nvim-surround" },
+
+  -- autopair plugin
+>>>>>>> 7f066d9 (remove legendary and fix bug)
   { "windwp/nvim-autopairs" },
   {
     "goolord/alpha-nvim",
@@ -221,10 +231,6 @@ require("lazy").setup({
     },
   },
   { "lervag/vimtex", ft = "tex" },
-  -- improve vim.ui.interface
-  {
-    "stevearc/dressing.nvim",
-  },
   -- remote editing
   {
     "chipsenkbeil/distant.nvim",

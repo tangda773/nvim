@@ -1,5 +1,9 @@
 require("bufferline").setup({
   options = {
+    indicator = {
+      icon = "▎", -- this should be omitted if indicator style is not 'icon'
+      style = "icon",
+    },
     diagnostics = "nvim_lsp",
     --- count is an integer representing total count of errors
     --- level is a string "error" | "warning"
@@ -9,5 +13,18 @@ require("bufferline").setup({
       local icon = level:match("error") and " " or ""
       return " " .. icon .. count
     end,
+    hover = {
+      enabled = true,
+      delay = 200,
+      reveal = { "close" },
+    },
+    offsets = {
+      {
+        filetype = "neo-tree",
+        text = "File Explorer",
+        text_align = "left",
+        separator = true,
+      },
+    },
   },
 })
