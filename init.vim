@@ -33,14 +33,12 @@ lua require('plugin-config/hop')
 " session管理插件
 lua require('plugin-config/auto-session')
 
-" notification manager
-lua require('plugin-config/nvim-notify')
-
 " Package Manager for Lsp Servers, Dap Servers, Linters, and formatters
 lua require('plugin-config/mason')
 
 " comment plugin
-" lua require('plugin-config/comment')
+lua require('plugin-config/comment')
+lua require('plugin-config/neogen')
 
 " Easy Way to Learn KeyMap
 lua require('plugin-config/WhichKey')
@@ -53,9 +51,6 @@ lua require('plugin-config/auto-save')
 
 " For luasnip config
 lua require('plugin-config/luasnip')
-
-" For Rust Progamming
-" lua require('plugin-config/rust-tools')
 
 " LSP Client 相關設定
 lua require('lsp/setup')
@@ -79,7 +74,7 @@ lua require('plugin-config/toggleterm')
 lua require('plugin-config/todo')
 
 " Surround plugin
-" lua require('plugin-config/nvim-surround')
+lua require('plugin-config/nvim-surround')
 
 " QuickFix improve
 lua require('plugin-config/nvim-bqf')
@@ -92,12 +87,6 @@ lua require('plugin-config/alpha')
 " disable the tabline when alpha buffer
 autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
 
-" enable neovim transparent
-lua require('plugin-config/transparent')
-
-" draw ascii diagram
-lua require('plugin-config/venn')
-
 " mark/tabpage/buffer/colorscheme switcher
 lua require("plugin-config/reach")
 
@@ -109,6 +98,9 @@ lua require('plugin-config/distant')
 
 " LaTeX editing
 lua require('plugin-config/vimtex')
+
+" notification manager
+lua require('plugin-config/nvim-notify')
 
 "Diagnostics, references, telescope results, quickfix
 lua require("plugin-config/trouble")

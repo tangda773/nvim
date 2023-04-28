@@ -44,7 +44,7 @@ require("lazy").setup({
     },
   },
   -- tab頁插件
-  { "akinsho/bufferline.nvim",                    dependencies = "nvim-tree/nvim-web-devicons" },
+  { "akinsho/bufferline.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
 
   -- 語法高亮插件
   {
@@ -57,6 +57,15 @@ require("lazy").setup({
   { "nvim-treesitter/nvim-treesitter-textobjects" },
   { "nvim-treesitter/nvim-treesitter-context" },
   "p00f/nvim-ts-rainbow",
+    build = ":TSUpdate",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      "nvim-treesitter/nvim-treesitter-context",
+      --  "nvim-treesitter/playground" ,
+      "p00f/nvim-ts-rainbow",
+      "JoosepAlviste/nvim-ts-context-commentstring",
+    },
+  -- 模糊搜詢插件
   {
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -97,7 +106,7 @@ require("lazy").setup({
   "onsails/lspkind-nvim",
 
   -- LSP UI 美化
-  { "glepnir/lspsaga.nvim",  branch = "main" },
+  { "glepnir/lspsaga.nvim",    branch = "main" },
 
   -- 游標快速移動插件
   {
@@ -110,6 +119,14 @@ require("lazy").setup({
     -- "rmagatti/session-lens",
   },
   "rcarriga/nvim-notify",
+  -- LaTeX/Markdown Previewer
+  {
+    "frabjous/knap",
+    ft = { "markdown", "tex" },
+    config = function()
+      require("./plugin-config/knap")
+    end,
+  },
   {
     "folke/trouble.nvim",
     dependencies = "nvim-tree/nvim-web-devicons",
@@ -118,7 +135,9 @@ require("lazy").setup({
     "folke/which-key.nvim",
   },
   -- auto highlight other used current world
-  "RRethy/vim-illuminate",
+  { "RRethy/vim-illuminate" },
+
+  -- debugger
   { "mfussenegger/nvim-dap", ft = { "cpp", "rust", "python", "lua" } },
   {
     "rcarriga/nvim-dap-ui",
@@ -129,14 +148,17 @@ require("lazy").setup({
     end,
   },
   { "jbyuki/one-small-step-for-vimkind", ft = "lua" },
-<<<<<<< HEAD
-  "numToStr/Comment.nvim",
-=======
   -- Comment plugin
-  -- "numToStr/Comment.nvim",
-
+  { "numToStr/Comment.nvim" },
+  -- Comment
+  {
+    "danymat/neogen",
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    config = true,
+    -- Uncomment next line if you want to follow only stable versions
+    -- version = "*"
+  },
   -- fixed bufdelete
->>>>>>> 7f066d9 (remove legendary and fix bug)
   "famiu/bufdelete.nvim",
   "lukas-reineke/indent-blankline.nvim",
   "jose-elias-alvarez/null-ls.nvim",
@@ -149,6 +171,8 @@ require("lazy").setup({
       require("./plugin-config/crates")
     end,
   },
+
+  -- record coding history
   "wakatime/vim-wakatime",
   {
     "lewis6991/gitsigns.nvim",
@@ -166,6 +190,7 @@ require("lazy").setup({
       require("./plugin-config/conflict")
     end,
   },
+
   -- Run Code like vscode.task
   {
     "stevearc/overseer.nvim",
@@ -176,9 +201,7 @@ require("lazy").setup({
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
       -- NOTE: This Plugin is not needed after https://github.com/neovim/neovim/pull/20198
-      --
       -- "antoinemadec/FixCursorHold.nvim",
-      --
       -- Need Adapter
       "nvim-neotest/neotest-python",
       "nvim-neotest/neotest-plenary",
@@ -194,21 +217,15 @@ require("lazy").setup({
   -- TODO Plugin
   { "folke/todo-comments.nvim", dependencies = "nvim-lua/plenary.nvim" },
   { "kevinhwang91/nvim-bqf" },
-<<<<<<< HEAD
-  { "kylechui/nvim-surround" },
-=======
-
   -- Surrounded Selection
-  -- { "kylechui/nvim-surround" },
+  { "kylechui/nvim-surround" },
 
   -- autopair plugin
->>>>>>> 7f066d9 (remove legendary and fix bug)
   { "windwp/nvim-autopairs" },
   {
     "goolord/alpha-nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
-  "xiyaowong/nvim-transparent",
   "pocco81/auto-save.nvim",
   {
     "akinsho/git-conflict.nvim",
@@ -216,6 +233,8 @@ require("lazy").setup({
       require("./plugin-config/conflict")
     end,
   },
+  -- auto save files
+  "pocco81/auto-save.nvim",
 
   -- mark/buffer/tabpage/colorscheme switcher
   "toppair/reach.nvim",
