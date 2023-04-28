@@ -46,17 +46,20 @@ require("lazy").setup({
     },
   },
   -- tab頁插件
-  { "akinsho/bufferline.nvim",                    dependencies = "nvim-tree/nvim-web-devicons" },
+  { "akinsho/bufferline.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
 
   -- 語法高亮插件
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      "nvim-treesitter/nvim-treesitter-context",
+      --  "nvim-treesitter/playground" ,
+      "p00f/nvim-ts-rainbow",
+      "JoosepAlviste/nvim-ts-context-commentstring",
+    },
   },
-  { "nvim-treesitter/nvim-treesitter-textobjects" },
-  { "nvim-treesitter/nvim-treesitter-context" },
-  -- use({ "nvim-treesitter/playground" })
-  "p00f/nvim-ts-rainbow",
   -- 模糊搜詢插件
   {
     "nvim-telescope/telescope.nvim",
@@ -111,7 +114,7 @@ require("lazy").setup({
   "onsails/lspkind-nvim",
 
   -- LSP UI 美化
-  { "glepnir/lspsaga.nvim",  branch = "main" },
+  { "glepnir/lspsaga.nvim",    branch = "main" },
 
   -- 游標快速移動插件
   {
@@ -133,10 +136,6 @@ require("lazy").setup({
       require("./plugin-config/knap")
     end,
   },
-
-  -- notification manager
-  "rcarriga/nvim-notify",
-
   {
     "folke/trouble.nvim",
     dependencies = "nvim-tree/nvim-web-devicons",
@@ -147,7 +146,7 @@ require("lazy").setup({
     "folke/which-key.nvim",
   },
   -- auto highlight other used current world
-  "RRethy/vim-illuminate",
+  { "RRethy/vim-illuminate" },
 
   -- debugger
   { "mfussenegger/nvim-dap", ft = { "cpp", "rust", "python", "lua" } },
@@ -163,8 +162,15 @@ require("lazy").setup({
   -- debugger for neovim lua
   { "jbyuki/one-small-step-for-vimkind", ft = "lua" },
   -- Comment plugin
-  -- "numToStr/Comment.nvim",
-
+  { "numToStr/Comment.nvim" },
+  -- Comment
+  {
+    "danymat/neogen",
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    config = true,
+    -- Uncomment next line if you want to follow only stable versions
+    -- version = "*"
+  },
   -- fixed bufdelete
   "famiu/bufdelete.nvim",
 
@@ -173,19 +179,6 @@ require("lazy").setup({
 
   -- Lsp Linter & formatter
   "jose-elias-alvarez/null-ls.nvim",
-
-  -- For Rust Language
-  -- use("simrat39/rust-tools.nvim")
-  --
-  {
-    "saecki/crates.nvim",
-    version = "v0.2.1",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    ft = { "rust", "toml" },
-    config = function()
-      require("./plugin-config/crates")
-    end,
-  },
 
   -- record coding history
   "wakatime/vim-wakatime",
@@ -209,11 +202,8 @@ require("lazy").setup({
     end,
   },
 
-  -- Project Management
-  "ahmedkhalf/project.nvim",
-
   -- Code Runner
-  { "michaelb/sniprun",                  build = "bash ./install.sh" },
+  { "michaelb/sniprun",         build = "bash ./install.sh" },
 
   -- Run Code like vscode.task
   {
@@ -226,9 +216,7 @@ require("lazy").setup({
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
       -- NOTE: This Plugin is not needed after https://github.com/neovim/neovim/pull/20198
-      --
       -- "antoinemadec/FixCursorHold.nvim",
-      --
       -- Need Adapter
       "nvim-neotest/neotest-python",
       "nvim-neotest/neotest-plenary",
@@ -248,7 +236,7 @@ require("lazy").setup({
   { "kevinhwang91/nvim-bqf" },
 
   -- Surrounded Selection
-  -- { "kylechui/nvim-surround" },
+  { "kylechui/nvim-surround" },
 
   -- autopair plugin
   { "windwp/nvim-autopairs" },
@@ -258,19 +246,6 @@ require("lazy").setup({
     "goolord/alpha-nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
-
-  -- make background transparent
-  "xiyaowong/nvim-transparent",
-
-  -- draw ascii diagram
-  {
-    "jbyuki/venn.nvim",
-    lazy = true,
-    config = function()
-      require("./plugin-config/venn")
-    end,
-  },
-
   -- auto save files
   "pocco81/auto-save.nvim",
 
@@ -288,23 +263,5 @@ require("lazy").setup({
       --   If not available, we use `mini` as the fallback
       "rcarriga/nvim-notify",
     },
-  },
-  -- improve vim.ui.interface
-  -- {
-  --   "stevearc/dressing.nvim",
-  -- },
-
-  -- image viewer
-  -- {
-  --   "edluffy/hologram.nvim",
-  --   ft = { "markdown", "tex" },
-  --   config = function()
-  --     require("./plugin-config/hologram")
-  --   end,
-  -- },
-
-  -- remote editing
-  {
-    "chipsenkbeil/distant.nvim",
   },
 })

@@ -16,7 +16,7 @@ require("nvim-treesitter.configs").setup({
     "toml",
     "json",
     "query",
-    "help",
+    "norg",
   },
   -- 啟用代碼高亮功能
   highlight = {
@@ -46,18 +46,14 @@ require("nvim-treesitter.configs").setup({
   indent = {
     enable = true,
   },
-
   -- for treesitter-textobjects
   textobjects = {
     select = {
       enable = true,
-
       -- FIXME: rust parser:let expression remove caused treesitter-texobject error
       disable = { "rust" },
-
       -- Automatically jump forward to textobj, similar to targets.vim
       lookahead = true,
-
       keymaps = {
         -- You can use the capture groups defined in textobjects.scm
         ["af"] = "@function.outer",
@@ -92,10 +88,8 @@ require("nvim-treesitter.configs").setup({
     },
     swap = {
       enable = true,
-
       -- FIXME: rust parser:let expression remove caused treesitter-texobject error
       disable = { "rust" },
-
       swap_next = {
         ["<leader>a"] = "@parameter.inner",
       },
@@ -105,10 +99,8 @@ require("nvim-treesitter.configs").setup({
     },
     move = {
       enable = true,
-
       -- FIXME: rust parser:let expression remove caused treesitter-texobject error
       disable = { "rust" },
-
       set_jumps = true, -- whether to set jumps in the jumplist
       goto_next_start = {
         ["]m"] = "@function.outer",
@@ -129,16 +121,16 @@ require("nvim-treesitter.configs").setup({
     },
     lsp_interop = {
       enable = true,
-
       -- FIXME: rust parser:let expression remove caused treesitter-texobject error
       disable = { "rust" },
-
       border = "none",
       peek_definition_code = {
         ["<leader>df"] = "@function.outer",
         ["<leader>dF"] = "@class.outer",
       },
-    },
+    }, },
+  context_commentstring = {
+    enable = true,
   },
   --  -- for playground
   -- playground = {
