@@ -97,19 +97,21 @@ require("lazy").setup({
 
   -- 語法自動補全相關插件
   -- nvim-cmp
-  "hrsh7th/cmp-nvim-lsp", -- { name = nvim_lsp }
-  "hrsh7th/cmp-buffer",  -- { name = 'buffer' },
-  "hrsh7th/cmp-path",    -- { name = 'path' }
-  "hrsh7th/cmp-cmdline", -- { name = 'cmdline' }
-  "hrsh7th/cmp-nvim-lua",
-  "lukas-reineke/cmp-under-comparator",
-  "amarakon/nvim-cmp-lua-latex-symbols",
-  "hrsh7th/nvim-cmp",
-
-  -- For luasnip users.
-  "L3MON4D3/LuaSnip",
-  "saadparwaiz1/cmp_luasnip",
-  "rafamadriz/friendly-snippets",
+  {
+    "hrsh7th/nvim-cmp",
+    -- nvim-cmp source
+    "hrsh7th/cmp-nvim-lsp", -- { name = nvim_lsp }
+    "hrsh7th/cmp-buffer", -- { name = 'buffer' },
+    "hrsh7th/cmp-path",   -- { name = 'path' }
+    "hrsh7th/cmp-cmdline", -- { name = 'cmdline' }
+    "hrsh7th/cmp-nvim-lua",
+    "lukas-reineke/cmp-under-comparator",
+    "amarakon/nvim-cmp-lua-latex-symbols",
+    -- For luasnip users.
+    "L3MON4D3/LuaSnip",
+    "saadparwaiz1/cmp_luasnip",
+    "rafamadriz/friendly-snippets",
+  },
   -- lspkind
   "onsails/lspkind-nvim",
 
@@ -263,5 +265,14 @@ require("lazy").setup({
       --   If not available, we use `mini` as the fallback
       "rcarriga/nvim-notify",
     },
+  },
+  {
+    "saecki/crates.nvim",
+    tag = "v0.3.0",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require('plugin-config/crates')
+    end,
+    ft = { "toml" },
   },
 })

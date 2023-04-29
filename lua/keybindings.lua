@@ -44,7 +44,7 @@ pluginKeys.mappings = {
   ["<BS>"] = "node_decremental",
   ["<TAB>"] = "scope_incremental",
   ["<leader>"] = {
-    name = "+Trouble & Crates & Gitsigns & Overseer Tasks",
+    name = "+Trouble & Gitsigns & Overseer Tasks",
     ["="] = { "Lsp Formatting" },
     x = {
       name = "+Trouble",
@@ -55,20 +55,6 @@ pluginKeys.mappings = {
       q = { "<cmd>Trouble quickfix<cr>", "Trouble Quickfix" },
       r = { "<cmd>Trouble lsp_references<cr>", "Trouble Lsp Reference" },
       a = { "Lsp Code Action" },
-    },
-    c = {
-      name = "+Crates",
-      v = { ":lua require('crates').show_versions_popup()<CR>", "Show Crates Version" },
-      f = { ":lua require('crates').show_features_popup()<CR>", "Show Crates Feature" },
-      d = { ":lua require('crates').show_dependencies_popup()<CR>", "Show Crates Dependencies" },
-      t = { ":lua require('crates').toggle()<CR>", "Crates Toggle" },
-      r = { ":lua require('crates').reload()<CR>", "Crates Reload" },
-      u = { ":lua require('crates').update_crate()<CR>", "Update Crate" },
-      a = { ":lua require('crates').update_all_crates()<CR>", "Update All Crates" },
-      H = { ":lua require('crates').open_homepage<CR>", "Crates Open Homepage" },
-      R = { ":lua require('crates').open_repository<CR>", "Crates Open Repository" },
-      D = { ":lua require('crates').open_documentation<CR>", "Crates Open Documentation" },
-      C = { ":lua require('crates').open_crates_io()<CR>", "Crates Open Crates IO" },
     },
     h = {
       name = "+Gitsigns",
@@ -91,12 +77,16 @@ pluginKeys.mappings = {
       t = { ":lua require('neotest').run.run()<CR>", "Neotest Run Current Line" },
       a = { ":lua require('neotest').run.run(vim.fn.expand('%'))<CR>", "Neotest Run Current File" },
     },
-    v = "Toggle_venn",
     ["@"] = {
       ":Telescope lsp_dynamic_workspace_symbols theme=dropdown<CR>",
       "Telescope Find Workspace LSP Symbols",
     },
     f = { ":NeoTreeReveal<CR>", "NeoTree Reveal" },
+    n = {
+      name = "+Neogen",
+      f = { ":lua require('neogen').generate()<CR>", "Neogen Generate" },
+      c = { ":lua require('neogen').generate()<CR>", "Neogen Generate Class" },
+    },
   },
   g = {
     name = "+LSP Function",
@@ -175,10 +165,10 @@ pluginKeys.cmp = function(cmp)
         cmp.select_next_item()
       elseif luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
-      elseif has_words_before() then
-        cmp.complete()
       elseif neogen.jumpable() then
         neogen.jump_next()
+      elseif has_words_before() then
+        cmp.complete()
       else
         fallback()
       end

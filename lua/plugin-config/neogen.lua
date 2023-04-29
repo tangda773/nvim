@@ -1,12 +1,37 @@
 require("neogen").setup({
   enabled = true,
   languages = {
-    ["lua.ldoc"] = require("neogen.configurations.lua"),
-    ["cpp.doxygen"] = require("neogen.configurations.cpp"),
-    ["c.doxygen"] = require("neogen.configurations.c"),
-    ["sh.google_bash"] = require("neogen.configurations.sh"),
-    ["python_google_docstrings"] = require("neogen.configurations.python"),
-    ["rust.rustdoc"] = require("neogen.configurations.rust"),
+    lua = {
+      template = {
+        annotation_convention = "emmylua", -- for a full list of annotation_conventions, see supported-languages below,
+        -- for more template configurations, see the language's configuration file in configurations/{lang}.lua
+      },
+    },
+    cpp = {
+      template = {
+        annotation_convention = "doxygen",
+      },
+    },
+    c = {
+      template = {
+        annotation_convention = "doxygen",
+      },
+    },
+    sh = {
+      template = {
+        annotation_convention = "google_bash",
+      },
+    },
+    python = {
+      template = {
+        annotation_convention = "google_docstrings",
+      },
+    },
+    rust = {
+      template = {
+        annotation_convention = "rustdoc",
+      },
+    },
   },
   snippet_engine = "luasnip",
 })

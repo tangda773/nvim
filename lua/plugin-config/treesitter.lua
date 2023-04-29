@@ -16,7 +16,6 @@ require("nvim-treesitter.configs").setup({
     "toml",
     "json",
     "query",
-    "norg",
   },
   -- 啟用代碼高亮功能
   highlight = {
@@ -72,7 +71,7 @@ require("nvim-treesitter.configs").setup({
       -- mapping query_strings to modes.
       selection_modes = {
         ["@parameter.outer"] = "v", -- charwise
-        ["@function.outer"] = "V", -- linewise
+        ["@function.outer"] = "V",  -- linewise
         ["@class.outer"] = "<c-v>", -- blockwise
       },
       -- If you set this to `true` (default is `false`) then any textobject is
@@ -128,7 +127,8 @@ require("nvim-treesitter.configs").setup({
         ["<leader>df"] = "@function.outer",
         ["<leader>dF"] = "@class.outer",
       },
-    }, },
+    },
+  },
   context_commentstring = {
     enable = true,
   },
@@ -166,4 +166,5 @@ vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
 -- 默認不要折疊
 -- https://stackoverflow.com/questions/8316139/how-to-set-the-default-to-unfolded-when-you-open-a-file
 vim.wo.foldenable = false
+-- OR: vim.wo.foldlevel = 99
 -- OR: vim.wo.foldlevel = 99
