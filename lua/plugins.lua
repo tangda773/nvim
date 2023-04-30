@@ -53,11 +53,6 @@ require("lazy").setup({
       local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
       ts_update()
     end,
-  },
-  { "nvim-treesitter/nvim-treesitter-textobjects" },
-  { "nvim-treesitter/nvim-treesitter-context" },
-  "p00f/nvim-ts-rainbow",
-    build = ":TSUpdate",
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
       "nvim-treesitter/nvim-treesitter-context",
@@ -65,6 +60,7 @@ require("lazy").setup({
       "p00f/nvim-ts-rainbow",
       "JoosepAlviste/nvim-ts-context-commentstring",
     },
+  },
   -- 模糊搜詢插件
   {
     "nvim-telescope/telescope.nvim",
@@ -73,8 +69,7 @@ require("lazy").setup({
   },
   {
     "nvim-telescope/telescope-fzf-native.nvim",
-    build =
-    "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+    build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
   },
   {
     "benfowler/telescope-luasnip.nvim",
@@ -87,15 +82,15 @@ require("lazy").setup({
     end,
   },
   {
-    "williamboman/mason.nvim",                 -- Packager Manager for Lsp Servers, DAP Servers, linters, and formatters
-    "williamboman/mason-lspconfig.nvim",       -- Server Lsp Installer
+    "williamboman/mason.nvim", -- Packager Manager for Lsp Servers, DAP Servers, linters, and formatters
+    "williamboman/mason-lspconfig.nvim", -- Server Lsp Installer
     "WhoIsSethDaniel/mason-tool-installer.nvim", -- Install or updated third-party tool
-    "neovim/nvim-lspconfig",                   -- Collection of configurations for the built-in
+    "neovim/nvim-lspconfig", -- Collection of configurations for the built-in
     -- LSP client
   },
   "hrsh7th/cmp-nvim-lsp", -- { name = nvim_lsp }
-  "hrsh7th/cmp-buffer",  -- { name = 'buffer' },
-  "hrsh7th/cmp-path",    -- { name = 'path' }
+  "hrsh7th/cmp-buffer", -- { name = 'buffer' },
+  "hrsh7th/cmp-path", -- { name = 'path' }
   "hrsh7th/cmp-cmdline", -- { name = 'cmdline' }
   "hrsh7th/cmp-nvim-lua",
   "lukas-reineke/cmp-under-comparator",
@@ -106,7 +101,7 @@ require("lazy").setup({
   "onsails/lspkind-nvim",
 
   -- LSP UI 美化
-  { "glepnir/lspsaga.nvim",    branch = "main" },
+  { "glepnir/lspsaga.nvim", branch = "main" },
 
   -- 游標快速移動插件
   {
@@ -119,14 +114,6 @@ require("lazy").setup({
     -- "rmagatti/session-lens",
   },
   "rcarriga/nvim-notify",
-  -- LaTeX/Markdown Previewer
-  {
-    "frabjous/knap",
-    ft = { "markdown", "tex" },
-    config = function()
-      require("./plugin-config/knap")
-    end,
-  },
   {
     "folke/trouble.nvim",
     dependencies = "nvim-tree/nvim-web-devicons",
@@ -212,7 +199,7 @@ require("lazy").setup({
   },
 
   -- Terminal
-  { "akinsho/toggleterm.nvim",  version = "*" },
+  { "akinsho/toggleterm.nvim", version = "*" },
 
   -- TODO Plugin
   { "folke/todo-comments.nvim", dependencies = "nvim-lua/plenary.nvim" },

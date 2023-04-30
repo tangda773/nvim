@@ -93,9 +93,6 @@ lua require("plugin-config/reach")
 " ehnance ui for notify/message/cmdline
 lua require("plugin-config/noice")
 
-" remote editing
-lua require('plugin-config/distant')
-
 " LaTeX editing
 lua require('plugin-config/vimtex')
 

@@ -16,7 +16,6 @@ require("nvim-treesitter.configs").setup({
     "toml",
     "json",
     "query",
-    "norg",
   },
   -- 啟用代碼高亮功能
   highlight = {
