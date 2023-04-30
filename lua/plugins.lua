@@ -161,7 +161,6 @@ require("lazy").setup({
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
   "xiyaowong/nvim-transparent",
-  { "jbyuki/venn.nvim", lazy = true },
   "pocco81/auto-save.nvim",
   {
     "akinsho/git-conflict.nvim",

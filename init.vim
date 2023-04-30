@@ -112,3 +112,6 @@ lua require('plugin-config/distant')
 
 " LaTeX editing
 lua require('plugin-config/vimtex')
+
+"Diagnostics, references, telescope results, quickfix
+lua require("plugin-config/trouble")
