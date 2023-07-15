@@ -20,6 +20,8 @@ local servers = {
   pyright = require("lsp.config.pyright"),
   jsonls = require("lsp.config.jsonls"),
   bashls = require("lsp.config.bashls"),
+  hls = require("lsp.config.hls"),
+  awk_ls = require("lsp.config.awkls")
 }
 
 for name, config in pairs(servers) do

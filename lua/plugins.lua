@@ -92,7 +92,6 @@ require("lazy").setup({
     "williamboman/mason-lspconfig.nvim",       -- Server Lsp Installer
     "WhoIsSethDaniel/mason-tool-installer.nvim", -- Install or updated third-party tool
     "neovim/nvim-lspconfig",                   -- Collection of configurations for the built-in
-    -- LSP client
   },
 
   -- 語法自動補全相關插件
@@ -126,17 +125,9 @@ require("lazy").setup({
 
   -- Session 管理插件
   {
-    "rmagatti/auto-session",
-    -- auto-sessioon with telescope
-    -- "rmagatti/session-lens",
-  },
-  -- LaTeX/Markdown Previewer
-  {
-    "frabjous/knap",
-    ft = { "markdown", "tex" },
-    config = function()
-      require("./plugin-config/knap")
-    end,
+   "rmagatti/auto-session",
+   -- auto-sessioon with telescope
+   "rmagatti/session-lens",
   },
   {
     "folke/trouble.nvim",
@@ -271,8 +262,21 @@ require("lazy").setup({
     tag = "v0.3.0",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
-      require('plugin-config/crates')
+      require("plugin-config/crates")
     end,
     ft = { "toml" },
+  },
+  {
+    "axieax/urlview.nvim",
+    config = function()
+      require("plugin-config/urlview")
+    end,
+  },
+  {
+    "lervag/vimtex",
+    ft = { "markdown", "tex" },
+    config = function()
+      require("plugin-config/vimtex")
+    end,
   },
 })

@@ -16,10 +16,19 @@ require("nvim-treesitter.configs").setup({
     "toml",
     "json",
     "query",
+    "make",
+    "awk",
+    "diff",
+    "git_config",
+    "git_rebase",
+    "gitattributes",
+    "gitignore",
+    "gitcommit"
   },
   -- 啟用代碼高亮功能
   highlight = {
     enable = true,
+    disable = { "latex" },
     additional_vim_regex_highlighting = false,
   },
   -- rainbow parentheses

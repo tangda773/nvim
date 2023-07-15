@@ -1,11 +1,4 @@
-let g:python3_host_prog="/opt/homebrew/bin/python3"
-
-" If terminal has true colors (24-bits colors)
-if has('termguicolors')
-  set termguicolors
-endif
-
-" 基礎設置
+ " 基礎設置
 lua require('basic')
 
 " lazy插件管理
@@ -34,6 +27,7 @@ lua require('plugin-config/hop')
 
 " session管理插件
 lua require('plugin-config/auto-session')
+lua require('plugin-config/session-lens')
 
 " Package Manager for Lsp Servers, Dap Servers, Linters, and formatters
 lua require('plugin-config/mason')
