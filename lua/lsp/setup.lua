@@ -1,11 +1,11 @@
 require("mason-lspconfig").setup({
   -- 自動安裝 Language Servers
-  automatic_installation = {exclude={pyright}}, 
+  automatic_installation = { exclude = { pyright } },
 })
 
 local lspconfig = require("lspconfig")
 
--- 安裝列表 
+-- 安裝列表
 -- { key: 服務器名， value: 配置文件 }
 -- key 必須為下列網址列出的 server name， 不可以隨便寫
 -- https://github.com/williamboman/nvim-lsp-installer#available-lsps
@@ -21,7 +21,8 @@ local servers = {
   jsonls = require("lsp.config.jsonls"),
   bashls = require("lsp.config.bashls"),
   hls = require("lsp.config.hls"),
-  awk_ls = require("lsp.config.awkls")
+  awk_ls = require("lsp.config.awkls"),
+  vimls = require("lsp.config.vimls"),
 }
 
 for name, config in pairs(servers) do

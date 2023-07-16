@@ -10,9 +10,9 @@ vim.wo.number = true
 vim.wo.relativenumber = true
 -- 高亮所在行
 vim.wo.cursorline = true
--- 顯示左侧圖標指示列
+-- 顯示左側圖標指示列
 vim.wo.signcolumn = "yes"
--- 右侧参考線，超過表示代碼太長了，考虑换行
+-- 右側参考線，超過表示代碼太長了，考慮换行
 vim.wo.colorcolumn = "80"
 -- 縮進2個空格等於一個Tab
 vim.o.tabstop = 2
@@ -57,10 +57,10 @@ vim.o.writebackup = false
 vim.o.swapfile = false
 -- smaller updatetime
 vim.o.updatetime = 300
--- 设置 timeoutlen 為等待键盤快捷键连擊時間200毫秒，可根據需要设置
--- 遇到问题詳見：https://github.com/nshen/learn-neovim-lua/issues/1
+-- 设置 timeoutlen 為等待键盤快捷键連擊時間200毫秒，可根據需要设置
+-- 遇到問題詳見：https://github.com/nshen/learn-neovim-lua/issues/1
 vim.o.timeoutlen = 200
--- split window 从下邊和右邊出現
+-- split window 從下邊和右邊出現
 vim.o.splitbelow = true
 vim.o.splitright = true
 -- 自動補全不自動選中

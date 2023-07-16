@@ -26,8 +26,7 @@ lua require('plugin-config/Lspsaga')
 lua require('plugin-config/hop')
 
 " session管理插件
-lua require('plugin-config/auto-session')
-lua require('plugin-config/session-lens')
+lua require('plugin-config/neovim_session_manager')
 
 " Package Manager for Lsp Servers, Dap Servers, Linters, and formatters
 lua require('plugin-config/mason')

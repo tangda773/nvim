@@ -18,7 +18,7 @@ dashboard.section.buttons.val = {
   dashboard.button("e", "  > New file", ":ene <BAR> startinsert <CR>"),
   dashboard.button("f", "  > Find file", ":cd $HOME/Documents | Telescope find_files<CR>"),
   dashboard.button("r", "  > Recent file", ":Telescope oldfiles<CR>"),
-  dashboard.button("c", "  > Open session", ":Telescope session-lens search_session<CR>"),
+  dashboard.button("c", "  > Open last session", ":SessionManager load_last_session<CR>"),
   dashboard.button("s", "  > Settings", ":e $MYVIMRC<CR>"),
   dashboard.button("q", "󰅚  > Quit NVIM", ":qa<CR>"),
 }

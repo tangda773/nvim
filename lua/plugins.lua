@@ -125,9 +125,10 @@ require("lazy").setup({
 
   -- Session 管理插件
   {
-   "rmagatti/auto-session",
-   -- auto-sessioon with telescope
-   "rmagatti/session-lens",
+    "Shatur/neovim-session-manager",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
   },
   {
     "folke/trouble.nvim",
