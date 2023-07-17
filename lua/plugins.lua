@@ -128,6 +128,8 @@ require("lazy").setup({
     "Shatur/neovim-session-manager",
     dependencies = {
       "nvim-lua/plenary.nvim",
+      -- pretty ui with vim.ui.select, vim.ui.input
+      "stevearc/dressing.nvim",
     },
   },
   {

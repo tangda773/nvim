@@ -27,6 +27,8 @@ lua require('plugin-config/hop')
 
 " session管理插件
 lua require('plugin-config/neovim_session_manager')
+" pretty ui with vim.ui.select, vim.ui.input
+lua require('plugin-config/dressing')
 
 " Package Manager for Lsp Servers, Dap Servers, Linters, and formatters
 lua require('plugin-config/mason')
