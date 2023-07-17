@@ -245,9 +245,6 @@ require("lazy").setup({
   -- auto save files
   "pocco81/auto-save.nvim",
 
-  -- mark/buffer/tabpage/colorscheme switcher
-  "toppair/reach.nvim",
-
   -- improve ui for notify/cmdline/messages
   {
     "folke/noice.nvim",

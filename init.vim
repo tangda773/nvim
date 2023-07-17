@@ -87,9 +87,6 @@ lua require('plugin-config/alpha')
 " disable the tabline when alpha buffer
  autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
 
-" mark/tabpage/buffer/colorscheme switcher
-lua require("plugin-config/reach")
-
 " ehnance ui for notify/message/cmdline
 lua require("plugin-config/noice")
 
