@@ -140,6 +140,11 @@ require("lazy").setup({
   -- help you learn keymap
   {
     "folke/which-key.nvim",
+    event = "VeryLazy",
+    init = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+    end,
   },
   -- auto highlight other used current world
   { "RRethy/vim-illuminate" },
