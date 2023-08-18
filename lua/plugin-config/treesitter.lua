@@ -3,6 +3,7 @@ require("nvim-treesitter.configs").setup({
   -- :TSInstallInfo 命令查看支持的语言
   ensure_installed = {
     "cpp",
+    "c",
     "lua",
     "latex",
     "markdown",
@@ -23,7 +24,7 @@ require("nvim-treesitter.configs").setup({
     "git_rebase",
     "gitattributes",
     "gitignore",
-    "gitcommit"
+    "gitcommit",
   },
   -- 啟用代碼高亮功能
   highlight = {
@@ -80,7 +81,7 @@ require("nvim-treesitter.configs").setup({
       -- mapping query_strings to modes.
       selection_modes = {
         ["@parameter.outer"] = "v", -- charwise
-        ["@function.outer"] = "V",  -- linewise
+        ["@function.outer"] = "V", -- linewise
         ["@class.outer"] = "<c-v>", -- blockwise
       },
       -- If you set this to `true` (default is `false`) then any textobject is

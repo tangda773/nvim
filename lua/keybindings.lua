@@ -31,10 +31,6 @@ pluginKeys.mappings = {
     "<cmd>lua require'illuminate'.next_reference{reverse=true,wrap=true}<cr>",
     "Next Reference Reverse",
   },
-  ["<A-F5>"] = { "<cmd>lua require('knap').process_once()<cr> ", "Process Once" },
-  ["<A-F6>"] = { "<cmd>lua require('knap').close_viewer()<cr> ", "Close Viewer" },
-  ["<A-F7>"] = { "<cmd>lua require('knap').toggle_autopreviewing()<cr> ", "Toggle Autopreviewing" },
-  ["<A-F8>"] = { "<cmd>lua require('knap').forward_jump()<cr>", "Forward Jump" },
   ["<C-p>"] = { ":Telescope find_files<cr>", "Telescope Find Files" },
   ["<C-f>"] = {
     "<cmd>:lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>",
@@ -75,7 +71,6 @@ pluginKeys.mappings = {
       r = { ":OverseerRun<CR>", "Overseer Run Tasks" },
       o = { ":OverseerQuickAction open float<CR>", "Overseer Show Tasks Output" },
       t = { ":lua require('neotest').run.run()<CR>", "Neotest Run Current Line" },
-      a = { ":lua require('neotest').run.run(vim.fn.expand('%'))<CR>", "Neotest Run Current File" },
     },
     ["@"] = {
       ":Telescope lsp_dynamic_workspace_symbols theme=dropdown<CR>",
@@ -85,7 +80,7 @@ pluginKeys.mappings = {
     n = {
       name = "+Neogen",
       f = { ":lua require('neogen').generate()<CR>", "Neogen Generate" },
-      c = { ":lua require('neogen').generate()<CR>", "Neogen Generate Class" },
+      c = { ":lua require('neogen').generate({type='class'})<CR>", "Neogen Generate Class" },
     },
   },
   g = {
