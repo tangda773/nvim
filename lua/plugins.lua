@@ -26,7 +26,7 @@ require("lazy").setup({
   -- 狀態欄插件
   {
     "nvim-lualine/lualine.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons", lazy = true },
+    dependencies = "nvim-tree/nvim-web-devicons",
   },
   {
     "nvim-neo-tree/neo-tree.nvim",

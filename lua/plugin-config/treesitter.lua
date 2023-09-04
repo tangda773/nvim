@@ -25,6 +25,7 @@ require("nvim-treesitter.configs").setup({
     "gitattributes",
     "gitignore",
     "gitcommit",
+    "xml",
   },
   -- 啟用代碼高亮功能
   highlight = {
