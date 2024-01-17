@@ -4,10 +4,12 @@ require("mason-tool-installer").setup({
   -- start; they should be the names Mason uses for each tool
   ensure_installed = {
     -- dap
-    "cpptools",
+    -- "cpptools",
+    -- "codelldb",
     -- formatter
     "stylua",
     "clang-format",
+    'gersemi',
     -- "yapf",
     "autopep8",
     -- linter

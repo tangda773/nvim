@@ -9,7 +9,7 @@ return {
     name = "Launch cpp file",
     type = "cppdbg",
     request = "launch",
-    MIMode = "lldb",
+    MIMode = "gdb",
     program = function()
       return vim.fn.input("Path to executable: ", vim.fn.expand("%:p:h") .. "/build/" .. vim.fn.expand("%:p:h:t"))
     end,
@@ -20,7 +20,8 @@ return {
     name = "Launch rust file",
     type = "cppdbg",
     request = "launch",
-    MIMode = "lldb",
+    MIMode = "gdb",
+    miDebuggerPath = "/usr/bin/lldb",
     program = function()
       return vim.fn.input(
         "Path to executable: ",
@@ -34,9 +35,9 @@ return {
     name = "Attach to gdbserver :1234",
     type = "cppdbg",
     request = "launch",
-    MIMode = "lldb",
+    MIMode = "gdb",
     miDebuggerServerAddress = "localhost:1234",
-    miDebuggerPath = "lldb",
+    miDebuggerPath = "/usr/bin/lldb",
     cwd = "${workspaceFolder}",
     program = function()
       return vim.fn.input("Path to executable: ", vim.fn.expand("%:p:h") .. "/build/" .. vim.fn.expand("%:p:h:t"))

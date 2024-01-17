@@ -26,6 +26,12 @@ require("nvim-treesitter.configs").setup({
     "gitignore",
     "gitcommit",
     "xml",
+    "html",
+    "css",
+    "typescript",
+    "javascript",
+    "csv",
+    "http",
   },
   -- 啟用代碼高亮功能
   highlight = {
@@ -61,7 +67,7 @@ require("nvim-treesitter.configs").setup({
     select = {
       enable = true,
       -- FIXME: rust parser:let expression remove caused treesitter-texobject error
-      disable = { "rust" },
+      -- disable = { "rust" },
       -- Automatically jump forward to textobj, similar to targets.vim
       lookahead = true,
       keymaps = {
@@ -99,7 +105,7 @@ require("nvim-treesitter.configs").setup({
     swap = {
       enable = true,
       -- FIXME: rust parser:let expression remove caused treesitter-texobject error
-      disable = { "rust" },
+      -- disable = { "rust" },
       swap_next = {
         ["<leader>a"] = "@parameter.inner",
       },
@@ -110,7 +116,7 @@ require("nvim-treesitter.configs").setup({
     move = {
       enable = true,
       -- FIXME: rust parser:let expression remove caused treesitter-texobject error
-      disable = { "rust" },
+      -- disable = { "rust" },
       set_jumps = true, -- whether to set jumps in the jumplist
       goto_next_start = {
         ["]m"] = "@function.outer",
@@ -132,16 +138,13 @@ require("nvim-treesitter.configs").setup({
     lsp_interop = {
       enable = true,
       -- FIXME: rust parser:let expression remove caused treesitter-texobject error
-      disable = { "rust" },
+      -- disable = { "rust" },
       border = "none",
       peek_definition_code = {
         ["<leader>df"] = "@function.outer",
         ["<leader>dF"] = "@class.outer",
       },
     },
-  },
-  context_commentstring = {
-    enable = true,
   },
   --  -- for playground
   -- playground = {
@@ -178,4 +181,5 @@ vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
 -- https://stackoverflow.com/questions/8316139/how-to-set-the-default-to-unfolded-when-you-open-a-file
 vim.wo.foldenable = false
 -- OR: vim.wo.foldlevel = 99
--- OR: vim.wo.foldlevel = 99
+
+require("ts_context_commentstring").setup({})

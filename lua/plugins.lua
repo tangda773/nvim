@@ -63,18 +63,18 @@ require("lazy").setup({
   -- 模糊搜詢插件
   {
     "nvim-telescope/telescope.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    "nvim-telescope/telescope-live-grep-args.nvim",
-  },
-  -- fzf 搜尋加強
-  {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    build =
-    "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
-  },
-  -- luasnip view by telescope
-  {
-    "benfowler/telescope-luasnip.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope-live-grep-args.nvim",
+      -- luasnip view by telescope
+      "benfowler/telescope-luasnip.nvim",
+      -- fzf 搜尋加強
+      {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build =
+        "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+      },
+    },
   },
 
   -- lua 語法補全增強
@@ -98,18 +98,20 @@ require("lazy").setup({
   -- nvim-cmp
   {
     "hrsh7th/nvim-cmp",
-    -- nvim-cmp source
-    "hrsh7th/cmp-nvim-lsp", -- { name = nvim_lsp }
-    "hrsh7th/cmp-buffer", -- { name = 'buffer' },
-    "hrsh7th/cmp-path",   -- { name = 'path' }
-    "hrsh7th/cmp-cmdline", -- { name = 'cmdline' }
-    "hrsh7th/cmp-nvim-lua",
-    "lukas-reineke/cmp-under-comparator",
-    "amarakon/nvim-cmp-lua-latex-symbols",
-    -- For luasnip users.
-    "L3MON4D3/LuaSnip",
-    "saadparwaiz1/cmp_luasnip",
-    "rafamadriz/friendly-snippets",
+    dependencies = {
+      -- nvim-cmp source
+      "hrsh7th/cmp-nvim-lsp", -- { name = nvim_lsp }
+      "hrsh7th/cmp-buffer", -- { name = 'buffer' },
+      "hrsh7th/cmp-path",  -- { name = 'path' }
+      "hrsh7th/cmp-cmdline", -- { name = 'cmdline' }
+      "hrsh7th/cmp-nvim-lua",
+      "lukas-reineke/cmp-under-comparator",
+      "amarakon/nvim-cmp-lua-latex-symbols",
+      -- For luasnip users.
+      "L3MON4D3/LuaSnip",
+      "saadparwaiz1/cmp_luasnip",
+      "rafamadriz/friendly-snippets",
+    },
   },
   -- lspkind
   "onsails/lspkind-nvim",
@@ -150,12 +152,21 @@ require("lazy").setup({
   { "RRethy/vim-illuminate" },
 
   -- debugger
-  { "mfussenegger/nvim-dap", ft = { "cpp", "rust", "python", "lua" } },
+  { "mfussenegger/nvim-dap" },
   -- debugger UI
+  -- {
+  --   "rcarriga/nvim-dap-ui",
+  --   dependencies = { "mfussenegger/nvim-dap" },
+  --   config = function()
+  --     require("./dap/setup")
+  --   end,
+  -- },
   {
-    "rcarriga/nvim-dap-ui",
-    dependencies = { "mfussenegger/nvim-dap" },
-    ft = { "cpp", "rust", "python", "lua" },
+    "theHamsta/nvim-dap-virtual-text",
+    dependencies = {
+      "mfussenegger/nvim-dap",
+      { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+    },
     config = function()
       require("./dap/setup")
     end,
@@ -279,9 +290,25 @@ require("lazy").setup({
   },
   {
     "lervag/vimtex",
-    ft = { "markdown", "tex" },
+    ft = { "tex" },
     config = function()
       require("plugin-config/vimtex")
     end,
   },
+  {
+    "ray-x/web-tools.nvim",
+    config = function()
+      require("plugin-config/web-tools")
+    end,
+  },
+  { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
+
+  {
+    "Civitasv/cmake-tools.nvim",
+    config = function()
+      require("plugin-config/cmake-tools")
+    end,
+    cmd = "CMakeGenerate",
+  },
+
 })

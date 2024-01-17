@@ -1,6 +1,6 @@
 require("mason-lspconfig").setup({
   -- 自動安裝 Language Servers
-  automatic_installation = { exclude = { pyright } },
+  automatic_installation = { exclude = { pyright} },
 })
 
 local lspconfig = require("lspconfig")
@@ -23,6 +23,9 @@ local servers = {
   hls = require("lsp.config.hls"),
   awk_ls = require("lsp.config.awkls"),
   vimls = require("lsp.config.vimls"),
+  html = require("lsp.config.htmls"),
+  cssls = require("lsp.config.cssls"),
+  tsserver = require("lsp.config.tsserver"),
 }
 
 for name, config in pairs(servers) do

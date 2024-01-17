@@ -78,8 +78,8 @@ cmp.setup.filetype({ "toml" }, {
   },
 })
 
--- Only enable `lua-latex-symbols` for `tex` and `plaintex` and `markdown` file types
-cmp.setup.filetype({ "tex", "plaintex", "markdown" }, {
+-- Only enable `lua-latex-symbols` for `tex` file types
+cmp.setup.filetype({ "tex", "markdown" }, {
   sources = {
     { name = "luasnip" },
     { name = "path" },
