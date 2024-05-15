@@ -1,7 +1,8 @@
 -- vim.cmd[[colorscheme dracula]]
+--
 -- utf8
 vim.g.encoding = "UTF-8"
-vim.o.fileencoding = 'utf-8'
+vim.o.fileencoding = "utf-8"
 -- jk移動时光標下上方保留8行
 vim.o.scrolloff = 8
 vim.o.sidescrolloff = 8
@@ -46,7 +47,7 @@ vim.bo.autoread = true
 vim.o.wrap = false
 vim.wo.wrap = false
 -- 行结尾可以跳到下一行
-vim.o.whichwrap = 'b,s,<,>,[,],h,l'
+vim.o.whichwrap = "b,s,<,>,[,],h,l"
 -- 允許隐藏被修改过的buffer
 vim.o.hidden = true
 -- 鼠標支持
@@ -75,9 +76,44 @@ vim.o.listchars = "space:·"
 -- 補全增强
 vim.o.wildmenu = true
 -- Dont' pass messages to |ins-completin menu|
-vim.o.shortmess = vim.o.shortmess .. 'c'
+vim.o.shortmess = vim.o.shortmess .. "c"
 vim.o.pumheight = 10
 -- always show tabline
 vim.o.showtabline = 2
 -- enable copy between clipboard and terminals
 vim.opt.clipboard = "unnamedplus"
+-- 禁用neovim內置插件
+-- netrw
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+-- matchit
+-- vim.g.loaded_matchit = 1
+--
+-- matchparen
+vim.g.loaded_matchparen = 1
+-- 2html
+vim.g.loaded_2html_plugin = 1
+-- logiPat
+vim.g.loaded_logiPat = 1
+-- rrhelper
+vim.g.loaded_rrhelper = 1
+-- tarPlugin
+vim.g.loaded_tarPlugin = 1
+-- gzip
+vim.g.loaded_gzip = 1
+-- zipPlugin
+vim.g.loaded_zipPlugin = 1
+-- tutor_mode
+vim.g.loaded_tutor_mode_plugin = 1
+-- rplugin
+vim.g.loaded_rplugin = 1
+-- spellfile
+vim.g.loaded_spellfile_plugin = 1
+-- vimball
+vim.g.loaded_vimball = 1
+vim.g.loaded_vimballPlugin = 1
+-- getscript
+vim.g.loaded_getscript = 1
+vim.g.loaded_getscriptPlugin = 1
+-- man
+vim.g.loaded_man = 1

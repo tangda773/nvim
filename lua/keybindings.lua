@@ -76,12 +76,13 @@ pluginKeys.mappings = {
       ":Telescope lsp_dynamic_workspace_symbols theme=dropdown<CR>",
       "Telescope Find Workspace LSP Symbols",
     },
-    f = { ":NeoTreeReveal<CR>", "NeoTree Reveal" },
+    f = { ":Neotree<CR>", "NeoTree" },
     n = {
       name = "+Neogen",
       f = { ":lua require('neogen').generate()<CR>", "Neogen Generate" },
       c = { ":lua require('neogen').generate({type='class'})<CR>", "Neogen Generate Class" },
     },
+    ["bd"] = {":Bdelete<CR>", "BufDelete"}
   },
   g = {
     name = "+LSP Function",
@@ -94,6 +95,7 @@ pluginKeys.mappings = {
     f = { "Show Finder" },
     n = { "Diagnostics Jump Next" },
     p = { "Diagnostics Jump Prev" },
+    x = { "URL Open Under Cursor"},
     -- ["cc"] = { "Comment Current Line" },
     -- ["bc"] = { "Comment Current Block" },
   },

@@ -1,4 +1,5 @@
- " 基礎設置
+let g:python3_host_prog='/usr/bin/python3'
+" 基礎設置
 lua require('basic')
 
 " lazy插件管理
@@ -93,5 +94,14 @@ lua require("plugin-config/noice")
 " notification manager
 lua require('plugin-config/nvim-notify')
 
-"Diagnostics, references, telescope results, quickfix
+" Diagnostics, references, telescope results, quickfix
 lua require("plugin-config/trouble")
+
+" Open the Url Address
+lua require("plugin-config/url-open")
+
+" Transparent the background
+lua require("plugin-config/transparent")
+
+" IDE Like drop down menu (work with LSP Server)
+lua require("plugin-config/dropbar")
