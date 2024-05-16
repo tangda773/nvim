@@ -11,8 +11,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local leet_arg = "leetcode.nvim"
-
 require("lazy").setup({
   -- 主題
   {
@@ -90,11 +88,11 @@ require("lazy").setup({
 
   -- LSP 客戶端插件
   {
-    "williamboman/mason.nvim", -- Lsp 伺服器、DAP 伺服器、檢查器和格式化工具的包管理器
-    "williamboman/mason-lspconfig.nvim", -- 伺服器 Lsp 安裝器
+    "williamboman/mason.nvim",                 -- Lsp 伺服器、DAP 伺服器、檢查器和格式化工具的包管理器
+    "williamboman/mason-lspconfig.nvim",       -- 伺服器 Lsp 安裝器
     "WhoIsSethDaniel/mason-tool-installer.nvim", -- 安裝或更新第三方工具
-    "neovim/nvim-lspconfig", -- 內置 LSP 客戶端的配置集合
-    event = "BufReadPre", -- 讀取緩衝區之前加載
+    "neovim/nvim-lspconfig",                   -- 內置 LSP 客戶端的配置集合
+    event = "BufReadPre",                      -- 讀取緩衝區之前加載
   },
 
   -- 語法自動補全相關插件
@@ -116,13 +114,13 @@ require("lazy").setup({
     },
   },
   -- lspkind
-  { "onsails/lspkind-nvim", event = "InsertEnter" }, -- 進入插入模式時加載
+  { "onsails/lspkind-nvim",    event = "InsertEnter" }, -- 進入插入模式時加載
 
   -- LSP UI 美化
-  { "glepnir/lspsaga.nvim", branch = "main", event = "LspAttach" }, -- LSP 附加時加載
+  { "glepnir/lspsaga.nvim",    branch = "main",                              event = "LspAttach" }, -- LSP 附加時加載
 
   -- 游標快速移動插件
-  { "phaazon/hop.nvim", branch = "v2", event = "VeryLazy" }, -- Vim 完成啟動後加載
+  { "phaazon/hop.nvim",        branch = "v2",                                event = "VeryLazy" }, -- Vim 完成啟動後加載
 
   -- 會話管理插件
   {
@@ -162,12 +160,12 @@ require("lazy").setup({
     config = function()
       require("./dap/setup")
     end,
-    event = "BufReadPost", -- 讀取緩衝區後加載
+    event = "BufReadPost",                            -- 讀取緩衝區後加載
   },
   { "jbyuki/one-small-step-for-vimkind", ft = "lua" }, -- 打開 Lua 文件時加載
 
   -- 註釋插件
-  { "numToStr/Comment.nvim", event = "BufReadPost" }, -- 讀取緩衝區後加載
+  { "numToStr/Comment.nvim",             event = "BufReadPost" }, -- 讀取緩衝區後加載
   {
     "danymat/neogen",
     dependencies = "nvim-treesitter/nvim-treesitter",
@@ -175,16 +173,16 @@ require("lazy").setup({
     cmd = "Neogen", -- 使用 `:Neogen` 命令時加載
   },
   -- 緩衝區刪除修復
-  { "famiu/bufdelete.nvim", event = "VeryLazy" }, -- Vim 完成啟動後加載
+  { "famiu/bufdelete.nvim",                event = "VeryLazy" }, -- Vim 完成啟動後加載
 
   -- 顯示空白字符
   { "lukas-reineke/indent-blankline.nvim", event = "BufReadPost" }, -- 讀取緩衝區後加載
 
   -- LSP 檢查器和格式化工具
-  { "jose-elias-alvarez/null-ls.nvim", event = "BufReadPost" }, -- 讀取緩衝區後加載
+  { "jose-elias-alvarez/null-ls.nvim",     event = "BufReadPost" }, -- 讀取緩衝區後加載
 
   -- 記錄編碼歷史
-  { "wakatime/vim-wakatime", event = "VeryLazy" }, -- Vim 完成啟動後加載
+  { "wakatime/vim-wakatime",               event = "VeryLazy" }, -- Vim 完成啟動後加載
 
   -- Git 插件
   {
@@ -197,7 +195,7 @@ require("lazy").setup({
 
   -- Vim Git 命令
   { "tpope/vim-fugitive", cmd = "Git" }, -- 使用 `:Git` 命令時加載
-  { "rbong/vim-flog", cmd = "Flog" }, -- 使用 `:Flog` 命令時加載
+  { "rbong/vim-flog",     cmd = "Flog" }, -- 使用 `:Flog` 命令時加載
   {
     "akinsho/git-conflict.nvim",
     config = function()
@@ -207,7 +205,7 @@ require("lazy").setup({
   },
 
   -- 代碼運行器
-  { "michaelb/sniprun", build = "bash ./install.sh", cmd = "SnipRun" }, -- 使用 `:SnipRun` 命令時加載
+  { "michaelb/sniprun",       build = "bash ./install.sh", cmd = "SnipRun" }, -- 使用 `:SnipRun` 命令時加載
 
   -- 像 VSCode 任務一樣運行代碼
   { "stevearc/overseer.nvim", cmd = "OverseerRun" }, -- 使用 `:OverseerRun` 命令時加載
@@ -229,19 +227,19 @@ require("lazy").setup({
   },
 
   -- 終端
-  { "akinsho/toggleterm.nvim", version = "*", cmd = "ToggleTerm" }, -- 使用 `:ToggleTerm` 命令時加載
+  { "akinsho/toggleterm.nvim",  version = "*",                          cmd = "ToggleTerm" }, -- 使用 `:ToggleTerm` 命令時加載
 
   -- TODO 插件
   { "folke/todo-comments.nvim", dependencies = "nvim-lua/plenary.nvim", event = "BufReadPost" }, -- 讀取緩衝區後加載
 
   -- QuickFix 改善
-  { "kevinhwang91/nvim-bqf", ft = "qf" }, -- 打開 Quickfix 文件類型時加載
+  { "kevinhwang91/nvim-bqf",    ft = "qf" }, -- 打開 Quickfix 文件類型時加載
 
   -- 環繞選擇插件
-  { "kylechui/nvim-surround", event = "VeryLazy" }, -- Vim 完成啟動後加載
+  { "kylechui/nvim-surround",   event = "VeryLazy" }, -- Vim 完成啟動後加載
 
   -- 自動補全括號插件
-  { "windwp/nvim-autopairs", event = "InsertEnter" }, -- 進入插入模式時加載
+  { "windwp/nvim-autopairs",    event = "InsertEnter" }, -- 進入插入模式時加載
 
   -- 啟動菜單
   {
@@ -282,9 +280,9 @@ require("lazy").setup({
     config = function()
       require("plugin-config/web-tools")
     end,
-    event = "VeryLazy", -- Vim 完成啟動後加載
+    event = "VeryLazy",                                    -- Vim 完成啟動後加載
   },
-  { "ellisonleao/glow.nvim", config = true, cmd = "Glow" }, -- 使用 `:Glow` 命令時加載
+  { "ellisonleao/glow.nvim",  config = true,     cmd = "Glow" }, -- 使用 `:Glow` 命令時加載
 
   {
     "Civitasv/cmake-tools.nvim",
@@ -296,7 +294,7 @@ require("lazy").setup({
   {
     "kawre/leetcode.nvim",
     build = ":TSUpdate html",
-    lazy = leet_arg ~= vim.fn.argv()[1],
+    cmd = "Leet",
     dependencies = {
       "nvim-telescope/telescope.nvim",
       "nvim-lua/plenary.nvim", -- telescope 需要
@@ -308,8 +306,8 @@ require("lazy").setup({
       "nvim-tree/nvim-web-devicons",
     },
     opts = {
-      args = leet_arg,
       lang = "rust",
+      plugins = { non_standalone = true },
     },
   },
   {
