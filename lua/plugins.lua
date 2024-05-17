@@ -278,8 +278,14 @@ require("lazy").setup({
   },
 
   -- Vim Git 命令
-  { "tpope/vim-fugitive", cmd = "Git" }, -- 使用 `:Git` 命令時加載
-  { "rbong/vim-flog", cmd = "Flog" }, -- 使用 `:Flog` 命令時加載
+  {
+    "rbong/vim-flog",
+    lazy = true,
+    cmd = { "Flog", "Flogsplit", "Floggit" },
+    dependencies = {
+      "tpope/vim-fugitive",
+    },
+  },
   {
     "akinsho/git-conflict.nvim",
     config = function()
