@@ -99,7 +99,8 @@ require("lazy").setup({
       "benfowler/telescope-luasnip.nvim",
       {
         "nvim-telescope/telescope-fzf-native.nvim",
-        build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+        build =
+        "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
       },
     },
     config = function()
@@ -149,12 +150,12 @@ require("lazy").setup({
   -- nvim-cmp
   {
     "hrsh7th/nvim-cmp",
-    event = "InsertEnter", -- 進入插入模式時加載
+    event = "InsertEnter",    -- 進入插入模式時加載
     dependencies = {
       "hrsh7th/cmp-nvim-lsp", -- { name = nvim_lsp }
-      "hrsh7th/cmp-buffer", -- { name = 'buffer' },
-      "hrsh7th/cmp-path", -- { name = 'path' }
-      "hrsh7th/cmp-cmdline", -- { name = 'cmdline' }
+      "hrsh7th/cmp-buffer",   -- { name = 'buffer' },
+      "hrsh7th/cmp-path",     -- { name = 'path' }
+      "hrsh7th/cmp-cmdline",  -- { name = 'cmdline' }
       "hrsh7th/cmp-nvim-lua",
       "lukas-reineke/cmp-under-comparator",
       "amarakon/nvim-cmp-lua-latex-symbols",
@@ -167,7 +168,7 @@ require("lazy").setup({
     end,
   },
   -- lspkind
-  { "onsails/lspkind-nvim", event = "InsertEnter" }, -- 進入插入模式時加載
+  { "onsails/lspkind-nvim",  event = "InsertEnter" }, -- 進入插入模式時加載
 
   -- LSP UI 美化
   {
@@ -222,7 +223,7 @@ require("lazy").setup({
     config = function()
       require("dap.setup")
     end,
-    event = "BufReadPost", -- 讀取緩衝區後加載
+    event = "BufReadPost",                             -- 讀取緩衝區後加載
   },
   { "jbyuki/one-small-step-for-vimkind", ft = "lua" }, -- 打開 Lua 文件時加載
 
@@ -237,14 +238,13 @@ require("lazy").setup({
   {
     "danymat/neogen",
     dependencies = "nvim-treesitter/nvim-treesitter",
-    config = true,
     cmd = "Neogen", -- 使用 `:Neogen` 命令時加載
     config = function()
       require("plugin-config.neogen")
     end,
   },
   -- 緩衝區刪除修復
-  { "famiu/bufdelete.nvim", event = "VeryLazy" }, -- Vim 完成啟動後加載
+  { "famiu/bufdelete.nvim",              event = "VeryLazy" }, -- Vim 完成啟動後加載
 
   -- 顯示空白字符
   {
@@ -276,15 +276,20 @@ require("lazy").setup({
     end,
     event = { "BufReadPost", "BufNewFile" }, -- 讀取緩衝區後或新建文件時加載
   },
-
-  -- Vim Git 命令
   {
-    "rbong/vim-flog",
-    lazy = true,
-    cmd = { "Flog", "Flogsplit", "Floggit" },
+    "NeogitOrg/neogit",
+    cmd = "Neogit",
     dependencies = {
-      "tpope/vim-fugitive",
+      "nvim-lua/plenary.nvim", -- required
+      "sindrets/diffview.nvim", -- optional - Diff integration
+
+      -- Only one of these is needed, not both.
+      "nvim-telescope/telescope.nvim", -- optional
+      -- "ibhagwan/fzf-lua",            -- optional
     },
+    config = function()
+      require("plugin-config.neogit")
+    end,
   },
   {
     "akinsho/git-conflict.nvim",
@@ -431,9 +436,9 @@ require("lazy").setup({
     config = function()
       require("plugin-config.web-tools")
     end,
-    event = "VeryLazy", -- Vim 完成啟動後加載
+    event = "VeryLazy",                                     -- Vim 完成啟動後加載
   },
-  { "ellisonleao/glow.nvim", config = true, cmd = "Glow" }, -- 使用 `:Glow` 命令時加載
+  { "ellisonleao/glow.nvim", config = true,     cmd = "Glow" }, -- 使用 `:Glow` 命令時加載
 
   {
     "Civitasv/cmake-tools.nvim",
