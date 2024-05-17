@@ -116,11 +116,14 @@ pluginKeys.telescopeList = {
 pluginKeys.mapLSP = function(mapbuf)
   -- rename
   mapbuf("n", "<leader>rn", ":Lspsaga rename<CR>", opt)
+  -- mapbuf("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opt)
   -- code action
   mapbuf("n", "<leader>xa", ":Lspsaga code_action<CR>", opt)
+  -- mapbuf("n", "<leader>xa", "<cmd>lua vim.lsp.buf.code_action()<CR>", opt)
   -- go xx
   mapbuf("n", "gf", ":Lspsaga finder<CR>", opt)
   mapbuf("n", "gd", ":Lspsaga peek_definition<CR>", opt)
+  -- mapbuf("n", "gd", "<cmd>lua vim.lsp.buf.definition<CR>", opt)
   mapbuf("n", "gh", ":Lspsaga hover_doc<CR>", opt)
   -- mapbuf("n", "gh", "<cmd>lua vim.lsp.buf.hover()<CR>", opt)
   mapbuf("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opt)
