@@ -7,7 +7,8 @@ local opts = {
 	noremap = true,
 }
 
-local mappings = require("keybindings").mappings
+-- local mappings = require("keybindings").mappings
+local mappings = {}
 
 wk.setup(conf)
 wk.register(mappings, opts)

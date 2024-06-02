@@ -32,7 +32,7 @@ pluginKeys.mappings = {
     "Next Reference Reverse",
   },
   ["<C-p>"] = { ":Telescope find_files<cr>", "Telescope Find Files" },
-  ["<C-f>"] = {
+  ["<C-g>"] = {
     "<cmd>:lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>",
     "Telescope Live Grep args",
   },
