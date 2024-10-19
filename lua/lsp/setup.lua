@@ -25,7 +25,7 @@ local servers = {
   vimls = require("lsp.config.vimls"),
   html = require("lsp.config.htmls"),
   cssls = require("lsp.config.cssls"),
-  tsserver = require("lsp.config.tsserver"),
+  ts_ls = require("lsp.config.ts_ls"),
 }
 
 for name, config in pairs(servers) do

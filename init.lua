@@ -1,5 +1,5 @@
 -- Set the Python 3 host program
-vim.g.python3_host_prog = "/usr/bin/python3"
+vim.g.python3_host_prog = "/opt/homebrew/bin/python3"
 
 -- Require basic settings module
 require("basic")

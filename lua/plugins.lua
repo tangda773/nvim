@@ -1,3 +1,22 @@
+--[[
+-- TODO: External dependencies:
+-- General requirements:
+--  - lazy.nvim: Git >=2.19.0, luarocks, Nerd Font (optional)
+-- Plugin-specific requirements:
+--  - nvim-treesitter: tar, curl (or git), C compiler with libstdc++
+--  - telescope.nvim: fd (finder)
+--  - telescope-fzf-native.nvim: fzf, cmake
+--  - telescope-live-grep-args.nvim: ripgrep
+--  - mason.nvim:
+--    - For Unix: git, curl or wget, unzip, GNU tar, gzip
+--    - For Windows: pwsh, git, GNU tar, one of the following (7zip, peazip, archiver, winzip, WinRAR)
+--  - nvim-dap: debug adapter
+--  - gitsigns.nvim: git
+--  - sniprun.nvim: Rust toolchain >1.65
+--  - curl.nvim: Python, cURL, jq (optional), tidy (optional)
+--  - nvim-silicon: silicon
+--]]
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -70,7 +89,7 @@ require("lazy").setup({
       "nvim-treesitter/nvim-treesitter-textobjects",
       "nvim-treesitter/nvim-treesitter-context",
       -- "nvim-treesitter/playground",
-      "p00f/nvim-ts-rainbow",
+      -- "p00f/nvim-ts-rainbow",
       "JoosepAlviste/nvim-ts-context-commentstring",
     },
     config = function()
@@ -211,20 +230,20 @@ require("lazy").setup({
   -- 自動高亮其他使用的當前單詞
   { "RRethy/vim-illuminate", event = "BufReadPost" }, -- 讀取緩衝區後加載
 
-  -- 調試器
-  { "mfussenegger/nvim-dap", event = "BufReadPost" }, -- 讀取緩衝區後加載
-  {
-    "theHamsta/nvim-dap-virtual-text",
-    dependencies = {
-      "mfussenegger/nvim-dap",
-      { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-    },
-    config = function()
-      require("dap.setup")
-    end,
-    event = "BufReadPost", -- 讀取緩衝區後加載
-  },
-  { "jbyuki/one-small-step-for-vimkind", ft = "lua" }, -- 打開 Lua 文件時加載
+  -- -- 調試器
+  -- { "mfussenegger/nvim-dap", event = "BufReadPost" }, -- 讀取緩衝區後加載
+  -- {
+  --   "theHamsta/nvim-dap-virtual-text",
+  --   dependencies = {
+  --     "mfussenegger/nvim-dap",
+  --     { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+  --   },
+  --   config = function()
+  --     require("dap.setup")
+  --   end,
+  --   event = "BufReadPost", -- 讀取緩衝區後加載
+  -- },
+  -- { "jbyuki/one-small-step-for-vimkind", ft = "lua" }, -- 打開 Lua 文件時加載
 
   -- 註釋插件
   {
@@ -373,7 +392,7 @@ require("lazy").setup({
   --     require("plugin-config.nvim-surround")
   --   end,
   -- }, -- Vim 完成啟動後加載
-    
+
   -- 自動補全括號插件
   {
     "windwp/nvim-autopairs",
@@ -382,7 +401,7 @@ require("lazy").setup({
       require("plugin-config.nvim-autopairs")
     end,
   }, -- 進入插入模式時加載
-    
+
   -- 啟動菜單
   {
     "goolord/alpha-nvim",
@@ -500,4 +519,43 @@ require("lazy").setup({
       require("neoscroll").setup({})
     end,
   },
+  {
+    "oysandvik94/curl.nvim",
+    cmd = "CurlOpen",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    config = function()
+      require("curl").setup({})
+    end,
+  },
+  {
+    "michaelrommel/nvim-silicon",
+    lazy = true,
+    cmd = "Silicon",
+    main = "nvim-silicon",
+    opts = {
+      -- Configuration here, or leave empty to use defaults
+      line_offset = function(args)
+        return args.line1
+      end,
+    },
+  },
+  {
+    "AckslD/swenv.nvim",
+    ft = "python",
+    config = function()
+      require("swenv").setup({})
+    end,
+  },
+  {
+    "natecraddock/workspaces.nvim",
+    config = function()
+      require('workspaces').setup({
+          hooks = {
+                  open = { "Telescope find_files" },
+              }
+      })
+    end,
+  }
 })

@@ -10,7 +10,7 @@ require("lualine").setup({
     globalstatus = false,
   },
   sections = {
-    lualine_a = { "mode" },
+    lualine_a = { "mode", "swenv"},
     lualine_b = { "branch", "diff", "diagnostics" },
     lualine_c = {
       "filename",
