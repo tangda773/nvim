@@ -10,6 +10,11 @@ local opts = {
 
 -- 使用 cmp_nvim_lsp 代替内置 omnifunc，獲得更强的補全體驗
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true
+}
 opts.capabilities = capabilities
 
 return {

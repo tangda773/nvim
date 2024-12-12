@@ -29,6 +29,15 @@ local opts = {
       completion = {
         callSnippet = "Replace",
       },
+      format = {
+        enable = false,
+        -- Put format options here
+        -- NOTE: the value should be String!
+        defaultConfig = {
+          indent_style = "space",
+          indent_size = "2",
+        },
+      },
     },
   },
   flags = {
@@ -52,6 +61,10 @@ local opts = {
 
 -- 使用cmp_nvim_lsp 代替內置omnifunc，能夠增強補全體驗
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
+capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true
+}
 opts.capabilities = capabilities
 
 -- 查看目錄等訊息

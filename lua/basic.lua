@@ -84,8 +84,8 @@ vim.o.showtabline = 2
 vim.opt.clipboard = "unnamedplus"
 -- 禁用neovim內置插件
 -- netrw
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
 -- matchit
 -- vim.g.loaded_matchit = 1
 --

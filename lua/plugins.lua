@@ -215,7 +215,7 @@ require("lazy").setup({
       "nvim-lua/plenary.nvim",
       "stevearc/dressing.nvim",
     },
-    cmd = "SessionManager", -- 使用 `:SessionManager` 命令時加載
+    -- cmd = "SessionManager", -- 使用 `:SessionManager` 命令時加載
     config = function()
       require("plugin-config.neovim_session_manager")
       require("plugin-config.dressing")
@@ -224,26 +224,29 @@ require("lazy").setup({
   {
     "folke/trouble.nvim",
     dependencies = "nvim-tree/nvim-web-devicons",
-    cmd = "TroubleToggle", -- 使用 `:TroubleToggle` 命令時加載
+    cmd = "Trouble", -- 使用 `:TroubleToggle` 命令時加載
+    config = function()
+      require("plugin-config.trouble")
+    end,
   },
 
   -- 自動高亮其他使用的當前單詞
   { "RRethy/vim-illuminate", event = "BufReadPost" }, -- 讀取緩衝區後加載
 
-  -- -- 調試器
-  -- { "mfussenegger/nvim-dap", event = "BufReadPost" }, -- 讀取緩衝區後加載
-  -- {
-  --   "theHamsta/nvim-dap-virtual-text",
-  --   dependencies = {
-  --     "mfussenegger/nvim-dap",
-  --     { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-  --   },
-  --   config = function()
-  --     require("dap.setup")
-  --   end,
-  --   event = "BufReadPost", -- 讀取緩衝區後加載
-  -- },
-  -- { "jbyuki/one-small-step-for-vimkind", ft = "lua" }, -- 打開 Lua 文件時加載
+  -- 調試器
+  { "mfussenegger/nvim-dap", event = "BufReadPost" }, -- 讀取緩衝區後加載
+  {
+    "theHamsta/nvim-dap-virtual-text",
+    dependencies = {
+      "mfussenegger/nvim-dap",
+      { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+    },
+    config = function()
+      require("dap.setup")
+    end,
+    event = "BufReadPost", -- 讀取緩衝區後加載
+  },
+  { "jbyuki/one-small-step-for-vimkind", ft = "lua" }, -- 打開 Lua 文件時加載
 
   -- 註釋插件
   {
@@ -275,11 +278,19 @@ require("lazy").setup({
   }, -- 讀取緩衝區後加載
 
   -- LSP 檢查器和格式化工具
+  -- {
+  --   "jose-elias-alvarez/null-ls.nvim",
+  --   event = "BufReadPost",
+  --   config = function()
+  --     require("plugin-config.null-ls")
+  --   end,
+  -- }, -- 讀取緩衝區後加載
   {
-    "jose-elias-alvarez/null-ls.nvim",
+    "mhartington/formatter.nvim",
     event = "BufReadPost",
     config = function()
-      require("plugin-config.null-ls")
+      -- require("plugin-config.null-ls")
+      require("plugin-config.formatter")
     end,
   }, -- 讀取緩衝區後加載
 
@@ -385,13 +396,13 @@ require("lazy").setup({
   }, -- 打開 Quickfix 文件類型時加載
 
   -- -- 環繞選擇插件
-  -- {
-  --   "kylechui/nvim-surround",
-  --   event = "VeryLazy",
-  --   config = function()
-  --     require("plugin-config.nvim-surround")
-  --   end,
-  -- }, -- Vim 完成啟動後加載
+  {
+    "kylechui/nvim-surround",
+    event = "VeryLazy",
+    config = function()
+      require("plugin-config.nvim-surround")
+    end,
+  }, -- Vim 完成啟動後加載
 
   -- 自動補全括號插件
   {
@@ -420,7 +431,7 @@ require("lazy").setup({
     end,
   }, -- Vim 完成啟動後加載
   --
-  -- -- 改善通知/UI 的插件
+  -- 改善通知/UI 的插件
   {
     "folke/noice.nvim",
     dependencies = {
@@ -456,7 +467,7 @@ require("lazy").setup({
     end,
     event = "VeryLazy", -- Vim 完成啟動後加載
   },
-  { "ellisonleao/glow.nvim", config = true, cmd = "Glow" }, -- 使用 `:Glow` 命令時加載
+  -- { "ellisonleao/glow.nvim", config = true, cmd = "Glow" }, -- 使用 `:Glow` 命令時加載
   --
   {
     "Civitasv/cmake-tools.nvim",
@@ -465,53 +476,53 @@ require("lazy").setup({
     end,
     cmd = "CMakeGenerate", -- 使用 `:CMakeGenerate` 命令時加載
   },
-  {
-    "kawre/leetcode.nvim",
-    build = ":TSUpdate html",
-    cmd = "Leet",
-    dependencies = {
-      "nvim-telescope/telescope.nvim",
-      "nvim-lua/plenary.nvim", -- telescope 需要
-      "MunifTanjim/nui.nvim",
-
-      -- 可選
-      "nvim-treesitter/nvim-treesitter",
-      "rcarriga/nvim-notify",
-      "nvim-tree/nvim-web-devicons",
-    },
-    opts = {
-      lang = "rust",
-      plugins = { non_standalone = true },
-    },
-  },
-  {
-    "xiyaowong/transparent.nvim",
-    event = "VeryLazy", -- Vim 完成啟動後加載
-    config = function()
-      require("plugin-config.transparent")
-    end,
-  },
-  {
-    "sontungexpt/url-open",
-    cmd = "URLOpenUnderCursor", -- "使用 `:URLOpenUnderCursor`命令時加載"
-    config = function()
-      local status_ok, url_open = pcall(require, "url-open")
-      if not status_ok then
-        return
-      end
-      require("plugin-config.url-open")
-    end,
-  },
-  {
-    "Bekaboo/dropbar.nvim",
-    dependencies = {
-      "nvim-telescope/telescope-fzf-native.nvim",
-    },
-    event = "VeryLazy", -- Vim 完成啟動後加載
-    config = function()
-      require("plugin-config.dropbar")
-    end,
-  },
+  -- {
+  --   "kawre/leetcode.nvim",
+  --   build = ":TSUpdate html",
+  --   cmd = "Leet",
+  --   dependencies = {
+  --     "nvim-telescope/telescope.nvim",
+  --     "nvim-lua/plenary.nvim", -- telescope 需要
+  --     "MunifTanjim/nui.nvim",
+  --
+  --     -- 可選
+  --     "nvim-treesitter/nvim-treesitter",
+  --     "rcarriga/nvim-notify",
+  --     "nvim-tree/nvim-web-devicons",
+  --   },
+  --   opts = {
+  --     lang = "rust",
+  --     plugins = { non_standalone = true },
+  --   },
+  -- },
+  -- {
+  --   "xiyaowong/transparent.nvim",
+  --   event = "VeryLazy", -- Vim 完成啟動後加載
+  --   config = function()
+  --     require("plugin-config.transparent")
+  --   end,
+  -- },
+  -- {
+  --   "sontungexpt/url-open",
+  --   cmd = "URLOpenUnderCursor", -- "使用 `:URLOpenUnderCursor`命令時加載"
+  --   config = function()
+  --     local status_ok, url_open = pcall(require, "url-open")
+  --     if not status_ok then
+  --       return
+  --     end
+  --     require("plugin-config.url-open")
+  --   end,
+  -- },
+  -- {
+  --   "Bekaboo/dropbar.nvim",
+  --   dependencies = {
+  --     "nvim-telescope/telescope-fzf-native.nvim",
+  --   },
+  --   event = "VeryLazy", -- Vim 完成啟動後加載
+  --   config = function()
+  --     require("plugin-config.dropbar")
+  --   end,
+  -- },
   {
     "karb94/neoscroll.nvim",
     event = "WinScrolled", -- Load neoscroll when the window is scrolled
@@ -542,20 +553,85 @@ require("lazy").setup({
     },
   },
   {
-    "AckslD/swenv.nvim",
-    ft = "python",
+    "natecraddock/workspaces.nvim",
     config = function()
-      require("swenv").setup({})
+      require("workspaces").setup({
+        hooks = {
+          open = { "Telescope find_files" },
+        },
+      })
     end,
   },
   {
-    "natecraddock/workspaces.nvim",
+    "linux-cultist/venv-selector.nvim",
+    dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap-python" },
+    branch = "regexp",
     config = function()
-      require('workspaces').setup({
-          hooks = {
-                  open = { "Telescope find_files" },
-              }
+      require("venv-selector").setup({
+        settings = {
+          search = {
+            anaconda_base = {
+              command = "fd ^python$ /opt/homebrew/Caskroom/miniconda/base -d 2",
+              type = "anaconda",
+            },
+            anaconda_envs = {
+              command = "fd ^python$ /opt/homebrew/Caskroom/miniconda/base/envs -d 3",
+              type = "anaconda",
+            },
+          },
+        },
       })
     end,
-  }
+  },
+  {
+    "kevinhwang91/promise-async",
+    event = "BufReadPost", -- 讀取緩衝區後加載
+  },
+  {
+    "kevinhwang91/nvim-ufo",
+    depenndencies = { "kevinhwang91/promise-async" },
+
+    event = "BufReadPost", -- 讀取緩衝區後加載
+    config = function()
+      vim.o.foldcolumn = "1" -- '0' is not bad
+      vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+      vim.o.foldlevelstart = 99
+      vim.o.foldenable = true
+      require("ufo").setup({})
+    end,
+  },
+  {
+    "mfussenegger/nvim-lint",
+    event = "BufReadPost",
+    config = function()
+      require("plugin-config.nvim-lint")
+    end,
+  },
+  {
+    "tadaa/vimade",
+    event = "VeryLazy",
+    config = function()
+      require("plugin-config.vimade")
+    end,
+  },
+  {
+    "uga-rosa/ccc.nvim",
+    event = "VeryLazy",
+    config = function()
+      -- Enable true color
+      vim.opt.termguicolors = true
+
+      local ccc = require("ccc")
+      local mapping = ccc.mapping
+
+      ccc.setup({
+        -- Your preferred settings
+        -- Example: enable highlighter
+        highlighter = {
+          auto_enable = true,
+          lsp = true,
+        },
+      })
+    end,
+  },
 })

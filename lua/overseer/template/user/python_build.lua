@@ -48,8 +48,10 @@ return {
   builder = function()
     -- Full path to current file (see :help expand())
     local file = vim.fn.expand("%:p")
+    local python_executable = require('venv-selector').python()
+    python_executable = python_executable ~= nil and python_executable or "python3"
     return {
-      cmd = { "python3" },
+      cmd = { python_executable },
       args = { file },
       components = { { "on_output_quickfix", open_on_match = true, errorformat = err_string }, "default" },
     }
