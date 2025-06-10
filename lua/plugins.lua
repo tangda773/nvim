@@ -1,20 +1,21 @@
 --[[
 -- TODO: External dependencies:
 -- General requirements:
---  - lazy.nvim: Git >=2.19.0, luarocks, Nerd Font (optional)
+--  - lazy.nvim: Git >=2.19.0, luarocks,or an optional Nerd Font
 -- Plugin-specific requirements:
---  - nvim-treesitter: tar, curl (or git), C compiler with libstdc++
---  - telescope.nvim: fd (finder)
+--  - nvim-treesitter: tar, curl or git, C compiler with libstdc++
+--  - telescope.nvim: fd finder)
 --  - telescope-fzf-native.nvim: fzf, cmake
 --  - telescope-live-grep-args.nvim: ripgrep
 --  - mason.nvim:
---    - For Unix: git, curl or wget, unzip, GNU tar, gzip
---    - For Windows: pwsh, git, GNU tar, one of the following (7zip, peazip, archiver, winzip, WinRAR)
+--    - For Unix: git, curl or wget, unzip,tar, gzip
+--    - For Windows: Powershell, git, tar, one of the following:7zip, peazip, Archiver, WinZip, WinRAR
 --  - nvim-dap: debug adapter
 --  - gitsigns.nvim: git
 --  - sniprun.nvim: Rust toolchain >1.65
---  - curl.nvim: Python, cURL, jq (optional), tidy (optional)
+--  - curl.nvim: Python, cURL, optionally jq or tidy
 --  - nvim-silicon: silicon
+--  - markdown-preview: nodejs
 --]]
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -32,12 +33,20 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   -- 主題
+  -- {
+  --   "rebelot/kanagawa.nvim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     vim.cmd([[colorscheme kanagawa]])
+  --   end,
+  -- },
   {
-    "rebelot/kanagawa.nvim",
+    "xero/miasma.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd([[colorscheme kanagawa]])
+      vim.cmd([[colorscheme miasma]])
     end,
   },
   -- 狀態欄插件
@@ -88,9 +97,10 @@ require("lazy").setup({
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
       "nvim-treesitter/nvim-treesitter-context",
-      -- "nvim-treesitter/playground",
-      -- "p00f/nvim-ts-rainbow",
+      -- "nvim-treesitter/playground"
+      -- "p00f/nvim-ts-rainbow"
       "JoosepAlviste/nvim-ts-context-commentstring",
+      "OXY2DEV/markview.nvim",
     },
     config = function()
       require("plugin-config.treesitter")
@@ -155,7 +165,7 @@ require("lazy").setup({
     end,
   },
 
-  -- LSP 客戶端插件
+  -- Language Server Protocol client
   {
     "neovim/nvim-lspconfig",
     event = "BufReadPre",
@@ -168,7 +178,7 @@ require("lazy").setup({
   -- nvim-cmp
   {
     "hrsh7th/nvim-cmp",
-    event = "InsertEnter", -- 進入插入模式時加載
+    event = "InsertEnter",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp", -- { name = nvim_lsp }
       "hrsh7th/cmp-buffer", -- { name = 'buffer' },
@@ -188,7 +198,7 @@ require("lazy").setup({
   -- lspkind
   { "onsails/lspkind-nvim", event = "InsertEnter" }, -- 進入插入模式時加載
 
-  -- LSP UI 美化
+  -- Beautify Language Server Protocol UI
   {
     "glepnir/lspsaga.nvim",
     branch = "main",
@@ -196,7 +206,7 @@ require("lazy").setup({
     config = function()
       require("plugin-config.Lspsaga")
     end,
-  }, -- LSP 附加時加載
+  },
 
   -- 游標快速移動插件
   {
@@ -206,16 +216,16 @@ require("lazy").setup({
     config = function()
       require("plugin-config.hop")
     end,
-  }, -- Vim 完成啟動後加載
+  },
 
-  -- 會話管理插件
+  -- Session Management
   {
     "Shatur/neovim-session-manager",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "stevearc/dressing.nvim",
     },
-    -- cmd = "SessionManager", -- 使用 `:SessionManager` 命令時加載
+    -- cmd = "SessionManager"
     config = function()
       require("plugin-config.neovim_session_manager")
       require("plugin-config.dressing")
@@ -224,29 +234,29 @@ require("lazy").setup({
   {
     "folke/trouble.nvim",
     dependencies = "nvim-tree/nvim-web-devicons",
-    cmd = "Trouble", -- 使用 `:TroubleToggle` 命令時加載
+    cmd = "Trouble",
     config = function()
       require("plugin-config.trouble")
     end,
   },
 
   -- 自動高亮其他使用的當前單詞
-  { "RRethy/vim-illuminate", event = "BufReadPost" }, -- 讀取緩衝區後加載
+  { "RRethy/vim-illuminate", event = "BufReadPost" },
 
-  -- 調試器
-  { "mfussenegger/nvim-dap", event = "BufReadPost" }, -- 讀取緩衝區後加載
-  {
-    "theHamsta/nvim-dap-virtual-text",
-    dependencies = {
-      "mfussenegger/nvim-dap",
-      { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-    },
-    config = function()
-      require("dap.setup")
-    end,
-    event = "BufReadPost", -- 讀取緩衝區後加載
-  },
-  { "jbyuki/one-small-step-for-vimkind", ft = "lua" }, -- 打開 Lua 文件時加載
+  -- -- 調試器
+  -- { "mfussenegger/nvim-dap", event = "BufReadPost" },
+  -- {
+  --   "theHamsta/nvim-dap-virtual-text",
+  --   dependencies = {
+  --     "mfussenegger/nvim-dap",
+  --     { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+  --   },
+  --   config = function()
+  --     require("dap.setup")
+  --   end,
+  --   event = "BufReadPost",
+  -- },
+  -- { "jbyuki/one-small-step-for-vimkind", ft = "lua" },
 
   -- 註釋插件
   {
@@ -255,7 +265,7 @@ require("lazy").setup({
     config = function()
       require("plugin-config.comment")
     end,
-  }, -- 讀取緩衝區後加載
+  },
   {
     "danymat/neogen",
     dependencies = "nvim-treesitter/nvim-treesitter",
@@ -275,27 +285,18 @@ require("lazy").setup({
     config = function()
       require("plugin-config.indent-blankline")
     end,
-  }, -- 讀取緩衝區後加載
+  },
 
-  -- LSP 檢查器和格式化工具
-  -- {
-  --   "jose-elias-alvarez/null-ls.nvim",
-  --   event = "BufReadPost",
-  --   config = function()
-  --     require("plugin-config.null-ls")
-  --   end,
-  -- }, -- 讀取緩衝區後加載
   {
     "mhartington/formatter.nvim",
     event = "BufReadPost",
     config = function()
-      -- require("plugin-config.null-ls")
       require("plugin-config.formatter")
     end,
-  }, -- 讀取緩衝區後加載
+  },
 
-  -- 記錄編碼歷史
-  { "wakatime/vim-wakatime", event = "VeryLazy" }, -- Vim 完成啟動後加載
+  -- record code time
+  -- { "wakatime/vim-wakatime", event = "VeryLazy" }
 
   -- Git 插件
   {
@@ -312,9 +313,8 @@ require("lazy").setup({
       "nvim-lua/plenary.nvim", -- required
       "sindrets/diffview.nvim", -- optional - Diff integration
 
-      -- Only one of these is needed, not both.
       "nvim-telescope/telescope.nvim", -- optional
-      -- "ibhagwan/fzf-lua",            -- optional
+      -- "ibhagwan/fzf-lua"            -- optional
     },
     config = function()
       require("plugin-config.neogit")
@@ -325,27 +325,27 @@ require("lazy").setup({
     config = function()
       require("plugin-config.conflict")
     end,
-    event = "BufReadPost", -- 讀取緩衝區後加載
+    event = "BufReadPost",
   },
 
-  -- 代碼運行器
-  {
-    "michaelb/sniprun",
-    build = "bash ./install.sh",
-    cmd = "SnipRun",
-    config = function()
-      require("plugin-config.sniprun")
-    end,
-  }, -- 使用 `:SnipRun` 命令時加載
+  -- SnipRun Code Runner
+  -- {
+  --  "michaelb/sniprun",
+  --   build = "bash ./install.sh",
+  --   cmd = "SnipRun",
+  --   config = function()
+  --     require("plugin-config.sniprun")
+  --   end,
+  -- },
 
-  -- 像 VSCode 任務一樣運行代碼
+  -- Task Runner , support vscode task
   {
     "stevearc/overseer.nvim",
     cmd = "OverseerRun",
     config = function()
       require("overseer.setup")
     end,
-  }, -- 使用 `:OverseerRun` 命令時加載
+  },
 
   -- 代碼測試
   {
@@ -360,7 +360,7 @@ require("lazy").setup({
       "nvim-neotest/neotest-vim-test",
       "vim-test/vim-test",
     },
-    event = "BufReadPost", -- 讀取緩衝區後加載
+    event = "BufReadPost",
     config = function()
       require("plugin-config.neotest")
     end,
@@ -374,7 +374,7 @@ require("lazy").setup({
     config = function()
       require("plugin-config.toggleterm")
     end,
-  }, -- 使用 `:ToggleTerm` 命令時加載
+  },
 
   -- TODO 插件
   {
@@ -384,61 +384,59 @@ require("lazy").setup({
     config = function()
       require("plugin-config.todo")
     end,
-  }, -- 讀取緩衝區後加載
+  },
 
-  -- QuickFix 改善
+  -- Improve QuickFix
   {
     "kevinhwang91/nvim-bqf",
     ft = "qf",
     config = function()
       require("plugin-config.nvim-bqf")
     end,
-  }, -- 打開 Quickfix 文件類型時加載
+  },
 
-  -- -- 環繞選擇插件
   {
     "kylechui/nvim-surround",
     event = "VeryLazy",
     config = function()
       require("plugin-config.nvim-surround")
     end,
-  }, -- Vim 完成啟動後加載
+  },
 
-  -- 自動補全括號插件
+  -- autoparis
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     config = function()
       require("plugin-config.nvim-autopairs")
     end,
-  }, -- 進入插入模式時加載
+  },
 
-  -- 啟動菜單
+  -- start menu
   {
     "goolord/alpha-nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    event = "VimEnter", -- Vim 啟動並加載配置後觸發
+    event = "VimEnter",
     config = function()
       require("plugin-config.alpha")
     end,
   },
-  -- 自動保存文件
+  -- autosave
   {
     "pocco81/auto-save.nvim",
     event = "VeryLazy",
     config = function()
       require("plugin-config.auto-save")
     end,
-  }, -- Vim 完成啟動後加載
-  --
-  -- 改善通知/UI 的插件
+  },
+  -- Improve neovim buffer/notify/menu UI
   {
     "folke/noice.nvim",
     dependencies = {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
     },
-    event = "VeryLazy", -- Vim 完成啟動後加載
+    event = "VeryLazy",
     config = function()
       require("plugin-config.noice")
       require("plugin-config.nvim-notify")
@@ -451,35 +449,32 @@ require("lazy").setup({
     config = function()
       require("plugin-config.crates")
     end,
-    ft = { "toml" }, -- 打開 toml 文件時加載
+    ft = { "toml" },
   },
-  {
-    "lervag/vimtex",
-    ft = { "tex" }, -- 打開 tex 文件時加載
-    config = function()
-      require("plugin-config.vimtex")
-    end,
-  },
-  {
-    "ray-x/web-tools.nvim",
-    config = function()
-      require("plugin-config.web-tools")
-    end,
-    event = "VeryLazy", -- Vim 完成啟動後加載
-  },
-  -- { "ellisonleao/glow.nvim", config = true, cmd = "Glow" }, -- 使用 `:Glow` 命令時加載
-  --
+  -- {
+  --   "lervag/vimtex",
+  --   ft = { "tex" },
+  --   config = function()
+  --     require"plugin-config.vimtex")
+  --   end,
+  -- },
+  -- {
+  --   "ray-x/web-tools.nvim",
+  --   config = function()
+  --     require("plugin-config.web-tools")
+  --   end,
+  --   event = "VeryLazy",
+  -- },
   {
     "Civitasv/cmake-tools.nvim",
     config = function()
       require("plugin-config.cmake-tools")
     end,
-    cmd = "CMakeGenerate", -- 使用 `:CMakeGenerate` 命令時加載
+    cmd = "CMakeGenerate",
   },
   -- {
   --   "kawre/leetcode.nvim",
   --   build = ":TSUpdate html",
-  --   cmd = "Leet",
   --   dependencies = {
   --     "nvim-telescope/telescope.nvim",
   --     "nvim-lua/plenary.nvim", -- telescope 需要
@@ -490,21 +485,20 @@ require("lazy").setup({
   --     "rcarriga/nvim-notify",
   --     "nvim-tree/nvim-web-devicons",
   --   },
-  --   opts = {
-  --     lang = "rust",
-  --     plugins = { non_standalone = true },
-  --   },
+  --   config = function()
+  --     require("plugin-config.leetcode")
+  --   end,
   -- },
   -- {
   --   "xiyaowong/transparent.nvim",
-  --   event = "VeryLazy", -- Vim 完成啟動後加載
+  --   event = "VeryLazy",
   --   config = function()
   --     require("plugin-config.transparent")
   --   end,
   -- },
   -- {
   --   "sontungexpt/url-open",
-  --   cmd = "URLOpenUnderCursor", -- "使用 `:URLOpenUnderCursor`命令時加載"
+  --   cmd = "URLOpenUnderCursor",
   --   config = function()
   --     local status_ok, url_open = pcall(require, "url-open")
   --     if not status_ok then
@@ -513,19 +507,9 @@ require("lazy").setup({
   --     require("plugin-config.url-open")
   --   end,
   -- },
-  -- {
-  --   "Bekaboo/dropbar.nvim",
-  --   dependencies = {
-  --     "nvim-telescope/telescope-fzf-native.nvim",
-  --   },
-  --   event = "VeryLazy", -- Vim 完成啟動後加載
-  --   config = function()
-  --     require("plugin-config.dropbar")
-  --   end,
-  -- },
   {
     "karb94/neoscroll.nvim",
-    event = "WinScrolled", -- Load neoscroll when the window is scrolled
+    event = "WinScrolled",
     config = function()
       require("neoscroll").setup({})
     end,
@@ -571,11 +555,11 @@ require("lazy").setup({
         settings = {
           search = {
             anaconda_base = {
-              command = "fd ^python$ /opt/homebrew/Caskroom/miniconda/base -d 2",
+              command = "fd ^python.exe$ C:\\Users\\tangd\\scoop\\apps\\miniconda3\\current -d 1",
               type = "anaconda",
             },
             anaconda_envs = {
-              command = "fd ^python$ /opt/homebrew/Caskroom/miniconda/base/envs -d 3",
+              command = "fd ^python.exe$ C:\\Users\\tangd\\scoop\\apps\\miniconda3\\current\\envs -d 2",
               type = "anaconda",
             },
           },
@@ -585,15 +569,15 @@ require("lazy").setup({
   },
   {
     "kevinhwang91/promise-async",
-    event = "BufReadPost", -- 讀取緩衝區後加載
+    event = "BufReadPost",
   },
   {
     "kevinhwang91/nvim-ufo",
     depenndencies = { "kevinhwang91/promise-async" },
 
-    event = "BufReadPost", -- 讀取緩衝區後加載
+    event = "BufReadPost",
     config = function()
-      vim.o.foldcolumn = "1" -- '0' is not bad
+      vim.o.foldcolumn = "1" -- '0' isn't bad
       vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
       vim.o.foldlevelstart = 99
       vim.o.foldenable = true
@@ -633,5 +617,38 @@ require("lazy").setup({
         },
       })
     end,
+  },
+  {
+    "nosduco/remote-sshfs.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    opts = {
+      -- Refer to the configuration section below
+      -- or leave empty for defaults
+    },
+    config = function()
+      require("plugin-config.remote-sshfs")
+    end,
+  },
+
+  -- Markdown Preview
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    build = "cd app && npm install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    config = function()
+      require("plugin-config.markdown-preview")
+    end,
+  },
+  {
+    "OXY2DEV/markview.nvim",
+    dependencies = "nvim-tree/nvim-web-devicons",
+    config = function()
+      require("plugin-config.markview")
+    end,
+    lazy = false,
   },
 })

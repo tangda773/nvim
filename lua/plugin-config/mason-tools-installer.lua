@@ -13,6 +13,7 @@ require("mason-tool-installer").setup({
     "autopep8",
     -- linter
     "markdownlint",
+    -- "vale",
   },
 
   -- if set to true this will check each tool for updates. If updates

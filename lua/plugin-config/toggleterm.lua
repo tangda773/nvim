@@ -1,5 +1,21 @@
+local powershell_options = {
+  shell = vim.fn.executable "pwsh" == 1 and "pwsh" or "powershell",
+  shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;",
+  shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait",
+  shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode",
+  shellquote = "",
+  shellxquote = "",
+}
+
+for option, value in pairs(powershell_options) do
+  vim.opt[option] = value
+end
+
 local check_and_pick_venv = function()
-local function get_virtualenv_path(path)
+  local function get_virtualenv_path(path)
+    if path == nil then
+      return nil
+    end
     -- Normalize backslashes to forward slashes for cross-platform compatibility
     local normalized_path = string.gsub(path, "\\", "/")
     -- Find "envs" in the path
@@ -8,7 +24,7 @@ local function get_virtualenv_path(path)
       -- Extract the virtualenv path
       local virtualenv_path = string.match(normalized_path, "^(.*%/envs/[^/]+)")
       return virtualenv_path
-    else 
+    else
       return nil
     end
   end
@@ -34,20 +50,20 @@ require("toggleterm").setup({
       background = "Normal",
     },
   },
-  on_create = function() 
+  on_create = function()
     local venv = check_and_pick_venv()
-    if venv~=nil then
-      vim.cmd('TermExec cmd="conda activate '..venv..'"')
+    if venv ~= nil then
+      vim.cmd('TermExec cmd="conda activate ' .. venv .. '"')
     end
-  end
+  end,
 })
 
 local Terminal = require("toggleterm.terminal").Terminal
 local ipython = Terminal:new({
-  on_create = function() 
+  on_create = function()
     local venv = check_and_pick_venv()
-    if venv~=nil then
-      vim.cmd('TermExec cmd="conda activate '..venv..' && ipython --no-autoindent"')
+    if venv ~= nil then
+      vim.cmd('TermExec cmd="conda activate ' .. venv .. ' && ipython --no-autoindent"')
     else
       vim.cmd('TermExec cmd="ipython --no-autoindent"')
     end

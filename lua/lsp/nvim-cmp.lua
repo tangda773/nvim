@@ -29,6 +29,8 @@ cmp.setup({
   }, {
     { name = "nvim_lua" },
     { name = "path" },
+  }, {
+    { name = "codeium" },
   }),
   sorting = {
     comparators = {
@@ -83,7 +85,7 @@ cmp.setup.filetype({ "tex", "markdown" }, {
   sources = {
     { name = "luasnip" },
     { name = "path" },
-    { name = "lua-latex-symbols" },
+    -- { name = "lua-latex-symbols" },
   },
 })
 

@@ -82,7 +82,7 @@ wk.add({
 wk.add({
   mode = { "n" },
   {
-    "<C-p>",
+    "<C-f>",
     ":Telescope find_files<cr>",
     desc = "Telescope Find Files",
   },
@@ -186,4 +186,13 @@ wk.add({
   mode = {"n"},
   {"zR", "<cmd>lua require('ufo').openAllFolds()<CR>",desc="open All Folds"},
   {"zM", "<cmd>lua require('ufo').closeAllFolds()<CR>",desc="close All Folds"},
+})
+
+wk.add({
+  mode = {"n"},
+  {"<learder>rn",desc="remote api connect"},
+  {"<learder>rd",desc="remote api disconnect"},
+  {"<learder>re",desc="remote api edit"},
+  {"<learder>rf",desc="telescope remote-sshfs find_files"},
+  {"<learder>rg",desc="telescope remote-sshfs live_grep"},
 })
