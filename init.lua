@@ -1,21 +1,16 @@
--- Set the Python 3 host program
--- vim.g.python3_host_prog = "/opt/homebrew/bin/python3"
-vim.g.python3_host_prog = "python3"
-
--- Require basic settings module
-require("basic")
-
--- Require plugins management module
-require("plugins")
-
-if vim.g.neovide then
-  vim.o.guifont = "FiraCode Nerd Font Mono:h24"
-  -- Helper function for transparency formatting
-  -- local alpha = function()
-  --   return string.format("%x", math.floor(255 * vim.g.transparency or 0.8))
-  -- end
-  -- g:neovide_transparency should be 0 if you want to unify transparency of content and title bar.
-  vim.g.neovide_transparency = 0.8
-  vim.g.transparency = 0.8
-  -- vim.g.neovide_background_color = "#0f1117" .. alpha()
+if vim.env.PROF then
+  -- example for lazy.nvim
+  -- change this to the correct path for your plugin manager
+  local snacks = vim.fn.stdpath("data") .. "/lazy/snacks.nvim"
+  vim.opt.rtp:append(snacks)
+  require("snacks.profiler").startup({
+    startup = {
+      event = "VimEnter", -- stop profiler on this event. Defaults to `VimEnter`
+      -- event = "UIEnter",
+      -- event = "VeryLazy",
+    },
+  })
 end
+require("basic")
+require("config.lazy")
+require("keybinding")
