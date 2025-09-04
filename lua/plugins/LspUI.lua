@@ -12,10 +12,10 @@ return{
 	  -- config options go here
 	  })
     -- Basic keybinding setup
-    vim.keymap.set("n", "K", "<cmd>LspUI hover<CR>")
+    vim.keymap.set("n", "gh", "<cmd>LspUI hover<CR>")
     vim.keymap.set("n", "gr", "<cmd>LspUI reference<CR>")
     vim.keymap.set("n", "gd", "<cmd>LspUI definition<CR>")
-    vim.keymap.set("n", "gt", "<cmd>LspUI type_definition<CR>")
+    vim.keymap.set("n", "gD", "<cmd>LspUI type_definition<CR>")
     vim.keymap.set("n", "gi", "<cmd>LspUI implementation<CR>")
     vim.keymap.set("n", "gn", "<cmd>LspUI diagnostic next<CR>")
     vim.keymap.set("n", "gp", "<cmd>LspUI diagnostic prev<CR>")

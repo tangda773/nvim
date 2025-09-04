@@ -11,18 +11,21 @@ return {
     "nvim-neotest/neotest-python",
     "nvim-neotest/neotest-plenary",
     "alfaix/neotest-gtest",
-    {"nvim-neotest/neotest-vim-test", dependencies ={"vim-test/vim-test"}}
+    {"nvim-neotest/neotest-vim-test", dependencies ={"vim-test/vim-test"}},
+    "mrcjkb/rustaceanvim"
   },
 
   config = function()
     require("neotest").setup({
       adapters = {
-        require("neotest-python"),
-        require("neotest-plenary"),
-        require("neotest-gtest").setup({}),
-        require("neotest-vim-test")({ignore_filetpes={"python","lua","cpp"}}),
+          require("neotest-python"),
+          require("neotest-plenary"),
+          require("neotest-gtest").setup({}),
+          require("neotest-vim-test")({ignore_filetpes={"python","lua","cpp"}}),
+          require("rustaceanvim.neotest")
       }
     })
+
   end,
   keys = {
     {"<leader>tr", ":lua require(\"neotest\").run.run()<cr>", desc="Neotest Run Current Test"},
