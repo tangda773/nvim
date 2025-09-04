@@ -28,10 +28,10 @@ return {
 
   end,
   keys = {
-    {"<leader>tr", ":lua require(\"neotest\").run.run()<cr>", desc="Neotest Run Current Test"},
-    {"<leader>tf", ":lua require(\"neotest\").run.run(vim.fn.expand(\"%\"))<cr>", desc="Neotest Run Current File"},
-    {"<leader>td", ":lua require(\"neotest\").run.run({strategy=\"dap\"})<cr>", desc="Neotest Debug Current Test"},
-    {"<leader>ts", ":lua require(\"neotest\").run.stop()<cr>", desc="Neotest Stop Current Test"},
-    {"<leader>ta", ":lua require(\"neotest\").run.attach()<cr>", desc="Neotest Attach Current Test"},
+    {'<leader>tr', ':lua require("neotest").run.run()<cr>', desc='Neotest Run Current Test'},
+    {'<leader>tf', ':lua require("neotest").run.run(vim.fn.expand("%"))<cr>', desc='Neotest Run Current File'},
+    {'<leader>td', ':lua require("neotest").run.run({strategy="dap"})<cr>', desc='Neotest Debug Current Test'},
+    {'<leader>ts', ':lua require("neotest").run.stop()<cr>', desc='Neotest Stop Current Test'},
+    {'<leader>ta', ':lua require("neotest").run.attach()<cr>', desc='Neotest Attach Current Test'},
   }
 }
