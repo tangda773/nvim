@@ -1,4 +1,8 @@
 local capabilities = require('cmp_nvim_lsp').default_capabilities() --nvim-cmp
+capabilities.textDocument.foldingRange = {
+  dynamicRegistration = false,
+  lineFoldingOnly = true
+}
 
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
