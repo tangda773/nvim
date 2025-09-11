@@ -9,7 +9,9 @@ return {
     -- For luasnip users.
     "L3MON4D3/LuaSnip",
     "saadparwaiz1/cmp_luasnip",
-    "onsails/lspkind.nvim"
+    "onsails/lspkind.nvim",
+    -- Set of preconfigured snippets
+    "rafamadriz/friendly-snippets",
   },
   config = function()
     local cmp = require("cmp")
@@ -117,5 +119,7 @@ return {
       }),
       matching = { disallow_symbol_nonprefix_matching = false }
     })
+
+    require('luasnip.loaders.from_vscode').lazy_load()
   end,
 }
