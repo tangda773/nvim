@@ -25,7 +25,7 @@ return{
     -- require("plugins.mini.deps")
     require("plugins.mini.diff")
     require("plugins.mini.extra")
-    -- require("plugins.mini.files")
+    require("plugins.mini.files")
     require("plugins.mini.git")
     require("plugins.mini.jump")
     require("plugins.mini.jump2d")

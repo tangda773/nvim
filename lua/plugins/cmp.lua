@@ -17,7 +17,7 @@ return {
     local cmp = require("cmp")
     local luasnip = require("luasnip")
     local lspkind = require("lspkind")
-    local ok, neogen = pcall(require,"neogen")
+    local ok, neogen = pcall(require, "neogen")
     cmp.setup({
       snippet = {
         expand = function(args)
@@ -26,18 +26,18 @@ return {
       },
       mapping = cmp.mapping.preset.insert({
         ['<CR>'] = cmp.mapping(function(fallback)
-                if cmp.visible() then
-                    if luasnip.expandable() then
-                        luasnip.expand()
-                    else
-                        cmp.confirm({
-                            select = true,
-                        })
-                    end
-                else
-                    fallback()
-                end
-            end),
+          if cmp.visible() then
+            if luasnip.expandable() then
+              luasnip.expand()
+            else
+              cmp.confirm({
+                select = true,
+              })
+            end
+          else
+            fallback()
+          end
+        end),
 
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
@@ -73,7 +73,7 @@ return {
         { name = "luasnip" },
       }, {
         { name = "buffer" },
-      },{
+      }, {
         { name = "lazydev", group_index = 0 }
       }),
       window = {
@@ -81,26 +81,26 @@ return {
         -- documentation = cmp.config.window.bordered(),
       },
       formatting = {
-          format = lspkind.cmp_format({
-            mode = 'symbol', -- show only symbol annotations
-            maxwidth = {
-              -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-              -- can also be a function to dynamically calculate max width such as
-              -- menu = function() return math.floor(0.45 * vim.o.columns) end,
-              menu = 50, -- leading text (labelDetails)
-              abbr = 50, -- actual suggestion item
-            },
-            ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
-            show_labelDetails = true, -- show labelDetails in menu. Disabled by default
+        format = lspkind.cmp_format({
+          mode = 'symbol', -- show only symbol annotations
+          maxwidth = {
+            -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+            -- can also be a function to dynamically calculate max width such as
+            -- menu = function() return math.floor(0.45 * vim.o.columns) end,
+            menu = 50,              -- leading text (labelDetails)
+            abbr = 50,              -- actual suggestion item
+          },
+          ellipsis_char = '...',    -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+          show_labelDetails = true, -- show labelDetails in menu. Disabled by default
 
-            -- The function below will be called before any actual modifications from lspkind
-            -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
-            before = function (entry, vim_item)
-              -- ...
-              return vim_item
-            end
-          })
-        }
+          -- The function below will be called before any actual modifications from lspkind
+          -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+          before = function(entry, vim_item)
+            -- ...
+            return vim_item
+          end
+        })
+      }
     })
 
     -- Cmdline sources
@@ -114,8 +114,6 @@ return {
       mapping = cmp.mapping.preset.cmdline(),
       sources = cmp.config.sources({
         { name = "path" }
-      }, {
-        { name = "cmdline" }
       }),
       matching = { disallow_symbol_nonprefix_matching = false }
     })

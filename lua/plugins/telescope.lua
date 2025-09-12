@@ -1,0 +1,14 @@
+return {
+  {
+    'nvim-telescope/telescope.nvim',
+    tag = '0.1.8',
+    -- or                              , branch = '0.1.x',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    lazy = true,
+  },
+  {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    build = 'make',
+    dependencies = { 'nvim-telescope/telescope.nvim' },
+  }
+}
