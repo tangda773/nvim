@@ -19,7 +19,6 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       {"mason-org/mason-lspconfig.nvim"},
-      { "ray-x/lsp_signature.nvim", opts = {}},
       {"hrsh7th/cmp-nvim-lsp"},
     },
     config = function()
