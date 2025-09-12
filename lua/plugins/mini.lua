@@ -23,7 +23,7 @@ return{
     require("plugins.mini.bufremove")
     -- require("plugins.mini.clue")
     -- require("plugins.mini.deps")
-    require("plugins.mini.diff")
+    -- require("plugins.mini.diff")
     require("plugins.mini.extra")
     require("plugins.mini.files")
     require("plugins.mini.git")
