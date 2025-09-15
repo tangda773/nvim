@@ -1,0 +1,14 @@
+[window]
+# opacity = 0.9
+padding.x = 10
+padding.y = 10
+
+[font]
+normal = {family = "Hack Nerd Font Mono", style="Regular"}
+bold = {family = "Hack Nerd Font Mono", style="bold"}
+italic = {family = "Hack Nerd Font Mono", style="italic"}
+bold_italic = {family = "Hack Nerd Font Mono", style="bold_italic"}
+size=24.0
+
+[terminal]
+shell = "pwsh.exe"
