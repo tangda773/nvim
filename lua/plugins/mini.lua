@@ -10,7 +10,7 @@ return{
     require("plugins.mini.comment")
     -- require("plugins.mini.completion")
     require("plugins.mini.keymap")
-    require("plugins.mini.move")
+    -- require("plugins.mini.move")
     require("plugins.mini.operators")
     require("plugins.mini.pairs")
     -- require("plugins.mini.snippets")
@@ -21,7 +21,7 @@ return{
     require("plugins.mini.basics")
     require("plugins.mini.bracketed")
     require("plugins.mini.bufremove")
-    -- require("plugins.mini.clue")
+    require("plugins.mini.clue")
     -- require("plugins.mini.deps")
     -- require("plugins.mini.diff")
     require("plugins.mini.extra")
@@ -35,7 +35,7 @@ return{
     require("plugins.mini.visits")
 
     -- Appearance
-    -- require("plugins.mini.animate")
+    require("plugins.mini.animate")
     -- require("plugins.mini.base16")
     require("plugins.mini.colors")
     require("plugins.mini.cursorword")

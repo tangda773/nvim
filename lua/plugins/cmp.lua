@@ -6,6 +6,14 @@ return {
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-cmdline",
+    {
+      "paopaol/cmp-doxygen",
+      dependencies = {
+        "nvim-treesitter/nvim-treesitter",
+        "nvim-treesitter/nvim-treesitter-textobjects"
+      }
+    },
+    "lukas-reineke/cmp-under-comparator",
     -- For luasnip users.
     "L3MON4D3/LuaSnip",
     "saadparwaiz1/cmp_luasnip",
@@ -23,6 +31,18 @@ return {
         expand = function(args)
           require("luasnip").lsp_expand(args.body)
         end,
+      },
+      sorting = {
+        comparators = {
+          cmp.config.compare.offset,
+          cmp.config.compare.exact,
+          cmp.config.compare.score,
+          require "cmp-under-comparator".under,
+          cmp.config.compare.kind,
+          cmp.config.compare.sort_text,
+          cmp.config.compare.length,
+          cmp.config.compare.order,
+        },
       },
       mapping = cmp.mapping.preset.insert({
         ['<CR>'] = cmp.mapping(function(fallback)
