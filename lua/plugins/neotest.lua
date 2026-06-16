@@ -21,14 +21,16 @@ return {
     { "<leader>tS", function() require("neotest").summary.toggle() end,              desc = "Neotest: summary" },
   },
   opts = function()
-    return {
-      adapters = {
+      local adapters = {
         require("neotest-python"),
         require("neotest-plenary"),
         require("neotest-gtest").setup({}),
         require("neotest-vim-test")({ ignore_filetypes = { "python", "lua", "cpp" } }),
-        require("rustaceanvim.neotest"),
-      },
-    }
+      }
+      local ok, rust_adapter = pcall(require, "rustaceanvim")
+      if ok then 
+        table.insert(adapters,rust_adapter)
+      end
+      return{adapters =adapters}
   end,
 }
