@@ -8,6 +8,8 @@ return {
   config = function(_, opts)
     require("remote-sshfs").setup(opts)
     require("telescope").load_extension('remote-sshfs')
+    require("remote-sshfs").callback.on_connect_success:add(function(host, mount_dir)
+        vim.notify("已連線：" .. host .. " → " .. mount_dir) end)
   end,
  keys = {
     { '<leader>rc', function() require("remote-sshfs.api").connect() end,    desc = "SSHFS connect" },
