@@ -28,10 +28,18 @@ return {
       vim.keymap.set('n', '<leader>sj', require('smart-splits').swap_buf_down, { desc = "Smart-Splits swap_buft down" })
       vim.keymap.set('n', '<leader>sk', require('smart-splits').swap_buf_up, { desc = "Smart-Splits swap_buft up" })
       vim.keymap.set('n', '<leader>sl', require('smart-splits').swap_buf_right, { desc = "Smart-Splits swap_buft right" })
-    end
-  }
+    end,
+  
   -- or use a specific version, or a range of versions using lazy.nvim's version API
   -- { 'mrjones2014/smart-splits.nvim', version = '>=1.0.0' }
   -- to use Kitty multiplexer support, run the post install hook
   -- { 'mrjones2014/smart-splits.nvim', build = './kitty/install-kittens.bash' }
+  keys = {
+    
+      {'<C-h>', function() require('smart-splits').move_cursor_left() end },
+      { '<C-j>', function() require('smart-splits').move_cursor_down() end },
+      { '<C-k>', function() require('smart-splits').move_cursor_up()  end},
+      { '<C-l>', function() require('smart-splits').move_cursor_right() end},
+  }
+},
 }

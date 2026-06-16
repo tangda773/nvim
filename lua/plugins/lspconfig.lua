@@ -10,19 +10,21 @@ return {
     "mason-org/mason-lspconfig.nvim",
     dependencies = { "mason-org/mason.nvim" },
     opts = {
-      ensure_installed = {},
+      ensure_installed = { "clangd", "lua_ls" },
     },
   },
   -- LSP 主配置，只有在打開檔案時才載入
   {
     "neovim/nvim-lspconfig",
+    name = "lsp-setup",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      {"mason-org/mason-lspconfig.nvim"},
-      {"hrsh7th/cmp-nvim-lsp"},
+      { "neovim/nvim-lspconfig" },
+      { "mason-org/mason-lspconfig.nvim" },
+      { "hrsh7th/cmp-nvim-lsp" },
     },
     config = function()
-      require('lsp_util').setup_servers()
+      require("lsp.util").setup()
     end,
   },
 }

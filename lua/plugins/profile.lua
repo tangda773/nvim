@@ -1,6 +1,7 @@
 return{
   "stevearc/profile.nvim",
-  -- priority = 10000,  -- 設為最高
+  priority = 9999,  -- 設為最高
+  lazy = false,
   init = function()
     -- profile.nvim 官方推薦的初始化邏輯
     local should_profile = os.getenv("NVIM_PROFILE")
@@ -28,5 +29,4 @@ return{
   end
   vim.keymap.set("", "<f1>", toggle_profile)
   end,
-  lazy = true,
 }

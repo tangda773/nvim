@@ -149,7 +149,7 @@ return {
   end,
   dependencies = {
     -- 'nvim-telescope/telescope.nvim',
-    -- 'ibhagwan/fzf-lua',
-    -- 'mfussenegger/nvim-dap'
+    {'ibhagwan/fzf-lua', optional = true},
+    'mfussenegger/nvim-dap'
   }
 }

@@ -14,13 +14,11 @@ vim.wo.signcolumn = "yes"
 -- 右側参考線，超過表示代碼太長了，考慮换行
 vim.wo.colorcolumn = "80"
 -- 縮進2個空格等於一個Tab
-vim.o.tabstop = 2
-vim.bo.tabstop = 2
+vim.opt.tabstop = 2
 vim.o.softtabstop = 2
 vim.o.shiftround = true
 -- >> << 时移動長度
-vim.o.shiftwidth = 2
-vim.bo.shiftwidth = 2
+vim.opt.shiftwidth = 2
 -- 新行對齊當前行，空格替代tab
 vim.o.expandtab = true
 vim.bo.expandtab = true
@@ -66,7 +64,6 @@ vim.o.splitright = true
 vim.g.completeopt = "menu,menuone,noselect,noinsert"
 -- 樣式
 vim.o.background = "dark"
-vim.o.termguicolors = true
 vim.opt.termguicolors = true
 -- 不可見字符的顯示，這裡只把空格顯示為一個點
 vim.o.list = true
@@ -80,38 +77,4 @@ vim.o.pumheight = 10
 vim.o.showtabline = 2
 -- enable copy between clipboard and terminals
 vim.opt.clipboard = "unnamedplus"
--- 禁用neovim內置插件
--- netrw
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
--- matchit
--- vim.g.loaded_matchit = 1
---
--- matchparen
-vim.g.loaded_matchparen = 1
--- 2html
-vim.g.loaded_2html_plugin = 1
--- logiPat
-vim.g.loaded_logiPat = 1
--- rrhelper
-vim.g.loaded_rrhelper = 1
--- tarPlugin
-vim.g.loaded_tarPlugin = 1
--- gzip
-vim.g.loaded_gzip = 1
--- zipPlugin
-vim.g.loaded_zipPlugin = 1
--- tutor_mode
-vim.g.loaded_tutor_mode_plugin = 1
--- rplugin
-vim.g.loaded_rplugin = 1
--- spellfile
-vim.g.loaded_spellfile_plugin = 1
--- vimball
-vim.g.loaded_vimball = 1
-vim.g.loaded_vimballPlugin = 1
--- getscript
-vim.g.loaded_getscript = 1
-vim.g.loaded_getscriptPlugin = 1
--- man
-vim.g.loaded_man = 1
+

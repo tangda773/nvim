@@ -11,4 +11,5 @@ return{
     vim.keymap.set('n','<leader>sl',':FzfLua live_grep_curbuf<CR>',{desc='FzfLua live_grep_curbuf'})
     require("fzf-lua").setup(opts)
   end,
+  cmd = "FzfLua",
 }

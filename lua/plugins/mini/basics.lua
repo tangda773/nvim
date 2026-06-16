@@ -4,7 +4,7 @@ require("mini.basics").setup(
     -- Options. Set field to `false` to disable.
     options = {
       -- Basic options ('number', 'ignorecase', and many more)
-      basic = true,
+      basic = false,
 
       -- Extra UI features ('winblend', 'listchars', 'pumheight', ...)
       extra_ui = false,

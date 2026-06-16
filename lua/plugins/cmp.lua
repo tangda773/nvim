@@ -6,13 +6,6 @@ return {
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-cmdline",
-    {
-      "paopaol/cmp-doxygen",
-      dependencies = {
-        "nvim-treesitter/nvim-treesitter",
-        "nvim-treesitter/nvim-treesitter-textobjects"
-      }
-    },
     "lukas-reineke/cmp-under-comparator",
     -- For luasnip users.
     "L3MON4D3/LuaSnip",

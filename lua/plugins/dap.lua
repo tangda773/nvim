@@ -2,6 +2,7 @@ return{
   {
         "mfussenegger/nvim-dap",
         lazy=true,
+        cmd = {"DapContinue", "DapToggleBreakpoint"},
         config = function()
           vim.keymap.set("n","<F5>",function() require("dap").continue() end, {desc="Dap Continue"})
           vim.keymap.set("n","<F10>",function() require("dap").step_over() end, {desc="Dap Step Over"})

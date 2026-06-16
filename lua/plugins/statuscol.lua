@@ -1,5 +1,6 @@
 return {
   "luukvbaal/statuscol.nvim",
+  event = "BufReadPost",
   config = function()
     vim.opt.fillchars = {
       foldclose = "", -- foldclose
