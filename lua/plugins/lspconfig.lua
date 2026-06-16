@@ -8,6 +8,7 @@ return {
   -- mason-lspconfig，依賴 mason，僅在需要時載入
   {
     "mason-org/mason-lspconfig.nvim",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = { "mason-org/mason.nvim" },
     opts = {
       ensure_installed = { "clangd", "lua_ls" },
@@ -19,7 +20,6 @@ return {
     name = "lsp-setup",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      { "neovim/nvim-lspconfig" },
       { "mason-org/mason-lspconfig.nvim" },
       { "hrsh7th/cmp-nvim-lsp" },
     },

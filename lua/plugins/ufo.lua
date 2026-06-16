@@ -3,6 +3,7 @@ return {
   dependencies = {
     'kevinhwang91/promise-async'
   },
+  event = "BufReadPost",
   config = function()
     vim.o.foldcolumn = '1' -- '0' is not bad
     vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value

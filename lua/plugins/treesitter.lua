@@ -1,5 +1,4 @@
   return {
-  {
     "nvim-treesitter/nvim-treesitter",
     branch = "main",          -- 用 rewrite 版，非舊 master
     build = ":TSUpdate",
@@ -8,8 +7,4 @@
       ensure_installed = { "lua", "rust", "c", "vim", "vimdoc", "query" },
     },
     -- 不呼叫 configs.setup()，highlight/indent 交給原生
-  },
-  {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-  }
   }

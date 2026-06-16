@@ -1,45 +1,21 @@
 return {
-  {
     'mrjones2014/smart-splits.nvim',
     opts = {
 
     },
-    config = function(_, opts)
-      require('smart-splits').setup(opts)
-      -- recommended mappings
-      -- resizing splits
-      -- these keymaps will also accept a range,
-      -- for example `10<A-h>` will `resize_left` by `(10 * config.default_amount)`
-      vim.keymap.set('n', '<A-h>', require('smart-splits').resize_left, { desc = "Smart-Splits resize_left" })
-      vim.keymap.set('n', '<A-j>', require('smart-splits').resize_down, { desc = "Smart-Splits resize_down" })
-      vim.keymap.set('n', '<A-k>', require('smart-splits').resize_up, { desc = "Smart-Splits resize_up" })
-      vim.keymap.set('n', '<A-l>', require('smart-splits').resize_right, { desc = "Smart-Splits resize_right" })
-      -- moving between splits
-      vim.keymap.set('n', '<C-h>', require('smart-splits').move_cursor_left, { desc = "Smart-Splits move_cursor_left" })
-      vim.keymap.set('n', '<C-j>', require('smart-splits').move_cursor_down, { desc = "Smart-Splits move_cursor_down" })
-      vim.keymap.set('n', '<C-k>', require('smart-splits').move_cursor_up, { desc = "Smart-Splits move_cursor_up" })
-      vim.keymap.set('n', '<C-l>', require('smart-splits').move_cursor_right, { desc = "Smart-Splits move_cursor_right" })
-      vim.keymap.set('n', '<C-\\>', require('smart-splits').move_cursor_previous, {
-        desc =
-        "Smart-Splits move_cursor_previous"
-      })
-      -- swapping buffers between windows
-      vim.keymap.set('n', '<leader>sh', require('smart-splits').swap_buf_left, { desc = "Smart-Splits swap_buft left" })
-      vim.keymap.set('n', '<leader>sj', require('smart-splits').swap_buf_down, { desc = "Smart-Splits swap_buft down" })
-      vim.keymap.set('n', '<leader>sk', require('smart-splits').swap_buf_up, { desc = "Smart-Splits swap_buft up" })
-      vim.keymap.set('n', '<leader>sl', require('smart-splits').swap_buf_right, { desc = "Smart-Splits swap_buft right" })
-    end,
-  
-  -- or use a specific version, or a range of versions using lazy.nvim's version API
-  -- { 'mrjones2014/smart-splits.nvim', version = '>=1.0.0' }
-  -- to use Kitty multiplexer support, run the post install hook
-  -- { 'mrjones2014/smart-splits.nvim', build = './kitty/install-kittens.bash' }
-  keys = {
-    
-      {'<C-h>', function() require('smart-splits').move_cursor_left() end },
-      { '<C-j>', function() require('smart-splits').move_cursor_down() end },
-      { '<C-k>', function() require('smart-splits').move_cursor_up()  end},
-      { '<C-l>', function() require('smart-splits').move_cursor_right() end},
-  }
-},
+keys = {
+    { '<C-h>',      function() require('smart-splits').move_cursor_left() end,   desc = "Split: move left" },
+    { '<C-j>',      function() require('smart-splits').move_cursor_down() end,   desc = "Split: move down" },
+    { '<C-k>',      function() require('smart-splits').move_cursor_up() end,     desc = "Split: move up" },
+    { '<C-l>',      function() require('smart-splits').move_cursor_right() end,  desc = "Split: move right" },
+    { '<C-\\>',     function() require('smart-splits').move_cursor_previous() end, desc = "Split: move previous" },
+    { '<A-h>',      function() require('smart-splits').resize_left() end,        desc = "Split: resize left" },
+    { '<A-j>',      function() require('smart-splits').resize_down() end,        desc = "Split: resize down" },
+    { '<A-k>',      function() require('smart-splits').resize_up() end,          desc = "Split: resize up" },
+    { '<A-l>',      function() require('smart-splits').resize_right() end,       desc = "Split: resize right" },
+    { '<leader>sh', function() require('smart-splits').swap_buf_left() end,      desc = "Split: swap left" },
+    { '<leader>sj', function() require('smart-splits').swap_buf_down() end,      desc = "Split: swap down" },
+    { '<leader>sk', function() require('smart-splits').swap_buf_up() end,        desc = "Split: swap up" },
+    { '<leader>sl', function() require('smart-splits').swap_buf_right() end,     desc = "Split: swap right" },
+  },
 }

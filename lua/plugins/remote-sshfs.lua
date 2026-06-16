@@ -8,32 +8,24 @@ return {
   config = function(_, opts)
     require("remote-sshfs").setup(opts)
     require("telescope").load_extension('remote-sshfs')
-    local api = require('remote-sshfs.api')
-    -- vim.keymap.set('n', '<leader>rc', api.connect, { desc = "remote-sshfs connect" })
-    vim.keymap.set('n', '<leader>rd', api.disconnect, { desc = "remote-sshfs disconnect" })
-    vim.keymap.set('n', '<leader>re', api.edit, { desc = "remote-sshfs edit" })
-
-    -- (optional) Override telescope find_files and live_grep to make dynamic based on if connected to host
-    local builtin = require("telescope.builtin")
-    local connections = require("remote-sshfs.connections")
-    vim.keymap.set("n", "<leader>ff", function()
-      if connections.is_connected() then
-        api.find_files()
-      else
-        builtin.find_files()
-      end
-    end, { desc = "remote-sshfs find_files" })
-    vim.keymap.set("n", "<leader>fg", function()
-      if connections.is_connected() then
-        api.live_grep()
-      else
-        builtin.live_grep()
-      end
-    end, { desc = "remote-sshfs live_grep" })
   end,
-  keys = {
-    {
-      '<leader>rc', ':lua require("remote-sshfs.api").connect()<cr>', desc = "remote-sshfs connect", mode = "n"
-    }
-  }
+ keys = {
+    { '<leader>rc', function() require("remote-sshfs.api").connect() end,    desc = "SSHFS connect" },
+    { '<leader>rd', function() require("remote-sshfs.api").disconnect() end, desc = "SSHFS disconnect" },
+    { '<leader>re', function() require("remote-sshfs.api").edit() end,       desc = "SSHFS edit" },
+    { '<leader>ff', function()
+        local c = require("remote-sshfs.connections")
+        if c.is_connected() then require("remote-sshfs.api").find_files()
+        else require("telescope.builtin").find_files() end
+      end, desc = "Find files" },
+    { '<leader>fg', function()
+        local c = require("remote-sshfs.connections")
+        if c.is_connected() then require("remote-sshfs.api").live_grep()
+        else require("telescope.builtin").live_grep() end
+      end, desc = "Live grep" },
+  },
+  config = function(_, opts)
+    require("remote-sshfs").setup(opts)
+    require("telescope").load_extension('remote-sshfs')
+  end,
 }

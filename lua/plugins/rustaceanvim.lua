@@ -9,10 +9,6 @@ return {
       -- LSP configuration
       server = {
         on_attach = function(client, bufnr)
-          local lsp_util = require("lsp.util")
-          lsp_util.on_attach(client, bufnr)
-
-
           -- rust 專用快捷鍵
         end,
       },
