@@ -5,7 +5,7 @@ return {
     "echasnovski/mini.nvim",
     name     = "mini-icons",
     lazy     = false,
-    priority = 100, -- 比一般插件早，但不用像 colorscheme 那麼高
+    priority = 100,
     config   = function()
       require("mini.icons").setup({})
     end,
@@ -28,7 +28,6 @@ return {
     event  = "VeryLazy",
     config = function()
       -- Appearance
-      vim.cmd([[colorscheme randomhue]])
       require("plugins.mini.animate")
       require("plugins.mini.colors")
       require("plugins.mini.cursorword")

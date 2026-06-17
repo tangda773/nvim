@@ -19,3 +19,5 @@ vim.loader.enable()
 require("basic")
 require("config.lazy")
 require("keybinding")
+
+vim.cmd([[colorscheme randomhue]])
