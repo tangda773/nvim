@@ -2,6 +2,11 @@ return {
   {
     "mfussenegger/nvim-dap",
     lazy = true,
+    init = function()
+      vim.api.nvim_create_user_command("DapStart", function()
+        vim.cmd("doautocmd User DapDebugStarted")
+      end, {})
+    end,
     keys = {
       { "<F5>",       function() require("dap").continue() end,                                      desc = "Dap: continue" },
       { "<F10>",      function() require("dap").step_over() end,                                     desc = "Dap: step over" },
