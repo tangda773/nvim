@@ -27,8 +27,8 @@ return {
         require("neotest-gtest").setup({}),
         require("neotest-vim-test")({ ignore_filetypes = { "python", "lua", "cpp" } }),
       }
-      local ok, rust_adapter = pcall(require, "rustaceanvim")
-      if ok then 
+      local ok, rust_adapter = pcall(require, "rustaceanvim.neotest")
+      if ok then
         table.insert(adapters,rust_adapter)
       end
       return{adapters =adapters}

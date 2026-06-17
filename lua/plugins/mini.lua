@@ -33,11 +33,11 @@ return {
         end,
       })
 
-      -- ── VeryLazy（UI） ────────────────────────────────────
       vim.api.nvim_create_autocmd("User", {
         pattern  = "VeryLazy",
         once     = true,
         callback = function()
+          -- ── VeryLazy（UI） ────────────────────────────────────
           require("plugins.mini.animate")
           require("plugins.mini.cursorword")
           require("plugins.mini.hipatterns")
@@ -46,14 +46,7 @@ return {
           require("plugins.mini.statusline")
           require("plugins.mini.tabline")
           require("plugins.mini.trailspace")
-        end,
-      })
-
-      -- ── VeryLazy（workflow） ──────────────────────────────
-      vim.api.nvim_create_autocmd("User", {
-        pattern  = "VeryLazy",
-        once     = true,
-        callback = function()
+          -- ── VeryLazy（workflow） ──────────────────────────────
           require("plugins.mini.basics")
           require("plugins.mini.bracketed")
           require("plugins.mini.bufremove")
@@ -66,6 +59,13 @@ return {
           require("plugins.mini.misc")
           require("plugins.mini.sessions")
           require("plugins.mini.visits")
+        end,
+      })
+
+      vim.api.nvim_create_autocmd("User", {
+        pattern  = "VeryLazy",
+        once     = true,
+        callback = function()
         end,
       })
     end,

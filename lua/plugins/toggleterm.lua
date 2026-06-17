@@ -1,11 +1,11 @@
 return {
   {
-    'akinsho/toggleterm.nvim', 
+    'akinsho/toggleterm.nvim',
     version = "*",
     opts = { --[[ things you want to change go here]]
-  },
+    },
 
-  cmd = {"ToggleTerm"},
-  keys = {{"<C-\\>", "<cmd>ToggleTerm<cr>"}},
+    cmd = { "ToggleTerm" },
+    keys = { { "<leader>tt", "<cmd>ToggleTerm<cr>" } },
   }
 }
