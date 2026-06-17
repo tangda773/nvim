@@ -21,14 +21,40 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
     end
 
-    nmap("gf",         vim.lsp.buf.format,         "LSP: Format")
-    nmap("gq",         vim.diagnostic.setloclist,  "LSP: Diagnostics List")
+    -- Format / Diagnostics
+    nmap("gf", vim.lsp.buf.format, "LSP: Format")
+    nmap("gq", vim.diagnostic.setloclist, "LSP: Diagnostics List")
+    nmap("<leader>e", vim.diagnostic.open_float, "LSP: Line Diagnostics")
 
-    -- 交給 LspUI.nvim
-    nmap("gd",         vim.lsp.buf.definition,     "LSP: Goto Definition")
-    nmap("gr",         vim.lsp.buf.references,     "LSP: Goto References")
-    nmap("<leader>rn", vim.lsp.buf.rename,         "LSP: Rename")
-    nmap("<leader>ca", vim.lsp.buf.code_action,    "LSP: Code Action")
+    -- Navigation
+    nmap("gd", vim.lsp.buf.definition, "LSP: Goto Definition")
+    nmap("gD", vim.lsp.buf.declaration, "LSP: Goto Declaration")
+    nmap("gy", vim.lsp.buf.type_definition, "LSP: Type Definition")
+    nmap("gi", vim.lsp.buf.implementation, "LSP: Goto Implementation")
+    nmap("gr", vim.lsp.buf.references, "LSP: Goto References")
+
+    -- Diagnostic jump
+    nmap("gn", function() vim.diagnostic.jump({ count = 1, float = true }) end, "LSP: Next Diagnostic")
+    nmap("gp", function() vim.diagnostic.jump({ count = -1, float = true }) end, "LSP: Prev Diagnostic")
+    nmap("]e", function() vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR }) end,
+      "LSP: Next Error")
+    nmap("[e", function() vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR }) end,
+      "LSP: Prev Error")
+
+    -- Docs
+    nmap("gh", vim.lsp.buf.hover, "LSP: Hover Docs")
+    nmap("<C-k>", vim.lsp.buf.signature_help, "LSP: Signature Help")
+
+    -- Refactor
+    nmap("<leader>rn", vim.lsp.buf.rename, "LSP: Rename")
+    nmap("<leader>ca", vim.lsp.buf.code_action, "LSP: Code Action")
+
+    -- Workspace
+    nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "LSP: Add Workspace")
+    nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "LSP: Remove Workspace")
+    nmap("<leader>wl", function()
+      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, "LSP: List Workspaces")
   end,
 })
 
