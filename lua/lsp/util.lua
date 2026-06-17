@@ -25,10 +25,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
     nmap("gq",         vim.diagnostic.setloclist,  "LSP: Diagnostics List")
 
     -- 交給 LspUI.nvim
-    -- nmap("gd",         vim.lsp.buf.definition,     "LSP: Goto Definition")
-    -- nmap("gr",         vim.lsp.buf.references,     "LSP: Goto References")
-    -- nmap("<leader>rn", vim.lsp.buf.rename,         "LSP: Rename")
-    -- nmap("<leader>ca", vim.lsp.buf.code_action,    "LSP: Code Action")
+    nmap("gd",         vim.lsp.buf.definition,     "LSP: Goto Definition")
+    nmap("gr",         vim.lsp.buf.references,     "LSP: Goto References")
+    nmap("<leader>rn", vim.lsp.buf.rename,         "LSP: Rename")
+    nmap("<leader>ca", vim.lsp.buf.code_action,    "LSP: Code Action")
   end,
 })
 
