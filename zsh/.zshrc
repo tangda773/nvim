@@ -2,8 +2,6 @@ export PATH=$PATH:~/.local/share/nvim/mason/bin:/usr/local/nnn
 
 source ~/.nnnrc
 
-eval "$(zoxide init zsh)"
-
 # auto install zinit to manage zsh plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -13,6 +11,10 @@ if [[ ! -a $ZINIT_HOME ]]; then
 fi
 
 source "${ZINIT_HOME}/zinit.zsh"
+
+zinit ice atload'unalias zi'
+
+eval "$(zoxide init zsh)"
 
 # add zsh plugins
 zinit light zsh-users/zsh-completions
