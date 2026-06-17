@@ -4,7 +4,16 @@ return {
   opts = {
     -- Refer to the configuration section below
     -- or leave empty for defaults
-    ui = { picker = "fzf-lua" },
+    mounts = {
+      ssh_options = {
+        "cache=yes",
+        "kernel_cache",
+        "compression=no",
+        "Ciphers=aes128-gcm@openssh.com",
+        "cache_timeout=115",
+      },
+      ui = { picker = "fzf-lua" },
+    }
   },
   config = function(_, opts)
     require("remote-sshfs").setup(opts)
