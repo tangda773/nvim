@@ -2,7 +2,7 @@ return {
   "LintaoAmons/scratch.nvim",
   event = "VeryLazy",
   dependencies = {
-    {"ibhagwan/fzf-lua", optional = true}, --optional: if you want to use fzf-lua to pick scratch file. Recommanded, since it will order the files by modification datetime desc. (require rg)
+    { "ibhagwan/fzf-lua", optional = true }, --optional: if you want to use fzf-lua to pick scratch file. Recommanded, since it will order the files by modification datetime desc. (require rg)
     -- {"nvim-telescope/telescope.nvim"}, -- optional: if you want to pick scratch file by telescope
     -- {"folke/snacks.nvim"}, -- optional: if you want to pick scratch file by snacks picker
     -- {"stevearc/dressing.nvim"} -- optional: to have the same UI shown in the GIF
@@ -10,20 +10,20 @@ return {
   config = function()
     require("scratch").setup({
       scratch_file_dir = vim.fn.stdpath("cache") .. "/scratch.nvim", -- where your scratch files will be put
-      window_cmd = "rightbelow vsplit", -- 'vsplit' | 'split' | 'edit' | 'tabedit' | 'rightbelow vsplit'
+      window_cmd = "rightbelow vsplit",                              -- 'vsplit' | 'split' | 'edit' | 'tabedit' | 'rightbelow vsplit'
       use_telescope = true,
       -- fzf-lua is recommanded, since it will order the files by modification datetime desc. (require rg)
       -- snacks.nvim is also supported as an alternative picker (require rg)
-      file_picker = "fzflua", -- "fzflua" | "telescope" | "snacks" | nil
+      file_picker = "fzflua",                  -- "fzflua" | "telescope" | "snacks" | nil
       filetypes = { "lua", "js", "sh", "ts" }, -- you can simply put filetype here
-      filetype_details = { -- or, you can have more control here
-        json = {}, -- empty table is fine
+      filetype_details = {                     -- or, you can have more control here
+        json = {},                             -- empty table is fine
         ["project-name.md"] = {
-          subdir = "project-name" -- group scratch files under specific sub folder
+          subdir = "project-name"              -- group scratch files under specific sub folder
         },
         ["yaml"] = {},
         go = {
-          subdir = true, -- true if each scratch file requires a new directory
+          subdir = true,     -- true if each scratch file requires a new directory
           filename = "main", -- the filename of the scratch file in the new directory
           content = { "package main", "", "func main() {", "  ", "}" },
           cursor = {
@@ -44,13 +44,7 @@ return {
           },
         },
       },
-      hooks = {
-        {
-          callback = function()
-            vim.api.nvim_buf_set_lines(0, 0, -1, false, { "hello", "world" })
-          end,
-        },
-      },
+      hooks = {},
     })
   end,
 }

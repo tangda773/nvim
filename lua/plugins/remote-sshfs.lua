@@ -4,6 +4,7 @@ return {
   opts = {
     -- Refer to the configuration section below
     -- or leave empty for defaults
+    ui = { picker = "fzf-lua" },
   },
   config = function(_, opts)
     require("remote-sshfs").setup(opts)
@@ -23,7 +24,7 @@ return {
         if c.is_connected() then
           require("remote-sshfs.api").find_files()
         else
-          require("telescope.builtin").find_files()
+          require("fzf-lua").files()
         end
       end,
       desc = "Find files"
@@ -35,7 +36,7 @@ return {
         if c.is_connected() then
           require("remote-sshfs.api").live_grep()
         else
-          require("telescope.builtin").live_grep()
+          require("fzf-lua").live_grep()
         end
       end,
       desc = "Live grep"
