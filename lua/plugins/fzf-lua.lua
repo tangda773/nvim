@@ -8,7 +8,6 @@ return{
   config = function(_, opts)
     vim.keymap.set('n','<leader><leader>',':FzfLua global<CR>',{desc='FzfLua global'})
     vim.keymap.set('n','<leader>sg',':FzfLua grep_curbuf<CR>',{desc='FzfLua grep_curbuf'})
-    vim.keymap.set('n','<leader>sl',':FzfLua live_grep_curbuf<CR>',{desc='FzfLua live_grep_curbuf'})
     require("fzf-lua").setup(opts)
   end,
   cmd = "FzfLua",
