@@ -12,8 +12,8 @@ return {
         "Ciphers=aes128-gcm@openssh.com",
         "cache_timeout=115",
       },
-      ui = { picker = "fzf-lua" },
-    }
+    },
+    ui = { picker = "fzf-lua" },
   },
   config = function(_, opts)
     require("remote-sshfs").setup(opts)
