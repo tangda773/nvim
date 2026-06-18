@@ -1,6 +1,7 @@
 export PATH=$PATH:~/.local/share/nvim/mason/bin:/usr/local/nnn
 
-source ~/.nnnrc
+# source ~/.nnnrc
+
 
 # auto install zinit to manage zsh plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -12,7 +13,7 @@ fi
 
 source "${ZINIT_HOME}/zinit.zsh"
 
-zinit ice atload'unalias zi'
+(( $+aliases[zi] )) && unalias zi
 
 eval "$(zoxide init zsh)"
 

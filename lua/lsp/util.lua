@@ -41,6 +41,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
     nmap("[e", function() vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR }) end,
       "LSP: Prev Error")
 
+    -- Diagnostics Quickfix/Loclist
+    nmap("<leader>xq", vim.diagnostic.setqflist, "Diagnostics -> QuickFix")
+    nmap("<leader>xl", vim.diagnostic.setloclist, "Buffer Diagnostics -> Loclist")
+
     -- Docs
     nmap("gh", vim.lsp.buf.hover, "LSP: Hover Docs")
     nmap("<C-k>", vim.lsp.buf.signature_help, "LSP: Signature Help")
@@ -52,9 +56,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- Workspace
     nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "LSP: Add Workspace")
     nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "LSP: Remove Workspace")
-    nmap("<leader>wl", function()
-      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, "LSP: List Workspaces")
+    nmap("<leader>wl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, "LSP: List Workspaces")
   end,
 })
 
