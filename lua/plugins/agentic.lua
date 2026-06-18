@@ -2,11 +2,15 @@
 return {
   "carlos-algms/agentic.nvim",
   opts = {
-    provider = "claude-agent-acp", -- 預設 provider
-    windows = {
-      position = "right",          -- "right" | "left" | "bottom"
-      width = "40%",
+    acp_providers = {
+      ["claude-agent-acp"] = {
+        command ="/home/kuangtatang/.local/share/pnpm/bin/claude-agent-acp"
+      }
     },
+    diff_preview = {
+      enabled = true,
+      layout = "split",
+    }
   },
   keys = {
     -- 開關聊天視窗
@@ -18,14 +22,14 @@ return {
     },
     -- 把目前檔案或選取文字加入 context
     {
-      "<C-'>",
+      "<leader>aa",
       function() require("agentic").add_selection_or_file_to_context() end,
       mode = { "n", "v" },
       desc = "Add to Agentic context"
     },
     -- 新開一個 session
     {
-      "<C-,>",
+      "<leader>an",
       function() require("agentic").new_session() end,
       mode = { "n", "v", "i" },
       desc = "New Agentic session"
@@ -39,7 +43,7 @@ return {
     },
     -- 恢復之前的 session（終端機繼續）
     {
-      "<A-i>r",
+      "<leader>ar",
       function() require("agentic").restore_session() end,
       mode = { "n", "v", "i" },
       desc = "Restore Agentic session"

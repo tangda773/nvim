@@ -8,7 +8,7 @@ return {
         { '<C-j>',      function() require('smart-splits').move_cursor_down() end,   desc = "Split: move down" },
         { '<C-k>',      function() require('smart-splits').move_cursor_up() end,     desc = "Split: move up" },
         { '<C-l>',      function() require('smart-splits').move_cursor_right() end,  desc = "Split: move right" },
-        { '<C-\\>',     function() require('smart-splits').move_cursor_previous() end, desc = "Split: move previous" },
+        -- { '<C-\\>',     function() require('smart-splits').move_cursor_previous() end, desc = "Split: move previous" },
         { '<A-h>',      function() require('smart-splits').resize_left() end,        desc = "Split: resize left" },
         { '<A-j>',      function() require('smart-splits').resize_down() end,        desc = "Split: resize down" },
         { '<A-k>',      function() require('smart-splits').resize_up() end,          desc = "Split: resize up" },
