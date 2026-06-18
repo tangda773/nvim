@@ -66,3 +66,7 @@ vim.opt.clipboard = "unnamedplus"
 
 -- 滑鼠
 vim.opt.mouse = "a"
+
+-- 禁用builtin 插件
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1

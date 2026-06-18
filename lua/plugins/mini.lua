@@ -6,17 +6,11 @@ return {
     priority = 1000,
     config   = function()
       -- ── 立即執行 ──────────────────────────────────────────
-      require("mini.icons").setup({})
-      require("mini.colors").setup({})
+      require("plugins.mini.icons")
+      require("plugins.mini.colors")
       vim.cmd([[colorscheme randomhue]])
+      require("plugins.mini.starter")
 
-      -- ── VimEnter ──────────────────────────────────────────
-      vim.api.nvim_create_autocmd("VimEnter", {
-        once = true,
-        callback = function()
-          require("plugins.mini.starter")
-        end,
-      })
 
       -- ── BufReadPost / InsertEnter ─────────────────────────
       vim.api.nvim_create_autocmd({ "InsertEnter", "BufReadPost" }, {
@@ -54,8 +48,8 @@ return {
           require("plugins.mini.extra")
           require("plugins.mini.files")
           require("plugins.mini.git")
-          require("plugins.mini.jump")
-          require("plugins.mini.jump2d")
+          -- require("plugins.mini.jump")
+          -- require("plugins.mini.jump2d")
           require("plugins.mini.misc")
           require("plugins.mini.sessions")
           require("plugins.mini.visits")
