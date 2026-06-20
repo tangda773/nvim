@@ -17,6 +17,8 @@ source "${ZINIT_HOME}/zinit.zsh"
 
 eval "$(zoxide init zsh)"
 
+# eval "$(zellij setup --generate-auto-start zsh)"
+
 # add zsh plugins
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
@@ -43,4 +45,6 @@ zinit ice as"command" from"gh-r" \
           atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
           atpull"%atclone" src"init.zsh"
 zinit light starship/starship
+
+export PATH="$HOME/.local/bin:$PATH"
 
