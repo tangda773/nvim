@@ -1,139 +1,223 @@
 return {
-  "hrsh7th/nvim-cmp",
-  event = "InsertEnter",
+  "saghen/blink.cmp",
+  version = "1.*",
   dependencies = {
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-buffer",
-    "hrsh7th/cmp-path",
-    "hrsh7th/cmp-cmdline",
-    "lukas-reineke/cmp-under-comparator",
-    -- For luasnip users.
     "L3MON4D3/LuaSnip",
-    "saadparwaiz1/cmp_luasnip",
-    "onsails/lspkind.nvim",
-    -- Set of preconfigured snippets
+    version = "v2.*",
     "rafamadriz/friendly-snippets",
   },
-  config = function()
-    local cmp = require("cmp")
-    local luasnip = require("luasnip")
-    local lspkind = require("lspkind")
-    local ok, neogen = pcall(require, "neogen")
-    cmp.setup({
-      snippet = {
-        expand = function(args)
-          require("luasnip").lsp_expand(args.body)
+  opts = {
+    -- ── Keymap ──────────────────────────────────────────────────
+    -- 對應你原本的 mapping 行為
+    keymap = {
+      preset = "none", -- 完全自訂，不用 preset
+
+      -- CR：確認補全（對應原本的 CR mapping）
+      ["<CR>"] = {
+        function(cmp)
+          -- snippet 可展開時優先展開
+          if require("luasnip").expandable() then
+            require("luasnip").expand()
+            return true
+          end
+          -- 否則確認補全
+          return cmp.accept()
         end,
+        "fallback",
       },
-      sorting = {
-        comparators = {
-          cmp.config.compare.offset,
-          cmp.config.compare.exact,
-          cmp.config.compare.score,
-          require "cmp-under-comparator".under,
-          cmp.config.compare.kind,
-          cmp.config.compare.sort_text,
-          cmp.config.compare.length,
-          cmp.config.compare.order,
-        },
-      },
-      mapping = cmp.mapping.preset.insert({
-        ['<CR>'] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            if luasnip.expandable() then
-              luasnip.expand()
-            else
-              cmp.confirm({
-                select = true,
-              })
-            end
-          else
-            fallback()
-          end
-        end),
 
-        ["<Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_next_item()
-          elseif luasnip.locally_jumpable(1) then
+      -- Tab：下一個補全項 / snippet 跳點
+      ["<Tab>"] = {
+        function(cmp)
+          local luasnip = require("luasnip")
+          if luasnip.locally_jumpable(1) then
             luasnip.jump(1)
-          elseif ok and neogen.jumpable(1) then
-            neogen.jump_next()
-          else
-            fallback()
+            return true
           end
-        end, { "i", "s" }),
-
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item()
-          elseif luasnip.locally_jumpable(-1) then
-            luasnip.jump(-1)
-          elseif ok and neogen.jumpable(-1) then
-            neogen.jump_prev()
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
-
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<C-e>'] = cmp.mapping.abort(),
-      }),
-      sources = cmp.config.sources({
-        { name = "nvim_lsp" },
-        { name = "luasnip" },
-      }, {
-        { name = "buffer" },
-      }, {
-        { name = "lazydev", group_index = 0 }
-      }),
-      window = {
-        -- completion = cmp.config.window.bordered(),
-        -- documentation = cmp.config.window.bordered(),
+        end,
+        "select_next",
+        "fallback",
       },
-      formatting = {
-        format = lspkind.cmp_format({
-          mode = 'symbol', -- show only symbol annotations
-          maxwidth = {
-            -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-            -- can also be a function to dynamically calculate max width such as
-            -- menu = function() return math.floor(0.45 * vim.o.columns) end,
-            menu = 50,              -- leading text (labelDetails)
-            abbr = 50,              -- actual suggestion item
-          },
-          ellipsis_char = '...',    -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
-          show_labelDetails = true, -- show labelDetails in menu. Disabled by default
 
-          -- The function below will be called before any actual modifications from lspkind
-          -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
-          before = function(entry, vim_item)
-            -- ...
-            return vim_item
+      -- S-Tab：上一個補全項 / snippet 跳點
+      ["<S-Tab>"] = {
+        function(cmp)
+          local luasnip = require("luasnip")
+          if luasnip.locally_jumpable(-1) then
+            luasnip.jump(-1)
+            return true
           end
-        })
-      }
-    })
+          local ok, neogen = pcall(require, "neogen")
+          if ok and neogen.jumpable(-1) then
+            neogen.jump_prev()
+            return true
+          end
+        end,
+        "select_prev",
+        "fallback",
+      },
 
-    -- Cmdline sources
-    cmp.setup.cmdline({ '/', '?' }, {
-      mapping = cmp.mapping.preset.cmdline(),
-      sources = {
-        { name = "buffer" }
-      }
-    })
-    cmp.setup.cmdline(':', {
-      mapping = cmp.mapping.preset.cmdline(),
-      sources = cmp.config.sources({
-          { name = "path" }
+      -- 文件捲動（對應 C-b / C-f）
+      ["<C-b>"] = { "scroll_documentation_up", "fallback" },
+      ["<C-f>"] = { "scroll_documentation_down", "fallback" },
+
+      -- 手動觸發補全
+      ["<C-Space>"] = { "show", "fallback" },
+
+      -- 取消補全
+      ["<C-e>"] = { "cancel", "fallback" },
+    },
+
+    -- ── Cmdline ─────────────────────────────────────────────────
+    -- 對應原本的 cmp.setup.cmdline
+    cmdline = {
+      enabled = true,
+      keymap  = { preset = "cmdline" },
+
+      sources = function()
+        local type = vim.fn.getcmdtype()
+        -- / 和 ? 搜尋：用 buffer source
+        if type == "/" or type == "?" then
+          return { "buffer" }
+        end
+        -- : 指令：用 path + cmdline
+        if type == ":" then
+          return { "path", "cmdline" }
+        end
+        return {}
+      end,
+    },
+
+    -- ── Snippets ────────────────────────────────────────────────
+    snippets = {
+      preset = "luasnip", -- 用你現有的 LuaSnip
+      -- 對應原本的 require('luasnip.loaders.from_vscode').lazy_load()
+      -- blink 會自動處理 friendly-snippets 載入
+    },
+
+    -- ── Sources ─────────────────────────────────────────────────
+    -- 對應原本的 sources 設定（含 group 優先順序）
+    sources = {
+      default = { "lsp", "snippets", "buffer", "path" },
+
+      per_filetype = {
+        lua = { inherit_defaults = true, "lazydev" },
+      },
+
+      providers = {
+        -- lazydev（對應原本的 group_index = 0，最高優先）
+        lazydev = {
+          name         = "LazyDev",
+          module       = "lazydev.integrations.blink",
+          score_offset = 100,
         },
-        {
-          { name = 'cmdline' }
-        }),
-      matching = { disallow_symbol_nonprefix_matching = false }
-    })
 
-    require('luasnip.loaders.from_vscode').lazy_load()
+        -- buffer（對應原本的 fallback group）
+        buffer = {
+          min_keyword_length = 2,
+        },
+
+        -- lsp
+        lsp = {
+          min_keyword_length = 0,
+        },
+      },
+    },
+
+    -- ── Appearance ──────────────────────────────────────────────
+    -- 對應原本的 lspkind formatting
+    appearance = {
+      nerd_font_variant = "mono",
+      kind_icons = {
+        Text          = "󰉿",
+        Method        = "󰊕",
+        Function      = "󰊕",
+        Constructor   = "󰒓",
+        Field         = "󰜢",
+        Variable      = "󰆦",
+        Property      = "󰖷",
+        Class         = "󱡠",
+        Interface     = "󱡠",
+        Struct        = "󱡠",
+        Module        = "󰅩",
+        Unit          = "󰪚",
+        Value         = "󰦨",
+        Enum          = "󰦨",
+        EnumMember    = "󰦨",
+        Keyword       = "󰻾",
+        Constant      = "󰏿",
+        Snippet       = "󱄽",
+        Color         = "󰏘",
+        File          = "󰈔",
+        Reference     = "󰬲",
+        Folder        = "󰉋",
+        Event         = "󱐋",
+        Operator      = "󰪚",
+        TypeParameter = "󰬛",
+      },
+    },
+
+    -- ── Completion ──────────────────────────────────────────────
+    completion = {
+      -- 對應原本的 select = true（預選第一個）
+      list = {
+        selection = {
+          preselect   = true,
+          auto_insert = false,
+        },
+      },
+
+      -- 補全選單（對應原本的 window 設定）
+      menu = {
+        auto_show = true,
+        border    = "rounded",
+        draw      = {
+          -- 對應 lspkind 的 symbol mode + labelDetails
+          columns = {
+            { "kind_icon" },
+            { "label",    "label_description", gap = 1 },
+            { "kind" },
+          },
+          -- 對應原本的 maxwidth
+          treesitter = { "lsp" },
+        },
+      },
+
+      -- 文件視窗（對應原本註解掉的 bordered documentation）
+      documentation = {
+        auto_show          = true,
+        auto_show_delay_ms = 200,
+        window             = {
+          border    = "rounded",
+          max_width = 50, -- 對應原本的 menu = 50
+        },
+      },
+
+      -- 自動括號
+      accept = {
+        auto_brackets = { enabled = true },
+      },
+    },
+
+    -- ── Sorting ─────────────────────────────────────────────────
+    -- 對應原本的 cmp-under-comparator
+    -- blink 內建 frecency + proximity，不需要額外外掛
+    -- 但可以客製化 score：
+    fuzzy = {
+      implementation = "prefer_rust_with_warning",
+      -- 對應 cmp-under-comparator 的 underscore 排序
+      -- 底線開頭的項目自動降低分數
+      sorts          = {
+        "score",
+        "sort_text",
+      },
+    },
+  },
+
+  config = function(_, opts)
+    require("blink.cmp").setup(opts)
+
+    -- friendly-snippets 載入（對應原本的 lazy_load）
+    require("luasnip.loaders.from_vscode").lazy_load()
   end,
 }

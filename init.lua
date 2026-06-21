@@ -3,19 +3,13 @@ vim.g.maplocalleader = "\\"
 
 vim.loader.enable()
 
--- if vim.env.PROF then
---   -- example for lazy.nvim
---   -- change this to the correct path for your plugin manager
---   local snacks = vim.fn.stdpath("data") .. "/lazy/snacks.nvim"
---   vim.opt.rtp:append(snacks)
---   require("snacks.profiler").startup({
---     startup = {
---       event = "VimEnter", -- stop profiler on this event. Defaults to `VimEnter`
---       -- event = "UIEnter",
---       -- event = "VeryLazy",
---     },
---   })
--- end
 require("basic")
 require("config.lazy")
 require("keybinding")
+
+
+-- ui2（0.12 新功能，cmdline / messages 重寫）
+vim.o.messagesopt = "hit-enter,history:500"
+
+-- 所有 float 統一加邊框
+vim.o.winborder = "rounded"

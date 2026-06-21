@@ -3,8 +3,7 @@ local M = {}
 local _capabilities = nil
 local function get_capabilities()
   if not _capabilities then
-    local c = vim.lsp.protocol.make_client_capabilities()
-    _capabilities = require("cmp_nvim_lsp").default_capabilities(c)
+    _capabilities = require('blink.cmp').get_lsp_capabilities({})
     _capabilities.textDocument.foldingRange = {
       dynamicRegistration = false,
       lineFoldingOnly = true,
@@ -34,8 +33,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     nmap("gr", vim.lsp.buf.references, "LSP: Goto References")
 
     -- Diagnostic jump
-    nmap("gn", function() vim.diagnostic.jump({ count = 1, float = true }) end, "LSP: Next Diagnostic")
-    nmap("gp", function() vim.diagnostic.jump({ count = -1, float = true }) end, "LSP: Prev Diagnostic")
+    nmap("gn", function() vim.diagnostic.jump({ count = 1 }) end, "LSP: Next Diagnostic")
+    nmap("gp", function() vim.diagnostic.jump({ count = -1 }) end, "LSP: Prev Diagnostic")
     nmap("]e", function() vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR }) end,
       "LSP: Next Error")
     nmap("[e", function() vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR }) end,
@@ -51,8 +50,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- Refactor
     nmap("<leader>rn", vim.lsp.buf.rename, "LSP: Rename")
-    nmap("<leader>ca", vim.lsp.buf.code_action, "LSP: Code Action")
 
+    nmap("<leader>ca", vim.lsp.buf.code_action, "LSP: Code Action")
     -- Workspace
     nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "LSP: Add Workspace")
     nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "LSP: Remove Workspace")
@@ -62,14 +61,19 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 M.setup = function()
   vim.diagnostic.config({
-    signs = {
-      text = {
-        [vim.diagnostic.severity.ERROR] = "",
-        [vim.diagnostic.severity.WARN]  = "",
-        [vim.diagnostic.severity.HINT]  = "",
-        [vim.diagnostic.severity.INFO]  = "",
-      },
+    -- 平時：signs + underline 提示有問題
+    signs            = { severity = { min = vim.diagnostic.severity.WARN } },
+    underline        = { severity = { min = vim.diagnostic.severity.WARN } },
+
+    -- 游標行：virtual_lines 顯示完整訊息
+    virtual_lines    = {
+      current_line = true,
+      severity     = { min = vim.diagnostic.severity.WARN },
     },
+    -- 關掉 virtual_text，避免和 virtual_lines 重複
+    virtual_text     = false,
+    severity_sort    = true,
+    update_in_insert = false,
   })
 
   vim.lsp.config("*", {
