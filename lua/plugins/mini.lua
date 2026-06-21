@@ -57,27 +57,4 @@ return {
       })
     end,
   },
-
-  -- ── treesitter 整合（獨立 repo，維持不變）────────────────────────
-  {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-    event        = "BufReadPost",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "echasnovski/mini.nvim",
-    },
-    config       = function()
-      local spec_treesitter = require("mini.ai").gen_spec.treesitter
-      require("mini.ai").setup({
-        custom_textobjects = {
-          c = spec_treesitter({ a = "@class.outer", i = "@class.inner" }),
-          F = spec_treesitter({ a = "@function.outer", i = "@function.inner" }),
-          o = spec_treesitter({
-            a = { "@loop.outer", "@conditional.outer" },
-            i = { "@loop.inner", "@conditional.inner" },
-          }),
-        },
-      })
-    end,
-  },
 }
