@@ -21,7 +21,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 
     -- Format / Diagnostics
-    nmap("gf", vim.lsp.buf.format, "LSP: Format")
+    -- conform.nvim 替代為 formatter
+    -- nmap("gf", vim.lsp.buf.format, "LSP: Format")
     nmap("gq", vim.diagnostic.setloclist, "LSP: Diagnostics List")
     nmap("<leader>e", vim.diagnostic.open_float, "LSP: Line Diagnostics")
 
