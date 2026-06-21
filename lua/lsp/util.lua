@@ -22,9 +22,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- Format / Diagnostics
     -- conform.nvim 替代為 formatter
-    -- nmap("gf", vim.lsp.buf.format, "LSP: Format")
-    nmap("gq", vim.diagnostic.setloclist, "LSP: Diagnostics List")
-    nmap("<leader>e", vim.diagnostic.open_float, "LSP: Line Diagnostics")
+    -- nmap("<leader>=", vim.lsp.buf.format, "LSP: Format")
+    nmap("<leader>xe", vim.diagnostic.open_float, "LSP: Line Diagnostics")
 
     -- Navigation
     nmap("gd", vim.lsp.buf.definition, "LSP: Goto Definition")
@@ -34,20 +33,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
     nmap("gr", vim.lsp.buf.references, "LSP: Goto References")
 
     -- Diagnostic jump
-    nmap("gn", function() vim.diagnostic.jump({ count = 1 }) end, "LSP: Next Diagnostic")
-    nmap("gp", function() vim.diagnostic.jump({ count = -1 }) end, "LSP: Prev Diagnostic")
+    nmap("]d", function() vim.diagnostic.jump({ count = 1 }) end, "LSP: Next Diagnostic")
+    nmap("[d", function() vim.diagnostic.jump({ count = -1 }) end, "LSP: Prev Diagnostic")
     nmap("]e", function() vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR }) end,
       "LSP: Next Error")
     nmap("[e", function() vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR }) end,
       "LSP: Prev Error")
 
     -- Diagnostics Quickfix/Loclist
-    nmap("<leader>xq", vim.diagnostic.setqflist, "Diagnostics -> QuickFix")
-    nmap("<leader>xl", vim.diagnostic.setloclist, "Buffer Diagnostics -> Loclist")
+    nmap("<leader>xq", vim.diagnostic.setqflist, "LSP: Diagnostics -> Quickfix")
+    nmap("<leader>xl", vim.diagnostic.setloclist, "LSP: Diagnostics -> Loclist")
 
     -- Docs
     nmap("gh", vim.lsp.buf.hover, "LSP: Hover Docs")
-    nmap("<C-k>", vim.lsp.buf.signature_help, "LSP: Signature Help")
+    nmap("gs", vim.lsp.buf.signature_help, "LSP: Signature Help")
 
     -- Refactor
     nmap("<leader>rn", vim.lsp.buf.rename, "LSP: Rename")

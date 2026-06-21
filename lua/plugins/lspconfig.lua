@@ -8,12 +8,20 @@ return {
     "mason-org/mason-lspconfig.nvim",
     event        = { "BufReadPre", "BufNewFile" },
     dependencies = { "mason-org/mason.nvim" },
-    opts = {
+    opts         = {
       ensure_installed = { "clangd", "lua_ls" },
     },
-    config = function(_, opts)
-      require("mason-lspconfig").setup(opts)
-      -- LSP 設定在這裡觸發，不需要獨立的 lsp-setup 外掛
+  },
+  -- LSP 主配置，只有在打開檔案時才載入
+  {
+    "neovim/nvim-lspconfig",
+    name = "lsp-setup",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      { "mason-org/mason-lspconfig.nvim" },
+      { "saghen/blink.cmp" },
+    },
+    config = function()
       require("lsp.util").setup()
     end,
   },

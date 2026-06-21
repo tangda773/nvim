@@ -1,54 +1,54 @@
 -- lua/plugins/conform.lua
 return {
   "stevearc/conform.nvim",
-  event = { "BufWritePre" },
-  cmd   = { "ConformInfo" },
-  opts  = {
+  event  = { "BufWritePre" },
+  cmd    = { "ConformInfo" },
+  opts   = {
     -- ── Formatters ──────────────────────────────────────────
     formatters_by_ft = {
       -- Lua
-      lua = { "stylua" },
+      lua             = { "stylua" },
 
       -- Rust（rustfmt 通常透過 rust-analyzer 處理，但也可以獨立）
-      rust = { "rustfmt" },
+      rust            = { "rustfmt" },
 
       -- C / C++
-      c   = { "clang_format" },
-      cpp = { "clang_format" },
+      c               = { "clang_format" },
+      cpp             = { "clang_format" },
 
       -- Python
-      python = { "ruff_format", "ruff_organize_imports" },
+      python          = { "ruff_format", "ruff_organize_imports" },
 
       -- JavaScript / TypeScript
-      javascript       = { "prettier" },
-      typescript       = { "prettier" },
-      javascriptreact  = { "prettier" },
-      typescriptreact  = { "prettier" },
+      javascript      = { "prettier" },
+      typescript      = { "prettier" },
+      javascriptreact = { "prettier" },
+      typescriptreact = { "prettier" },
 
       -- Web
-      html = { "prettier" },
-      css  = { "prettier" },
-      json = { "prettier" },
-      yaml = { "prettier" },
+      html            = { "prettier" },
+      css             = { "prettier" },
+      json            = { "prettier" },
+      yaml            = { "prettier" },
 
       -- Markdown
-      markdown = { "prettier" },
+      markdown        = { "prettier" },
 
       -- Shell
-      sh   = { "shfmt" },
-      bash = { "shfmt" },
+      sh              = { "shfmt" },
+      bash            = { "shfmt" },
 
       -- TOML（Rust 專案常用）
-      toml = { "taplo" },
+      toml            = { "taplo" },
 
       -- 任何有 LSP formatter 的 fallback
-      ["*"] = { "trim_whitespace" },
+      ["*"]           = { "trim_whitespace" },
     },
 
     -- ── 存檔時自動格式化 ────────────────────────────────────
     format_on_save = {
       timeout_ms = 500,
-      lsp_format = "prefer",  -- LSP 優先
+      lsp_format = "prefer", -- LSP 優先
     },
 
     -- ── Formatter 客製化 ────────────────────────────────────
@@ -57,7 +57,7 @@ return {
         prepend_args = { "--indent-type", "Spaces", "--indent-width", "2" },
       },
       shfmt = {
-        prepend_args = { "-i", "2" },  -- 2 space indent
+        prepend_args = { "-i", "2" }, -- 2 space indent
       },
     },
   },
@@ -65,7 +65,7 @@ return {
   config = function(_, opts)
     require("conform").setup(opts)
 
-    vim.keymap.set({ "n", "v" }, "gf", function()
+    vim.keymap.set({ "n", "v" }, "<leader>=", function()
       require("conform").format({
         async      = true,
         lsp_format = "fallback",
