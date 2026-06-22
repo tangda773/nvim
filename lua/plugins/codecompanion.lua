@@ -24,12 +24,12 @@ return {
     }
   },
   keys = {
-    -- Chat 模式（ACP）
-    { "<leader>ac", "<cmd>CodeCompanionChat<cr>", desc = "Chat（Claude Code ACP）" },
-    { "<leader>ap", "<cmd>CodeCompanionActions<cr>", desc = "Action Palette" },
+    -- -- Chat 模式（need HTTP Provider）
+    -- { "<leader>ac", "<cmd>CodeCompanionChat<cr>", desc = "Chat" },
+    -- { "<leader>ap", "<cmd>CodeCompanionActions<cr>", desc = "Action Palette" },
 
     -- CLI 模式
-    { "<leader>cl", "<cmd>CodeCompanionCLI<cr>", desc = "Claude Code CLI" },
+    { "<leader>cl", "<cmd>CodeCompanionCLI<cr>",     desc = "Claude Code CLI" },
     { "<leader>cp", "<cmd>CodeCompanionCLI Ask<cr>", desc = "Claude Code CLI(Ask)" }
   }
 }
