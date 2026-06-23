@@ -1,66 +1,112 @@
--- lua/plugins/orgmode.lua
+-- ~/.config/nvim/lua/plugins/orgmode.lua
 return {
   "nvim-orgmode/orgmode",
-  event  = "VeryLazy",
+  event = "VeryLazy",
   config = function()
-    require("orgmode").setup({
-      -- ── 基本路徑 ────────────────────────────
-      org_agenda_files  = {
-        "~/notes/**/*.org",
-        "~/notes/*.org",
-      },
-      org_default_notes_file = "~/notes/inbox.org",
+    local ok, settings = pcall(require, "config.orgmode-settings")
+    if not ok then
+      vim.notify("orgmode-settings.lua loading failed: " .. settings, vim.log.levels.ERROR)
+      return
+    end
+    require("orgmode").setup(settings)
 
-      -- ── TODO states ─────────────────────────
-      org_todo_keywords = {
-        "TODO(t)",
-        "NEXT(n)",
-        "WAIT(w)",
-        "|",
-        "DONE(d)",
-        "CANCELLED(c)",
-      },
+    -- lua/config/keymaps-org.lua
+    local map = vim.keymap.set
+    local opts = { noremap = true, silent = true }
 
-      -- ── Tags ────────────────────────────────
-      org_tags_column = -80,
+    -- Org 全域核心：Agenda / Capture / Inbox
+    map("n", "<leader>oa", function()
+      require("orgmode").action("agenda.prompt")
+    end, vim.tbl_extend("force", opts, { desc = "Org: Agenda prompt" }))
 
-      -- ── Capture templates ───────────────────
-      org_capture_templates = {
-        t = {
-          description = "Todo",
-          template    = "* TODO %?\n  %u",
-          target      = "~/notes/inbox.org",
-        },
-        n = {
-          description = "Note",
-          template    = "* %?\n  %u",
-          target      = "~/notes/inbox.org",
-        },
-        j = {
-          description = "Journal",
-          template    = "* %<%Y-%m-%d %a>\n** %<%H:%M> %?",
-          target      = "~/notes/journal/%<%Y-%m>.org",
-          datetree    = { tree_type = "month" },
-        },
-        w = {
-          description = "Work Todo",
-          template    = "* TODO %? :work:\n  DEADLINE: %^{Deadline}t",
-          target      = "~/notes/work/inbox.org",
-        },
-        c = {
-          description = "Code snippet",
-          template    = "* %^{Title} :code:\n#+begin_src %^{Language}\n%?\n#+end_src\n  %u",
-          target      = "~/notes/snippets.org",
-        },
-      },
+    map("n", "<leader>oc", function()
+      require("orgmode").action("capture.prompt")
+    end, vim.tbl_extend("force", opts, { desc = "Org: Capture prompt" }))
 
-      -- ── UI ──────────────────────────────────
-      org_startup_folded     = "showeverything",
-      org_ellipsis           = " ▼",
-      org_hide_leading_stars = true,
+    map("n", "<leader>oi", function()
+      vim.cmd.edit(vim.fn.expand("~/org/inbox.org"))
+    end, vim.tbl_extend("force", opts, { desc = "Org: Open inbox.org" }))
 
-      -- ── 日期格式 ────────────────────────────
-      org_time_stamp_rounding_minutes = 5,
+    local api = vim.api
+
+    local org_group = api.nvim_create_augroup("OrgBufferSetup", { clear = true })
+
+    api.nvim_create_autocmd("FileType", {
+      group = org_group,
+      pattern = "org",
+      callback = function(ev)
+        -- 視覺 / 顯示
+        vim.opt_local.conceallevel = 2
+        vim.opt_local.concealcursor = "nc"
+        vim.opt_local.wrap = true
+        vim.opt_local.linebreak = true
+        vim.opt_local.spell = false -- 如果不想被拼字檢查打擾
+        -- vim.opt_local.spelllang = "en_us"
+
+        vim.opt_local.breakindent = true
+        vim.opt_local.formatoptions:remove("c")
+        vim.opt_local.formatoptions:remove("r")
+        vim.opt_local.formatoptions:remove("o")
+
+        -- Org buffer 專用 LocalLeader keymap
+        local function bmap(mode, lhs, rhs, desc)
+          vim.keymap.set(mode, lhs, rhs, {
+            noremap = true,
+            silent = true,
+            buffer = ev.buf,
+            desc = desc,
+          })
+        end
+
+        -- TODO 狀態操作
+        bmap("n", "<localleader>ot", function()
+          require("orgmode").action("todo.set_todo")
+        end, "Org: Cycle TODO")
+
+        bmap("n", "<localleader>oT", function()
+          require("orgmode").action("todo.set_todo", { pop = true })
+        end, "Org: Choose TODO")
+
+        -- 日期 / 時間
+        bmap("n", "<localleader>od", function()
+          require("orgmode").action("clock.org_deadline")
+        end, "Org: Set DEADLINE")
+
+        bmap("n", "<localleader>os", function()
+          require("orgmode").action("clock.org_schedule")
+        end, "Org: Set SCHEDULED")
+
+        bmap("n", "<localleader>oi", function()
+          require("orgmode").action("org.insert_timestamp")
+        end, "Org: Insert timestamp")
+
+        -- Link / tags
+        bmap("n", "<localleader>ol", function()
+          require("orgmode").action("org.insert_link")
+        end, "Org: Insert link")
+
+        bmap("n", "<localleader>oq", function()
+          require("orgmode").action("org.set_tags")
+        end, "Org: Set tags")
+
+        -- Narrow / Widen
+        bmap("n", "<localleader>on", function()
+          require("orgmode").action("org.narrow")
+        end, "Org: Narrow subtree")
+
+        bmap("n", "<localleader>oN", function()
+          require("orgmode").action("org.widen")
+        end, "Org: Widen")
+
+        -- -- src block 操作
+        -- bmap("n", "<localleader>oE", function()
+        --   require("orgmode").action("org.edit_special")
+        -- end, "Org: Edit src block")
+
+        -- bmap("n", "<localleader>oB", function()
+        --   require("orgmode").action("babel.execute_block")
+        -- end, "Org: Execute src block")
+      end,
     })
   end,
 }
