@@ -7,7 +7,10 @@ return {
   ---@type render.md.UserConfig
   opts = {
     win_options = {
-      conceallevel = { default = 0, rendered = 2 },
+      conceallevel = { default = vim.opt.conceallevel, rendered = 3 },
+    },
+    code = {
+      disable = { "mermaid" },
     }
   },
   ft = "markdown",

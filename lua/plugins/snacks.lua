@@ -2,32 +2,32 @@ return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy     = false,
-  opts = {
+  opts     = {
     -- ── 填補你目前的空缺 ──────────────────────
-    input    = { enabled = true },   -- vim.ui.input
-    notifier = { enabled = true, timeout=3000},   -- nvim-notify
-    scratch  = { enabled = true },   --  scratch.nvim
-    words    = { enabled = true },   -- 游標單字高亮
+    input        = { enabled = true },                 -- vim.ui.input
+    notifier     = { enabled = true, timeout = 3000 }, -- nvim-notify
+    scratch      = { enabled = true },                 --  scratch.nvim
+    words        = { enabled = true },                 -- 游標單字高亮
 
     -- ── 其他全部關掉 ──────────────────────────
-    bigfile  = { enabled = false },   -- faster.nvim
-    animate      = { enabled = false },  -- mini.animate
-    dashboard    = { enabled = false },  -- mini.starter
-    explorer     = { enabled = false },  -- mini.files
-    indent       = { enabled = false },  -- mini.indentscope
-    picker       = { enabled = false },  -- fzf-lua
-    quickfile    = { enabled = false },  -- faster.nvim
-    scope        = { enabled = false },  -- mini.indentscope
-    scroll       = { enabled = false },  -- mini.animate
-    statuscolumn = { enabled = false },  -- statuscol.nvim
-    terminal     = { enabled = false },  -- toggleterm
-    lazygit      = { enabled = false },  -- neogit
-    gitbrowse    = { enabled = false },  -- neogit
+    bigfile      = { enabled = false }, -- faster.nvim
+    animate      = { enabled = false }, -- mini.animate
+    dashboard    = { enabled = false }, -- mini.starter
+    explorer     = { enabled = false }, -- mini.files
+    indent       = { enabled = false }, -- mini.indentscope
+    picker       = { enabled = false }, -- fzf-lua
+    quickfile    = { enabled = false }, -- faster.nvim
+    scope        = { enabled = false }, -- mini.indentscope
+    scroll       = { enabled = false }, -- mini.animate
+    statuscolumn = { enabled = false }, -- statuscol.nvim
+    terminal     = { enabled = false }, -- toggleterm
+    lazygit      = { enabled = false }, -- neogit
+    gitbrowse    = { enabled = false }, -- neogit
     zen          = { enabled = false },
     dim          = { enabled = false },
   },
   -- 在 keys 或 init 裡加：
-  init = function()
+  init     = function()
     -- LSP progress 整合
     vim.api.nvim_create_autocmd("LspProgress", {
       callback = function(ev)
@@ -59,21 +59,32 @@ return {
         Snacks.notify.info(text, {
           id      = "lsp_progress_" .. ev.data.client_id,
           title   = "LSP",
-          timeout = false,  -- 不自動消失，等 end event
+          timeout = false, -- 不自動消失，等 end event
         })
       end,
     })
   end,
-  keys = {
+  config   = function(_, opts)
+    opts.image = {
+      enabled = true,
+      resolve = function(path, src)
+        if require("obsidian.api").path_is_note(path) then
+          return require("obsidian.api").resolve_image_path(src)
+        end
+      end,
+    }
+    require("snacks").setup(opts)
+  end,
+  keys     = {
     -- words 跳轉
-    { "]]", function() Snacks.words.jump(1)  end, desc = "Next word occurrence" },
-    { "[[", function() Snacks.words.jump(-1) end, desc = "Prev word occurrence" },
+    { "]]",         function() Snacks.words.jump(1) end,           desc = "Next word occurrence" },
+    { "[[",         function() Snacks.words.jump(-1) end,          desc = "Prev word occurrence" },
 
     -- scratch
-    { "<leader>.", function() Snacks.scratch()        end, desc = "Toggle scratch" },
-    { "<leader>fs", function() Snacks.scratch.select() end, desc = "Select scratch" },
+    { "<leader>.",  function() Snacks.scratch() end,               desc = "Toggle scratch" },
+    { "<leader>fs", function() Snacks.scratch.select() end,        desc = "Select scratch" },
 
     -- notifier 歷史
-    { "<leader>fn", function() Snacks.notifier.show_history() end, desc = "Notify history"}
+    { "<leader>fn", function() Snacks.notifier.show_history() end, desc = "Notify history" }
   }
 }

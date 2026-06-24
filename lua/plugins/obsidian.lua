@@ -28,5 +28,11 @@ return {
       create_new = true,
       order = { " ", "x", "-" },
     },
+    attachments = {
+      folder = "assets/imgs", -- 預設，相對於 vault root
+      -- folder = "/",         -- vault root
+      -- folder = "./",        -- 同目前檔案的資料夾
+      -- folder = "./assets",  -- 目前資料夾的子目錄
+    },
   },
 }
