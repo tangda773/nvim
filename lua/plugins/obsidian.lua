@@ -21,15 +21,11 @@ return {
       enabled = false,
     },
     ui = {
-      enable = true,
-      checkboxes = {
-        [" "] = { char = "☐", hl_group = "ObsidianTodo" },
-        ["x"] = { char = "✔", hl_group = "ObsidianDone" },
-        ["-"] = { char = "–", hl_group = "ObsidianCancelled" },
-      },
+      enable = false,
     },
-
     checkbox = {
+      enable = true,
+      create_new = true,
       order = { " ", "x", "-" },
     },
   },
