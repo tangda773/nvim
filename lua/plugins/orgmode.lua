@@ -15,17 +15,12 @@ return {
     local opts = { noremap = true, silent = true }
 
     -- Org 全域核心：Agenda / Capture / Inbox
-    map("n", "<leader>oa", function()
-      require("orgmode").action("agenda.prompt")
-    end, vim.tbl_extend("force", opts, { desc = "Org: Agenda prompt" }))
+    map("n", "<leader>oa", "<cmd>Org agenda<cr>", vim.tbl_extend("force", opts, { desc = "Org: Agenda prompt" }))
 
-    map("n", "<leader>oc", function()
-      require("orgmode").action("capture.prompt")
-    end, vim.tbl_extend("force", opts, { desc = "Org: Capture prompt" }))
+    map("n", "<leader>oc", "<cmd>Org capture<cr>", vim.tbl_extend("force", opts, { desc = "Org: Capture prompt" }))
 
-    map("n", "<leader>oi", function()
-      vim.cmd.edit(vim.fn.expand("~/org/inbox.org"))
-    end, vim.tbl_extend("force", opts, { desc = "Org: Open inbox.org" }))
+    map("n", "<leader>oi", function() vim.cmd.edit(vim.fn.expand("~/org/inbox.org")) end,
+      vim.tbl_extend("force", opts, { desc = "Org: Open inbox.org" }))
 
     local api = vim.api
 
