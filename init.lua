@@ -15,6 +15,9 @@ require("keybinding")
 vim.o.winborder = "rounded"
 
 -- 遵守 gofmt/gopls 的 Tab 風格，但在畫面上看起來像 2-space
+
+local go_group = vim.api.nvim_create_augroup("GoIndent", { clear = true })
+
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "go",
   callback = function()
