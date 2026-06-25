@@ -12,8 +12,9 @@ local function get_capabilities()
   return _capabilities
 end
 
+local lsp_keymaps_group = vim.api.nvim_create_augroup("LspKeymaps", { clear = true })
 vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("lsp_keymaps", { clear = true }),
+  group = lsp_keymaps_group,
   callback = function(ev)
     local bufnr = ev.buf
     local function nmap(keys, func, desc)
