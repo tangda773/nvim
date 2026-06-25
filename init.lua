@@ -13,3 +13,15 @@ require("keybinding")
 
 -- 所有 float 統一加邊框
 vim.o.winborder = "rounded"
+
+-- 遵守 gofmt/gopls 的 Tab 風格，但在畫面上看起來像 2-space
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "go",
+  callback = function()
+    vim.opt_local.tabstop = 2
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.softtabstop = 2
+    vim.opt_local.expandtab = false -- 正常用 Tab
+    vim.opt_local.list = false      -- 不顯示 ^I
+  end,
+})
