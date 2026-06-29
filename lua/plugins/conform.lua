@@ -41,16 +41,20 @@ return {
       -- TOML（Rust 專案常用）
       toml            = { "taplo" },
 
+      -- Golang
+      go              = { "goimports", "gofumpt" },
+
       -- 任何有 LSP formatter 的 fallback
       ["*"]           = { "trim_whitespace" },
     },
 
     -- ── 存檔時自動格式化 ────────────────────────────────────
-    format_on_save = {
-      timeout_ms = 500,
-      lsp_format = "prefer", -- LSP 優先
-    },
-
+    format_on_save = function(bufnr)
+      if vim.bo[bufnr].filetype == "go" then
+        return { timeout_ms = 3000, lsp_format = "never" }
+      end
+      return { timeout_ms = 500, lsp_format = "prefer" }
+    end,
     -- ── Formatter 客製化 ────────────────────────────────────
     formatters = {
       stylua = {

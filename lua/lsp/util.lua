@@ -17,6 +17,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
   group = lsp_keymaps_group,
   callback = function(ev)
     local bufnr = ev.buf
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
     local function nmap(keys, func, desc)
       vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
     end
@@ -57,6 +58,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
     nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "LSP: Add Workspace")
     nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "LSP: Remove Workspace")
     nmap("<leader>wl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, "LSP: List Workspaces")
+
+    if client and client:supports_method("textDocument/inlayHint") then
+      vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+    end
   end,
 })
 
@@ -89,6 +94,7 @@ M.setup = function()
     -- "pyright",
     -- "bashls",
     -- "rust_analyzer",  -- 注意：rust 用 rustaceanvim 就不要加這行
+    "gopls",
   })
 end
 
