@@ -34,11 +34,9 @@ zinit light Aloxaf/fzf-tab
 zinit ice depth=1
 zinit light jeffreytse/zsh-vi-mode
 
-# enable zsh-history-substring-search
-plugins=(zsh-history-substring-search)
 # bind zsh-history-substring-search keybinding
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
+bindkey "${terminfo[kcuu1]}" history-substring-search-up
+bindkey "${terminfo[kcud1]}" history-substring-search-down
 
 # Load starship theme
 zinit ice as"command" from"gh-r" \
