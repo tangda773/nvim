@@ -1,0 +1,431 @@
+2025-03-18 02:28:23: App: Profile directory: C:/Users/tangd/.config/joplin-desktop
+2025-03-18 02:28:23: App: Root profile directory: C:/Users/tangd/.config/joplin-desktop
+2025-03-18 02:28:23: Database was open successfully
+2025-03-18 02:28:23: Checking for database schema update...
+2025-03-18 02:28:23: Current database version <null>
+2025-03-18 02:28:23: Upgrading database from version 0
+2025-03-18 02:28:23: Converting database to version 1
+2025-03-18 02:28:23: Converting database to version 2
+2025-03-18 02:28:23: Converting database to version 3
+2025-03-18 02:28:23: Converting database to version 4
+2025-03-18 02:28:23: Converting database to version 5
+2025-03-18 02:28:23: Converting database to version 6
+2025-03-18 02:28:23: Converting database to version 7
+2025-03-18 02:28:23: Converting database to version 8
+2025-03-18 02:28:23: Converting database to version 9
+2025-03-18 02:28:23: Converting database to version 10
+2025-03-18 02:28:23: Converting database to version 11
+2025-03-18 02:28:23: Converting database to version 12
+2025-03-18 02:28:23: Converting database to version 13
+2025-03-18 02:28:23: Converting database to version 14
+2025-03-18 02:28:23: Converting database to version 15
+2025-03-18 02:28:23: Converting database to version 16
+2025-03-18 02:28:23: Converting database to version 17
+2025-03-18 02:28:23: Converting database to version 18
+2025-03-18 02:28:23: Converting database to version 19
+2025-03-18 02:28:23: Converting database to version 20
+2025-03-18 02:28:23: Converting database to version 21
+2025-03-18 02:28:23: Converting database to version 22
+2025-03-18 02:28:23: Converting database to version 23
+2025-03-18 02:28:23: Converting database to version 24
+2025-03-18 02:28:23: Converting database to version 25
+2025-03-18 02:28:23: Converting database to version 26
+2025-03-18 02:28:23: Converting database to version 27
+2025-03-18 02:28:23: Converting database to version 28
+2025-03-18 02:28:23: Converting database to version 29
+2025-03-18 02:28:23: Converting database to version 30
+2025-03-18 02:28:23: Converting database to version 31
+2025-03-18 02:28:23: Converting database to version 32
+2025-03-18 02:28:23: Converting database to version 33
+2025-03-18 02:28:23: Converting database to version 34
+2025-03-18 02:28:23: Migration failed with fallback and will not be repeated - saving version number
+2025-03-18 02:28:23: Converting database to version 35
+2025-03-18 02:28:23: Converting database to version 36
+2025-03-18 02:28:23: Converting database to version 37
+2025-03-18 02:28:23: Converting database to version 38
+2025-03-18 02:28:23: Converting database to version 39
+2025-03-18 02:28:23: Converting database to version 40
+2025-03-18 02:28:23: Converting database to version 41
+2025-03-18 02:28:23: Converting database to version 42
+2025-03-18 02:28:23: Converting database to version 43
+2025-03-18 02:28:23: Converting database to version 44
+2025-03-18 02:28:23: Converting database to version 45
+2025-03-18 02:28:23: Converting database to version 46
+2025-03-18 02:28:23: Converting database to version 47
+2025-03-18 02:28:23: New version: 47. Previously recorded version: 0
+2025-03-18 02:28:23: Initializing tables...
+2025-03-18 02:28:23: KeychainService: checking if keychain supported
+2025-03-18 02:28:23: KeychainService: tried to set and get password. Result was: mytest
+2025-03-18 02:28:23: e2ee/utils: Master password is not set - trying to get it from the active master key...
+2025-03-18 02:28:23: handleSyncStartupOperation: Processing operation: 0
+2025-03-18 02:28:23: App: Client ID: 51c8198fe29547208d7ae572072d52a5
+2025-03-18 02:28:23: First start: detected locale as ja_JP
+2025-03-18 02:28:23: models/Setting: Skipping all default migrations...
+2025-03-18 02:28:23: e2ee/utils: Trying to load 0 master keys...
+2025-03-18 02:28:23: e2ee/utils: Loaded master keys: 0
+2025-03-18 02:28:23: ResourceFetcher: Auto-add resources: Mode: always
+2025-03-18 02:28:23: permanentlyDeleteOldData: Processing items older than 7776000000ms...
+2025-03-18 02:28:23: ResourceFetcher: Auto-added resources: 0
+2025-03-18 02:28:23: permanentlyDeleteOldData: Items to permanently delete: {"folderIds":[],"noteIds":[]}
+2025-03-18 02:28:23: checkDisabledSyncItemsNotification: No errors: Hiding notification
+2025-03-18 02:28:23: Running migration: 20
+2025-03-18 02:28:23: DeleteAction: MigrationService: ; Item IDs: 1
+2025-03-18 02:28:23: Running migration: 27
+2025-03-18 02:28:23: DeleteAction: MigrationService: ; Item IDs: 2
+2025-03-18 02:28:23: Running migration: 33
+2025-03-18 02:28:23: SearchEngine: Updating FTS table...
+2025-03-18 02:28:23: Updating items_normalized from {"updated_time":0,"id":""}
+2025-03-18 02:28:23: SearchEngine: Updated FTS table in 4ms. Inserted: 0. Deleted: 0
+2025-03-18 02:28:23: DeleteAction: MigrationService: ; Item IDs: 3
+2025-03-18 02:28:23: Running migration: 35
+2025-03-18 02:28:23: SearchEngine: Updating FTS table...
+2025-03-18 02:28:23: Updating items_normalized from {"updated_time":0,"id":""}
+2025-03-18 02:28:24: SearchEngine: Updated FTS table in 3ms. Inserted: 0. Deleted: 0
+2025-03-18 02:28:24: DeleteAction: MigrationService: ; Item IDs: 4
+2025-03-18 02:28:24: Running migration: 42
+2025-03-18 02:28:24: DeleteAction: MigrationService: ; Item IDs: 5
+2025-03-18 02:28:24: App: "syncInfoCache" was changed - setting up encryption related code
+2025-03-18 02:28:24: e2ee/utils: Trying to load 0 master keys...
+2025-03-18 02:28:24: e2ee/utils: Loaded master keys: 0
+2025-03-18 02:28:24: App: "syncInfoCache" was changed - setting up encryption related code
+2025-03-18 02:28:24: e2ee/utils: Trying to load 0 master keys...
+2025-03-18 02:28:24: e2ee/utils: Loaded master keys: 0
+2025-03-18 02:28:24: App: "syncInfoCache" was changed - setting up encryption related code
+2025-03-18 02:28:24: e2ee/utils: Trying to load 0 master keys...
+2025-03-18 02:28:24: e2ee/utils: Loaded master keys: 0
+2025-03-18 02:28:24: app.start: doing regular boot
+2025-03-18 02:28:24: App: "syncInfoCache" was changed - setting up encryption related code
+2025-03-18 02:28:24: e2ee/utils: Trying to load 0 master keys...
+2025-03-18 02:28:24: e2ee/utils: Loaded master keys: 0
+2025-03-18 02:28:24: App: "syncInfoCache" was changed - setting up encryption related code
+2025-03-18 02:28:24: e2ee/utils: Trying to load 0 master keys...
+2025-03-18 02:28:24: e2ee/utils: Loaded master keys: 0
+2025-03-18 02:28:24: App: "syncInfoCache" was changed - setting up encryption related code
+2025-03-18 02:28:24: e2ee/utils: Trying to load 0 master keys...
+2025-03-18 02:28:24: e2ee/utils: Loaded master keys: 0
+2025-03-18 02:28:24: RevisionService: runInBackground: Starting background service with revision collection interval 600000
+2025-03-18 02:28:24: PluginService: Loading plugin from C:/Users/tangd/.config/joplin-desktop/cache/io.github.jackgruber.backup
+2025-03-18 02:28:24: PluginService: Loading plugin from C:/Users/tangd/.config/joplin-desktop/cache/io.github.personalizedrefrigerator.js-draw
+2025-03-18 02:28:24: SpellCheckerServiceDriverNative: Set effective languages to "en-US"
+2025-03-18 02:28:24: SpellCheckerServiceDriverNative: Set effective languages to "en-US"
+2025-03-18 02:28:25: DecryptionWorker: cannot start because no master key is currently loaded.
+2025-03-18 02:28:25: Preparing scheduled sync
+2025-03-18 02:28:25: Sync cancelled - no sync target is selected.
+2025-03-18 02:28:25: Updating all notifications...
+2025-03-18 02:28:25: Garbage collecting alarms...
+2025-03-18 02:28:25: joplin.plugins: Starting plugin: io.github.jackgruber.backup
+2025-03-18 02:28:25: joplin.plugins: Starting plugin: io.github.personalizedrefrigerator.js-draw
+2025-03-18 02:28:25: useFormNote: Sync has finished and note has never been changed - reloading it
+2025-03-18 02:28:25: useFormNote: [warn] Trying to reload note that has been deleted: <null>
+2025-03-18 02:28:25: joplin.plugins: Finished running onStart handler: io.github.personalizedrefrigerator.js-draw (Took 191ms)
+2025-03-18 02:28:25: joplin.plugins: Finished running onStart handler: io.github.jackgruber.backup (Took 351ms)
+2025-03-18 02:28:25: useFormNote: Sync has finished and note has never been changed - reloading it
+2025-03-18 02:28:26: DecryptionWorker: cannot start because no master key is currently loaded.
+2025-03-18 02:28:28: RevisionService: maintenance: Starting...
+2025-03-18 02:28:28: RevisionService: maintenance: Service is enabled
+2025-03-18 02:28:28: RevisionService: collectRevisions: Created revisions for 0 notes
+2025-03-18 02:28:28: RevisionService: maintenance: Done in 132ms
+2025-03-18 02:28:29: checkForUpdates: Starting...
+2025-03-18 02:28:29: checkForUpdates: Checking with options {"includePreReleases":false}
+2025-03-18 02:28:30: checkForUpdates: Current version: 3.2.12
+2025-03-18 02:28:30: checkForUpdates: Latest version: 3.2.13
+2025-03-18 02:28:30: checkForUpdates: Is Pre-release: <false>
+2025-03-18 02:28:38: checkForUpdates: Done.
+2025-03-18 02:28:38: SearchEngine: Updating FTS table...
+2025-03-18 02:28:38: Updating items_normalized from {"updated_time":0,"id":""}
+2025-03-18 02:28:38: SearchEngine: Updated FTS table in 25ms. Inserted: 5. Deleted: 0
+2025-03-18 02:28:40: Preparing scheduled sync
+2025-03-18 02:28:40: Sync cancelled - no sync target is selected.
+2025-03-18 02:28:54: ResourceService::indexNoteResources: Start
+2025-03-18 02:28:54: ResourceService::indexNoteResources: Completed
+2025-03-18 02:28:54: ResourceService::deleteOrphanResources: []
+2025-03-18 02:29:04: SearchEngine: Updating FTS table...
+2025-03-18 02:29:04: Updating items_normalized from {"updated_time":0,"id":""}
+2025-03-18 02:29:04: SearchEngine: Updated FTS table in 1ms. Inserted: 0. Deleted: 0
+2025-03-18 02:33:24: Running background sync on timer...
+2025-03-18 02:33:24: Preparing scheduled sync
+2025-03-18 02:33:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 02:34:30: useFormNote: Sync has finished and note has never been changed - reloading it
+2025-03-18 02:34:45: useFormNote: Sync has finished and note has never been changed - reloading it
+2025-03-18 02:34:57: focusHandler: [warn] Tried action "focus" on an undefined element: Dialog::titleInputRef
+2025-03-18 02:35:11: SearchEngine: Updating FTS table...
+2025-03-18 02:35:11: Updating items_normalized from {"updated_time":0,"id":""}
+2025-03-18 02:35:11: SearchEngine: Updated FTS table in 1ms. Inserted: 0. Deleted: 0
+2025-03-18 02:35:16: Preparing scheduled sync
+2025-03-18 02:35:16: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 02:38:24: Running background sync on timer...
+2025-03-18 02:38:24: Preparing scheduled sync
+2025-03-18 02:38:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 02:38:24: RevisionService: maintenance: Starting...
+2025-03-18 02:38:24: RevisionService: maintenance: Service is enabled
+2025-03-18 02:38:24: RevisionService: collectRevisions: Created revisions for 0 notes
+2025-03-18 02:38:24: RevisionService: maintenance: Done in 116ms
+2025-03-18 02:43:24: Running background sync on timer...
+2025-03-18 02:43:24: Preparing scheduled sync
+2025-03-18 02:43:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 02:48:24: Running background sync on timer...
+2025-03-18 02:48:24: Preparing scheduled sync
+2025-03-18 02:48:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 02:48:24: RevisionService: maintenance: Starting...
+2025-03-18 02:48:24: RevisionService: maintenance: Service is enabled
+2025-03-18 02:48:24: RevisionService: collectRevisions: Created revisions for 0 notes
+2025-03-18 02:48:24: RevisionService: maintenance: Done in 111ms
+2025-03-18 02:53:24: Running background sync on timer...
+2025-03-18 02:53:24: Preparing scheduled sync
+2025-03-18 02:53:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 02:58:24: Running background sync on timer...
+2025-03-18 02:58:24: Preparing scheduled sync
+2025-03-18 02:58:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 02:58:24: RevisionService: maintenance: Starting...
+2025-03-18 02:58:24: RevisionService: maintenance: Service is enabled
+2025-03-18 02:58:24: RevisionService: collectRevisions: Created revisions for 0 notes
+2025-03-18 02:58:24: RevisionService: maintenance: Done in 110ms
+2025-03-18 03:03:24: Running background sync on timer...
+2025-03-18 03:03:24: Preparing scheduled sync
+2025-03-18 03:03:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 03:08:24: Running background sync on timer...
+2025-03-18 03:08:24: Preparing scheduled sync
+2025-03-18 03:08:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 03:08:24: RevisionService: maintenance: Starting...
+2025-03-18 03:08:24: RevisionService: maintenance: Service is enabled
+2025-03-18 03:08:24: RevisionService: collectRevisions: Created revisions for 0 notes
+2025-03-18 03:08:24: RevisionService: maintenance: Done in 111ms
+2025-03-18 03:13:24: Running background sync on timer...
+2025-03-18 03:13:24: Preparing scheduled sync
+2025-03-18 03:13:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 03:18:24: Running background sync on timer...
+2025-03-18 03:18:24: Preparing scheduled sync
+2025-03-18 03:18:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 03:18:24: RevisionService: maintenance: Starting...
+2025-03-18 03:18:24: RevisionService: maintenance: Service is enabled
+2025-03-18 03:18:24: RevisionService: collectRevisions: Created revisions for 0 notes
+2025-03-18 03:18:24: RevisionService: maintenance: Done in 109ms
+2025-03-18 03:23:24: Running background sync on timer...
+2025-03-18 03:23:24: Preparing scheduled sync
+2025-03-18 03:23:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 03:28:24: userFetcher: Skipping fetching user because user ID is not available
+2025-03-18 03:28:24: Garbage collecting alarms...
+2025-03-18 03:28:24: Running background sync on timer...
+2025-03-18 03:28:24: Preparing scheduled sync
+2025-03-18 03:28:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 03:28:24: RevisionService: maintenance: Starting...
+2025-03-18 03:28:24: RevisionService: maintenance: Service is enabled
+2025-03-18 03:28:24: RevisionService: collectRevisions: Created revisions for 0 notes
+2025-03-18 03:28:24: RevisionService: maintenance: Done in 112ms
+2025-03-18 03:33:24: Running background sync on timer...
+2025-03-18 03:33:24: Preparing scheduled sync
+2025-03-18 03:33:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 03:38:24: Running background sync on timer...
+2025-03-18 03:38:24: Preparing scheduled sync
+2025-03-18 03:38:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 03:38:24: RevisionService: maintenance: Starting...
+2025-03-18 03:38:24: RevisionService: maintenance: Service is enabled
+2025-03-18 03:38:24: RevisionService: collectRevisions: Created revisions for 0 notes
+2025-03-18 03:38:24: RevisionService: maintenance: Done in 111ms
+2025-03-18 03:43:24: Running background sync on timer...
+2025-03-18 03:43:24: Preparing scheduled sync
+2025-03-18 03:43:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 03:48:24: RevisionService: maintenance: Starting...
+2025-03-18 03:48:24: RevisionService: maintenance: Service is enabled
+2025-03-18 03:48:24: Running background sync on timer...
+2025-03-18 03:48:24: Preparing scheduled sync
+2025-03-18 03:48:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 03:48:24: RevisionService: collectRevisions: Created revisions for 0 notes
+2025-03-18 03:48:24: RevisionService: maintenance: Done in 112ms
+2025-03-18 03:53:24: Running background sync on timer...
+2025-03-18 03:53:24: Preparing scheduled sync
+2025-03-18 03:53:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 03:58:24: RevisionService: maintenance: Starting...
+2025-03-18 03:58:24: RevisionService: maintenance: Service is enabled
+2025-03-18 03:58:24: Running background sync on timer...
+2025-03-18 03:58:24: Preparing scheduled sync
+2025-03-18 03:58:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 03:58:24: RevisionService: collectRevisions: Created revisions for 0 notes
+2025-03-18 03:58:24: RevisionService: maintenance: Done in 112ms
+2025-03-18 04:03:24: Running background sync on timer...
+2025-03-18 04:03:24: Preparing scheduled sync
+2025-03-18 04:03:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 04:08:24: RevisionService: maintenance: Starting...
+2025-03-18 04:08:24: RevisionService: maintenance: Service is enabled
+2025-03-18 04:08:24: Running background sync on timer...
+2025-03-18 04:08:24: Preparing scheduled sync
+2025-03-18 04:08:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 04:08:24: RevisionService: collectRevisions: Created revisions for 0 notes
+2025-03-18 04:08:24: RevisionService: maintenance: Done in 112ms
+2025-03-18 04:13:24: Running background sync on timer...
+2025-03-18 04:13:24: Preparing scheduled sync
+2025-03-18 04:13:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 04:18:24: RevisionService: maintenance: Starting...
+2025-03-18 04:18:24: RevisionService: maintenance: Service is enabled
+2025-03-18 04:18:24: Running background sync on timer...
+2025-03-18 04:18:24: Preparing scheduled sync
+2025-03-18 04:18:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 04:18:24: RevisionService: collectRevisions: Created revisions for 0 notes
+2025-03-18 04:18:24: RevisionService: maintenance: Done in 113ms
+2025-03-18 04:23:24: Running background sync on timer...
+2025-03-18 04:23:24: Preparing scheduled sync
+2025-03-18 04:23:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 04:28:24: userFetcher: Skipping fetching user because user ID is not available
+2025-03-18 04:28:24: RevisionService: maintenance: Starting...
+2025-03-18 04:28:24: RevisionService: maintenance: Service is enabled
+2025-03-18 04:28:24: Running background sync on timer...
+2025-03-18 04:28:24: Preparing scheduled sync
+2025-03-18 04:28:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 04:28:24: RevisionService: collectRevisions: Created revisions for 0 notes
+2025-03-18 04:28:24: RevisionService: maintenance: Done in 109ms
+2025-03-18 04:33:24: Running background sync on timer...
+2025-03-18 04:33:24: Preparing scheduled sync
+2025-03-18 04:33:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 04:38:24: RevisionService: maintenance: Starting...
+2025-03-18 04:38:24: RevisionService: maintenance: Service is enabled
+2025-03-18 04:38:24: Running background sync on timer...
+2025-03-18 04:38:24: Preparing scheduled sync
+2025-03-18 04:38:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 04:38:24: RevisionService: collectRevisions: Created revisions for 0 notes
+2025-03-18 04:38:24: RevisionService: maintenance: Done in 109ms
+2025-03-18 04:43:24: Running background sync on timer...
+2025-03-18 04:43:24: Preparing scheduled sync
+2025-03-18 04:43:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 04:48:24: RevisionService: maintenance: Starting...
+2025-03-18 04:48:24: RevisionService: maintenance: Service is enabled
+2025-03-18 04:48:24: Running background sync on timer...
+2025-03-18 04:48:24: Preparing scheduled sync
+2025-03-18 04:48:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 04:48:24: RevisionService: collectRevisions: Created revisions for 0 notes
+2025-03-18 04:48:24: RevisionService: maintenance: Done in 111ms
+2025-03-18 04:53:24: Running background sync on timer...
+2025-03-18 04:53:24: Preparing scheduled sync
+2025-03-18 04:53:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 04:58:24: RevisionService: maintenance: Starting...
+2025-03-18 04:58:24: RevisionService: maintenance: Service is enabled
+2025-03-18 04:58:24: Running background sync on timer...
+2025-03-18 04:58:24: Preparing scheduled sync
+2025-03-18 04:58:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 04:58:24: RevisionService: collectRevisions: Created revisions for 0 notes
+2025-03-18 04:58:24: RevisionService: maintenance: Done in 109ms
+2025-03-18 05:03:24: Running background sync on timer...
+2025-03-18 05:03:24: Preparing scheduled sync
+2025-03-18 05:03:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 05:08:24: RevisionService: maintenance: Starting...
+2025-03-18 05:08:24: RevisionService: maintenance: Service is enabled
+2025-03-18 05:08:24: Running background sync on timer...
+2025-03-18 05:08:24: Preparing scheduled sync
+2025-03-18 05:08:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 05:08:24: RevisionService: collectRevisions: Created revisions for 0 notes
+2025-03-18 05:08:24: RevisionService: maintenance: Done in 102ms
+2025-03-18 05:13:24: Running background sync on timer...
+2025-03-18 05:13:24: Preparing scheduled sync
+2025-03-18 05:13:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 05:18:24: RevisionService: maintenance: Starting...
+2025-03-18 05:18:24: RevisionService: maintenance: Service is enabled
+2025-03-18 05:18:24: Running background sync on timer...
+2025-03-18 05:18:24: Preparing scheduled sync
+2025-03-18 05:18:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 05:18:24: RevisionService: collectRevisions: Created revisions for 0 notes
+2025-03-18 05:18:24: RevisionService: maintenance: Done in 111ms
+2025-03-18 05:23:24: Running background sync on timer...
+2025-03-18 05:23:24: Preparing scheduled sync
+2025-03-18 05:23:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 05:28:24: userFetcher: Skipping fetching user because user ID is not available
+2025-03-18 05:28:24: RevisionService: maintenance: Starting...
+2025-03-18 05:28:24: RevisionService: maintenance: Service is enabled
+2025-03-18 05:28:24: Running background sync on timer...
+2025-03-18 05:28:24: Preparing scheduled sync
+2025-03-18 05:28:24: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 05:28:24: RevisionService: collectRevisions: Created revisions for 0 notes
+2025-03-18 05:28:24: RevisionService: maintenance: Done in 113ms
+2025-03-18 09:38:32: Running background sync on timer...
+2025-03-18 09:38:32: Preparing scheduled sync
+2025-03-18 09:38:32: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 09:38:32: RevisionService: maintenance: Starting...
+2025-03-18 09:38:32: RevisionService: maintenance: Service is enabled
+2025-03-18 09:38:32: userFetcher: Skipping fetching user because user ID is not available
+2025-03-18 09:38:32: ResourceService::indexNoteResources: Start
+2025-03-18 09:38:32: RevisionService: collectRevisions: Created revisions for 0 notes
+2025-03-18 09:38:32: RevisionService: maintenance: Done in 115ms
+2025-03-18 09:38:32: ResourceService::indexNoteResources: Completed
+2025-03-18 09:38:32: ResourceService::deleteOrphanResources: []
+2025-03-18 09:38:42: SearchEngine: Updating FTS table...
+2025-03-18 09:38:42: Updating items_normalized from {"updated_time":0,"id":""}
+2025-03-18 09:38:42: SearchEngine: Updated FTS table in 5ms. Inserted: 0. Deleted: 0
+2025-03-18 09:43:32: Running background sync on timer...
+2025-03-18 09:43:32: Preparing scheduled sync
+2025-03-18 09:43:32: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 09:48:32: RevisionService: maintenance: Starting...
+2025-03-18 09:48:32: RevisionService: maintenance: Service is enabled
+2025-03-18 09:48:32: Running background sync on timer...
+2025-03-18 09:48:32: Preparing scheduled sync
+2025-03-18 09:48:32: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 09:48:32: RevisionService: collectRevisions: Created revisions for 0 notes
+2025-03-18 09:48:32: RevisionService: maintenance: Done in 111ms
+2025-03-18 09:53:32: Running background sync on timer...
+2025-03-18 09:53:32: Preparing scheduled sync
+2025-03-18 09:53:32: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 09:58:32: RevisionService: maintenance: Starting...
+2025-03-18 09:58:32: RevisionService: maintenance: Service is enabled
+2025-03-18 09:58:32: Running background sync on timer...
+2025-03-18 09:58:32: Preparing scheduled sync
+2025-03-18 09:58:32: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 09:58:32: RevisionService: collectRevisions: Created revisions for 0 notes
+2025-03-18 09:58:32: RevisionService: maintenance: Done in 111ms
+2025-03-18 10:03:32: Running background sync on timer...
+2025-03-18 10:03:32: Preparing scheduled sync
+2025-03-18 10:03:32: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 10:08:32: RevisionService: maintenance: Starting...
+2025-03-18 10:08:32: RevisionService: maintenance: Service is enabled
+2025-03-18 10:08:32: Running background sync on timer...
+2025-03-18 10:08:32: Preparing scheduled sync
+2025-03-18 10:08:32: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 10:08:32: RevisionService: collectRevisions: Created revisions for 0 notes
+2025-03-18 10:08:32: RevisionService: maintenance: Done in 110ms
+2025-03-18 10:13:32: Running background sync on timer...
+2025-03-18 10:13:32: Preparing scheduled sync
+2025-03-18 10:13:32: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 10:18:32: RevisionService: maintenance: Starting...
+2025-03-18 10:18:32: RevisionService: maintenance: Service is enabled
+2025-03-18 10:18:32: Running background sync on timer...
+2025-03-18 10:18:32: Preparing scheduled sync
+2025-03-18 10:18:32: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 10:18:32: RevisionService: collectRevisions: Created revisions for 0 notes
+2025-03-18 10:18:32: RevisionService: maintenance: Done in 114ms
+2025-03-18 10:23:32: Running background sync on timer...
+2025-03-18 10:23:32: Preparing scheduled sync
+2025-03-18 10:23:32: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 10:28:32: RevisionService: maintenance: Starting...
+2025-03-18 10:28:32: RevisionService: maintenance: Service is enabled
+2025-03-18 10:28:32: Running background sync on timer...
+2025-03-18 10:28:32: Preparing scheduled sync
+2025-03-18 10:28:32: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 10:28:32: RevisionService: collectRevisions: Created revisions for 0 notes
+2025-03-18 10:28:32: RevisionService: maintenance: Done in 110ms
+2025-03-18 10:33:32: Running background sync on timer...
+2025-03-18 10:33:32: Preparing scheduled sync
+2025-03-18 10:33:32: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 10:38:32: userFetcher: Skipping fetching user because user ID is not available
+2025-03-18 10:38:32: RevisionService: maintenance: Starting...
+2025-03-18 10:38:32: RevisionService: maintenance: Service is enabled
+2025-03-18 10:38:32: Running background sync on timer...
+2025-03-18 10:38:32: Preparing scheduled sync
+2025-03-18 10:38:32: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 10:38:32: RevisionService: collectRevisions: Created revisions for 0 notes
+2025-03-18 10:38:32: RevisionService: maintenance: Done in 113ms
+2025-03-18 10:43:32: Running background sync on timer...
+2025-03-18 10:43:32: Preparing scheduled sync
+2025-03-18 10:43:32: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 10:48:32: RevisionService: maintenance: Starting...
+2025-03-18 10:48:32: RevisionService: maintenance: Service is enabled
+2025-03-18 10:48:32: Running background sync on timer...
+2025-03-18 10:48:32: Preparing scheduled sync
+2025-03-18 10:48:32: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 10:48:32: RevisionService: collectRevisions: Created revisions for 0 notes
+2025-03-18 10:48:32: RevisionService: maintenance: Done in 114ms
+2025-03-18 10:53:32: Running background sync on timer...
+2025-03-18 10:53:32: Preparing scheduled sync
+2025-03-18 10:53:32: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 10:58:32: RevisionService: maintenance: Starting...
+2025-03-18 10:58:32: RevisionService: maintenance: Service is enabled
+2025-03-18 10:58:32: Running background sync on timer...
+2025-03-18 10:58:32: Preparing scheduled sync
+2025-03-18 10:58:32: Synchroniser is missing credentials - manual sync required to authenticate.
+2025-03-18 10:58:32: RevisionService: collectRevisions: Created revisions for 0 notes
+2025-03-18 10:58:32: RevisionService: maintenance: Done in 110ms

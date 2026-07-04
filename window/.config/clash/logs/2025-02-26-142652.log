@@ -1,0 +1,5 @@
+14:26:53 INF [API] listening addr=127.0.0.1:50462
+14:26:53 INF inbound create success inbound=mixed addr=127.0.0.1:7890 network=tcp
+14:26:53 INF inbound create success inbound=mixed addr=127.0.0.1:7890 network=udp
+14:26:58 INF inbound create success inbound=mixed addr=:7890 network=tcp
+14:26:58 INF inbound create success inbound=mixed addr=:7890 network=udp
