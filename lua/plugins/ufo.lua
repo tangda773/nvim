@@ -36,10 +36,17 @@ return {
       table.insert(newVirtText, { suffix, 'MoreMsg' })
       return newVirtText
     end
+
+    local ft_map = {
+      -- 沒有好 LSP 的語言改用 TS
+      lua = { "treesitter", "indent" },
+      vim = "indent",
+    }
+
     require('ufo').setup({
       fold_virt_text_handler = handler,
       provider_selector = function(bufnr, filetype, buftype)
-        return { "lsp", "treesitter", "indent" }
+        return ft_map[filetype] or { "lsp", "indent" }
       end,
       preview = {
         mappings = {
