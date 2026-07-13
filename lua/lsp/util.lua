@@ -92,7 +92,7 @@ M.setup = function()
     "lua_ls",
     -- 日後新增只要加這裡一行
     -- "pyright",
-    -- "bashls",
+    "bashls",
     -- "rust_analyzer",  -- 注意：rust 用 rustaceanvim 就不要加這行
     "gopls",
   })
