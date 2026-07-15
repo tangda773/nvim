@@ -65,6 +65,22 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
+local servers = {
+  bashls = "lsp.bashls",
+  clangd = "lsp.clangd",
+  lua_ls = "lsp.lua_ls",
+  -- pyright = "lsp.pyright",
+  gopls = "lsp.gopls",
+  ts_ls = "lsp.ts_ls",
+  -- rust_analyzer = "lsp.rust_analyzer",
+  eslint = "lsp.eslint",
+  html = "lsp.html",
+  cssls = "lsp.cssls",
+  jsonls = "lsp.jsonls",
+  yamlls = "lsp.yamlls",
+
+}
+
 M.setup = function()
   vim.diagnostic.config({
     -- 平時：signs + underline 提示有問題
@@ -86,16 +102,15 @@ M.setup = function()
     capabilities = get_capabilities(),
   })
 
+  for name, module in pairs(servers) do
+    local ok, cfg = pcall(require, module)
+    if ok and type(cfg) == "table" then
+      vim.lsp.config(name, cfg)
+    end
+  end
+
   -- 啟動所有 server
-  vim.lsp.enable({
-    "clangd",
-    "lua_ls",
-    -- 日後新增只要加這裡一行
-    -- "pyright",
-    "bashls",
-    -- "rust_analyzer",  -- 注意：rust 用 rustaceanvim 就不要加這行
-    "gopls",
-  })
+  vim.lsp.enable(vim.tbl_keys(servers))
 end
 
 return M
