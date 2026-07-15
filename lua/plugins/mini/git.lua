@@ -1,1 +1,6 @@
 require("mini.git").setup({})
+vim.keymap.set("n", "<leader>gb", ":vert Git blame -- %CR", { desc = "Git blame" })
+vim.keymap.set("n", "<leader>gl", ":Git log --oneline<CR>", { desc = "Git log" })
+vim.keymap.set("n", "<leader>gs", ":Git status<CR>", { desc = "Git status" })
+vim.keymap.set("n", "<leader>gd", ":Git diff<CR>", { desc = "Git diff" })
+vim.keymap.set("n", "<leader>gh", MiniGit.show_at_cursor, { desc = "Git history at cursor" })

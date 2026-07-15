@@ -10,7 +10,7 @@ return {
       require("plugins.mini.colors")
       vim.cmd([[colorscheme randomhue]])
       require("plugins.mini.starter")
-
+      require("plugins.mini.misc")
 
       -- ── BufReadPost / InsertEnter ─────────────────────────
       vim.api.nvim_create_autocmd({ "InsertEnter", "BufReadPost" }, {
@@ -50,7 +50,6 @@ return {
           require("plugins.mini.git")
           require("plugins.mini.jump")
           -- require("plugins.mini.jump2d")
-          require("plugins.mini.misc")
           require("plugins.mini.sessions")
           require("plugins.mini.visits")
         end,
