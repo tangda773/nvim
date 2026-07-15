@@ -1,9 +1,9 @@
 return {
   "saghen/blink.cmp",
-  version = "1.*",
+  version = vim.version.range("1.*"),
   dependencies = {
-    { "L3MON4D3/LuaSnip",      version = "v2.*", build = "make install_jsregexp" },
-    "rafamadriz/friendly-snippets",
+    { "L3MON4D3/LuaSnip",      version = vim.version.range("v2.*"), build = "make install_jsregexp" },
+    {"rafamadriz/friendly-snippets"},
 
     { "saghen/blink.compat" },
     { "hrsh7th/cmp-nvim-lua" },

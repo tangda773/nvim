@@ -1,6 +1,6 @@
 return {
   "akinsho/toggleterm.nvim",
-  version = "*",
+  version = vim.version.range("*"),
   keys = {
     { "<leader>tt", desc = "Terminal: bottom (T1)" },
     { "<leader>t1", desc = "Terminal: bottom (T1)" },

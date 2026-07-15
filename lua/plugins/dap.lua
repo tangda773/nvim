@@ -55,7 +55,7 @@ return {
     "jay-babu/mason-nvim-dap.nvim",
     event = "User DapDebugStarted",
     dependencies = {
-      { "williamboman/mason.nvim" },
+      { "mason-org/mason.nvim" },
       { "mfussenegger/nvim-dap" },
     },
     opts = {

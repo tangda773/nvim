@@ -1,6 +1,6 @@
 return {
   "obsidian-nvim/obsidian.nvim",
-  version = "*",
+  version = vim.version.range("*"),
   lazy = true,
   ft = "markdown",
   dependencies = { "nvim-lua/plenary.nvim" },

@@ -1,6 +1,6 @@
 return {
   'mrcjkb/rustaceanvim',
-  version = '^6', -- Recommended
+  version = vim.version.range('^6'), -- Recommended
   init = function()
     vim.g.rustaceanvim = {
       -- Plugin configuration
