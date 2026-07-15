@@ -19,6 +19,13 @@ return {
       "vim",
       "vimdoc",
       "query",
+      "javascript",
+      "typescript",
+      "tsx",
+      "html",
+      "css",
+      "json",
+      "yaml",
     })
     -- 如果你想在 bootstrap 階段阻塞直到裝完，可以改成：
     -- require("nvim-treesitter")
@@ -30,7 +37,20 @@ return {
 
     vim.api.nvim_create_autocmd("FileType", {
       group = group,
-      pattern = { "go", "lua", "rust", "c", "vim", "help" },
+      pattern = {
+        "go",
+        "lua",
+        "rust",
+        "c",
+        "vim",
+        "help",
+        "javascript",
+        "typescript",
+        "tsx",
+        "html",
+        "css",
+        "json",
+        "yaml", },
       callback = function(args)
         vim.treesitter.start(args.buf)
       end,
