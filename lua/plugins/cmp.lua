@@ -2,8 +2,12 @@ return {
   "saghen/blink.cmp",
   version = "1.*",
   dependencies = {
-    { "L3MON4D3/LuaSnip", version = "v2.*", build = "make install_jsregexp" },
+    { "L3MON4D3/LuaSnip",      version = "v2.*", build = "make install_jsregexp" },
     "rafamadriz/friendly-snippets",
+
+    { "saghen/blink.compat" },
+    { "hrsh7th/cmp-nvim-lua" },
+    { "samiulsami/cmp-go-deep" },
   },
   opts = {
     -- ── Keymap ──────────────────────────────────────────────────
@@ -41,7 +45,8 @@ return {
     sources = {
       default = { "lsp", "snippets", "buffer", "path" },
       per_filetype = {
-        lua = { inherit_defaults = true, "lazydev" },
+        lua = { inherit_defaults = true, "lazydev", "nvim_lua" },
+        go = { inherit_defaults = true, "go_deep" },
       },
       providers = {
         lazydev = {
@@ -55,8 +60,18 @@ return {
         lsp = {
           min_keyword_length = 0,
         },
+        nvim_lua = {
+          name = "nvim_lua",
+          module = "blink.compat.source"
+        },
+        go_deep = {
+          name = "go_deep",
+          module = "blink.compat.source"
+        }
       },
     },
+    -- ── Signature ─────────────────────────────────────────────────
+    signature = { enabled = true },
     -- ── Appearance ──────────────────────────────────────────────
     appearance = {
       nerd_font_variant = "mono",
