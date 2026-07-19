@@ -1,5 +1,5 @@
 require("mini.git").setup({})
-vim.keymap.set("n", "<leader>gb", ":vert Git blame -- %CR", { desc = "Git blame" })
+vim.keymap.set("n", "<leader>gb", ":vert Git blame -- %CR<CR>", { desc = "Git blame" })
 vim.keymap.set("n", "<leader>gl", ":Git log --oneline<CR>", { desc = "Git log" })
 vim.keymap.set("n", "<leader>gs", ":Git status<CR>", { desc = "Git status" })
 vim.keymap.set("n", "<leader>gd", ":Git diff<CR>", { desc = "Git diff" })
