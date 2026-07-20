@@ -50,6 +50,7 @@ return {
           require("plugins.mini.git")
           require("plugins.mini.diff")
           require("plugins.mini.jump")
+          require("plugins.mini.move")
           -- require("plugins.mini.jump2d")
           require("plugins.mini.sessions")
           require("plugins.mini.visits")
