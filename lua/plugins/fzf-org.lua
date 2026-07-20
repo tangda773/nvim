@@ -9,20 +9,6 @@ return {
     },
     keys = {
       {
-        "<leader>oa",
-        function()
-          require("orgmode").action("agenda.prompt")
-        end,
-        desc = "Org agenda",
-      },
-      {
-        "<leader>oc",
-        function()
-          require("orgmode").action("capture.prompt")
-        end,
-        desc = "Org capture",
-      },
-      {
         "<leader>of",
         function()
           require("fzf-org").files()
