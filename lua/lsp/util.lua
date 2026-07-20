@@ -18,46 +18,47 @@ vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(ev)
     local bufnr = ev.buf
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
-    local function nmap(keys, func, desc)
-      vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
+    local function map(mode, keys, func, desc)
+      vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = desc })
     end
 
     -- Format / Diagnostics
     -- conform.nvim 替代為 formatter
     -- nmap("<leader>=", vim.lsp.buf.format, "LSP: Format")
-    nmap("<leader>xe", vim.diagnostic.open_float, "LSP: Line Diagnostics")
+    map("n", "<leader>xe", vim.diagnostic.open_float, "LSP: Line Diagnostics")
 
     -- Navigation
-    nmap("gd", vim.lsp.buf.definition, "LSP: Goto Definition")
-    nmap("gD", vim.lsp.buf.declaration, "LSP: Goto Declaration")
-    nmap("gy", vim.lsp.buf.type_definition, "LSP: Type Definition")
-    nmap("gi", vim.lsp.buf.implementation, "LSP: Goto Implementation")
-    nmap("gr", vim.lsp.buf.references, "LSP: Goto References")
+    map("n", "gd", vim.lsp.buf.definition, "LSP: Goto Definition")
+    map("n", "gD", vim.lsp.buf.declaration, "LSP: Goto Declaration")
+    map("n", "gy", vim.lsp.buf.type_definition, "LSP: Type Definition")
+    map("n", "gI", vim.lsp.buf.implementation, "LSP: Goto Implementation")
+    map("n", "<leader>gr", vim.lsp.buf.references, "LSP: Goto References")
 
     -- Diagnostic jump
-    nmap("]d", function() vim.diagnostic.jump({ count = 1 }) end, "LSP: Next Diagnostic")
-    nmap("[d", function() vim.diagnostic.jump({ count = -1 }) end, "LSP: Prev Diagnostic")
-    nmap("]e", function() vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR }) end,
+    map("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end, "LSP: Next Diagnostic")
+    map("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end, "LSP: Prev Diagnostic")
+    map("n", "]e", function() vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR }) end,
       "LSP: Next Error")
-    nmap("[e", function() vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR }) end,
+    map("n", "[e", function() vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR }) end,
       "LSP: Prev Error")
 
     -- Diagnostics Quickfix/Loclist
-    nmap("<leader>xq", vim.diagnostic.setqflist, "LSP: Diagnostics -> Quickfix")
-    nmap("<leader>xl", vim.diagnostic.setloclist, "LSP: Diagnostics -> Loclist")
+    map("n", "<leader>xq", vim.diagnostic.setqflist, "LSP: Diagnostics -> Quickfix")
+    map("n", "<leader>xl", vim.diagnostic.setloclist, "LSP: Diagnostics -> Loclist")
 
     -- Docs
-    nmap("gh", vim.lsp.buf.hover, "LSP: Hover Docs")
-    nmap("gs", vim.lsp.buf.signature_help, "LSP: Signature Help")
+    map("n", "gh", vim.lsp.buf.hover, "LSP: Hover Docs")
+    map("i", "<C-s>", vim.lsp.buf.signature_help, "LSP: Signature Help")
+
 
     -- Refactor
-    nmap("<leader>rn", vim.lsp.buf.rename, "LSP: Rename")
-
-    nmap("<leader>ca", vim.lsp.buf.code_action, "LSP: Code Action")
+    map("n", "<leader>rn", vim.lsp.buf.rename, "LSP: Rename")
+    map("n", "<leader>ca", vim.lsp.buf.code_action, "LSP: Code Action")
     -- Workspace
-    nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "LSP: Add Workspace")
-    nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "LSP: Remove Workspace")
-    nmap("<leader>wl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, "LSP: List Workspaces")
+    map("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, "LSP: Add Workspace")
+    map("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, "LSP: Remove Workspace")
+    map("n", "<leader>wl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
+      "LSP: List Workspaces")
 
     if client and client:supports_method("textDocument/inlayHint") then
       vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
