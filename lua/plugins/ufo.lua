@@ -62,11 +62,6 @@ return {
     })
     vim.keymap.set("n", "zR", require("ufo").openAllFolds, { desc = "nvim-ufo openAllFolds" })
     vim.keymap.set("n", "zM", require("ufo").closeAllFolds, { desc = "nvim-ufo closeAllFolds" })
-    vim.keymap.set("n", "K", function()
-      local winid = require('ufo').peekFoldedLinesUnderCursor()
-      if not winid then
-        vim.lsp.buf.hover() -- 如果沒有折疊就呼叫LSP Hover
-      end
-    end)
+    vim.keymap.set("n", "K", require("ufo").peekFoldedLinesUnderCursor, { desc = "nvim-ufo peekFoldedLinesUnderCursor" })
   end
 }
