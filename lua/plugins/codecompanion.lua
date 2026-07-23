@@ -28,8 +28,8 @@ return {
     -- { "<leader>ac", "<cmd>CodeCompanionChat<cr>", desc = "Chat" },
     -- { "<leader>ap", "<cmd>CodeCompanionActions<cr>", desc = "Action Palette" },
 
-    -- CLI 模式
-    { "<leader>cl", "<cmd>CodeCompanionCLI<cr>",     desc = "Claude Code CLI" },
-    { "<leader>cp", "<cmd>CodeCompanionCLI Ask<cr>", desc = "Claude Code CLI(Ask)" }
+    -- CLI 模式（移到 <leader>a 統一 AI 前綴，清出 <leader>c 給 code action 概念）
+    { "<leader>ac", "<cmd>CodeCompanionCLI<cr>",     desc = "[AI] Claude Code CLI" },
+    { "<leader>ap", "<cmd>CodeCompanionCLI Ask<cr>", desc = "[AI] Claude Code Ask" }
   }
 }

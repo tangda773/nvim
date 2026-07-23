@@ -8,6 +8,7 @@ return {
     notifier     = { enabled = true, timeout = 3000 }, -- nvim-notify
     scratch      = { enabled = true },                 --  scratch.nvim
     words        = { enabled = true },                 -- 游標單字高亮
+    profiler     = { enabled = true },
 
     -- ── 其他全部關掉 ──────────────────────────
     bigfile      = { enabled = false }, -- faster.nvim
@@ -77,14 +78,18 @@ return {
   end,
   keys     = {
     -- words 跳轉
-    { "]]",         function() Snacks.words.jump(1) end,           desc = "Next word occurrence" },
-    { "[[",         function() Snacks.words.jump(-1) end,          desc = "Prev word occurrence" },
+    { "]]",         function() Snacks.words.jump(1) end,              desc = "Next word occurrence" },
+    { "[[",         function() Snacks.words.jump(-1) end,             desc = "Prev word occurrence" },
 
     -- scratch
-    { "<leader>.",  function() Snacks.scratch() end,               desc = "Toggle scratch" },
-    { "<leader>fs", function() Snacks.scratch.select() end,        desc = "Select scratch" },
+    { "<leader>.",  function() Snacks.scratch() end,                  desc = "Toggle scratch" },
+    { "<leader>fs", function() Snacks.scratch.select() end,           desc = "Select scratch" },
 
     -- notifier 歷史
-    { "<leader>fn", function() Snacks.notifier.show_history() end, desc = "Notify history" }
+    { "<leader>fn", function() Snacks.notifier.show_history() end,    desc = "Notify history" },
+
+    -- profiler
+    { "<leader>pp", function() Snacks.toggle.profiler():toggle() end, desc = "Toggle profiler", },
+    { "<leader>ps", function() Snacks.profiler.scratch() end,         desc = "Profiler scratch", },
   }
 }

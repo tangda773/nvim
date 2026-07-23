@@ -119,22 +119,26 @@
 | `[i` / `]i`           | 跳至縮排 scope 頂 / 底（mini.indentscope）                 |
 | `<C-h/j/k/l>`         | 跨視窗移動焦點（smart-splits）                             |
 | `<leader>wh/wj/wk/wl` | 調整視窗大小                                               |
-| `<leader>sh/sj/sk/sl` | 與鄰近視窗交換 buffer                                      |
+| `<leader>wH/wJ/wK/wL` | 與鄰近視窗交換 buffer                                      |
 | `]]` / `[[`           | 跳到游標詞的下一個 / 上一個位置（snacks）                  |
 | `zR` / `zM`           | 展開 / 收合所有折疊（nvim-ufo）                            |
 
 ### LSP（有 LSP attach 的 buffer）
 
-| 鍵                          | 功能                          |
-| --------------------------- | ----------------------------- |
-| `gd` / `gD` / `gy` / `gI`   | 定義 / 宣告 / 型別定義 / 實作 |
-| `<leader>gr`                | 參考                          |
-| `gh`                        | Hover Docs                    |
-| `<C-s>`（Insert）           | Signature Help                |
-| `<leader>rn` / `<leader>ca` | 重新命名 / Code Action        |
-| `]d` / `[d` / `]e` / `[e`   | 下一個 / 上一個 診斷 / 錯誤   |
-| `<leader>xe` / `<leader>xq` | 顯示診斷 / 送入 Quickfix      |
-| `K`                         | 預覽折疊內容（nvim-ufo）      |
+| 鍵                          | 功能                                    |
+| --------------------------- | --------------------------------------- |
+| `<leader>ld` / `<leader>li` | 定義 / 實作（fzf fuzzy UI）             |
+| `<leader>lr`                | 參考（fzf fuzzy UI）                    |
+| `<leader>lt`                | 型別定義                                |
+| `gD`                        | 宣告（go to declaration）               |
+| `<leader>ls` / `<leader>lS` | 文件符號 / Workspace 符號               |
+| `gh`                        | Hover Docs                              |
+| `<C-s>`（Insert）           | Signature Help                          |
+| `<leader>ln` / `<leader>la` | 重新命名 / Code Action                  |
+| `<leader>lwa/lwr/lwl`       | Workspace 資料夾 新增 / 移除 / 列出     |
+| `]d` / `[d` / `]e` / `[e`   | 下一個 / 上一個 診斷 / 錯誤             |
+| `<leader>xe` / `<leader>xq` | 顯示診斷 / 送入 Quickfix               |
+| `K`                         | 預覽折疊內容（nvim-ufo）                |
 
 ### 補全
 
@@ -146,14 +150,15 @@
 
 ### Git
 
-| 鍵                          | 功能                            |
-| --------------------------- | ------------------------------- |
-| `<leader>gb` / `<leader>gl` | blame / log（mini.git）         |
-| `<leader>gs` / `<leader>gd` | status / diff                   |
-| `<leader>gh`                | 目前行變更歷史                  |
-| `:Neogit`                   | 完整 Git UI（neogit，無固定鍵） |
+| 鍵                          | 功能                      |
+| --------------------------- | ------------------------- |
+| `<leader>gb` / `<leader>gl` | blame / log（mini.git）   |
+| `<leader>gs` / `<leader>gd` | status / diff             |
+| `<leader>gh`                | 目前行變更歷史            |
+| `<leader>gg`                | Neogit 完整 Git UI        |
+| `<leader>gp`                | Neogit push               |
 
-### 測試 / 除錯
+### 測試（`<leader>t`）
 
 | 鍵                          | 功能                             |
 | --------------------------- | -------------------------------- |
@@ -162,26 +167,27 @@
 | `<leader>to` / `<leader>tS` | 切換輸出面板 / 測試總覽樹        |
 | `<F5>`                      | Debug continue                   |
 | `<F10>` / `<F11>` / `<F12>` | step over / into / out           |
-| `<leader>b` / `<leader>B`   | 切換中斷點 / 條件中斷點          |
+| `<leader>db` / `<leader>dB` | 切換中斷點 / 設定中斷點          |
+| `<leader>dL`                | Log point                        |
 
-### Terminal
+### Terminal（`<leader>T`）
 
-| 鍵                          | 功能             |
-| --------------------------- | ---------------- |
-| `<leader>tt` / `<leader>t1` | 底部水平終端機   |
-| `<leader>t2`                | 右側垂直終端機   |
-| `<leader>t3`                | 浮動終端機       |
-| `<leader>t4`                | 獨立分頁終端機   |
-| `<esc><esc>`（終端機內）    | 回到 Normal 模式 |
+| 鍵                       | 功能             |
+| ------------------------ | ---------------- |
+| `<leader>Tt`             | 底部水平終端機   |
+| `<leader>Tv`             | 右側垂直終端機   |
+| `<leader>Tf`             | 浮動終端機       |
+| `<leader>Tn`             | 獨立分頁終端機   |
+| `<esc><esc>`（終端機內） | 回到 Normal 模式 |
 
-### AI
+### AI（`<leader>a`）
 
 | 鍵                          | 功能                         |
 | --------------------------- | ---------------------------- |
 | `<C-\>`                     | 開關 Agentic 對話面板        |
 | `<leader>aa` / `<leader>ad` | 加入選取 / 診斷到 AI context |
 | `<leader>an` / `<leader>ar` | 開新 / 恢復 Agentic session  |
-| `<leader>cl` / `<leader>cp` | Claude Code CLI / Ask 模式   |
+| `<leader>ac` / `<leader>ap` | Claude Code CLI / Ask 模式   |
 
 ### Org / 筆記
 
@@ -192,12 +198,13 @@
 | `<leader>oi`                 | 開 `~/org/inbox.org`          |
 | `<localleader>ot`（.org 內） | 切換 TODO 狀態                |
 
-### 遠端 / 其他
+### Buffer / 遠端 / 其他
 
 | 鍵                                         | 功能                                     |
 | ------------------------------------------ | ---------------------------------------- |
-| `<leader>rc` / `<leader>rd` / `<leader>re` | SSHFS 連線 / 斷線 / 編輯設定             |
+| `<leader>bf` / `<leader>bF`               | 開檔案總管 / 定位目前檔案（mini.files）   |
 | `<leader>bd` / `<leader>bD`                | 刪除 / wipeout buffer                    |
+| `<leader>rc` / `<leader>rd` / `<leader>re` | SSHFS 連線 / 斷線 / 編輯設定             |
 | `<leader>.` / `<leader>fs` / `<leader>fn`  | scratch buffer / 選擇 scratch / 通知歷史 |
 | `<F1>`                                     | 效能剖析開始 / 停止（profile.nvim）      |
 

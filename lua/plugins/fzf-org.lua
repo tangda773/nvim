@@ -2,7 +2,6 @@
 return {
   {
     "0xzhzh/fzf-org.nvim",
-    lazy = false,
     dependencies = {
       "ibhagwan/fzf-lua",
       "nvim-orgmode/orgmode",

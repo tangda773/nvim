@@ -26,3 +26,8 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.list = false      -- 不顯示 ^I
   end,
 })
+
+require("utils").debug.setup({
+  backend = "fzf",
+  override_print = true,
+})
