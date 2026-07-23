@@ -2,11 +2,10 @@ return {
   "akinsho/toggleterm.nvim",
   version = vim.version.range("*"),
   keys = {
-    { "<leader>tt", desc = "Terminal: bottom (T1)" },
-    { "<leader>t1", desc = "Terminal: bottom (T1)" },
-    { "<leader>t2", desc = "Terminal: right (T2)" },
-    { "<leader>t3", desc = "Terminal: float (T3)" },
-    { "<leader>t4", desc = "Terminal: tab (T4)" },
+    { "<leader>Tt", desc = "[Term] Bottom horizontal" },
+    { "<leader>Tv", desc = "[Term] Right vertical" },
+    { "<leader>Tf", desc = "[Term] Float" },
+    { "<leader>Tn", desc = "[Term] New tab" },
   },
   config = function()
     require("toggleterm").setup({
@@ -57,27 +56,23 @@ return {
     set_term_esc_key()
 
     -- T1: 底部水平分割（長輸出，例如 cargo test --watch）
-    map({ "n", "t" }, "<leader>tt", function()
-      require("toggleterm").toggle(1, 0, vim.loop.cwd(), "horizontal")
-    end, vim.tbl_extend("force", opts, { desc = "Terminal: bottom (T1)" }))
-
-    map({ "n", "t" }, "<leader>t1", function()
-      require("toggleterm").toggle(1, 0, vim.loop.cwd(), "horizontal")
-    end, vim.tbl_extend("force", opts, { desc = "Terminal: bottom (T1)" }))
+    map({ "n", "t" }, "<leader>Tt", function()
+      require("toggleterm").toggle(1, 0, vim.uv.cwd(), "horizontal")
+    end, vim.tbl_extend("force", opts, { desc = "[Term] Bottom horizontal" }))
 
     -- T2: 右側垂直分割（互動 shell / REPL）
-    map({ "n", "t" }, "<leader>t2", function()
-      require("toggleterm").toggle(2, 0, vim.loop.cwd(), "vertical")
-    end, vim.tbl_extend("force", opts, { desc = "Terminal: right (T2)" }))
+    map({ "n", "t" }, "<leader>Tv", function()
+      require("toggleterm").toggle(2, 0, vim.uv.cwd(), "vertical")
+    end, vim.tbl_extend("force", opts, { desc = "[Term] Right vertical" }))
 
     -- T3: float（臨時工具，如 lazygit / htop）
-    map({ "n", "t" }, "<leader>t3", function()
-      require("toggleterm").toggle(3, 0, vim.loop.cwd(), "float")
-    end, vim.tbl_extend("force", opts, { desc = "Terminal: float (T3)" }))
+    map({ "n", "t" }, "<leader>Tf", function()
+      require("toggleterm").toggle(3, 0, vim.uv.cwd(), "float")
+    end, vim.tbl_extend("force", opts, { desc = "[Term] Float" }))
 
     -- T4: tab 方向（獨立 tab terminal，適合長 session）
-    map({ "n", "t" }, "<leader>t4", function()
-      require("toggleterm").toggle(4, 0, vim.loop.cwd(), "tab")
-    end, vim.tbl_extend("force", opts, { desc = "Terminal: tab (T4)" }))
+    map({ "n", "t" }, "<leader>Tn", function()
+      require("toggleterm").toggle(4, 0, vim.uv.cwd(), "tab")
+    end, vim.tbl_extend("force", opts, { desc = "[Term] New tab" }))
   end,
 }

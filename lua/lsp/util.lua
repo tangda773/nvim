@@ -27,12 +27,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- nmap("<leader>=", vim.lsp.buf.format, "LSP: Format")
     map("n", "<leader>xe", vim.diagnostic.open_float, "LSP: Line Diagnostics")
 
-    -- Navigation
-    map("n", "gd", vim.lsp.buf.definition, "LSP: Goto Definition")
-    map("n", "gD", vim.lsp.buf.declaration, "LSP: Goto Declaration")
-    map("n", "gy", vim.lsp.buf.type_definition, "LSP: Type Definition")
-    map("n", "gI", vim.lsp.buf.implementation, "LSP: Goto Implementation")
-    map("n", "<leader>gr", vim.lsp.buf.references, "LSP: Goto References")
+    -- Navigation（gd/gI/gr 已移至 fzf-lua <leader>ld/<leader>li/<leader>lr，避免 buffer-local 蓋掉全域 fuzzy 版本）
+    map("n", "gD",         vim.lsp.buf.declaration,    "[LSP] Declaration")
+    map("n", "<leader>lt", vim.lsp.buf.type_definition, "[LSP] Type Definition")
 
     -- Diagnostic jump
     map("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end, "LSP: Next Diagnostic")
@@ -48,17 +45,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- Docs
     map("n", "gh", vim.lsp.buf.hover, "LSP: Hover Docs")
-    map("i", "<C-s>", vim.lsp.buf.signature_help, "LSP: Signature Help")
 
-
-    -- Refactor
-    map("n", "<leader>rn", vim.lsp.buf.rename, "LSP: Rename")
-    map("n", "<leader>ca", vim.lsp.buf.code_action, "LSP: Code Action")
-    -- Workspace
-    map("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, "LSP: Add Workspace")
-    map("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, "LSP: Remove Workspace")
-    map("n", "<leader>wl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
-      "LSP: List Workspaces")
+    -- Refactor（統一到 <leader>l 前綴，清出 <leader>r、<leader>c、<leader>w 給其他用途）
+    map("n", "<leader>ln", vim.lsp.buf.rename,       "[LSP] Rename")
+    map("n", "<leader>la", vim.lsp.buf.code_action,  "[LSP] Code Action")
+    -- Workspace（<leader>lw 子群組）
+    map("n", "<leader>lwa", vim.lsp.buf.add_workspace_folder,    "[LSP] Add Workspace")
+    map("n", "<leader>lwr", vim.lsp.buf.remove_workspace_folder, "[LSP] Remove Workspace")
+    map("n", "<leader>lwl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
+      "[LSP] List Workspaces")
 
     if client and client:supports_method("textDocument/inlayHint") then
       vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
