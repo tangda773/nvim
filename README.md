@@ -35,7 +35,6 @@
 | `obsidian.nvim`                                    | Obsidian vault 整合                                        |
 | `orgmode`                                          | Org-mode 任務 / agenda                                     |
 | `overseer.nvim`                                    | 建置與任務執行管理                                         |
-| `profile.nvim`                                     | 啟動 / 執行期效能剖析                                      |
 | `remote-sshfs.nvim`                                | SSHFS 遠端掛載                                             |
 | `render-markdown.nvim`                             | Markdown 行內渲染                                          |
 | `smart-splits.nvim`                                | 跨視窗導航 / 縮放 / 交換                                   |
@@ -125,20 +124,20 @@
 
 ### LSP（有 LSP attach 的 buffer）
 
-| 鍵                          | 功能                                    |
-| --------------------------- | --------------------------------------- |
-| `<leader>ld` / `<leader>li` | 定義 / 實作（fzf fuzzy UI）             |
-| `<leader>lr`                | 參考（fzf fuzzy UI）                    |
-| `<leader>lt`                | 型別定義                                |
-| `gD`                        | 宣告（go to declaration）               |
-| `<leader>ls` / `<leader>lS` | 文件符號 / Workspace 符號               |
-| `gh`                        | Hover Docs                              |
-| `<C-s>`（Insert）           | Signature Help                          |
-| `<leader>ln` / `<leader>la` | 重新命名 / Code Action                  |
-| `<leader>lwa/lwr/lwl`       | Workspace 資料夾 新增 / 移除 / 列出     |
-| `]d` / `[d` / `]e` / `[e`   | 下一個 / 上一個 診斷 / 錯誤             |
-| `<leader>xe` / `<leader>xq` | 顯示診斷 / 送入 Quickfix               |
-| `K`                         | 預覽折疊內容（nvim-ufo）                |
+| 鍵                          | 功能                                |
+| --------------------------- | ----------------------------------- |
+| `<leader>ld` / `<leader>li` | 定義 / 實作（fzf fuzzy UI）         |
+| `<leader>lr`                | 參考（fzf fuzzy UI）                |
+| `<leader>lt`                | 型別定義                            |
+| `gD`                        | 宣告（go to declaration）           |
+| `<leader>ls` / `<leader>lS` | 文件符號 / Workspace 符號           |
+| `gh`                        | Hover Docs                          |
+| `<C-s>`（Insert）           | Signature Help                      |
+| `<leader>ln` / `<leader>la` | 重新命名 / Code Action              |
+| `<leader>lwa/lwr/lwl`       | Workspace 資料夾 新增 / 移除 / 列出 |
+| `]d` / `[d` / `]e` / `[e`   | 下一個 / 上一個 診斷 / 錯誤         |
+| `<leader>xe` / `<leader>xq` | 顯示診斷 / 送入 Quickfix            |
+| `K`                         | 預覽折疊內容（nvim-ufo）            |
 
 ### 補全
 
@@ -150,13 +149,13 @@
 
 ### Git
 
-| 鍵                          | 功能                      |
-| --------------------------- | ------------------------- |
-| `<leader>gb` / `<leader>gl` | blame / log（mini.git）   |
-| `<leader>gs` / `<leader>gd` | status / diff             |
-| `<leader>gh`                | 目前行變更歷史            |
-| `<leader>gg`                | Neogit 完整 Git UI        |
-| `<leader>gp`                | Neogit push               |
+| 鍵                          | 功能                    |
+| --------------------------- | ----------------------- |
+| `<leader>gb` / `<leader>gl` | blame / log（mini.git） |
+| `<leader>gs` / `<leader>gd` | status / diff           |
+| `<leader>gh`                | 目前行變更歷史          |
+| `<leader>gg`                | Neogit 完整 Git UI      |
+| `<leader>gp`                | Neogit push             |
 
 ### 測試（`<leader>t`）
 
@@ -202,11 +201,38 @@
 
 | 鍵                                         | 功能                                     |
 | ------------------------------------------ | ---------------------------------------- |
-| `<leader>bf` / `<leader>bF`               | 開檔案總管 / 定位目前檔案（mini.files）   |
+| `<leader>bf` / `<leader>bF`                | 開檔案總管 / 定位目前檔案（mini.files）  |
 | `<leader>bd` / `<leader>bD`                | 刪除 / wipeout buffer                    |
 | `<leader>rc` / `<leader>rd` / `<leader>re` | SSHFS 連線 / 斷線 / 編輯設定             |
 | `<leader>.` / `<leader>fs` / `<leader>fn`  | scratch buffer / 選擇 scratch / 通知歷史 |
-| `<F1>`                                     | 效能剖析開始 / 停止（profile.nvim）      |
+
+---
+
+## Custom Utilities
+
+除了第三方 plugins 外，這份配置也包含一些自製 Lua utilities，
+用來改善日常開發體驗。
+
+### Debug Utility
+
+`utils.debug` 是一個輕量化 Lua debug 工具，整合 `fzf-lua` 作為查看介面。
+
+Features:
+
+- `dd(...)`：使用 `vim.inspect()` 檢查 Lua value
+- `bt()`：查看 Lua traceback
+- 支援 `print()` / `:=` debug workflow
+- Debug history + fzf preview
+- 顯示 caller file / line 資訊
+
+Setup:
+
+```lua
+require("utils").debug.setup({
+  backend = "fzf",
+})
+
+```
 
 ---
 
