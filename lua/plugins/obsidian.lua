@@ -3,7 +3,10 @@ return {
   version = vim.version.range("*"),
   lazy = true,
   ft = "markdown",
-  dependencies = { "nvim-lua/plenary.nvim" },
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "ibhagwan/fzf-lua",
+  },
   opts = {
     legacy_commands = false,
     workspaces = {
