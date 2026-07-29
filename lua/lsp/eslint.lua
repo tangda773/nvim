@@ -1,3 +1,4 @@
+---@type vim.lsp.Config
 return {
   root_dir = function(fname)
     return vim.fs.root(fname, {

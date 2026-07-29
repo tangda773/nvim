@@ -1,3 +1,11 @@
+---@class utils.debug
+---@field dd fun(...: any): nil
+---@field bt fun(): nil
+---@field setup fun(opts?: DebugConfig): nil
+---@field open fun(): nil
+---@field clear fun(): nil
+---@field history fun(): DebugHistoryItem[]
+---@field set_backend fun(name: string): nil
 local M = {}
 
 
@@ -5,6 +13,13 @@ local M = {}
 -- Config
 -----------------------------------------------------------
 
+---@class DebugConfig
+---@field backend "fzf"|"notify"
+---@field max_history integer
+---@field override_print boolean
+---@field fzf { prompt: string, preview_width: string }
+
+---@type DebugConfig
 local config = {
 
   -- fzf | notify
@@ -26,6 +41,17 @@ local config = {
 -- State
 -----------------------------------------------------------
 
+---@class DebugHistoryItem
+---@field time string
+---@field kind string
+---@field source string
+---@field title string
+---@field content string
+
+---@class DebugState
+---@field history DebugHistoryItem[]
+
+---@type DebugState
 local state = {
   history = {},
 }
@@ -36,12 +62,14 @@ local state = {
 -- Helpers
 -----------------------------------------------------------
 
+---@return string
 local function now()
   return os.date("%H:%M:%S")
 end
 
 
 
+---@return string
 local function caller()
   local info =
       debug.getinfo(
@@ -64,6 +92,8 @@ end
 
 
 
+---@param ... any
+---@return string
 local function inspect(...)
   local result = {}
 
@@ -86,6 +116,9 @@ end
 -- History
 -----------------------------------------------------------
 
+---@param kind string
+---@param text string
+---@param source string
 local function add_history(
     kind,
     text,
@@ -234,6 +267,7 @@ end
 -- notify backend
 -----------------------------------------------------------
 
+---@param text string
 local function show_notify(text)
   vim.notify(
     text,
@@ -247,6 +281,9 @@ end
 -- Output
 -----------------------------------------------------------
 
+---@param kind string
+---@param text string
+---@param source string
 local function output(
     kind,
     text,
@@ -273,6 +310,7 @@ end
 -- Public API
 -----------------------------------------------------------
 
+---@param ... any
 function M.dd(...)
   local source =
       caller()
@@ -342,6 +380,7 @@ end
 -- Setup
 -----------------------------------------------------------
 
+---@param opts? DebugConfig
 function M.setup(opts)
   config =
       vim.tbl_deep_extend(
@@ -383,10 +422,12 @@ function M.clear()
   state.history = {}
 end
 
+---@return DebugHistoryItem[]
 function M.history()
   return state.history
 end
 
+---@param name string
 function M.set_backend(name)
   config.backend = name
 end
