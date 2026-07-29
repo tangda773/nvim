@@ -17,6 +17,7 @@ vim.o.winborder = "rounded"
 local go_group = vim.api.nvim_create_augroup("GoIndent", { clear = true })
 
 vim.api.nvim_create_autocmd("FileType", {
+  group = go_group,
   pattern = "go",
   callback = function()
     vim.opt_local.tabstop = 2

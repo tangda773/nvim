@@ -1,3 +1,4 @@
+---@type vim.lsp.Config
 return {
   -- 讓 tsserver 用專案的 tsconfig / jsconfig 當 root
   root_dir = function(fname)

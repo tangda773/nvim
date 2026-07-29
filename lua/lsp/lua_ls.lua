@@ -1,4 +1,5 @@
 -- lsp/lua_ls.lua
+---@type vim.lsp.Config
 return {
   on_init = function(client)
     -- 只在 Neovim config 目錄時才注入 vim runtime

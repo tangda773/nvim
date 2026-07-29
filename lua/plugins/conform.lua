@@ -49,6 +49,8 @@ return {
     },
 
     -- ── 存檔時自動格式化 ────────────────────────────────────
+    ---@param bufnr integer
+    ---@return {timeout_ms: integer, lsp_format: string}
     format_on_save = function(bufnr)
       if vim.bo[bufnr].filetype == "go" then
         return { timeout_ms = 3000, lsp_format = "never" }
