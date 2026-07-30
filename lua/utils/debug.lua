@@ -1,13 +1,13 @@
 ---@class utils.debug
 ---@field dd fun(...: any): nil
 ---@field bt fun(): nil
----@field setup fun(opts?: DebugConfig): nil
+---@field setup fun(opts?: DebugUserConfig): nil
 ---@field open fun(): nil
 ---@field clear fun(): nil
 ---@field history fun(): DebugHistoryItem[]
 ---@field set_backend fun(name: string): nil
+---@field get_config fun(): DebugConfig
 local M = {}
-
 
 -----------------------------------------------------------
 -- Config
@@ -19,23 +19,25 @@ local M = {}
 ---@field override_print boolean
 ---@field fzf { prompt: string, preview_width: string }
 
+---@class DebugUserConfig
+---@field backend? "fzf"|"notify"
+---@field max_history? integer
+---@field override_print? boolean
+---@field fzf? { prompt?: string, preview_width?: string }
+
 ---@type DebugConfig
-local config = {
-
-  -- fzf | notify
+local default_config = {
   backend = "fzf",
-
   max_history = 200,
-
   override_print = true,
-
   fzf = {
     prompt = "Debug> ",
     preview_width = "60%",
   },
 }
 
-
+---@type DebugConfig
+local config = vim.deepcopy(default_config)
 
 -----------------------------------------------------------
 -- State
@@ -50,13 +52,10 @@ local config = {
 
 ---@class DebugState
 ---@field history DebugHistoryItem[]
-
 ---@type DebugState
 local state = {
   history = {},
 }
-
-
 
 -----------------------------------------------------------
 -- Helpers
@@ -67,50 +66,24 @@ local function now()
   return os.date("%H:%M:%S")
 end
 
-
-
 ---@return string
 local function caller()
-  local info =
-      debug.getinfo(
-        3,
-        "Sl"
-      )
-
-
+  local info = debug.getinfo(3, "Sl")
   if not info then
     return "unknown"
   end
-
-
-  return string.format(
-    "%s:%d",
-    info.short_src or "?",
-    info.currentline or 0
-  )
+  return string.format("%s:%d", info.short_src or "?", info.currentline or 0)
 end
-
-
 
 ---@param ... any
 ---@return string
 local function inspect(...)
   local result = {}
-
-
   for _, value in ipairs({ ... }) do
-    result[#result + 1] =
-        vim.inspect(value)
+    result[#result + 1] = vim.inspect(value)
   end
-
-
-  return table.concat(
-    result,
-    "\n"
-  )
+  return table.concat(result, "\n")
 end
-
-
 
 -----------------------------------------------------------
 -- History
@@ -119,163 +92,95 @@ end
 ---@param kind string
 ---@param text string
 ---@param source string
-local function add_history(
-    kind,
-    text,
-    source
-)
+local function add_history(kind, text, source)
   local item = {
-
     time = now(),
-
     kind = kind,
-
     source = source,
-
-    title = string.format(
-      "[%s] %-10s %s",
-      now(),
-      kind,
-      source
-    ),
-
+    title = string.format("[%s] %-10s %s", now(), kind, source),
     content = text,
   }
 
+  table.insert(state.history, item)
 
-
-  table.insert(
-    state.history,
-    item
-  )
-
-
-
-  if #state.history >
-      config.max_history
-  then
-    table.remove(
-      state.history,
-      1
-    )
+  if #state.history > config.max_history then
+    table.remove(state.history, 1)
   end
 end
-
-
 
 -----------------------------------------------------------
 -- fzf-lua backend
 -----------------------------------------------------------
 
+local function fzf_preview_title()
+  return string.format("Debug history (%d items)", #state.history)
+end
+
 local function show_fzf()
-  local ok, fzf =
-      pcall(require, "fzf-lua")
-
-
+  local ok, fzf = pcall(require, "fzf-lua")
   if not ok then
-    vim.notify(
-      "fzf-lua is not available",
-      vim.log.levels.ERROR
-    )
+    vim.notify("fzf-lua is not available", vim.log.levels.ERROR)
     return
   end
 
-
   local entries = {}
-
   for i, item in ipairs(state.history) do
-    entries[#entries + 1] =
-        string.format(
-          "%d %s",
-          i,
-          item.title
-        )
+    entries[#entries + 1] = string.format("%d %s", i, item.title)
   end
 
+  fzf.fzf_exec(entries, {
+    prompt = "Debug> ",
 
+    fzf_opts = {
+      ["--no-sort"] = true,
+      ["--layout"] = "reverse",
+    },
 
-  fzf.fzf_exec(
-    entries,
-    {
+    winopts = {
+      title = "default-title",
+      title_flags = false,
+      height = 0.85,
+      width = 0.80,
+      border = "rounded",
+      preview = {
+        layout = "flex",
+        flip_columns = 120,
+        title = "Preview",
+        border = "rounded",
+      },
+    },
 
-      prompt = "Debug> ",
+    preview = function(selected)
+      local index = tonumber(selected[1]:match("^(%d+)"))
+      if not index then
+        return ""
+      end
+      return state.history[index].content
+    end,
 
-      preview = function(selected)
-        local index =
-            tonumber(
-              selected[1]:match("^(%d+)")
-            )
-
-
+    actions = {
+      ["default"] = function(selected)
+        local index = tonumber(selected[1]:match("^(%d+)"))
         if not index then
-          return ""
+          return
         end
 
-
-        return state.history[index].content
+        local content = state.history[index].content
+        vim.cmd("new")
+        vim.bo.filetype = "lua"
+        vim.api.nvim_buf_set_lines(0, 0, -1, false, vim.split(content, "\n"))
       end,
-
-
-      actions = {
-
-        ["default"] =
-            function(selected)
-              local index =
-                  tonumber(
-                    selected[1]:match("^(%d+)")
-                  )
-
-
-              if not index then
-                return
-              end
-
-
-
-              local content =
-                  state.history[index].content
-
-
-
-              vim.cmd("new")
-
-
-              vim.bo.filetype =
-              "lua"
-
-
-
-              vim.api.nvim_buf_set_lines(
-                0,
-                0,
-                -1,
-                false,
-                vim.split(
-                  content,
-                  "\n"
-                )
-              )
-            end,
-
-      },
-
-    }
-  )
+    },
+  })
 end
-
 -----------------------------------------------------------
 -- notify backend
 -----------------------------------------------------------
 
 ---@param text string
 local function show_notify(text)
-  vim.notify(
-    text,
-    vim.log.levels.INFO
-  )
+  vim.notify(text, vim.log.levels.INFO)
 end
-
-
 
 -----------------------------------------------------------
 -- Output
@@ -284,18 +189,8 @@ end
 ---@param kind string
 ---@param text string
 ---@param source string
-local function output(
-    kind,
-    text,
-    source
-)
-  add_history(
-    kind,
-    text,
-    source
-  )
-
-
+local function output(kind, text, source)
+  add_history(kind, text, source)
 
   if config.backend == "fzf" then
     show_fzf()
@@ -304,66 +199,72 @@ local function output(
   end
 end
 
-
-
 -----------------------------------------------------------
 -- Public API
 -----------------------------------------------------------
+local function human_src(src)
+  if not src then
+    return "?"
+  end
+
+  src = src:gsub("^@", "")
+  src = src:gsub('^%[string "(.+)"%]$', "%1")
+  return src
+end
+
+local function caller(level)
+  level = (level or 2) + 1
+
+  local info = debug.getinfo(level, "S")
+  if not info then
+    return "unknown"
+  end
+
+  local src = human_src(info.short_src or info.source)
+  local line = info.currentline or 0
+
+  local name_info = debug.getinfo(level, "n")
+  local name = name_info and name_info.name or nil
+
+  if name and name ~= "" then
+    return string.format("%s:%d in %s", src, line, name)
+  end
+
+  return string.format("%s:%d", src, line)
+end
 
 ---@param ... any
 function M.dd(...)
-  local source =
-      caller()
+  local source = caller()
+  local args = { ... }
 
+  local payload
+  if #args == 1 then
+    payload = inspect(args[1])
+  else
+    payload = inspect(args)
+  end
 
+  local text = table.concat({
+    "== DEBUG ==",
+    "caller: " .. source,
+    "",
+    payload,
+  }, "\n")
 
-  local text = table.concat(
-
-    {
-
-      "== DEBUG ==",
-
-      "caller: "
-      .. source,
-
-      "",
-
-      inspect(...),
-
-    },
-
-    "\n"
-
-  )
-
-
-
-  output(
-    "inspect",
-    text,
-    source
-  )
+  output("inspect", text, source)
 end
 
 function M.bt()
-  local source =
-      caller()
+  local source = caller()
+  local text = table.concat({
+    "== BACKTRACE ==",
+    "caller: " .. source,
+    "",
+    debug.traceback("", 2),
+  }, "\n")
 
-
-
-  local text =
-      debug.traceback(
-        "== BACKTRACE ==",
-        2
-      )
-
-
-
-  output(
-    "trace",
-    text,
-    source
-  )
+  output("trace", text, source)
 end
 
 -----------------------------------------------------------
@@ -374,38 +275,22 @@ local function debug_print(...)
   M.dd(...)
 end
 
-
-
 -----------------------------------------------------------
 -- Setup
 -----------------------------------------------------------
 
----@param opts? DebugConfig
+---@param opts? DebugUserConfig
 function M.setup(opts)
-  config =
-      vim.tbl_deep_extend(
-        "force",
-        config,
-        opts or {}
-      )
-
-
-
-  -- global helpers
+  config = vim.tbl_deep_extend("force", vim.deepcopy(default_config), opts or {})
 
   _G.dd = M.dd
-
   _G.bt = M.bt
-
-
 
   if config.override_print then
     if vim.fn.has("nvim-0.11") == 1 then
-      vim._print =
-          debug_print
+      vim._print = debug_print
     else
-      vim.print =
-          debug_print
+      vim.print = debug_print
     end
   end
 end
@@ -413,6 +298,11 @@ end
 -----------------------------------------------------------
 -- Extra API
 -----------------------------------------------------------
+
+---@return DebugConfig
+function M.get_config()
+  return config
+end
 
 function M.open()
   show_fzf()
