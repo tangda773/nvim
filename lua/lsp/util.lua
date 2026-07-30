@@ -29,23 +29,23 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- Format / Diagnostics
     -- conform.nvim 替代為 formatter
     -- nmap("<leader>=", vim.lsp.buf.format, "LSP: Format")
-    map("n", "<leader>xe", vim.diagnostic.open_float, "LSP: Line Diagnostics")
+    map("n", "<leader>xe", vim.diagnostic.open_float, "[LSP] Line Diagnostics")
 
     -- Navigation（gd/gI/gr 已移至 fzf-lua <leader>ld/<leader>li/<leader>lr，避免 buffer-local 蓋掉全域 fuzzy 版本）
     map("n", "gD", vim.lsp.buf.declaration, "[LSP] Declaration")
     map("n", "<leader>lt", vim.lsp.buf.type_definition, "[LSP] Type Definition")
 
     -- Diagnostic jump
-    map("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end, "LSP: Next Diagnostic")
-    map("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end, "LSP: Prev Diagnostic")
+    map("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end, "[LSP] Next Diagnostic")
+    map("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end, "[LSP] Prev Diagnostic")
     map("n", "]e", function() vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR }) end,
-      "LSP: Next Error")
+      "[LSP] Next Error")
     map("n", "[e", function() vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR }) end,
-      "LSP: Prev Error")
+      "[LSP] Prev Error")
 
     -- Diagnostics Quickfix/Loclist
-    map("n", "<leader>xq", vim.diagnostic.setqflist, "LSP: Diagnostics -> Quickfix")
-    map("n", "<leader>xl", vim.diagnostic.setloclist, "LSP: Diagnostics -> Loclist")
+    map("n", "<leader>xq", vim.diagnostic.setqflist, "[LSP] Diagnostics -> Quickfix")
+    map("n", "<leader>xl", vim.diagnostic.setloclist, "[LSP] Diagnostics -> Loclist")
 
     -- Docs
     map("n", "gh", vim.lsp.buf.hover, "LSP: Hover Docs")
