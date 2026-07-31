@@ -4,10 +4,10 @@ return {
   dependencies = {
     { "L3MON4D3/LuaSnip",      version = "v2.*", build = "make install_jsregexp" },
     "rafamadriz/friendly-snippets",
-
     { "saghen/blink.compat" },
     { "hrsh7th/cmp-nvim-lua" },
     { "samiulsami/cmp-go-deep" },
+    { "ray-x/cmp-sql" },
   },
   opts = {
     -- ── Keymap ──────────────────────────────────────────────────
@@ -45,29 +45,34 @@ return {
     sources = {
       default = { "lsp", "snippets", "buffer", "path" },
       per_filetype = {
-        lua = { inherit_defaults = true, "lazydev", "nvim_lua" },
-        go = { inherit_defaults = true, "go_deep" },
+        lua   = { inherit_defaults = true, "lazydev", "nvim_lua" },
+        go    = { inherit_defaults = true, "go_deep" },
+        sql   = { "snippets", "dadbod", "sql", "buffer" },
+        mysql = { "snippets", "dadbod", "sql", "buffer" },
+        plsql = { "snippets", "dadbod", "sql", "buffer" },
       },
       providers = {
-        lazydev = {
+        lazydev  = {
           name         = "LazyDev",
           module       = "lazydev.integrations.blink",
           score_offset = 100,
         },
-        buffer = {
+        buffer   = {
           min_keyword_length = 2,
         },
-        lsp = {
+        lsp      = {
           min_keyword_length = 0,
         },
         nvim_lua = {
           name = "nvim_lua",
           module = "blink.compat.source"
         },
-        go_deep = {
+        go_deep  = {
           name = "go_deep",
           module = "blink.compat.source"
-        }
+        },
+        dadbod   = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
+        sql      = { name = "sql", module = "blink.compat.source" },
       },
     },
     -- ── Signature ─────────────────────────────────────────────────
