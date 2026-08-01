@@ -1,11 +1,11 @@
 return {
   {
     "kristijanhusak/vim-dadbod-ui",
-    version = "master",
+    branch = "master",
     dependencies = {
-      { "tpope/vim-dadbod",                     version = "master" },
+      { "tpope/vim-dadbod",                     branch = "master" },
       -- 選用:SQL 補全,只在 sql/mysql/plsql 檔案類型才載入
-      { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, version = "master" },
+      { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, branch = "master" },
     },
     cmd = {
       "DBUI",

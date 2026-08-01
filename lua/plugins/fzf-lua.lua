@@ -1,6 +1,6 @@
 return {
   "ibhagwan/fzf-lua",
-  version = "main",
+  branch = "main",
   -- 不用宣告 nvim-web-devicons 依賴:你已經有 mini.nvim 提供的
   -- mini.icons,fzf-lua 會自動偵測並沿用,不用另外裝圖示套件。
   cmd = "FzfLua",
