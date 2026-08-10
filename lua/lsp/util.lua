@@ -66,7 +66,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 ---@type table<string, string>
-local servers = {
+M.servers = {
   bashls = "lsp.bashls",
   clangd = "lsp.clangd",
   lua_ls = "lsp.lua_ls",
@@ -81,6 +81,33 @@ local servers = {
   yamlls = "lsp.yamlls",
 
 }
+
+local function enable_installed(names)
+  local ok_mlc, mlc = pcall(require, "mason-lspconfig")
+  if not ok_mlc then
+    vim.lsp.enable(names) -- 沒裝 mason-lspconfig 就照舊全部 enable
+    return
+  end
+
+  local installed = {}
+  for _, name in ipairs(mlc.get_installed_servers()) do
+    installed[name] = true
+  end
+
+  local ready, pending = {}, {}
+  for _, name in ipairs(names) do
+    if installed[name] then
+      table.insert(ready, name)
+    else
+      table.insert(pending, name)
+    end
+  end
+
+  if #ready > 0 then vim.lsp.enable(ready) end
+  if #pending > 0 then
+    vim.notify("[LSP] 等待安裝完成: " .. table.concat(pending, ", "), vim.log.levels.INFO)
+  end
+end
 
 M.setup = function()
   vim.diagnostic.config({
@@ -103,15 +130,23 @@ M.setup = function()
     capabilities = get_capabilities(),
   })
 
-  for name, module in pairs(servers) do
+  for name, module in pairs(M.servers) do
     local ok, cfg = pcall(require, module)
     if ok and type(cfg) == "table" then
       vim.lsp.config(name, cfg)
     end
   end
 
-  -- 啟動所有 server
-  vim.lsp.enable(vim.tbl_keys(servers))
+  enable_installed(vim.tbl_keys(M.servers))
+
+  -- 安裝完成後自動補 enable，不用重開 nvim
+  local ok_mlc = pcall(require, "mason-lspconfig")
+  if ok_mlc then
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "MasonToolsUpdateCompleted",
+      callback = function() enable_installed(vim.tbl_keys(M.servers)) end,
+    })
+  end
 end
 
 return M

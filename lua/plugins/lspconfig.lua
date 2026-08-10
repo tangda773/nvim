@@ -9,7 +9,8 @@ return {
     event        = { "BufReadPre", "BufNewFile" },
     dependencies = { "mason-org/mason.nvim" },
     opts         = {
-      ensure_installed = { "clangd", "lua_ls" },
+      ensure_installed = vim.tbl_keys(require("lsp.util").servers),
+      automatic_enable = false,
     },
   },
   -- LSP 主配置，只有在打開檔案時才載入
