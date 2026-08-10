@@ -49,6 +49,7 @@ miniclue.setup({
     { mode = 'n', keys = '<leader>g', desc = '+git' },
     { mode = 'n', keys = '<leader>l', desc = '+lsp' },
     { mode = 'n', keys = '<leader>lw', desc = '+lsp-workspace' },
+    { mode = 'n', keys = '<leader>c', desc = '+code' },
     { mode = 'n', keys = '<leader>x', desc = '+diagnostics' },
     { mode = 'n', keys = '<leader>d', desc = '+debug' },
     { mode = 'n', keys = '<leader>t', desc = '+test' },
