@@ -1,15 +1,10 @@
 ---@type vim.lsp.Config
 return {
   -- 讓 tsserver 用專案的 tsconfig / jsconfig 當 root
-  root_dir = function(fname)
-    return vim.fs.root(fname, {
-      "tsconfig.json",
-      "jsconfig.json",
-      "package.json",
-      ".git",
-    })
+  root_dir = function(bufnr, on_dir)
+    local fname = vim.api.nvim_buf_get_name(bufnr)
+    on_dir(vim.fs.root(fname, { "tsconfig.json", "jsconfig.json", "package.json", ".git" }))
   end,
-
   -- 預設 filetypes 通常已經 OK，但明確寫也可以
   filetypes = {
     "javascript",
