@@ -1,264 +1,455 @@
 # nvim
 
-個人 Neovim 設定，鎖定 **Neovim ≥ 0.11 / 建議 0.12+**。插件管理使用 [`zpack.nvim`](https://github.com/zuqini/zpack.nvim)（薄封裝於內建 `vim.pack`）。
+Personal Neovim configuration targeting *_Neovim >= 0.12_. Plugin management uses [`zpack.nvim`](https://github.com/zuqini/zpack.nvim), a thin wrapper around the built-in `vim.pack`.
 
-**核心方向**：原生 API 優先、mini.nvim 生態系取代大型 all-in-one 插件、LSP + Treesitter + AI 協作三軌並行。
+**Core approach:** prefer native APIs, use the mini.nvim ecosystem instead of large all-in-one plugins, and combine LSP, Treesitter, and AI-assisted workflows.
 
-支援語言：Go / Rust / C·C++ / Lua / Bash / TypeScript·JavaScript / HTML / CSS / JSON / YAML。
-
----
-
-## 插件清單
-
-| 插件                                               | 主要功能                                                   |
-| -------------------------------------------------- | ---------------------------------------------------------- |
-| `zpack.nvim`                                       | 插件管理器（基於 `vim.pack`）                              |
-| `mini.nvim`                                        | 30 個子模組，見下節                                        |
-| `agentic.nvim`                                     | ACP AI 對話面板 + diff 預覽（接 `claude-agent-acp`）       |
-| `blink.cmp`                                        | 補全引擎（LSP / snippet / buffer / path / cmdline）        |
-| `LuaSnip` + `friendly-snippets`                    | Snippet 引擎                                               |
-| `codecompanion.nvim`                               | AI 協作（CLI 模式，接 `claude` 指令）                      |
-| `conform.nvim`                                     | 存檔自動格式化（`stylua`/`rustfmt`/`prettier`/`gofumpt`…） |
-| `crates.nvim`                                      | Cargo.toml 版號補全與操作                                  |
-| `nvim-dap` + `nvim-dap-ui` + `mason-nvim-dap.nvim` | DAP 除錯                                                   |
-| `faster.nvim`                                      | 大檔案效能降級                                             |
-| `fzf-lua`                                          | 模糊搜尋（檔案、grep、buffer）                             |
-| `fzf-org.nvim`                                     | Org 檔案 / headline picker                                 |
-| `lazydev.nvim`                                     | Neovim Lua API 型別提示                                    |
-| `mason.nvim` + `mason-lspconfig.nvim`              | LSP / DAP / formatter 安裝管理                             |
-| `nvim-lspconfig`                                   | LSP 主設定（見 `lua/lsp/`）                                |
-| `neogen`                                           | 依 Treesitter 產生 docstring                               |
-| `neogit` + `diffview.nvim`                         | 完整 Git 操作 UI                                           |
-| `neotest` + adapters                               | 測試執行 UI（Python / Go / C++ / 通用）                    |
-| `rustaceanvim`                                     | Rust / rust-analyzer 深度整合                              |
-| `nvim-bqf`                                         | Quickfix 視窗增強                                          |
-| `obsidian.nvim`                                    | Obsidian vault 整合                                        |
-| `orgmode`                                          | Org-mode 任務 / agenda                                     |
-| `overseer.nvim`                                    | 建置與任務執行管理                                         |
-| `remote-sshfs.nvim`                                | SSHFS 遠端掛載                                             |
-| `render-markdown.nvim`                             | Markdown 行內渲染                                          |
-| `smart-splits.nvim`                                | 跨視窗導航 / 縮放 / 交換                                   |
-| `snacks.nvim`                                      | `vim.ui.input`、通知系統、scratch buffer、游標詞高亮       |
-| `statuscol.nvim`                                   | 自訂 statuscolumn                                          |
-| `toggleterm.nvim`                                  | 多佈局終端機管理                                           |
-| `nvim-treesitter`                                  | 語法解析 / 高亮                                            |
-| `nvim-ufo`                                         | 進階折疊（LSP / Treesitter / indent）                      |
+Supported languages: Go / Rust / C/C++ / Lua / Bash / TypeScript/JavaScript / HTML / CSS / JSON / YAML.
 
 ---
 
-## mini.nvim 子模組
+## Directory Structure
 
-| 子模組             | 載入時機    | 功能                                                              |
-| ------------------ | ----------- | ----------------------------------------------------------------- |
-| `mini.icons`       | 立即        | 檔案圖示提供者                                                    |
-| `mini.colors`      | 立即        | 配色工具（`randomhue` colorscheme）                               |
-| `mini.starter`     | 立即        | 開機首頁                                                          |
-| `mini.misc`        | 立即        | `setup_auto_root` + `setup_restore_cursor`                        |
-| `mini.ai`          | BufReadPost | 進階文字物件（`F`=函式 / `c`=類別 / `o`=迴圈條件 / `B`=block）    |
-| `mini.align`       | BufReadPost | 對齊                                                              |
-| `mini.comment`     | BufReadPost | 註解切換                                                          |
-| `mini.keymap`      | BufReadPost | 多步驟 keymap（目前設定已被註解）                                 |
-| `mini.operators`   | BufReadPost | evaluate / exchange / multiply / replace / sort                   |
-| `mini.pairs`       | BufReadPost | 括號自動配對                                                      |
-| `mini.splitjoin`   | BufReadPost | 單行 ↔ 多行切換                                                   |
-| `mini.surround`    | BufReadPost | 環繞符號 add / delete / replace                                   |
-| `mini.animate`     | VeryLazy    | 游標 / 捲動 / 視窗動畫                                            |
-| `mini.cursorword`  | VeryLazy    | 高亮游標所在單字的其他出現位置                                    |
-| `mini.hipatterns`  | VeryLazy    | 高亮 FIXME/HACK/TODO/NOTE 與 `#rrggbb`                            |
-| `mini.indentscope` | VeryLazy    | 縮排引導線（`[i`/`]i` 跳轉至 scope 頂 / 底）                      |
-| `mini.map`         | VeryLazy    | 程式碼縮圖（`:lua MiniMap.toggle()` 手動開關）                    |
-| `mini.statusline`  | VeryLazy    | 狀態列（含 LSP progress）                                         |
-| `mini.tabline`     | VeryLazy    | 分頁 / buffer 列                                                  |
-| `mini.trailspace`  | VeryLazy    | 標示行尾多餘空白                                                  |
-| `mini.basics`      | VeryLazy    | 通用便利選項與 mapping 預設集合                                   |
-| `mini.bracketed`   | VeryLazy    | `[x`/`]x` 跳轉（13 種類型，indent 停用讓位給 `mini.indentscope`） |
-| `mini.bufremove`   | VeryLazy    | 刪除 / wipeout buffer（不破壞視窗佈局）                           |
-| `mini.clue`        | VeryLazy    | 前綴鍵提示（`<leader>`/`g`/`'`/`"`/`<C-w>`/`z` 等）               |
-| `mini.extra`       | VeryLazy    | 額外 picker / 文字物件 / 取值函式                                 |
-| `mini.files`       | VeryLazy    | 檔案總管（`use_as_default_explorer = true`，取代 netrw）          |
-| `mini.git`         | VeryLazy    | 輕量 Git 狀態（statusline + `<leader>gb/gl/gs/gd/gh`）            |
-| `mini.jump`        | VeryLazy    | 加強版 `f`/`F`/`t`/`T` + `;` 重複                                 |
-| `mini.sessions`    | VeryLazy    | Session 讀寫                                                      |
-| `mini.visits`      | VeryLazy    | 常造訪路徑記錄                                                    |
+```text
+~/.config/nvim/
+├── init.lua                    # Entry point: mapleader, vim.loader, require basic/config.zpack
+├── lua/
+│   ├── basic.lua               # Global options
+│   ├── config/
+│   │   ├── zpack.lua           # zpack.nvim initialization
+│   │   └── orgmode-settings.lua
+│   ├── lsp/
+│   │   ├── util.lua            # Shared LSP setup, keymaps, diagnostic configuration
+│   │   ├── bashls.lua / clangd.lua / cssls.lua / eslint.lua
+│   │   ├── gopls.lua / html.lua / jsonls.lua / lua_ls.lua
+│   │   ├── ts_ls.lua / yamlls.lua
+│   ├── plugins/
+│   │   ├── mini.lua            # mini.nvim spec; requires submodules by load timing
+│   │   ├── mini/               # mini submodule configuration files, loaded by mini.lua
+│   │   └── *.lua               # Other plugin specs
+│   └── utils/
+│       ├── init.lua
+│       └── debug.lua           # Debug utility (dd/bt plus fzf-lua viewer)
+└── wezterm/                    # WezTerm configuration; unrelated to Neovim
+```
 
-> `lua/plugins/mini/` 下另有 11 個檔案（`base16`、`deps`、`diff`、`doc`、`fuzzy`、`hues`、`jump2d`、`move`、`pick`、`snippets`、`test`）目前未被 `require`，不生效。
+> zpack scan rule: it only processes direct files under `lua/plugins/*.lua`; it does **not** recurse into `lua/plugins/mini/`. `mini.lua` is responsible for requiring each submodule at the appropriate time.
+
+---
+
+## Plugin List
+
+| Plugin                                                      | Primary purpose                                                                    |
+| ----------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `zpack.nvim`                                                | Plugin manager built on `vim.pack`                                                 |
+| `mini.nvim`                                                 | Multiple submodules; see the next section                                          |
+| `agentic.nvim`                                              | ACP AI chat panel and diff preview through `claude-agent-acp`                      |
+| `blink.cmp`                                                 | Completion engine: LSP, snippets, buffers, paths, and command line                 |
+| `LuaSnip` + `friendly-snippets`                             | Snippet engine and bundled snippets                                                |
+| `blink.compat` + `cmp-nvim-lua` + `cmp-go-deep` + `cmp-sql` | Additional blink.cmp sources                                                       |
+| `codecompanion.nvim`                                        | AI collaboration through CLI mode and the `claude` command                         |
+| `conform.nvim`                                              | Format on save with `stylua`, `rustfmt`, `prettier`, `gofumpt`, and more           |
+| `crates.nvim`                                               | Cargo.toml version completion and operations                                       |
+| `vim-dadbod-ui` + `vim-dadbod` + `vim-dadbod-completion`    | SQL database UI and query completion                                               |
+| `nvim-dap` + `nvim-dap-ui` + `mason-nvim-dap.nvim`          | DAP debugging                                                                      |
+| `dropbar.nvim`                                              | Winbar breadcrumb navigation                                                       |
+| `faster.nvim`                                               | Large-file performance degradation mode                                            |
+| `fzf-lua`                                                   | Fuzzy finding for files, grep, buffers, LSP, Git, and more                         |
+| `fzf-org.nvim`                                              | Org file and headline picker                                                       |
+| `grug-far.nvim`                                             | Project-wide search and replace with ripgrep or ast-grep                           |
+| `lazydev.nvim`                                              | Neovim Lua API type hints                                                          |
+| `mason.nvim` + `mason-lspconfig.nvim`                       | LSP, DAP, and formatter installation management                                    |
+| `nvim-lspconfig`                                            | LSP configuration loading; see `lua/lsp/`                                          |
+| `neogen`                                                    | Generate docstrings using Treesitter                                               |
+| `neogit` + `diffview.nvim`                                  | Full Git UI and diff review                                                        |
+| `neotest` + adapters                                        | Test execution UI for Python, Go, C++, Rust, and generic runners                   |
+| `nvim-bqf`                                                  | Quickfix enhancement with preview and fzf filtering                                |
+| `obsidian.nvim`                                             | Obsidian vault integration; workspace: `~/notes`                                   |
+| `orgmode`                                                   | Org-mode tasks and agenda                                                          |
+| `overseer.nvim`                                             | Build and task execution management                                                |
+| `quicker.nvim`                                              | Fast editing for Quickfix and Location lists                                       |
+| `remote-sshfs.nvim`                                         | Remote mounting through SSHFS                                                      |
+| `render-markdown.nvim`                                      | Inline Markdown rendering                                                          |
+| `rustaceanvim`                                              | Deep Rust and rust-analyzer integration                                            |
+| `b0o/schemastore.nvim`                                      | JSON/YAML schema source for jsonls and yamlls                                      |
+| `smart-splits.nvim`                                         | Cross-window navigation, resizing, and buffer swapping                             |
+| `snacks.nvim`                                               | `vim.ui.input`, notifications, scratch buffers, cursor-word highlighting, profiler |
+| `statuscol.nvim`                                            | Custom status column for folds, signs, and line numbers                            |
+| `toggleterm.nvim`                                           | Multi-layout terminal management                                                   |
+| `nvim-treesitter`                                           | Syntax parsing and highlighting through the built-in Treesitter API                |
+| `trouble.nvim`                                              | Tree-based UI for diagnostics, symbols, and call hierarchy                         |
+| `nvim-ufo`                                                  | Advanced folds via LSP, Treesitter, and indentation                                |
+
+---
+
+## mini.nvim Submodules
+
+| Submodule          | Load timing               | Purpose                                                                                       |
+| ------------------ | ------------------------- | --------------------------------------------------------------------------------------------- |
+| `mini.icons`       | Immediate                 | File icon provider                                                                            |
+| `mini.colors`      | Immediate                 | Color tools, including the `randomhue` colorscheme                                            |
+| `mini.starter`     | Immediate                 | Startup dashboard                                                                             |
+| `mini.misc`        | Immediate                 | `setup_auto_root` and `setup_restore_cursor`                                                  |
+| `mini.ai`          | BufReadPost / InsertEnter | Advanced text objects: `F` function, `c` class, `o` loop condition, `B` block                 |
+| `mini.align`       | BufReadPost / InsertEnter | Alignment with `ga` / `gA`                                                                    |
+| `mini.comment`     | BufReadPost / InsertEnter | Comment toggling with `gc` / `gcc`                                                            |
+| `mini.keymap`      | BufReadPost / InsertEnter | Multi-step keymaps; multistep configuration is currently commented out, so only setup runs    |
+| `mini.operators`   | BufReadPost / InsertEnter | Evaluate, exchange, multiply, replace, and sort                                               |
+| `mini.pairs`       | BufReadPost / InsertEnter | Automatic bracket and quote pairs                                                             |
+| `mini.splitjoin`   | BufReadPost / InsertEnter | Toggle one-line and multi-line forms with `gS`                                                |
+| `mini.surround`    | BufReadPost / InsertEnter | Add, delete, and replace surrounding delimiters with `sa` / `sd` / `sr`                       |
+| `mini.animate`     | VeryLazy                  | Cursor, scroll, and window animations                                                         |
+| `mini.cursorword`  | VeryLazy                  | Highlight other occurrences of the word under the cursor                                      |
+| `mini.hipatterns`  | VeryLazy                  | Highlight FIXME, HACK, TODO, NOTE, and `#rrggbb` colors                                       |
+| `mini.indentscope` | VeryLazy                  | Indent guides; `[i` / `]i` jump to scope start/end                                            |
+| `mini.statusline`  | VeryLazy                  | Status line with LSP progress                                                                 |
+| `mini.tabline`     | VeryLazy                  | Tab and buffer line                                                                           |
+| `mini.trailspace`  | VeryLazy                  | Highlight trailing whitespace                                                                 |
+| `mini.basics`      | VeryLazy                  | Convenience defaults including `<C-s>` save and yank highlighting; options/windows disabled   |
+| `mini.bracketed`   | VeryLazy                  | `[x` / `]x` navigation for b c d f j l o q t u w y; indent is disabled for `mini.indentscope` |
+| `mini.bufremove`   | VeryLazy                  | Delete or wipe buffers without destroying window layout                                       |
+| `mini.clue`        | VeryLazy                  | Prefix-key hints for `<leader>`, `g`, `'`, `"`, `<C-w>`, `z`, and more                        |
+| `mini.diff`        | VeryLazy                  | Buffer diff and hunk indicators                                                               |
+| `mini.extra`       | VeryLazy                  | Additional pickers, text objects, and helper functions                                        |
+| `mini.files`       | VeryLazy                  | File explorer replacing netrw                                                                 |
+| `mini.git`         | VeryLazy                  | Lightweight Git operations: blame, log, status, diff, cursor history                          |
+| `mini.jump`        | VeryLazy                  | Enhanced `f` / `F` / `t` / `T` with `;` repeat                                                |
+| `mini.move`        | VeryLazy                  | Move lines or selected blocks with `<M-hjkl>`                                                 |
+| `mini.sessions`    | VeryLazy                  | Session read/write                                                                            |
+| `mini.visits`      | VeryLazy                  | Frequently visited path tracking                                                              |
+
+There are **10 configuration files** under `lua/plugins/mini/` that are currently **not required** and therefore inactive:
+
+- **Commented out in `mini.lua`:** `map`, `jump2d`
+- **Present but never loaded:** `base16`, `deps`, `doc`, `fuzzy`, `hues`, `pick`, `snippets`, `test`
 
 ---
 
 ## Cheat Sheet
 
-**`<leader>` = `\`　`<localleader>` = `<Space>`**
+**`<leader>` = `\` | `<localleader>` = `<Space>`**
 
-### 檔案 / 搜尋
+### General / Windows / Buffers
 
-| 鍵                          | 功能                                           |
-| --------------------------- | ---------------------------------------------- |
-| `<leader><leader>`          | 全域模糊搜尋（fzf-lua）                        |
-| `<leader>sg`                | 搜尋目前 buffer 內容                           |
-| `<leader>ff` / `<leader>fg` | 找檔案 / 全文搜尋（自動判斷本機或 SSHFS 遠端） |
-| `l` / `h`（mini.files 內）  | 進入 / 返回上層                                |
+| Key                         | Action                                                        |
+| --------------------------- | ------------------------------------------------------------- |
+| `<C-s>` in any mode         | Save and return to Normal mode through `mini.basics`          |
+| `<C-h/j/k/l>`               | Move focus between windows with `smart-splits`                |
+| `<leader>wh/wj/wk/wl`       | Resize windows                                                |
+| `<leader>wH/wJ/wK/wL`       | Swap buffers with adjacent windows                            |
+| `<leader>bf` / `<leader>bF` | Open file explorer / reveal current file with `mini.files`    |
+| `<leader>bd` / `<leader>bD` | Delete / wipe buffer with `mini.bufremove`                    |
+| `<leader>ss` / `<leader>sw` | Select / write session with `mini.sessions`                   |
+| `<leader>.`                 | Toggle scratch buffer with `snacks`                           |
+| `<leader>fs`                | Select scratch buffer                                         |
+| `<leader>fn`                | Notification history                                          |
+| `<leader>pp`                | Toggle profiler with `snacks`                                 |
+| `<leader>ps`                | Profiler scratch buffer                                       |
+| `]]` / `[[`                 | Next / previous cursor-word occurrence through `snacks.words` |
 
-### 編輯
+### Search / fzf-lua
 
-| 鍵                    | 功能                                            |
-| --------------------- | ----------------------------------------------- |
-| `gc` / `gcc`          | 註解 operator / 整行切換（mini.comment）        |
-| `sa` / `sd` / `sr`    | 新增 / 刪除 / 替換環繞符號（mini.surround）     |
-| `ga` / `gS`           | 對齊 / 單行↔多行（mini.align / mini.splitjoin） |
-| `daF` / `dif` / `dic` | 刪除函式 / 迴圈條件 / 類別（mini.ai）           |
-| `<leader>=`           | 格式化目前 buffer（conform.nvim）               |
-| `<C-s>`（任意模式）   | 存檔並回 Normal                                 |
+| Key                         | Action                                                                         |
+| --------------------------- | ------------------------------------------------------------------------------ |
+| `<leader><leader>`          | Global fuzzy finder                                                            |
+| `<leader>ff` / `<leader>fg` | Find files / live grep; automatically switches for local or SSHFS remote paths |
+| `<leader>fw`                | Grep word under cursor                                                         |
+| `<leader>fb`                | Buffer list                                                                    |
+| `<leader>fo`                | Recent files                                                                   |
+| `<leader>fh`                | Help tags                                                                      |
+| `<leader>fc`                | Commands                                                                       |
+| `<leader>fk`                | Keymaps                                                                        |
+| `<leader>fr`                | Resume previous search                                                         |
+| `<leader>sg`                | Live grep current buffer                                                       |
+| `Ctrl-q` inside fzf         | Send all selected entries to Quickfix                                          |
 
-### 導航
+### Git / Neogit / Diffview
 
-| 鍵                    | 功能                                                       |
-| --------------------- | ---------------------------------------------------------- |
-| `f`/`F`/`t`/`T` + `;` | 加強版行內跳轉（mini.jump）                                |
-| `[x` / `]x`           | 依類型跳前/後（mini.bracketed，`b c d f j l o q t u w y`） |
-| `[i` / `]i`           | 跳至縮排 scope 頂 / 底（mini.indentscope）                 |
-| `<C-h/j/k/l>`         | 跨視窗移動焦點（smart-splits）                             |
-| `<leader>wh/wj/wk/wl` | 調整視窗大小                                               |
-| `<leader>wH/wJ/wK/wL` | 與鄰近視窗交換 buffer                                      |
-| `]]` / `[[`           | 跳到游標詞的下一個 / 上一個位置（snacks）                  |
-| `zR` / `zM`           | 展開 / 收合所有折疊（nvim-ufo）                            |
+| Key          | Action                                   |
+| ------------ | ---------------------------------------- |
+| `<leader>gb` | Git blame with `mini.git`                |
+| `<leader>gl` | One-line Git log with `mini.git`         |
+| `<leader>gs` | Git status with `mini.git`               |
+| `<leader>gd` | Git diff with `mini.git`                 |
+| `<leader>gh` | Change history at cursor with `mini.git` |
+| `<leader>gS` | Fuzzy Git status with `fzf-lua`          |
+| `<leader>gc` | Repository Git commits with `fzf-lua`    |
+| `<leader>gB` | Buffer Git commits with `fzf-lua`        |
+| `<leader>gg` | Full Neogit UI                           |
+| `<leader>gp` | Neogit push                              |
 
-### LSP（有 LSP attach 的 buffer）
+### LSP / Diagnostics
 
-| 鍵                          | 功能                                |
-| --------------------------- | ----------------------------------- |
-| `<leader>ld` / `<leader>li` | 定義 / 實作（fzf fuzzy UI）         |
-| `<leader>lr`                | 參考（fzf fuzzy UI）                |
-| `<leader>lt`                | 型別定義                            |
-| `gD`                        | 宣告（go to declaration）           |
-| `<leader>ls` / `<leader>lS` | 文件符號 / Workspace 符號           |
-| `gh`                        | Hover Docs                          |
-| `<C-s>`（Insert）           | Signature Help                      |
-| `<leader>ln` / `<leader>la` | 重新命名 / Code Action              |
-| `<leader>lwa/lwr/lwl`       | Workspace 資料夾 新增 / 移除 / 列出 |
-| `]d` / `[d` / `]e` / `[e`   | 下一個 / 上一個 診斷 / 錯誤         |
-| `<leader>xe` / `<leader>xq` | 顯示診斷 / 送入 Quickfix            |
-| `K`                         | 預覽折疊內容（nvim-ufo）            |
+| Key                         | Action                                                 |
+| --------------------------- | ------------------------------------------------------ |
+| `<leader>ld`                | Definition through `fzf-lua`                           |
+| `<leader>lr`                | References through `fzf-lua`                           |
+| `<leader>li`                | Implementations through `fzf-lua`                      |
+| `<leader>ls` / `<leader>lS` | Document symbols / workspace symbols through `fzf-lua` |
+| `gD`                        | Declaration via native LSP                             |
+| `<leader>lt`                | Type definition via native LSP                         |
+| `gh`                        | Hover documentation                                    |
+| `<leader>ln`                | Rename                                                 |
+| `<leader>la`                | Code action                                            |
+| `<leader>lwa/lwr/lwl`       | Add / remove / list workspace folders                  |
+| `]d` / `[d`                 | Next / previous diagnostic                             |
+| `]e` / `[e`                 | Next / previous error                                  |
+| `<leader>xe`                | Diagnostic floating window for cursor line             |
+| `<leader>xq`                | Diagnostics to Quickfix                                |
+| `<leader>xl`                | Diagnostics to Location list                           |
+| `<leader>xd`                | Buffer diagnostics through `fzf-lua`                   |
+| `<leader>xD`                | Workspace diagnostics through `fzf-lua`                |
 
-### 補全
+### Trouble
 
-| 鍵                    | 功能                             |
-| --------------------- | -------------------------------- |
-| `<Tab>` / `<S-Tab>`   | 選單下移 / 上移，或 snippet 跳點 |
-| `<CR>`                | 確認補全                         |
-| `<C-Space>` / `<C-e>` | 手動觸發 / 取消                  |
+| Key                         | Action                         |
+| --------------------------- | ------------------------------ |
+| `<leader>xx`                | Workspace diagnostics          |
+| `<leader>xX`                | Buffer diagnostics             |
+| `<leader>cs`                | Symbol tree                    |
+| `<leader>cl`                | LSP definitions and references |
+| `<leader>ci` / `<leader>co` | Incoming / outgoing calls      |
+| `<leader>xL`                | Location list                  |
+| `<leader>xQ`                | Quickfix list                  |
 
-### Git
+### DAP / Tests
 
-| 鍵                          | 功能                    |
-| --------------------------- | ----------------------- |
-| `<leader>gb` / `<leader>gl` | blame / log（mini.git） |
-| `<leader>gs` / `<leader>gd` | status / diff           |
-| `<leader>gh`                | 目前行變更歷史          |
-| `<leader>gg`                | Neogit 完整 Git UI      |
-| `<leader>gp`                | Neogit push             |
+| Key                         | Action                                          |
+| --------------------------- | ----------------------------------------------- |
+| `<F5>`                      | Debug continue                                  |
+| `<F10>` / `<F11>` / `<F12>` | Step over / into / out                          |
+| `<leader>db` / `<leader>dB` | Toggle breakpoint / set breakpoint              |
+| `<leader>dL`                | Log point                                       |
+| `<leader>dr`                | DAP REPL                                        |
+| `<leader>dl`                | Run last                                        |
+| `<leader>dh` / `<leader>dp` | DAP hover / preview widget                      |
+| `<leader>df` / `<leader>dS` | DAP frames / scopes widget                      |
+| `<leader>tr` / `<leader>tf` | Run nearest test / file tests through `neotest` |
+| `<leader>td`                | Run tests in DAP mode                           |
+| `<leader>ts` / `<leader>ta` | Stop / attach tests                             |
+| `<leader>to` / `<leader>tS` | Toggle output panel / test summary tree         |
 
-### 測試（`<leader>t`）
+### Folding with nvim-ufo
 
-| 鍵                          | 功能                             |
-| --------------------------- | -------------------------------- |
-| `<leader>tr` / `<leader>tf` | 跑最近測試 / 整檔測試（neotest） |
-| `<leader>td`                | DAP 除錯模式跑測試               |
-| `<leader>to` / `<leader>tS` | 切換輸出面板 / 測試總覽樹        |
-| `<F5>`                      | Debug continue                   |
-| `<F10>` / `<F11>` / `<F12>` | step over / into / out           |
-| `<leader>db` / `<leader>dB` | 切換中斷點 / 設定中斷點          |
-| `<leader>dL`                | Log point                        |
+| Key                | Action                                           |
+| ------------------ | ------------------------------------------------ |
+| `zR` / `zM`        | Open / close all folds                           |
+| `K`                | Preview folded content                           |
+| `zo` / `zc` / `za` | Open / close / toggle fold through native Neovim |
 
-### Terminal（`<leader>T`）
+### Quickfix / Location List
 
-| 鍵                       | 功能             |
-| ------------------------ | ---------------- |
-| `<leader>Tt`             | 底部水平終端機   |
-| `<leader>Tv`             | 右側垂直終端機   |
-| `<leader>Tf`             | 浮動終端機       |
-| `<leader>Tn`             | 獨立分頁終端機   |
-| `<esc><esc>`（終端機內） | 回到 Normal 模式 |
+`quicker.nvim` and `nvim-bqf` share the **same** native Quickfix and Location list; they do not create separate result windows:
 
-### AI（`<leader>a`）
+- **nvim-bqf:** preview window with `<Tab>` and fzf filtering with `zf` in the Quickfix buffer.
+- **quicker.nvim:** loads with `ft = "qf"` and makes the Quickfix buffer directly editable and writable back to source files.
 
-| 鍵                          | 功能                         |
-| --------------------------- | ---------------------------- |
-| `<C-\>`                     | 開關 Agentic 對話面板        |
-| `<leader>aa` / `<leader>ad` | 加入選取 / 診斷到 AI context |
-| `<leader>an` / `<leader>ar` | 開新 / 恢復 Agentic session  |
-| `<leader>ac` / `<leader>ap` | Claude Code CLI / Ask 模式   |
+| Key             | Action                                        |
+| --------------- | --------------------------------------------- |
+| `<leader>xq`    | Send diagnostics to Quickfix through LSP      |
+| `<leader>xl`    | Send diagnostics to Location list through LSP |
+| `<leader>xQ`    | Trouble Quickfix window                       |
+| `<leader>xL`    | Trouble Location list window                  |
+| `Ctrl-q` in fzf | Send all selected entries to Quickfix         |
 
-### Org / 筆記
+### grug-far: Search and Replace
 
-| 鍵                           | 功能                          |
-| ---------------------------- | ----------------------------- |
-| `<leader>oa` / `<leader>oc`  | Org agenda / capture          |
-| `<leader>of` / `<leader>og`  | fzf 開 Org 檔 / 搜尋 headline |
-| `<leader>oi`                 | 開 `~/org/inbox.org`          |
-| `<localleader>ot`（.org 內） | 切換 TODO 狀態                |
+`grug-far.nvim` opens an interactive search-and-replace panel. It only writes after replacement is confirmed in that panel; use `git diff` to validate changes.
 
-### Buffer / 遠端 / 其他
+| Key                           | Mode    | Action                                                        |
+| ----------------------------- | ------- | ------------------------------------------------------------- |
+| `<leader>sr`                  | Normal  | Open grug-far; project root is detected automatically         |
+| `<leader>sR`                  | Normal  | Open grug-far with the word under cursor prefilled            |
+| `<leader>sA`                  | Normal  | Open grug-far using the ast-grep engine for structural search |
+| `<leader>sA`                  | Visual  | Open grug-far with selected text using the ast-grep engine    |
+| `:GrugFar` / `:GrugFarWithin` | Command | Open manually                                                 |
 
-| 鍵                                         | 功能                                     |
-| ------------------------------------------ | ---------------------------------------- |
-| `<leader>bf` / `<leader>bF`                | 開檔案總管 / 定位目前檔案（mini.files）  |
-| `<leader>bd` / `<leader>bD`                | 刪除 / wipeout buffer                    |
-| `<leader>rc` / `<leader>rd` / `<leader>re` | SSHFS 連線 / 斷線 / 編輯設定             |
-| `<leader>.` / `<leader>fs` / `<leader>fn`  | scratch buffer / 選擇 scratch / 通知歷史 |
+- **ripgrep engine, default:** text search and regular-expression replacement; requires `rg`.
+- **ast-grep engine:** structural search and replacement; requires `sg`, the ast-grep CLI.
+- Health check: `:checkhealth grug-far`.
+
+### Navigation / Jumping
+
+| Key                | Action                                                                |
+| ------------------ | --------------------------------------------------------------------- |
+| `f/F/t/T` plus `;` | Enhanced in-line jumps with `mini.jump`                               |
+| `[x` / `]x`        | Previous / next by type via `mini.bracketed`: b c d f j l o q t u w y |
+| `[i` / `]i`        | Jump to indent scope start / end with `mini.indentscope`              |
+| `<leader>;`        | Dropbar winbar symbol picker                                          |
+| `[;`               | Jump to current context start with Dropbar                            |
+| `];`               | Select next context with Dropbar                                      |
+
+### Completion
+
+| Key                   | Action                                                                              |
+| --------------------- | ----------------------------------------------------------------------------------- |
+| `<Tab>` / `<S-Tab>`   | Move down / up completion menu, or jump forward / back through LuaSnip placeholders |
+| `<CR>`                | Confirm completion or expand snippet                                                |
+| `<C-Space>` / `<C-e>` | Trigger / cancel completion manually                                                |
+| `<C-b>` / `<C-f>`     | Scroll completion documentation up / down                                           |
+
+### Editing with mini.nvim
+
+| Key                   | Action                                                                    |
+| --------------------- | ------------------------------------------------------------------------- |
+| `gc` / `gcc`          | Comment operator / toggle current line with `mini.comment`                |
+| `sa` / `sd` / `sr`    | Add / delete / replace surrounding delimiters with `mini.surround`        |
+| `ga` / `gA`           | Align / align with preview through `mini.align`                           |
+| `gS`                  | Toggle one-line and multi-line forms with `mini.splitjoin`                |
+| `g=` / `gx` / `gm`    | Evaluate / exchange / multiply with `mini.operators`                      |
+| `gz`                  | Replace with register through `mini.operators`; avoids a `gr` conflict    |
+| `gs`                  | Sort with `mini.operators`                                                |
+| `<M-h/j/k/l>`         | Move lines or selected blocks in Normal and Visual modes with `mini.move` |
+| `daF` / `dif` / `dic` | Delete function / loop condition / class via `mini.ai`                    |
+| `<leader>=`           | Format current buffer with `conform.nvim`                                 |
+
+### Terminal: `<leader>T`
+
+| Key                          | Action                       |
+| ---------------------------- | ---------------------------- |
+| `<leader>Tt`                 | Bottom horizontal terminal   |
+| `<leader>Tv`                 | Right-side vertical terminal |
+| `<leader>Tf`                 | Floating terminal            |
+| `<leader>Tn`                 | Terminal in a separate tab   |
+| `<Esc><Esc>` inside terminal | Return to Normal mode        |
+
+### AI: `<leader>a`
+
+| Key          | Action                                                     |
+| ------------ | ---------------------------------------------------------- |
+| `<C-\>`      | Toggle the Agentic chat panel                              |
+| `<leader>aa` | Add current file or selection to Agentic context           |
+| `<leader>ad` | Add LSP diagnostics on the current line to Agentic context |
+| `<leader>an` | Start a new Agentic session                                |
+| `<leader>ar` | Resume an Agentic session                                  |
+| `<leader>ac` | Claude Code CLI through codecompanion                      |
+| `<leader>ap` | Claude Code Ask mode through codecompanion                 |
+
+### Org / Notes: `<leader>o`
+
+| Key                                                   | Action                                      |
+| ----------------------------------------------------- | ------------------------------------------- |
+| `<leader>oa` / `<leader>oc`                           | Org agenda / capture                        |
+| `<leader>oi`                                          | Open `~/org/inbox.org`                      |
+| `<leader>of` / `<leader>og`                           | Open Org file / search headline through fzf |
+| `<leader>or`                                          | Org refile                                  |
+| `<localleader>ot` / `<localleader>oT` in `.org` files | Cycle TODO state / select TODO state        |
+| `<localleader>od` / `<localleader>os`                 | Set DEADLINE / SCHEDULED                    |
+| `<localleader>oi`                                     | Insert timestamp                            |
+| `<localleader>ol` / `<localleader>oq`                 | Insert link / set tags                      |
+| `<localleader>on` / `<localleader>oN`                 | Narrow subtree / widen                      |
+
+### Remote: `<leader>r`
+
+| Key                                        | Action                                          |
+| ------------------------------------------ | ----------------------------------------------- |
+| `<leader>rc` / `<leader>rd` / `<leader>re` | SSHFS connect / disconnect / edit configuration |
+
+---
+
+## AI Workflow
+
+### agentic.nvim
+
+Connects to `claude-agent-acp`, which must be installed as the `claude-agent-acp` npm package. It provides a chat panel and diff preview.
+
+- `<C-\>` toggles the panel in Normal, Visual, and Insert modes.
+- `<leader>aa` adds the current selection or entire file to context.
+- `<leader>ad` adds LSP diagnostics from the cursor line to context.
+- `<leader>an` / `<leader>ar` start a new session / resume a session.
+
+### codecompanion.nvim
+
+Uses the CLI provider through the `claude` command, meaning no HTTP API key is needed.
+
+- `<leader>ac` runs `:CodeCompanionCLI` for interactive Claude Code.
+- `<leader>ap` runs `:CodeCompanionCLI Ask` for Ask mode.
+
+---
+
+## Language Tooling
+
+| Language                | LSP                                      | Formatter                               | DAP            | Tests                      |
+| ----------------------- | ---------------------------------------- | --------------------------------------- | -------------- | -------------------------- |
+| Go                      | `gopls` with staticcheck and inlay hints | `goimports` + `gofumpt`                 | mason-nvim-dap | neotest-plenary / vim-test |
+| Rust                    | `rustaceanvim` with rust-analyzer        | `rustfmt`                               | rustaceanvim   | rustaceanvim.neotest       |
+| C / C++                 | `clangd`                                 | `clang_format`                          | mason-nvim-dap | neotest-gtest              |
+| Lua                     | `lua_ls` + `lazydev`                     | `stylua`                                | —              | neotest-plenary            |
+| TypeScript / JavaScript | `ts_ls` + `eslint`                       | `prettier`; ts_ls formatting disabled   | —              | neotest-vim-test           |
+| HTML / CSS              | `html` / `cssls`                         | `prettier`                              | —              | —                          |
+| JSON / YAML             | `jsonls` / `yamlls` with schemastore     | `prettier`                              | —              | —                          |
+| Bash / Shell            | `bashls`                                 | `shfmt`                                 | —              | —                          |
+| Python                  | No LSP; pyright disabled                 | `ruff_format` + `ruff_organize_imports` | —              | neotest-python             |
+| TOML                    | No LSP                                   | `taplo`                                 | —              | —                          |
+| SQL                     | vim-dadbod with blink source             | —                                       | —              | —                          |
 
 ---
 
 ## Custom Utilities
 
-除了第三方 plugins 外，這份配置也包含一些自製 Lua utilities，
-用來改善日常開發體驗。
+### Debug Utility: `lua/utils/debug.lua`
 
-### Debug Utility
+A lightweight Lua debug utility that uses fzf-lua as its viewer.
 
-`utils.debug` 是一個輕量化 Lua debug 工具，整合 `fzf-lua` 作為查看介面。
-
-Features:
-
-- `dd(...)`：使用 `vim.inspect()` 檢查 Lua value
-- `bt()`：查看 Lua traceback
-- 支援 `print()` / `:=` debug workflow
-- Debug history + fzf preview
-- 顯示 caller file / line 資訊
-
-Setup:
+- Global `dd(...)`: inspect Lua values with `vim.inspect()`.
+- Global `bt()`: print a Lua traceback.
+- `print()` is overridden so all output enters debug history.
+- Shows caller file and line information.
+- An fzf-lua interface browses debug history; pressing Enter opens content in a new buffer.
 
 ```lua
+-- Already configured in init.lua:
 require("utils").debug.setup({
   backend = "fzf",
+  override_print = true,
 })
-
 ```
 
 ---
 
-## 安裝
+## Installation
 
-**前置條件**
+### Prerequisites
 
-- Neovim ≥ 0.11（建議 0.12+）
-- `git`、`ripgrep`、`fd`、`fzf`
-- C 編譯器（Treesitter parser 編譯用）
-- `nodejs`/`npm`（`claude-agent-acp` / `claude` CLI）
-- 各語言 formatter（`stylua`/`rustfmt`/`prettier`/`gofumpt`…，`conform.nvim` 用）
-- 選用：`sshfs`（`remote-sshfs.nvim`）
+- Neovim >= 0.11; 0.12+ recommended.
+- `git`, `ripgrep` (`rg`), `fd`, and `fzf`.
+- A C compiler for Treesitter parser compilation.
+- `nodejs` / `npm` for `claude-agent-acp` and the `claude` CLI.
+- Language formatters such as `stylua`, `rustfmt`, `prettier`, and `gofumpt` for conform.nvim.
+- Optional: `sshfs` for remote-sshfs.nvim; `sg` for ast-grep support in grug-far.
 
-**安裝**
-
-```bash
-git clone git@github.com:tangda773/nvim.git ~/.config/nvim          # Linux / macOS
-git clone git@github.com:tangda773/nvim.git "$HOME/AppData/Local/nvim"  # Windows
-```
-
-首次執行 `nvim` 時 `zpack.nvim` 自動安裝所有插件，`mason.nvim` 安裝語言伺服器，完成後重開即可。
-
-**更新**
+### Install
 
 ```bash
-git pull
-# 更新插件版本：:ZPack update
+git clone git@github.com:tangda773/nvim.git ~/.config/nvim
 ```
+
+On first launch, `zpack.nvim` installs all plugins and `mason.nvim` installs language servers. Restart Neovim after setup completes.
+
+### Update Plugins
+
+```vim
+:ZPack update
+```
+
+---
+
+## Quick Verification
+
+```vim
+:checkhealth
+:checkhealth grug-far
+:lua print(require("grug-far"))
+:lua print(require("quicker"))
+:lua print(require("trouble"))
+:lua print(require("dropbar"))
+```
+
+---
+
+## Disabled / Planned
+
+- `mini.map`: code minimap; its spec file exists but is commented out in `mini.lua`.
+- `mini.jump2d`: two-step arbitrary jump; its spec file exists but is commented out in `mini.lua`.
+- `pyright`: commented out in `lsp/util.lua`; Python LSP is currently disabled.
+- Direct `rust_analyzer`: managed by `rustaceanvim`, not enabled directly from `lsp/util.lua`.
