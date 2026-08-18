@@ -36,7 +36,7 @@ return {
           require("plugins.mini.cursorword")
           require("plugins.mini.hipatterns")
           require("plugins.mini.indentscope")
-          require("plugins.mini.map")
+          -- require("plugins.mini.map")
           require("plugins.mini.statusline")
           require("plugins.mini.tabline")
           require("plugins.mini.trailspace")
