@@ -74,6 +74,7 @@ lazy.nvim-style specs are used throughout `lua/plugins/`. Common fields:
 | `fzf-lua`                                                   | Fuzzy finding for files, grep, buffers, LSP, Git, and more                         |
 | `fzf-org.nvim`                                              | Org file and headline picker                                                       |
 | `grug-far.nvim`                                             | Project-wide search and replace with ripgrep or ast-grep                           |
+| `nvim-rip-substitute`                                       | Buffer and workspace search and replace with PCRE2 regex and incremental popup UI  |
 | `lazydev.nvim`                                              | Neovim Lua API type hints                                                          |
 | `mason.nvim` + `mason-lspconfig.nvim`                       | LSP, DAP, and formatter installation management                                    |
 | `nvim-lspconfig`                                            | LSP configuration loading; see `lua/lsp/`                                          |
@@ -284,6 +285,34 @@ There are **10 configuration files** under `lua/plugins/mini/` that are currentl
 - **ripgrep engine, default:** text search and regular-expression replacement; requires `rg`.
 - **ast-grep engine:** structural search and replacement; requires `sg`, the ast-grep CLI.
 - Health check: `:checkhealth grug-far`.
+
+### nvim-rip-substitute: Search and Replace
+
+`nvim-rip-substitute` opens a popup UI for search and replace in the current buffer or workspace using PCRE2 regex syntax via ripgrep, with incremental live preview and match counting.
+
+| Key / Command    | Mode    | Action                                           |
+| ---------------- | ------- | ------------------------------------------------ |
+| `<leader>rs`     | Normal  | Open rip-substitute popup for the current buffer |
+| `<leader>rs`     | Visual  | Open with the selection as line range            |
+| `:RipSubstitute` | Command | Open manually                                    |
+
+**Inside the popup:**
+
+| Key           | Action                                      |
+| ------------- | ------------------------------------------- |
+| `<CR>`        | Confirm and substitute in buffer            |
+| `<S-CR>`      | Confirm and substitute in working directory |
+| `<C-CR>`      | Confirm from insert mode                    |
+| `q`           | Abort                                       |
+| `<Up>/<Down>` | Navigate substitution history               |
+| `<C-f>`       | Toggle fixed strings mode (disable regex)   |
+| `<C-c>`       | Toggle case sensitivity                     |
+| `R`           | Open pattern at regex101 for debugging      |
+| `?`           | Display help                                |
+
+- Uses **PCRE2 regex** via ripgrep instead of Vim's regex syntax.
+- **Workspace substitution** (`<S-CR>`) rewrites across all project files; use `git diff` to validate.
+- History of previous substitutions is persisted across sessions.
 
 ### Navigation / Jumping
 
