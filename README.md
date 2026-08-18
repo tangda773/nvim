@@ -67,6 +67,7 @@ lazy.nvim-style specs are used throughout `lua/plugins/`. Common fields:
 | `codecompanion.nvim`                                        | AI collaboration through CLI mode and the `claude` command                         |
 | `conform.nvim`                                              | Format on save with `stylua`, `rustfmt`, `prettier`, `gofumpt`, and more           |
 | `crates.nvim`                                               | Cargo.toml version completion and operations                                       |
+| `csvview.nvim`                                              | CSV/TSV aligned-column viewer with sticky header and field navigation              |
 | `vim-dadbod-ui` + `vim-dadbod` + `vim-dadbod-completion`    | SQL database UI and query completion                                               |
 | `nvim-dap` + `nvim-dap-ui` + `mason-nvim-dap.nvim`          | DAP debugging                                                                      |
 | `dropbar.nvim`                                              | Winbar breadcrumb navigation                                                       |
@@ -348,6 +349,21 @@ There are **10 configuration files** under `lua/plugins/mini/` that are currentl
 | `<M-h/j/k/l>`         | Move lines or selected blocks in Normal and Visual modes with `mini.move` |
 | `daF` / `dif` / `dic` | Delete function / loop condition / class via `mini.ai`                    |
 | `<leader>=`           | Format current buffer with `conform.nvim`                                 |
+
+### CSV/TSV: csvview.nvim
+
+Loaded automatically for `csv` and `tsv` filetypes. Displays columns in aligned `border` mode with a sticky header.
+
+| Key / Command     | Mode    | Action                           |
+| ----------------- | ------- | -------------------------------- |
+| `:CsvViewEnable`  | Command | Enable aligned-column view       |
+| `:CsvViewDisable` | Command | Disable aligned-column view      |
+| `:CsvViewToggle`  | Command | Toggle aligned-column view       |
+| `<Tab>`           | n / v   | Jump to next field end           |
+| `<S-Tab>`         | n / v   | Jump to previous field end       |
+| `<Enter>`         | n / v   | Jump to next row                 |
+| `<S-Enter>`       | n / v   | Jump to previous row             |
+| `if` / `af`       | o / x   | Text object: inner / outer field |
 
 ### Terminal: `<leader>T`
 
