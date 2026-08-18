@@ -1,6 +1,6 @@
 # nvim
 
-Personal Neovim configuration targeting *_Neovim >= 0.12_. Plugin management uses [`zpack.nvim`](https://github.com/zuqini/zpack.nvim), a thin wrapper around the built-in `vim.pack`.
+Personal Neovim configuration targeting *_Neovim >= 0.12_. Plugin management uses [`lazy.nvim`](https://github.com/folke/lazy.nvim).
 
 **Core approach:** prefer native APIs, use the mini.nvim ecosystem instead of large all-in-one plugins, and combine LSP, Treesitter, and AI-assisted workflows.
 
@@ -12,11 +12,12 @@ Supported languages: Go / Rust / C/C++ / Lua / Bash / TypeScript/JavaScript / HT
 
 ```text
 ~/.config/nvim/
-├── init.lua                    # Entry point: mapleader, vim.loader, require basic/config.zpack
+├── init.lua                    # Entry point: mapleader, vim.loader, require config.lazy
+├── lazy-lock.json              # lazy.nvim lockfile; pin exact plugin versions
 ├── lua/
 │   ├── basic.lua               # Global options
 │   ├── config/
-│   │   ├── zpack.lua           # zpack.nvim initialization
+│   │   ├── lazy.lua            # lazy.nvim bootstrap and setup
 │   │   └── orgmode-settings.lua
 │   ├── lsp/
 │   │   ├── util.lua            # Shared LSP setup, keymaps, diagnostic configuration
@@ -24,16 +25,32 @@ Supported languages: Go / Rust / C/C++ / Lua / Bash / TypeScript/JavaScript / HT
 │   │   ├── gopls.lua / html.lua / jsonls.lua / lua_ls.lua
 │   │   ├── ts_ls.lua / yamlls.lua
 │   ├── plugins/
-│   │   ├── mini.lua            # mini.nvim spec; requires submodules by load timing
-│   │   ├── mini/               # mini submodule configuration files, loaded by mini.lua
-│   │   └── *.lua               # Other plugin specs
+│   │   ├── mini.lua            # lazy.nvim spec for mini.nvim; requires submodules by load timing
+│   │   ├── mini/               # mini submodule configuration files, required by mini.lua
+│   │   └── *.lua               # lazy.nvim plugin specs
 │   └── utils/
 │       ├── init.lua
 │       └── debug.lua           # Debug utility (dd/bt plus fzf-lua viewer)
 └── wezterm/                    # WezTerm configuration; unrelated to Neovim
 ```
 
-> zpack scan rule: it only processes direct files under `lua/plugins/*.lua`; it does **not** recurse into `lua/plugins/mini/`. `mini.lua` is responsible for requiring each submodule at the appropriate time.
+> lazy.nvim import rule: `lua/config/lazy.lua` calls `require("lazy").setup({ spec = { { import = "plugins" } } })`, which loads all `lua/plugins/*.lua` files as plugin specs. Files under `lua/plugins/mini/` are plain configuration modules that return nothing — they are not picked up as specs. `mini.lua` is responsible for requiring each submodule at the appropriate time.
+
+### Plugin spec fields in use
+
+lazy.nvim-style specs are used throughout `lua/plugins/`. Common fields:
+
+| Field          | Role                                                                              |
+| -------------- | --------------------------------------------------------------------------------- |
+| `opts`         | Passed to the plugin's `setup()` call by lazy.nvim automatically                  |
+| `config`       | Custom setup function; used when `opts` alone is insufficient                     |
+| `keys`         | Lazy-load trigger: load the plugin only when one of the listed keymaps is pressed |
+| `event`        | Lazy-load trigger: load on a Neovim event such as `BufReadPost` or `VeryLazy`     |
+| `ft`           | Lazy-load trigger: load only for the listed filetypes                             |
+| `cmd`          | Lazy-load trigger: load when the listed Ex command is first called                |
+| `dependencies` | Other plugin specs that must be present before this one                           |
+| `lazy`         | Set to `false` to load immediately at startup; `true` to defer until triggered    |
+| `priority`     | Load order for eager (`lazy = false`) plugins; higher numbers load first          |
 
 ---
 
@@ -41,7 +58,7 @@ Supported languages: Go / Rust / C/C++ / Lua / Bash / TypeScript/JavaScript / HT
 
 | Plugin                                                      | Primary purpose                                                                    |
 | ----------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `zpack.nvim`                                                | Plugin manager built on `vim.pack`                                                 |
+| `lazy.nvim`                                                 | Plugin manager and lazy-loader                                                     |
 | `mini.nvim`                                                 | Multiple submodules; see the next section                                          |
 | `agentic.nvim`                                              | ACP AI chat panel and diff preview through `claude-agent-acp`                      |
 | `blink.cmp`                                                 | Completion engine: LSP, snippets, buffers, paths, and command line                 |
@@ -424,13 +441,18 @@ require("utils").debug.setup({
 git clone git@github.com:tangda773/nvim.git ~/.config/nvim
 ```
 
-On first launch, `zpack.nvim` installs all plugins and `mason.nvim` installs language servers. Restart Neovim after setup completes.
+On first launch, `lua/config/lazy.lua` bootstraps lazy.nvim by cloning it from the stable branch if it is not already present. lazy.nvim then installs all plugins automatically. `mason.nvim` installs language servers on demand. Restart Neovim after the initial setup completes.
 
-### Update Plugins
+### Manage Plugins
 
-```vim
-:ZPack update
-```
+| Command         | Action                                                                |
+| --------------- | --------------------------------------------------------------------- |
+| `:Lazy`         | Open the lazy.nvim UI (install, update, restore, profile, and more)   |
+| `:Lazy sync`    | Install missing plugins, update existing ones, and clean removed ones |
+| `:Lazy update`  | Update all plugins to their latest versions                           |
+| `:Lazy restore` | Restore all plugins to the versions recorded in `lazy-lock.json`      |
+| `:Lazy health`  | Run health checks for lazy.nvim                                       |
+| `:Lazy profile` | Show plugin load-time profiling                                       |
 
 ---
 
