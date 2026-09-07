@@ -5,11 +5,21 @@ return {
     { "nvim-treesitter/nvim-treesitter", lazy = true },
   },
   opts = {
-    -- NOTE: The log_level is in `opts.opts`
-    opts = {
-      -- log_level = "DEBUG", -- or "TRACE"
+    adapters = {
+      acp = {
+        claude_code = function()
+          return require("codecompanion.adapters").extend("claude_code", {
+            env = {
+              CLAUDE_CODE_OAUTH_TOKEN = "my-oauth-token",
+            },
+          })
+        end,
+      },
     },
     interactions = {
+      chat = {
+        adapter = { name = "claude_code" },
+      },
       cli = {
         agent = "claude_code",
         agents = {
@@ -18,18 +28,15 @@ return {
             args = {},
             description = "Claude Code CLI",
             provider = "terminal",
-          }
-        }
-      }
-    }
+          },
+        },
+      },
+    },
   },
   keys = {
-    -- -- Chat 模式（need HTTP Provider）
-    -- { "<leader>ac", "<cmd>CodeCompanionChat<cr>", desc = "Chat" },
-    -- { "<leader>ap", "<cmd>CodeCompanionActions<cr>", desc = "Action Palette" },
-
-    -- CLI 模式（移到 <leader>a 統一 AI 前綴，清出 <leader>c 給 code action 概念）
-    { "<leader>ac", "<cmd>CodeCompanionCLI<cr>",     desc = "[AI] Claude Code CLI" },
-    { "<leader>ap", "<cmd>CodeCompanionCLI Ask<cr>", desc = "[AI] Claude Code Ask" }
-  }
+    { "<leader>acc", "<cmd>CodeCompanionChat<cr>",                     desc = "[AI/CC] Chat (ACP)" },
+    { "<leader>aca", "<cmd>CodeCompanionActions<cr>",                  desc = "[AI/CC] Action Palette" },
+    { "<leader>act", function() require("codecompanion").toggle() end, desc = "[AI/CC] Toggle CLI" },
+    { "<leader>acp", "<cmd>CodeCompanionCLI Ask<cr>",                  desc = "[AI/CC] Ask (CLI)" },
+  },
 }

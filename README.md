@@ -361,17 +361,19 @@ Loaded automatically for `csv` and `tsv` filetypes. Displays columns in aligned 
 | `<leader>Tn`                 | Terminal in a separate tab   |
 | `<Esc><Esc>` inside terminal | Return to Normal mode        |
 
-### AI: `<leader>a`
+### AI
 
-| Key          | Action                                                     |
-| ------------ | ---------------------------------------------------------- |
-| `<C-\>`      | Toggle the Agentic chat panel                              |
-| `<leader>aa` | Add current file or selection to Agentic context           |
-| `<leader>ad` | Add LSP diagnostics on the current line to Agentic context |
-| `<leader>an` | Start a new Agentic session                                |
-| `<leader>ar` | Resume an Agentic session                                  |
-| `<leader>ac` | Claude Code CLI through codecompanion                      |
-| `<leader>ap` | Claude Code Ask mode through codecompanion                 |
+| Key           | Action                                                          |
+| ------------- | --------------------------------------------------------------- |
+| `<C-\>`       | [AI/Agentic] Toggle the Agentic chat panel                      |
+| `<leader>aa`  | [AI/Agentic] Add current file or selection to context           |
+| `<leader>ad`  | [AI/Agentic] Add LSP diagnostics on the current line to context |
+| `<leader>an`  | [AI/Agentic] Start a new session                                |
+| `<leader>ar`  | [AI/Agentic] Resume a session (continues in terminal too)       |
+| `<leader>acc` | [AI/CC] Open Claude Code Chat (ACP)                             |
+| `<leader>aca` | [AI/CC] Open Action Palette                                     |
+| `<leader>act` | [AI/CC] Toggle Claude Code CLI                                  |
+| `<leader>acp` | [AI/CC] Claude Code Ask mode (CLI)                              |
 
 ### Org / Notes: `<leader>o`
 
