@@ -8,7 +8,11 @@ return {
     adapters = {
       acp = {
         claude_code = function()
-          return require("codecompanion.adapters").extend("claude_code", {})
+          return require("codecompanion.adapters").extend("claude_code", {
+            commands = {
+              default = { "/home/kuangtatang/.local/share/pnpm/bin/claude-agent-acp" },
+            },
+          })
         end,
       },
     },
