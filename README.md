@@ -30,7 +30,8 @@ Supported languages: Go / Rust / C/C++ / Lua / Bash / TypeScript/JavaScript / HT
 │   │   └── *.lua               # lazy.nvim plugin specs
 │   └── utils/
 │       ├── init.lua
-│       └── debug.lua           # Debug utility (dd/bt plus fzf-lua viewer)
+│       ├── debug.lua           # Debug utility (dd/bt plus fzf-lua viewer)
+│       └── call_hierarchy.lua  # A recursive LSP call hierarchy explorer, rendered into the quickfix list
 └── wezterm/                    # WezTerm configuration; unrelated to Neovim
 ```
 
@@ -96,7 +97,6 @@ lazy.nvim-style specs are used throughout `lua/plugins/`. Common fields:
 | `statuscol.nvim`                                            | Custom status column for folds, signs, and line numbers                            |
 | `toggleterm.nvim`                                           | Multi-layout terminal management                                                   |
 | `nvim-treesitter`                                           | Syntax parsing and highlighting through the built-in Treesitter API                |
-| `trouble.nvim`                                              | Tree-based UI for diagnostics, symbols, and call hierarchy                         |
 | `nvim-ufo`                                                  | Advanced folds via LSP, Treesitter, and indentation                                |
 
 ---
@@ -219,18 +219,6 @@ There are **10 configuration files** under `lua/plugins/mini/` that are currentl
 | `<leader>xd`                | Buffer diagnostics through `fzf-lua`                   |
 | `<leader>xD`                | Workspace diagnostics through `fzf-lua`                |
 
-### Trouble
-
-| Key                         | Action                         |
-| --------------------------- | ------------------------------ |
-| `<leader>xx`                | Workspace diagnostics          |
-| `<leader>xX`                | Buffer diagnostics             |
-| `<leader>cs`                | Symbol tree                    |
-| `<leader>cl`                | LSP definitions and references |
-| `<leader>ci` / `<leader>co` | Incoming / outgoing calls      |
-| `<leader>xL`                | Location list                  |
-| `<leader>xQ`                | Quickfix list                  |
-
 ### DAP / Tests
 
 | Key                         | Action                                          |
@@ -267,8 +255,6 @@ There are **10 configuration files** under `lua/plugins/mini/` that are currentl
 | --------------- | --------------------------------------------- |
 | `<leader>xq`    | Send diagnostics to Quickfix through LSP      |
 | `<leader>xl`    | Send diagnostics to Location list through LSP |
-| `<leader>xQ`    | Trouble Quickfix window                       |
-| `<leader>xL`    | Trouble Location list window                  |
 | `Ctrl-q` in fzf | Send all selected entries to Quickfix         |
 
 ### grug-far: Search and Replace
@@ -467,6 +453,41 @@ require("utils").debug.setup({
 })
 ```
 
+### Call Hierarchy Utility: lua/utils/call_hierarchy.lua
+
+A recursive LSP call hierarchy explorer, rendered into the quickfix list. Unlike the built-in vim.lsp.buf.incoming_calls() / outgoing_calls(), which only expand one level per invocation, this walks the full tree (incoming or outgoing) and shows the complete call chain for every node.
+
+- M.run('incoming'|'outgoing', opts?): walks callers or callees from the symbol under the cursor and populates the quickfix list.
+- opts.max_depth (default 30): safety-valve recursion depth cap.
+- opts.max_fanout (default 40): caps how many children are expanded from any single node, guarding against high fan-in/fan-out utilities (e.g. a widely-called log()) that have no cycle for the built-in cycle detection to catch.
+- Path-scoped cycle detection: dedup is scoped per root-to-node path, so "diamond" fan-in (two branches reaching the same function) is preserved instead of one branch silently disappearing.
+- Each quickfix entry shows the full root-to-node call chain (child ← parent ← grandparent ← ...), not just indentation, so direct vs. indirect relationships stay unambiguous even in a flat list.
+- If a branch is truncated by either safety valve, vim.notify reports it after the traversal completes — a truncated result is never silently mistaken for a complete one.
+
+```lua
+local utils = require("utils")
+
+-- Direct callers/callees only (equivalent to the built-in functions)
+vim.keymap.set("n", "<leader>ci", function()
+  utils.call_hierarchy.run("incoming", { max_depth = 1 })
+end, { desc = "Incoming calls (1 level)" })
+
+vim.keymap.set("n", "<leader>co", function()
+  utils.call_hierarchy.run("outgoing", { max_depth = 1 })
+end, { desc = "Outgoing calls (1 level)" })
+
+-- Full traversal, guarded by default safety valves
+vim.keymap.set("n", "<leader>cI", function()
+  utils.call_hierarchy.run("incoming")
+end, { desc = "Incoming calls (full traversal)" })
+
+vim.keymap.set("n", "<leader>cO", function()
+  utils.call_hierarchy.run("outgoing")
+end, { desc = "Outgoing calls (full traversal)" })
+```
+
+> For a single-level lookup with a nicer UI, trouble.nvim's lsp_incoming_calls/lsp_outgoing_calls modes are a good lighter-weight alternative — reach for this module when you need to trace several levels deep in one pass.
+
 ---
 
 ## Installation
@@ -508,7 +529,6 @@ On first launch, `lua/config/lazy.lua` bootstraps lazy.nvim by cloning it from t
 :checkhealth grug-far
 :lua print(require("grug-far"))
 :lua print(require("quicker"))
-:lua print(require("trouble"))
 :lua print(require("dropbar"))
 ```
 
