@@ -8,11 +8,7 @@ return {
     adapters = {
       acp = {
         claude_code = function()
-          return require("codecompanion.adapters").extend("claude_code", {
-            env = {
-              CLAUDE_CODE_OAUTH_TOKEN = "my-oauth-token",
-            },
-          })
+          return require("codecompanion.adapters").extend("claude_code", {})
         end,
       },
     },
