@@ -2,7 +2,8 @@ return {
   "olimorris/codecompanion.nvim",
   dependencies = {
     "nvim-lua/plenary.nvim",
-    { "nvim-treesitter/nvim-treesitter", lazy = true },
+    "nvim-treesitter/nvim-treesitter",
+    "lalitmee/codecompanion-spinners.nvim",
   },
   opts = {
     adapters = {
@@ -32,6 +33,13 @@ return {
         },
       },
     },
+    extensions = {
+      spinner = {
+        opts = {
+          style = "snacks"
+        }
+      }
+    }
   },
   keys = {
     { "<leader>acc", "<cmd>CodeCompanionChat<cr>",                     desc = "[AI/CC] Chat (ACP)" },
