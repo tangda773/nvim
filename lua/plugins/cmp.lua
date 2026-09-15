@@ -13,17 +13,12 @@ return {
     -- ── Keymap ──────────────────────────────────────────────────
     keymap = {
       preset        = "none",
-      -- CR：只負責確認補全，LuaSnip expand 移到外面的 vim.keymap
       ["<CR>"]      = { "accept", "fallback" },
-      -- Tab：只負責補全選單導航，snippet jump 移到外面的 vim.keymap
       ["<Tab>"]     = { "select_next", "fallback" },
       ["<S-Tab>"]   = { "select_prev", "fallback" },
-      -- 文件捲動
       ["<C-b>"]     = { "scroll_documentation_up", "fallback" },
       ["<C-f>"]     = { "scroll_documentation_down", "fallback" },
-      -- 手動觸發補全
       ["<C-Space>"] = { "show", "fallback" },
-      -- 取消補全
       ["<C-e>"]     = { "cancel", "fallback" },
     },
     -- ── Cmdline ─────────────────────────────────────────────────
@@ -80,33 +75,6 @@ return {
     -- ── Appearance ──────────────────────────────────────────────
     appearance = {
       nerd_font_variant = "mono",
-      kind_icons = {
-        Text          = "󰉿",
-        Method        = "󰊕",
-        Function      = "󰊕",
-        Constructor   = "󰒓",
-        Field         = "󰜢",
-        Variable      = "󰆦",
-        Property      = "󰖷",
-        Class         = "󱡠",
-        Interface     = "󱡠",
-        Struct        = "󱡠",
-        Module        = "󰅩",
-        Unit          = "󰪚",
-        Value         = "󰦨",
-        Enum          = "󰦨",
-        EnumMember    = "󰦨",
-        Keyword       = "󰻾",
-        Constant      = "󰏿",
-        Snippet       = "󱄽",
-        Color         = "󰏘",
-        File          = "󰈔",
-        Reference     = "󰬲",
-        Folder        = "󰉋",
-        Event         = "󱐋",
-        Operator      = "󰪚",
-        TypeParameter = "󰬛",
-      },
     },
     -- ── Completion ──────────────────────────────────────────────
     completion = {
@@ -122,10 +90,82 @@ return {
         draw      = {
           columns = {
             { "kind_icon" },
-            { "label",    "label_description", gap = 1 },
+            { "label",       "label_description", gap = 1 },
             { "kind" },
+            { "source_name", gap = 1 },
           },
           treesitter = { "lsp" },
+          components = {
+            -- ── 圖示：mini.icons 動態取得，純文字色 ────────────
+            kind_icon = {
+              ellipsis = false,
+              text = function(ctx)
+                local icon, _, _ = require("mini.icons").get("lsp", ctx.kind:lower())
+                return icon
+              end,
+              highlight = function(ctx)
+                local _, hl, _ = require("mini.icons").get("lsp", ctx.kind:lower())
+                return hl
+              end,
+            },
+
+            -- ── kind：純文字，不加括號 ─────────────────────
+            kind = {
+              ellipsis = false,
+              width = { fill = true },
+              text = function(ctx) return ctx.kind end,
+              highlight = function(ctx)
+                local _, hl, _ = require("mini.icons").get("lsp", ctx.kind:lower())
+                return hl
+              end,
+            },
+
+            -- ── label：fuzzy 匹配加粗 + deprecated 刪除線 ──────
+            label = {
+              width = { fill = true, max = 60 },
+              text = function(ctx)
+                return ctx.label .. (ctx.label_detail or "")
+              end,
+              highlight = function(ctx)
+                if ctx.deprecated then
+                  local highlights = {
+                    { 0, #ctx.label, group = "BlinkCmpLabelDeprecated" },
+                  }
+                  for _, idx in ipairs(ctx.label_matched_indices or {}) do
+                    table.insert(highlights, { idx, idx + 1, group = "BlinkCmpLabelMatch" })
+                  end
+                  return highlights
+                end
+
+                local highlights = {
+                  { 0, #ctx.label, group = "BlinkCmpLabel" },
+                }
+                if ctx.label_detail then
+                  table.insert(highlights, {
+                    #ctx.label, #ctx.label + #ctx.label_detail, group = "BlinkCmpLabelDetail",
+                  })
+                end
+                for _, idx in ipairs(ctx.label_matched_indices or {}) do
+                  table.insert(highlights, { idx, idx + 1, group = "BlinkCmpLabelMatch" })
+                end
+                return highlights
+              end,
+            },
+            label_description = {
+              ellipsis  = true,
+              width     = { max = 25 },
+              text      = function(ctx) return ctx.label_description end,
+              highlight = "BlinkCmpLabelDescription",
+            },
+
+            -- ── 來源：方括號淡色文字，常駐顯示 ─────────────
+            source_name = {
+              text = function(ctx)
+                return "[" .. ctx.source_name .. "]"
+              end,
+              highlight = "BlinkCmpSource",
+            },
+          },
         },
       },
       documentation = {
@@ -149,12 +189,10 @@ return {
   config = function(_, opts)
     require("blink.cmp").setup(opts)
 
-    -- friendly-snippets 載入
     require("luasnip.loaders.from_vscode").lazy_load()
 
     local luasnip = require("luasnip")
 
-    -- Tab：snippet jump forward（在 blink menu 關閉後才觸發）
     vim.keymap.set({ "i", "s" }, "<Tab>", function()
       if luasnip.locally_jumpable(1) then
         luasnip.jump(1)
@@ -166,7 +204,6 @@ return {
       end
     end, { silent = true, desc = "LuaSnip jump forward / Tab" })
 
-    -- S-Tab：snippet jump backward
     vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
       if luasnip.locally_jumpable(-1) then
         luasnip.jump(-1)
@@ -178,7 +215,6 @@ return {
       end
     end, { silent = true, desc = "LuaSnip jump backward / S-Tab" })
 
-    -- CR：snippet expand（menu 沒開時才需要這個）
     vim.keymap.set("i", "<CR>", function()
       if luasnip.expandable() then
         luasnip.expand()
@@ -189,5 +225,15 @@ return {
         )
       end
     end, { silent = true, desc = "LuaSnip expand / CR" })
+
+    -- ── Fuzzy 匹配字元顏色 ───────────────────────────────
+    vim.api.nvim_set_hl(0, "BlinkCmpLabelMatch", { fg = "#FFD866", bold = true })
+
+    -- ── Deprecated：純色繼承 + 刪除線 ─────────────────────
+    vim.api.nvim_set_hl(0, "BlinkCmpLabelDeprecated", { link = "Comment" })
+    vim.api.nvim_set_hl(0, "BlinkCmpLabelDeprecated", { strikethrough = true })
+
+    -- ── 來源標籤：低調灰色，比 kind 文字更淡 ────────────────
+    vim.api.nvim_set_hl(0, "BlinkCmpSource", { link = "Comment" })
   end,
 }
