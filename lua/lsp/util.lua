@@ -77,6 +77,7 @@ M.servers = {
   yamlls = "lsp.yamlls",
 }
 
+
 M.setup = function()
   vim.diagnostic.config({
     -- 平時：signs + underline 提示有問題
@@ -161,9 +162,36 @@ M.setup = function()
     end
   end
 
+  -- 判斷這個 server 的執行檔是不是已經存在於當前環境的 PATH（不管是系統套件、
+  -- cargo/go install、還是手動裝的），不透過 mason 也能用
+  local function is_system_installed(name)
+    local ok, cfg = pcall(function() return vim.lsp.config[name] end)
+    if not ok or not cfg or not cfg.cmd then
+      return false
+    end
+
+    local exe
+    if type(cfg.cmd) == "table" then
+      exe = cfg.cmd[1]
+    elseif type(cfg.cmd) == "function" then
+      -- 少數 server 的 cmd 是函式（動態決定執行檔），這裡先不處理，交給 mason 流程
+      return false
+    end
+
+    return exe ~= nil and vim.fn.executable(exe) == 1
+  end
+
   local installing = {} -- pkg_name -> { {bufnr, name}, ... } 排隊中的呼叫者
 
+
   local function ensure_server(bufnr, name)
+    -- 環境裡已經有現成的執行檔，直接啟用，完全不碰 mason-registry
+    if is_system_installed(name) then
+      configure_and_enable(name)
+      attach_to_buf(bufnr, name)
+      return
+    end
+
     local pkg_name = lspconfig_to_pkg[name]
 
     if not ok_mr or not pkg_name or not mr.has_package(pkg_name) then
