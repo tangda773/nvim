@@ -1,77 +1,66 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   branch = "main",
-  build = ":TSUpdate", -- 保留,讓你照樣可以用 :TSInstall, :TSUpdate
-  lazy = false,        -- 官方也強調不要 lazy-load
+  build = ":TSUpdate",
+  lazy = false,
   config = function()
-    -- ① 指定 parser / queries 安裝位置(預設也是這個,明寫方便你之後 core-ts 共用)
+    -- ① 指定 parser / queries 安裝位置
     require("nvim-treesitter").setup({
       install_dir = vim.fn.stdpath("data") .. "/site",
     })
 
-    -- ② 用官方新 API 安裝(或補齊)需要的 parser(非同步)
-    -- 已移除 jsx(它只是附屬在 javascript/tsx 底下的 query,不是獨立 parser)
-    -- 已移除 org:orgmode.nvim 自己內建了編譯好的 org.so(在它自己的
-    -- repo 底下 parser/org.so),不需要、也不應該再透過這裡另外裝一份,
-    -- 不然會撞成兩份 parser 同時存在,lua_ls/nvim-treesitter 都會警告衝突
-    require("nvim-treesitter").install({
-      -- 語言
-      "go", "gomod", "lua", "rust", "c", "cpp",
-      "javascript", "typescript", "tsx", "jsdoc",
-      "html", "css", "json", "json5", "yaml", "toml", "csv",
-      "markdown", "markdown_inline",
-      -- git / ssh 工作流程
-      "gitcommit", "git_rebase", "git_config", "gitignore", "ssh_config", "diff",
-      -- 建置系統
-      "make", "cmake",
-      -- 容器(Containerfile 在你的環境裡也被判斷成 dockerfile filetype,不用另外裝 containerfile)
-      "dockerfile",
-      -- 工具型(query/regex/luadoc 是被其他語言注入使用,不需要自己的 filetype 高亮)
-      "vim", "vimdoc", "query", "regex", "luadoc",
-    })
-
-    -- 如果你想在 bootstrap 階段阻塞直到裝完,可以改成:
-    -- require("nvim-treesitter")
-    --   .install({ "go", "lua", "rust", "c", "vim", "vimdoc", "query" })
-    --   :wait(300000)  -- 最多等 5 分鐘
-
-    -- ③ 讓 filetype 名稱跟 parser 語言名稱對不上的那幾個,明確關聯起來,
-    -- 否則 vim.treesitter.start(bufnr) 不帶語言參數時會找不到對應 parser
+    -- ② 讓 filetype 名稱跟 parser 語言名稱對不上的那幾個,明確關聯起來
     vim.treesitter.language.register("git_rebase", "gitrebase")
     vim.treesitter.language.register("git_config", "gitconfig")
     vim.treesitter.language.register("ssh_config", "sshconfig")
 
-    -- ④ 高亮由內建 Tree-sitter 負責
+    -- ③ 抓一次「這個 nvim-treesitter 版本知道怎麼裝」的語言清單,
+    --    之後每次 FileType 觸發時拿來對照用,不用每次都重新查
+    local available_parsers = require("nvim-treesitter").get_available()
+
+    -- ④ 按需安裝 + 啟動 highlight 的核心邏輯
+    local function treesitter_try_attach(buf, language)
+      -- 先確認 parser 真的能載入,載入失敗就直接放棄
+      if not vim.treesitter.language.add(language) then return end
+      -- 再用 pcall 包一層 start(),雙重保護,避免 previewer 快速切換
+      -- buffer 時的 async 時機競態把 assert 往外炸
+      pcall(vim.treesitter.start, buf, language)
+    end
+
     local group = vim.api.nvim_create_augroup("BuiltinTreesitterHighlight", { clear = true })
     vim.api.nvim_create_autocmd("FileType", {
       group = group,
-      pattern = {
-        -- 語言(補上原本漏掉的 rust)
-        "go", "lua", "rust", "c", "cpp",
-        "javascript", "typescript", "typescriptreact", "javascriptreact",
-        "html", "css", "json", "json5", "yaml", "toml", "csv",
-        "markdown", "org",
-        -- git / ssh(pattern 用的是實際 filetype 值,不是 parser 名稱)
-        "gitcommit", "gitrebase", "gitconfig", "gitignore", "sshconfig", "diff",
-        -- 建置系統
-        "make", "cmake",
-        -- 容器
-        "dockerfile",
-        -- 工具型
-        "vim", "help", "query",
-      },
       callback = function(args)
-        vim.treesitter.start(args.buf)
+        local buf, filetype = args.buf, args.match
+        local language = vim.treesitter.language.get_lang(filetype)
+        if not language then return end -- 這個 filetype 根本沒對應語言,跳過
+
+        local installed_parsers = require("nvim-treesitter").get_installed("parsers")
+        if vim.tbl_contains(installed_parsers, language) then
+          -- 已經裝好,直接啟動
+          treesitter_try_attach(buf, language)
+        elseif vim.tbl_contains(available_parsers, language) then
+          -- 有得裝但還沒裝,先裝再啟動(非同步 await,不卡住 UI)
+          require("nvim-treesitter").install(language):await(function()
+            treesitter_try_attach(buf, language)
+          end)
+        else
+          -- 既沒裝也裝不到(可能是自訂/沒被官方收錄的語言),
+          -- 交給 language.add() 內部去判斷有沒有其他來源的 parser
+          treesitter_try_attach(buf, language)
+        end
       end,
     })
 
     -- ⑤ 如果想順便啟用內建 TS 折疊(可選)
     -- vim.api.nvim_create_autocmd("FileType", {
     --   group = group,
-    --   pattern = { "go", "lua", "rust", "c", "cpp" },
-    --   callback = function()
-    --     vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-    --     vim.wo.foldmethod = "expr"
+    --   callback = function(args)
+    --     local language = vim.treesitter.language.get_lang(vim.bo[args.buf].filetype)
+    --     if language then
+    --       vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+    --       vim.wo.foldmethod = "expr"
+    --     end
     --   end,
     -- })
   end,
