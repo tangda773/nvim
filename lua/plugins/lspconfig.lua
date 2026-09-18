@@ -2,15 +2,12 @@ return {
   {
     "mason-org/mason.nvim",
     opts = {},
-    lazy = true,
   },
   {
     "mason-org/mason-lspconfig.nvim",
-    event        = { "BufReadPre", "BufNewFile" },
     dependencies = { "mason-org/mason.nvim" },
-    opts         = {
-      ensure_installed = vim.tbl_keys(require("lsp.util").servers),
-      automatic_enable = false,
+    opts = {
+      automatic_enable = false, -- 交给 lsp.util 自己在 FileType 時手動 enable
     },
   },
   -- LSP 主配置，只有在打開檔案時才載入
