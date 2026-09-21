@@ -63,7 +63,7 @@ return {
   },
   keys = {
     { "<leader>acc", "<cmd>CodeCompanionChat<cr>",                     desc = "[AI/CC] Chat (ACP)" },
-    { "<leader>aca", "<cmd>CodeCompanionActions<cr>",                  desc = "[AI/CC] Action Palette" },
+    { "<leader>aca", "<cmd>CodeCompanionActions<cr>",                  desc = "[AI/CC] Action palette" },
     { "<leader>act", function() require("codecompanion").toggle() end, desc = "[AI/CC] Toggle CLI" },
     { "<leader>acp", "<cmd>CodeCompanionCLI Ask<cr>",                  desc = "[AI/CC] Ask (CLI)" },
   },

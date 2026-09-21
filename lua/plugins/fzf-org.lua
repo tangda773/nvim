@@ -12,21 +12,21 @@ return {
         function()
           require("fzf-org").files()
         end,
-        desc = "Org files",
+        desc = "[Org] Files",
       },
       {
         "<leader>og",
         function()
           require("fzf-org").all_headlines()
         end,
-        desc = "Org headlines",
+        desc = "[Org] Headlines",
       },
       {
         "<leader>or",
         function()
           require("fzf-org").refile()
         end,
-        desc = "Org refile",
+        desc = "[Org] Refile",
       },
     },
     config = function()

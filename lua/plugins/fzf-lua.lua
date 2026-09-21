@@ -5,34 +5,34 @@ return {
   -- mini.icons,fzf-lua 會自動偵測並沿用,不用另外裝圖示套件。
   cmd = "FzfLua",
   keys = {
-    { "<leader><leader>", "<cmd>FzfLua global<cr>",                     desc = "Global Fuzzy Finder" },
+    { "<leader><leader>", "<cmd>FzfLua global<cr>",                     desc = "Global fuzzy finder" },
 
     -- 搜尋類（ff/fg 由 remote-sshfs 統一管理，自動判斷本機 or 遠端）
-    { "<leader>fw",       "<cmd>FzfLua grep_cword<cr>",                 desc = "Grep Word Under Cursor" },
-    { "<leader>fb",       "<cmd>FzfLua buffers<cr>",                    desc = "Buffers" },
-    { "<leader>fo",       "<cmd>FzfLua oldfiles<cr>",                   desc = "Recent Files" },
-    { "<leader>fh",       "<cmd>FzfLua helptags<cr>",                   desc = "Help Tags" },
-    { "<leader>fc",       "<cmd>FzfLua commands<cr>",                   desc = "Commands" },
-    { "<leader>fk",       "<cmd>FzfLua keymaps<cr>",                    desc = "Keymaps" },
-    { "<leader>fr",       "<cmd>FzfLua resume<cr>",                     desc = "Resume Last Search" },
-    { "<leader>sg",       "<cmd>FzfLua lgrep_curbuf<cr>",               desc = "Live Grep Current Buffer" },
+    { "<leader>fw",       "<cmd>FzfLua grep_cword<cr>",                 desc = "[Find] Grep word under cursor" },
+    { "<leader>fb",       "<cmd>FzfLua buffers<cr>",                    desc = "[Find] Buffers" },
+    { "<leader>fo",       "<cmd>FzfLua oldfiles<cr>",                   desc = "[Find] Recent files" },
+    { "<leader>fh",       "<cmd>FzfLua helptags<cr>",                   desc = "[Find] Help tags" },
+    { "<leader>fc",       "<cmd>FzfLua commands<cr>",                   desc = "[Find] Commands" },
+    { "<leader>fk",       "<cmd>FzfLua keymaps<cr>",                    desc = "[Find] Keymaps" },
+    { "<leader>fr",       "<cmd>FzfLua resume<cr>",                     desc = "[Find] Resume last search" },
+    { "<leader>sg",       "<cmd>FzfLua lgrep_curbuf<cr>",               desc = "[Find] Live grep current buffer" },
 
     -- Git(大寫版本,跟 plugins/mini/git.lua 的 <leader>gs/<leader>gb 錯開;
     -- mini.git 是直接看 git CLI 輸出,這裡是互動式模糊搜尋,兩者互補不是重複)
-    { "<leader>gS",       "<cmd>FzfLua git_status<cr>",                 desc = "Git Status (fuzzy)" },
-    { "<leader>gc",       "<cmd>FzfLua git_commits<cr>",                desc = "Git Commits (Repo)" },
-    { "<leader>gB",       "<cmd>FzfLua git_bcommits<cr>",               desc = "Git Commits (Buffer, fuzzy)" },
+    { "<leader>gS",       "<cmd>FzfLua git_status<cr>",                 desc = "[Git] Status (fuzzy)" },
+    { "<leader>gc",       "<cmd>FzfLua git_commits<cr>",                desc = "[Git] Commits (repo)" },
+    { "<leader>gB",       "<cmd>FzfLua git_bcommits<cr>",               desc = "[Git] Commits (buffer, fuzzy)" },
 
     -- LSP（統一到 <leader>l 前綴，避免與 lsp/util buffer-local 及 mini.operators 衝突）
     { "<leader>ld",       "<cmd>FzfLua lsp_definitions<cr>",            desc = "[LSP] Definition (fuzzy)" },
     { "<leader>lr",       "<cmd>FzfLua lsp_references<cr>",             desc = "[LSP] References (fuzzy)" },
     { "<leader>li",       "<cmd>FzfLua lsp_implementations<cr>",        desc = "[LSP] Implementation (fuzzy)" },
-    { "<leader>ls",       "<cmd>FzfLua lsp_document_symbols<cr>",       desc = "[LSP] Document Symbols" },
-    { "<leader>lS",       "<cmd>FzfLua lsp_live_workspace_symbols<cr>", desc = "[LSP] Workspace Symbols" },
+    { "<leader>ls",       "<cmd>FzfLua lsp_document_symbols<cr>",       desc = "[LSP] Document symbols" },
+    { "<leader>lS",       "<cmd>FzfLua lsp_live_workspace_symbols<cr>", desc = "[LSP] Workspace symbols" },
 
     -- Diagnostics
-    { "<leader>xd",       "<cmd>FzfLua diagnostics_document<cr>",       desc = "Diagnostics (Buffer)" },
-    { "<leader>xD",       "<cmd>FzfLua diagnostics_workspace<cr>",      desc = "Diagnostics (Workspace)" },
+    { "<leader>xd",       "<cmd>FzfLua diagnostics_document<cr>",       desc = "[Diagnostics] Buffer" },
+    { "<leader>xD",       "<cmd>FzfLua diagnostics_workspace<cr>",      desc = "[Diagnostics] Workspace" },
   },
   opts = {
     "default-title", -- fzf-lua 內建 profile,標題顯示在視窗上緣,比預設乾淨

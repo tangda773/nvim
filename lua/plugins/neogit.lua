@@ -2,7 +2,7 @@ return {
   "NeogitOrg/neogit",
   cmd = "Neogit",
   keys = {
-    { "<leader>gg", "<cmd>Neogit<cr>",       desc = "[Git] Neogit" },
+    { "<leader>gg", "<cmd>Neogit<cr>",       desc = "[Git] Open Neogit" },
     { "<leader>gp", "<cmd>Neogit push<cr>",  desc = "[Git] Push" },
   },
   dependencies = {

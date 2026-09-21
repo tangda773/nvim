@@ -15,13 +15,13 @@ return {
     "marilari88/neotest-vitest",     -- 如果專案用 Vitest 而非 Jest，改用/並用這個
   },
   keys = {
-    { "<leader>tr", function() require("neotest").run.run() end,                     desc = "Neotest: run" },
-    { "<leader>tf", function() require("neotest").run.run(vim.fn.expand("%")) end,   desc = "Neotest: run file" },
-    { "<leader>td", function() require("neotest").run.run({ strategy = "dap" }) end, desc = "Neotest: debug" },
-    { "<leader>ts", function() require("neotest").run.stop() end,                    desc = "Neotest: stop" },
-    { "<leader>ta", function() require("neotest").run.attach() end,                  desc = "Neotest: attach" },
-    { "<leader>to", function() require("neotest").output_panel.toggle() end,         desc = "Neotest: output" },
-    { "<leader>tS", function() require("neotest").summary.toggle() end,              desc = "Neotest: summary" },
+    { "<leader>tr", function() require("neotest").run.run() end,                     desc = "[Test] Run" },
+    { "<leader>tf", function() require("neotest").run.run(vim.fn.expand("%")) end,   desc = "[Test] Run file" },
+    { "<leader>td", function() require("neotest").run.run({ strategy = "dap" }) end, desc = "[Test] Debug" },
+    { "<leader>ts", function() require("neotest").run.stop() end,                    desc = "[Test] Stop" },
+    { "<leader>ta", function() require("neotest").run.attach() end,                  desc = "[Test] Attach" },
+    { "<leader>to", function() require("neotest").output_panel.toggle() end,         desc = "[Test] Output" },
+    { "<leader>tS", function() require("neotest").summary.toggle() end,              desc = "[Test] Summary" },
   },
   opts = function()
     local adapters = {

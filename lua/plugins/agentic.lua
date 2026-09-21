@@ -18,35 +18,35 @@ return {
       "<C-\\>",
       function() require("agentic").toggle() end,
       mode = { "n", "v", "i" },
-      desc = "[AI/Agentic] Toggle Agentic"
+      desc = "[AI] Toggle Agentic"
     },
     -- 把目前檔案或選取文字加入 context
     {
       "<leader>aa",
       function() require("agentic").add_selection_or_file_to_context() end,
       mode = { "n", "v" },
-      desc = "[AI/Agentic] Add to Agentic context"
+      desc = "[AI] Add to Agentic context"
     },
     -- 新開一個 session
     {
       "<leader>an",
       function() require("agentic").new_session() end,
       mode = { "n", "v", "i" },
-      desc = "[AI/Agentic] New Agentic session"
+      desc = "[AI] New Agentic session"
     },
     -- 把目前行的 LSP 診斷錯誤加入 context
     {
       "<leader>ad",
       function() require("agentic").add_current_line_diagnostics() end,
       mode = "n",
-      desc = "[AI/Agentic] Add diagnostics to Agentic"
+      desc = "[AI] Add diagnostics to Agentic"
     },
     -- 恢復之前的 session（終端機繼續）
     {
       "<leader>ar",
       function() require("agentic").restore_session() end,
       mode = { "n", "v", "i" },
-      desc = "[AI/Agentic] Restore Agentic session"
+      desc = "[AI] Restore Agentic session"
     },
   },
 }

@@ -19,9 +19,9 @@ return {
     require("remote-sshfs").setup(opts)
   end,
   keys = {
-    { '<leader>rc', function() require("remote-sshfs.api").connect() end,    desc = "SSHFS connect" },
-    { '<leader>rd', function() require("remote-sshfs.api").disconnect() end, desc = "SSHFS disconnect" },
-    { '<leader>re', function() require("remote-sshfs.api").edit() end,       desc = "SSHFS edit" },
+    { '<leader>rc', function() require("remote-sshfs.api").connect() end,    desc = "[Remote] Connect" },
+    { '<leader>rd', function() require("remote-sshfs.api").disconnect() end, desc = "[Remote] Disconnect" },
+    { '<leader>re', function() require("remote-sshfs.api").edit() end,       desc = "[Remote] Edit" },
     {
       '<leader>ff',
       function()
@@ -32,7 +32,7 @@ return {
           require("fzf-lua").files()
         end
       end,
-      desc = "Find files"
+      desc = "[Find] Find files"
     },
     {
       '<leader>fg',
@@ -44,7 +44,7 @@ return {
           require("fzf-lua").live_grep()
         end
       end,
-      desc = "Live grep"
+      desc = "[Find] Live grep"
     },
   },
 }

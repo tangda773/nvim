@@ -27,7 +27,7 @@ return {
         })
       end,
       mode = "n",
-      desc = "Replace in project",
+      desc = "[Find] Replace in project",
     },
 
     {
@@ -46,7 +46,7 @@ return {
         })
       end,
       mode = "n",
-      desc = "Replace word in project",
+      desc = "[Find] Replace word in project",
     },
 
     {
@@ -65,7 +65,7 @@ return {
         })
       end,
       mode = "n",
-      desc = "AST search and replace",
+      desc = "[Find] AST search and replace",
     },
 
     {
@@ -84,7 +84,7 @@ return {
         })
       end,
       mode = "x",
-      desc = "AST replace selection",
+      desc = "[Find] AST replace selection",
     },
   },
 }

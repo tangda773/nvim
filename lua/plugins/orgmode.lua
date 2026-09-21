@@ -15,12 +15,12 @@ return {
     local opts = { noremap = true, silent = true }
 
     -- Org 全域核心：Agenda / Capture / Inbox
-    map("n", "<leader>oa", "<cmd>Org agenda<cr>", vim.tbl_extend("force", opts, { desc = "Org: Agenda prompt" }))
+    map("n", "<leader>oa", "<cmd>Org agenda<cr>", vim.tbl_extend("force", opts, { desc = "[Org] Agenda prompt" }))
 
-    map("n", "<leader>oc", "<cmd>Org capture<cr>", vim.tbl_extend("force", opts, { desc = "Org: Capture prompt" }))
+    map("n", "<leader>oc", "<cmd>Org capture<cr>", vim.tbl_extend("force", opts, { desc = "[Org] Capture prompt" }))
 
     map("n", "<leader>oi", function() vim.cmd.edit(vim.fn.expand("~/org/inbox.org")) end,
-      vim.tbl_extend("force", opts, { desc = "Org: Open inbox.org" }))
+      vim.tbl_extend("force", opts, { desc = "[Org] Open inbox.org" }))
 
     local api = vim.api
 
@@ -56,42 +56,42 @@ return {
         -- TODO 狀態操作
         bmap("n", "<localleader>ot", function()
           require("orgmode").action("todo.set_todo")
-        end, "Org: Cycle TODO")
+        end, "[Org] Cycle TODO")
 
         bmap("n", "<localleader>oT", function()
           require("orgmode").action("todo.set_todo", { pop = true })
-        end, "Org: Choose TODO")
+        end, "[Org] Choose TODO")
 
         -- 日期 / 時間
         bmap("n", "<localleader>od", function()
           require("orgmode").action("clock.org_deadline")
-        end, "Org: Set DEADLINE")
+        end, "[Org] Set DEADLINE")
 
         bmap("n", "<localleader>os", function()
           require("orgmode").action("clock.org_schedule")
-        end, "Org: Set SCHEDULED")
+        end, "[Org] Set SCHEDULED")
 
         bmap("n", "<localleader>oi", function()
           require("orgmode").action("org.insert_timestamp")
-        end, "Org: Insert timestamp")
+        end, "[Org] Insert timestamp")
 
         -- Link / tags
         bmap("n", "<localleader>ol", function()
           require("orgmode").action("org.insert_link")
-        end, "Org: Insert link")
+        end, "[Org] Insert link")
 
         bmap("n", "<localleader>oq", function()
           require("orgmode").action("org.set_tags")
-        end, "Org: Set tags")
+        end, "[Org] Set tags")
 
         -- Narrow / Widen
         bmap("n", "<localleader>on", function()
           require("orgmode").action("org.narrow")
-        end, "Org: Narrow subtree")
+        end, "[Org] Narrow subtree")
 
         bmap("n", "<localleader>oN", function()
           require("orgmode").action("org.widen")
-        end, "Org: Widen")
+        end, "[Org] Widen")
 
         -- -- src block 操作
         -- bmap("n", "<localleader>oE", function()

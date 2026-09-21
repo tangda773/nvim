@@ -86,13 +86,13 @@ return {
 
     -- scratch
     { "<leader>.",  function() Snacks.scratch() end,                  desc = "Toggle scratch" },
-    { "<leader>fs", function() Snacks.scratch.select() end,           desc = "Select scratch" },
+    { "<leader>fs", function() Snacks.scratch.select() end,           desc = "[Find] Select scratch" },
 
     -- notifier 歷史
-    { "<leader>fn", function() Snacks.notifier.show_history() end,    desc = "Notify history" },
+    { "<leader>fn", function() Snacks.notifier.show_history() end,    desc = "[Find] Notify history" },
 
     -- profiler
-    { "<leader>pp", function() Snacks.toggle.profiler():toggle() end, desc = "Toggle profiler", },
-    { "<leader>ps", function() Snacks.profiler.scratch() end,         desc = "Profiler scratch", },
+    { "<leader>pp", function() Snacks.toggle.profiler():toggle() end, desc = "[Profiler] Toggle", },
+    { "<leader>ps", function() Snacks.profiler.scratch() end,         desc = "[Profiler] Scratch", },
   }
 }

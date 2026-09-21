@@ -2,10 +2,10 @@ return {
   "akinsho/toggleterm.nvim",
   version = "*",
   keys = {
-    { "<leader>Tt", desc = "[Term] Bottom horizontal" },
-    { "<leader>Tv", desc = "[Term] Right vertical" },
-    { "<leader>Tf", desc = "[Term] Float" },
-    { "<leader>Tn", desc = "[Term] New tab" },
+    { "<leader>Tt", desc = "[Terminal] Bottom horizontal" },
+    { "<leader>Tv", desc = "[Terminal] Right vertical" },
+    { "<leader>Tf", desc = "[Terminal] Float" },
+    { "<leader>Tn", desc = "[Terminal] New tab" },
   },
   config = function()
     require("toggleterm").setup({
@@ -47,7 +47,7 @@ return {
             buffer = ev.buf,
             noremap = true,
             silent = true,
-            desc = "Terminal: normal mode",
+            desc = "[Terminal] Normal mode",
           })
         end,
       })
@@ -58,21 +58,21 @@ return {
     -- T1: 底部水平分割（長輸出，例如 cargo test --watch）
     map({ "n", "t" }, "<leader>Tt", function()
       require("toggleterm").toggle(1, 0, vim.uv.cwd(), "horizontal")
-    end, vim.tbl_extend("force", opts, { desc = "[Term] Bottom horizontal" }))
+    end, vim.tbl_extend("force", opts, { desc = "[Terminal] Bottom horizontal" }))
 
     -- T2: 右側垂直分割（互動 shell / REPL）
     map({ "n", "t" }, "<leader>Tv", function()
       require("toggleterm").toggle(2, 0, vim.uv.cwd(), "vertical")
-    end, vim.tbl_extend("force", opts, { desc = "[Term] Right vertical" }))
+    end, vim.tbl_extend("force", opts, { desc = "[Terminal] Right vertical" }))
 
     -- T3: float（臨時工具，如 lazygit / htop）
     map({ "n", "t" }, "<leader>Tf", function()
       require("toggleterm").toggle(3, 0, vim.uv.cwd(), "float")
-    end, vim.tbl_extend("force", opts, { desc = "[Term] Float" }))
+    end, vim.tbl_extend("force", opts, { desc = "[Terminal] Float" }))
 
     -- T4: tab 方向（獨立 tab terminal，適合長 session）
     map({ "n", "t" }, "<leader>Tn", function()
       require("toggleterm").toggle(4, 0, vim.uv.cwd(), "tab")
-    end, vim.tbl_extend("force", opts, { desc = "[Term] New tab" }))
+    end, vim.tbl_extend("force", opts, { desc = "[Terminal] New tab" }))
   end,
 }

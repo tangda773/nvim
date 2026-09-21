@@ -23,42 +23,42 @@ local function setup_keymaps(bufnr)
   -- Format / Diagnostics
   -- conform.nvim 替代為 formatter
   -- nmap("<leader>=", vim.lsp.buf.format, "LSP: Format")
-  map("n", "<leader>xe", vim.diagnostic.open_float, "[LSP] Line Diagnostics")
+  map("n", "<leader>xe", vim.diagnostic.open_float, "[Diagnostics] Line diagnostics")
 
   -- Navigation（gd/gI/gr 已移至 fzf-lua <leader>ld/<leader>li/<leader>lr，避免 buffer-local 蓋掉全域 fuzzy 版本）
   map("n", "gD", vim.lsp.buf.declaration, "[LSP] Declaration")
-  map("n", "<leader>lt", vim.lsp.buf.type_definition, "[LSP] Type Definition")
+  map("n", "<leader>lt", vim.lsp.buf.type_definition, "[LSP] Type definition")
 
   -- Diagnostic jump
   map("n", "]d", function()
     vim.diagnostic.jump({ count = 1 })
-  end, "[LSP] Next Diagnostic")
+  end, "[LSP] Next diagnostic")
   map("n", "[d", function()
     vim.diagnostic.jump({ count = -1 })
-  end, "[LSP] Prev Diagnostic")
+  end, "[LSP] Prev diagnostic")
   map("n", "]e", function()
     vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR })
-  end, "[LSP] Next Error")
+  end, "[LSP] Next error")
   map("n", "[e", function()
     vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR })
-  end, "[LSP] Prev Error")
+  end, "[LSP] Prev error")
 
   -- Diagnostics Quickfix/Loclist
-  map("n", "<leader>xq", vim.diagnostic.setqflist, "[LSP] Diagnostics -> Quickfix")
-  map("n", "<leader>xl", vim.diagnostic.setloclist, "[LSP] Diagnostics -> Loclist")
+  map("n", "<leader>xq", vim.diagnostic.setqflist, "[Diagnostics] Send to quickfix")
+  map("n", "<leader>xl", vim.diagnostic.setloclist, "[Diagnostics] Send to loclist")
 
   -- Docs
-  map("n", "gh", vim.lsp.buf.hover, "LSP: Hover Docs")
+  map("n", "gh", vim.lsp.buf.hover, "[LSP] Hover docs")
 
   -- Refactor（統一到 <leader>l 前綴，清出 <leader>r、<leader>c、<leader>w 給其他用途）
   map("n", "<leader>ln", vim.lsp.buf.rename, "[LSP] Rename")
-  map("n", "<leader>la", vim.lsp.buf.code_action, "[LSP] Code Action")
+  map("n", "<leader>la", vim.lsp.buf.code_action, "[LSP] Code action")
   -- Workspace（<leader>lw 子群組）
-  map("n", "<leader>lwa", vim.lsp.buf.add_workspace_folder, "[LSP] Add Workspace")
-  map("n", "<leader>lwr", vim.lsp.buf.remove_workspace_folder, "[LSP] Remove Workspace")
+  map("n", "<leader>lwa", vim.lsp.buf.add_workspace_folder, "[LSP/Workspace] Add workspace")
+  map("n", "<leader>lwr", vim.lsp.buf.remove_workspace_folder, "[LSP/Workspace] Remove workspace")
   map("n", "<leader>lwl", function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, "[LSP] List Workspaces")
+  end, "[LSP/Workspace] List workspaces")
 end
 
 ---@type table<string, string>

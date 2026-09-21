@@ -38,17 +38,17 @@ utils.debug.setup({
 -- Direct callers/callees only (equivalent to the built-in functions)
 vim.keymap.set('n', '<leader>ci', function()
   utils.call_hierarchy.run('incoming', { max_depth = 1 })
-end, { desc = 'Incoming calls (1 level)' })
+end, { desc = '[Code] Incoming calls (1 level)' })
 
 vim.keymap.set('n', '<leader>co', function()
   utils.call_hierarchy.run('outgoing', { max_depth = 1 })
-end, { desc = 'Outgoing calls (1 level)' })
+end, { desc = '[Code] Outgoing calls (1 level)' })
 
 -- Full traversal, guarded by default safety valves
 vim.keymap.set('n', '<leader>cI', function()
   utils.call_hierarchy.run('incoming')
-end, { desc = 'Incoming calls (full traversal)' })
+end, { desc = '[Code] Incoming calls (full traversal)' })
 
 vim.keymap.set('n', '<leader>cO', function()
   utils.call_hierarchy.run('outgoing')
-end, { desc = 'Outgoing calls (full traversal)' })
+end, { desc = '[Code] Outgoing calls (full traversal)' })

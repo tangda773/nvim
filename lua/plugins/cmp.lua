@@ -213,7 +213,7 @@ return {
           "n", false
         )
       end
-    end, { silent = true, desc = "LuaSnip jump forward / Tab" })
+    end, { silent = true, desc = "Snippet jump forward" })
 
     vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
       if luasnip.locally_jumpable(-1) then
@@ -224,7 +224,7 @@ return {
           "n", false
         )
       end
-    end, { silent = true, desc = "LuaSnip jump backward / S-Tab" })
+    end, { silent = true, desc = "Snippet jump backward" })
 
     vim.keymap.set("i", "<CR>", function()
       if luasnip.expandable() then
@@ -235,7 +235,7 @@ return {
           "n", false
         )
       end
-    end, { silent = true, desc = "LuaSnip expand / CR" })
+    end, { silent = true, desc = "Snippet expand" })
 
     -- ── Fuzzy 匹配字元顏色 ───────────────────────────────
     vim.api.nvim_set_hl(0, "BlinkCmpLabelMatch", { fg = "#FFD866", bold = true })

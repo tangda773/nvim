@@ -7,7 +7,7 @@ return {
       "<leader>rs",
       function() require("rip-substitute").sub() end,
       mode = { "n", "x" },
-      desc = " rip substitute",
+      desc = "[Find] Rip substitute",
     },
   },
 }
