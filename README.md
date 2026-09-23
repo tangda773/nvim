@@ -351,15 +351,14 @@ Loaded automatically for `csv` and `tsv` filetypes. Displays columns in aligned 
 | `<S-Enter>`       | n / v   | Jump to previous row             |
 | `if` / `af`       | o / x   | Text object: inner / outer field |
 
-### Terminal: `<leader>T`
+### Terminal:
 
-| Key                          | Action                       |
-| ---------------------------- | ---------------------------- |
-| `<leader>Tt`                 | Bottom horizontal terminal   |
-| `<leader>Tv`                 | Right-side vertical terminal |
-| `<leader>Tf`                 | Floating terminal            |
-| `<leader>Tn`                 | Terminal in a separate tab   |
-| `<Esc><Esc>` inside terminal | Return to Normal mode        |
+| Key     | Action                       |
+| ------- | ---------------------------- |
+| `<c-t>` | Bottom horizontal terminal   |
+| `<c-v>` | Right-side vertical terminal |
+| `<c-g>` | Floating terminal            |
+| `<c-y>` | Terminal in a separate tab   |
 
 ### AI
 
