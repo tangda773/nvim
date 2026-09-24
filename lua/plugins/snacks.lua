@@ -21,7 +21,7 @@ return {
     scope        = { enabled = false }, -- mini.indentscope
     scroll       = { enabled = false }, -- mini.animate
     statuscolumn = { enabled = false }, -- statuscol.nvim
-    terminal     = { enabled = false }, -- toggleterm
+    terminal     = { enabled = true },  -- toggleterm
     lazygit      = { enabled = false }, -- neogit
     gitbrowse    = { enabled = false }, -- neogit
     zen          = { enabled = false },
@@ -94,5 +94,40 @@ return {
     -- profiler
     { "<leader>pp", function() Snacks.toggle.profiler():toggle() end, desc = "[Profiler] Toggle", },
     { "<leader>ps", function() Snacks.profiler.scratch() end,         desc = "[Profiler] Scratch", },
-  }
+
+    -- Terminal
+    {
+      "<C-t>",
+      function()
+        Snacks.terminal.toggle(nil, { cwd = vim.uv.cwd(), win = { position = "bottom", height = 0.25 } })
+      end,
+      mode = { "n", "t" },
+      desc = "[Terminal] Bottom (數字前綴開多個，如 2<C-t>)"
+    },
+    {
+      "<C-v>",
+      function()
+        Snacks.terminal.toggle(nil, { cwd = vim.uv.cwd(), win = { position = "right", width = 0.33 } })
+      end,
+      mode = { "n", "t" },
+      desc = "[Terminal] Right (數字前綴開多個，如 2<C-v>)"
+    },
+    {
+      "<C-g>",
+      function()
+        Snacks.terminal.toggle(nil, { cwd = vim.uv.cwd(), win = { position = "float", border = "rounded" } })
+      end,
+      mode = { "n", "t" },
+      desc = "[Terminal] Float (數字前綴開多個，如 2<C-g>)"
+    },
+    {
+      "<C-y>",
+      function()
+        vim.cmd("tabnew")
+        Snacks.terminal.open(nil, { cwd = vim.uv.cwd(), win = { position = "current" } })
+      end,
+      mode = { "n", "t" },
+      desc = "[Terminal] New tab (數字前綴開多個，如 2<C-y>)"
+    },
+  },
 }

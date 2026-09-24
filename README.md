@@ -72,6 +72,7 @@ lazy.nvim-style specs are used throughout `lua/plugins/`. Common fields:
 | `vim-dadbod-ui` + `vim-dadbod` + `vim-dadbod-completion`    | SQL database UI and query completion                                               |
 | `nvim-dap` + `nvim-dap-ui` + `mason-nvim-dap.nvim`          | DAP debugging                                                                      |
 | `dropbar.nvim`                                              | Winbar breadcrumb navigation                                                       |
+| `edgy.nvim`                                                 | Docked terminal window layout (bottom/right) for `snacks.terminal`                 |
 | `faster.nvim`                                               | Large-file performance degradation mode                                            |
 | `fzf-lua`                                                   | Fuzzy finding for files, grep, buffers, LSP, Git, and more                         |
 | `fzf-org.nvim`                                              | Org file and headline picker                                                       |
@@ -93,9 +94,8 @@ lazy.nvim-style specs are used throughout `lua/plugins/`. Common fields:
 | `rustaceanvim`                                              | Deep Rust and rust-analyzer integration                                            |
 | `b0o/schemastore.nvim`                                      | JSON/YAML schema source for jsonls and yamlls                                      |
 | `smart-splits.nvim`                                         | Cross-window navigation, resizing, and buffer swapping                             |
-| `snacks.nvim`                                               | `vim.ui.input`, notifications, scratch buffers, cursor-word highlighting, profiler |
+| `snacks.nvim`                                               | `vim.ui.input`, notifications, scratch buffers, cursor-word highlighting, profiler, multi-layout terminal |
 | `statuscol.nvim`                                            | Custom status column for folds, signs, and line numbers                            |
-| `toggleterm.nvim`                                           | Multi-layout terminal management                                                   |
 | `nvim-treesitter`                                           | Syntax parsing and highlighting through the built-in Treesitter API                |
 | `nvim-ufo`                                                  | Advanced folds via LSP, Treesitter, and indentation                                |
 
@@ -353,12 +353,14 @@ Loaded automatically for `csv` and `tsv` filetypes. Displays columns in aligned 
 
 ### Terminal:
 
-| Key     | Action                       |
-| ------- | ---------------------------- |
-| `<c-t>` | Bottom horizontal terminal   |
-| `<c-v>` | Right-side vertical terminal |
-| `<c-g>` | Floating terminal            |
-| `<c-y>` | Terminal in a separate tab   |
+Managed by `snacks.terminal` (docked layout via `edgy.nvim`). Each keymap toggles a single default terminal; prefix a count to open/toggle an additional instance (e.g. `2<c-t>` opens a second bottom terminal).
+
+| Key     | Action                                                          |
+| ------- | ----------------------------------------------------------------- |
+| `<c-t>` | Bottom terminal (count prefix opens more, e.g. `2<c-t>`)          |
+| `<c-v>` | Right-side terminal (count prefix opens more, e.g. `2<c-v>`)      |
+| `<c-g>` | Floating terminal (count prefix opens more, e.g. `2<c-g>`)        |
+| `<c-y>` | Terminal in a new tab (count prefix opens more, e.g. `2<c-y>`)    |
 
 ### AI
 
