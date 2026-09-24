@@ -69,6 +69,7 @@ M.servers = {
   -- pyright = "lsp.pyright",
   gopls = "lsp.gopls",
   ts_ls = "lsp.ts_ls",
+  tsc = "lsp.tsc", -- TS 7 native LSP
   -- rust_analyzer = "lsp.rust_analyzer",
   eslint = "lsp.eslint",
   html = "lsp.html",
