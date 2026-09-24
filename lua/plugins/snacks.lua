@@ -9,15 +9,43 @@ return {
     scratch      = { enabled = true },                 --  scratch.nvim
     words        = { enabled = true },                 -- 游標單字高亮
     profiler     = { enabled = true },
+    -- 大檔案偵測 + 效能降級，取代原本的 faster.nvim
+    bigfile      = {
+      enabled = true,
+      notify = true,
+      size = 2 * 1024 * 1024, -- 2MiB；沿用 faster.nvim 原本 bigfile 的 `filesize = 2` 門檻
+      line_length = 250,      -- 平均每行 bytes；沿用 faster.nvim longline 的 `avg_bytes_per_line = 250` 門檻
+      ---@param ctx {buf: number, ft:string}
+      setup = function(ctx)
+        if vim.fn.exists(":NoMatchParen") ~= 0 then
+          vim.cmd([[NoMatchParen]])
+        end
+        Snacks.util.wo(0, { foldmethod = "manual", statuscolumn = "", conceallevel = 0 })
+        vim.b.completion = false
+        vim.b.minianimate_disable = true
+        vim.b.minihipatterns_disable = true
+        -- 沿用 faster.nvim 的 vimopts 行為：大檔案不寫 swapfile、不建立巨大 undo tree
+        vim.opt_local.swapfile = false
+        vim.opt_local.undolevels = -1
+        vim.opt_local.undoreload = 0
+        vim.opt_local.list = false
+        vim.opt_local.spell = false
+        vim.schedule(function()
+          if vim.api.nvim_buf_is_valid(ctx.buf) then
+            vim.bo[ctx.buf].syntax = ctx.ft
+          end
+        end)
+      end,
+    },
+    -- 啟動時盡快渲染首個檔案內容，取代原本的 faster.nvim
+    quickfile    = { enabled = true },
 
     -- ── 其他全部關掉 ──────────────────────────
-    bigfile      = { enabled = false }, -- faster.nvim
     animate      = { enabled = false }, -- mini.animate
     dashboard    = { enabled = false }, -- mini.starter
     explorer     = { enabled = false }, -- mini.files
     indent       = { enabled = false }, -- mini.indentscope
     picker       = { enabled = false }, -- fzf-lua
-    quickfile    = { enabled = false }, -- faster.nvim
     scope        = { enabled = false }, -- mini.indentscope
     scroll       = { enabled = false }, -- mini.animate
     statuscolumn = { enabled = false }, -- statuscol.nvim

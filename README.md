@@ -73,7 +73,6 @@ lazy.nvim-style specs are used throughout `lua/plugins/`. Common fields:
 | `nvim-dap` + `nvim-dap-ui` + `mason-nvim-dap.nvim`          | DAP debugging                                                                      |
 | `dropbar.nvim`                                              | Winbar breadcrumb navigation                                                       |
 | `edgy.nvim`                                                 | Docked terminal window layout (bottom/right) for `snacks.terminal`                 |
-| `faster.nvim`                                               | Large-file performance degradation mode                                            |
 | `fzf-lua`                                                   | Fuzzy finding for files, grep, buffers, LSP, Git, and more                         |
 | `fzf-org.nvim`                                              | Org file and headline picker                                                       |
 | `grug-far.nvim`                                             | Project-wide search and replace with ripgrep or ast-grep                           |
@@ -94,10 +93,17 @@ lazy.nvim-style specs are used throughout `lua/plugins/`. Common fields:
 | `rustaceanvim`                                              | Deep Rust and rust-analyzer integration                                            |
 | `b0o/schemastore.nvim`                                      | JSON/YAML schema source for jsonls and yamlls                                      |
 | `smart-splits.nvim`                                         | Cross-window navigation, resizing, and buffer swapping                             |
-| `snacks.nvim`                                               | `vim.ui.input`, notifications, scratch buffers, cursor-word highlighting, profiler, multi-layout terminal |
+| `snacks.nvim`                                               | `vim.ui.input`, notifications, scratch buffers, cursor-word highlighting, profiler, multi-layout terminal, big-file detection (`bigfile`), fast startup rendering (`quickfile`) |
 | `statuscol.nvim`                                            | Custom status column for folds, signs, and line numbers                            |
 | `nvim-treesitter`                                           | Syntax parsing and highlighting through the built-in Treesitter API                |
 | `nvim-ufo`                                                  | Advanced folds via LSP, Treesitter, and indentation                                |
+
+`snacks.nvim`'s `bigfile` and `quickfile` modules replace the former `faster.nvim`:
+
+- **`bigfile`**: detects large or minified files (size or average line length) and disables `matchparen`, folding, statuscolumn, undo, and swapfile for that buffer to keep large-file editing responsive.
+- **`quickfile`**: renders the first opened file's syntax before plugins finish loading, cutting the delay before text becomes visible on startup.
+
+`faster.nvim`'s `fastmacro` behaviour (disabling `lualine`/`mini.clue` while a macro plays) has no `snacks.bigfile`/`quickfile` equivalent and was dropped along with the plugin.
 
 ---
 
