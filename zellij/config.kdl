@@ -106,6 +106,9 @@ keybinds clear-defaults=true {
         bind "w" { SearchToggleOption "Wrap"; }
     }
     session {
+        bind "[" { FocusGuestSession; SwitchToMode "Normal"; }
+        bind "]" { FocusHostSession; SwitchToMode "Normal"; }
+        bind "f" { ToggleHostFullscreen; SwitchToMode "Normal"; }
         bind "a" {
             LaunchOrFocusPlugin "zellij:about" {
                 floating true
@@ -290,6 +293,8 @@ load_plugins {
 web_client {
     font "monospace"
 }
+
+nested_session_handling "descend" // or "fullscreent"; default is "ask"
 
 // Use a simplified UI without special fonts (arrow glyphs)
 // Options:
