@@ -19,5 +19,12 @@ return {
         end,
       })
     end
+
+    -- quickfix / loclist：收進底部面板，預設收合只顯示標題列
+    table.insert(opts.bottom, {
+      ft = "qf",
+      title = "QuickFix",
+      size = { height = 0.25 },
+    })
   end,
 }
