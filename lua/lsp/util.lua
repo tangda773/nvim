@@ -23,29 +23,10 @@ local function setup_keymaps(bufnr)
   -- Format / Diagnostics
   -- conform.nvim 替代為 formatter
   -- nmap("<leader>=", vim.lsp.buf.format, "LSP: Format")
-  map("n", "<leader>xe", vim.diagnostic.open_float, "[Diagnostics] Line diagnostics")
 
   -- Navigation（gd/gI/gr 已移至 fzf-lua <leader>ld/<leader>li/<leader>lr，避免 buffer-local 蓋掉全域 fuzzy 版本）
   map("n", "gD", vim.lsp.buf.declaration, "[LSP] Declaration")
   map("n", "<leader>lt", vim.lsp.buf.type_definition, "[LSP] Type definition")
-
-  -- Diagnostic jump
-  map("n", "]d", function()
-    vim.diagnostic.jump({ count = 1 })
-  end, "[LSP] Next diagnostic")
-  map("n", "[d", function()
-    vim.diagnostic.jump({ count = -1 })
-  end, "[LSP] Prev diagnostic")
-  map("n", "]e", function()
-    vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR })
-  end, "[LSP] Next error")
-  map("n", "[e", function()
-    vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR })
-  end, "[LSP] Prev error")
-
-  -- Diagnostics Quickfix/Loclist
-  map("n", "<leader>xq", vim.diagnostic.setqflist, "[Diagnostics] Send to quickfix")
-  map("n", "<leader>xl", vim.diagnostic.setloclist, "[Diagnostics] Send to loclist")
 
   -- Docs
   map("n", "gh", vim.lsp.buf.hover, "[LSP] Hover docs")
