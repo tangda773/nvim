@@ -18,9 +18,15 @@ local M = {}
 
 ---@alias CallHierarchyDirection 'incoming'|'outgoing'
 
+---@class CallHierarchySite
+---@field uri string file that contains the call expression
+---@field range { start: { line: integer, character: integer } }
+
 ---@class CallHierarchyResultEntry
 ---@field item CallHierarchyItem
 ---@field depth integer
+---@field chain CallHierarchyItem[] root → this node (root first)
+---@field sites CallHierarchySite[] call expressions of the edge parent → this node; empty for the root
 
 ---@class CallHierarchyStats
 ---@field hit_depth_limit? boolean true if any branch was cut off by max_depth
@@ -39,7 +45,7 @@ local M = {}
 local function get_client(bufnr)
   local clients = vim.lsp.get_clients({ bufnr = bufnr })
   for _, c in ipairs(clients) do
-    if c.supports_method('textDocument/prepareCallHierarchy') then
+    if c:supports_method('textDocument/prepareCallHierarchy', bufnr) then
       return c
     end
   end
@@ -70,6 +76,10 @@ end
 --- happen to reach the same function are NOT deduped against each other
 --- (see the "diamond" fan-in case), only true cycles on the same path are.
 ---
+--- `chain` is likewise copied per level. Every result carries its own
+--- root-to-node chain, so rendering never depends on the order in which the
+--- asynchronous LSP responses happen to arrive.
+---
 ---@param client vim.lsp.Client
 ---@param item CallHierarchyItem
 ---@param direction CallHierarchyDirection
@@ -77,10 +87,13 @@ end
 ---@param max_depth integer
 ---@param max_fanout integer
 ---@param path_seen table<string, boolean> dedup set scoped to this path only
+---@param chain CallHierarchyItem[] items from the root to the parent node; copied per level
+---@param sites CallHierarchySite[] call expressions of the edge parent → `item` (empty for the root)
 ---@param results CallHierarchyResultEntry[] flat accumulator, appended in place
 ---@param stats CallHierarchyStats accumulator for user-facing truncation notices
 ---@param callback fun() invoked once this subtree (and all descendants) resolves
-local function recurse(client, item, direction, depth, max_depth, max_fanout, path_seen, results, stats, callback)
+local function recurse(client, item, direction, depth, max_depth, max_fanout, path_seen, chain, sites, results, stats,
+                       callback)
   if depth > max_depth then
     stats.hit_depth_limit = true
     callback()
@@ -96,7 +109,10 @@ local function recurse(client, item, direction, depth, max_depth, max_fanout, pa
   local new_path_seen = vim.tbl_extend('force', {}, path_seen)
   new_path_seen[key] = true
 
-  table.insert(results, { item = item, depth = depth })
+  local new_chain = vim.list_slice(chain)
+  table.insert(new_chain, item)
+
+  table.insert(results, { item = item, depth = depth, chain = new_chain, sites = sites })
 
   local method = direction == 'incoming'
       and 'callHierarchy/incomingCalls'
@@ -127,8 +143,18 @@ local function recurse(client, item, direction, depth, max_depth, max_fanout, pa
     for _, entry in ipairs(res) do
       ---@diagnostic disable-next-line: undefined-field
       local child_item = direction == 'incoming' and entry.from or entry.to
+
+      -- `fromRanges` are positions inside the *caller* document:
+      --   incoming: the caller is the child (`entry.from`)
+      --   outgoing: the caller is the node being expanded (`item`)
+      local site_uri = direction == 'incoming' and child_item.uri or item.uri
+      local child_sites = {}
+      for _, rng in ipairs(entry.fromRanges or {}) do
+        table.insert(child_sites, { uri = site_uri, range = rng })
+      end
+
       recurse(client, child_item, direction, depth + 1, max_depth, max_fanout,
-        new_path_seen, results, stats, function()
+        new_path_seen, new_chain, child_sites, results, stats, function()
           pending = pending - 1
           if pending == 0 then
             callback()
@@ -138,39 +164,83 @@ local function recurse(client, item, direction, depth, max_depth, max_fanout, pa
   end)
 end
 
---- Renders the flat results list into the quickfix window. Each entry's
---- `text` includes the full root-to-node call chain (not just the immediate
---- parent), so the direct/indirect relationship is legible even without
---- relying on indentation alone.
+--- Returns a function that maps an item to a display label. Bare names are
+--- used whenever they are unambiguous within `results`; colliding names are
+--- qualified progressively:
+---   1. `dir.name`       (for Go the parent directory is the package name)
+---   2. `dir.name:line`  (when even that is ambiguous, e.g. same-named methods
+---                        on different receivers in one package)
+---@param results CallHierarchyResultEntry[]
+---@return fun(item: CallHierarchyItem): string
+local function build_labeler(results)
+  ---@param item CallHierarchyItem
+  local function qualified(item)
+    local dir = vim.fs.basename(vim.fs.dirname(vim.uri_to_fname(item.uri)))
+    return dir .. '.' .. item.name
+  end
+
+  ---@type table<string, table<string, boolean>> label → set of distinct node keys
+  local by_name, by_qual = {}, {}
+  for _, r in ipairs(results) do
+    local k = node_key(r.item)
+    local q = qualified(r.item)
+    by_name[r.item.name] = by_name[r.item.name] or {}
+    by_name[r.item.name][k] = true
+    by_qual[q] = by_qual[q] or {}
+    by_qual[q][k] = true
+  end
+
+  return function(item)
+    if vim.tbl_count(by_name[item.name]) <= 1 then
+      return item.name
+    end
+    local q = qualified(item)
+    if vim.tbl_count(by_qual[q]) <= 1 then
+      return q
+    end
+    return string.format('%s:%d', q, item.range.start.line + 1)
+  end
+end
+
+--- Renders the flat results list into the quickfix window.
+---
+--- Text: the full call chain with `→` meaning "calls".
+---   incoming: deeper entries are callers, so the chain is reversed
+---             (caller first, root last): `startSockets → Run → RecvAny`
+---   outgoing: deeper entries are callees, so root-first already reads as
+---             "calls": `Run → readLoop → RecvAny`
+---
+--- Location: the call expression of the edge (one quickfix entry per call
+--- site, so `:cnext` visits every place the call happens). The root, which has
+--- no incoming edge, points at its own definition.
 ---@param results CallHierarchyResultEntry[]
 ---@param title string
-local function render_qf(results, title)
+---@param direction CallHierarchyDirection
+local function render_qf(results, title, direction)
+  local label = build_labeler(results)
   local qf_items = {}
-  ---@type table<integer, string> path_stack[depth] = name
-  local path_stack = {}
 
   for _, r in ipairs(results) do
-    path_stack[r.depth] = r.item.name
-    for d = r.depth + 1, #path_stack do
-      path_stack[d] = nil
+    local text
+    if r.depth == 0 then
+      text = label(r.item)
+    else
+      local names = vim.tbl_map(label, r.chain)
+      if direction == 'incoming' then
+        names = vim.iter(names):rev():totable()
+      end
+      text = string.rep('  ', r.depth) .. table.concat(names, ' → ')
     end
 
-    local chain = {}
-    for d = 0, r.depth do
-      table.insert(chain, path_stack[d])
+    local sites = #r.sites > 0 and r.sites or { { uri = r.item.uri, range = r.item.range } }
+    for _, s in ipairs(sites) do
+      table.insert(qf_items, {
+        filename = vim.uri_to_fname(s.uri),
+        lnum = s.range.start.line + 1,
+        col = s.range.start.character + 1,
+        text = text,
+      })
     end
-
-    local indent = string.rep('  ', r.depth)
-    local text = r.depth == 0
-        and r.item.name
-        or string.format('%s%s  ← %s', indent, r.item.name, table.concat(chain, ' ← ', 1, r.depth))
-
-    table.insert(qf_items, {
-      filename = vim.uri_to_fname(r.item.uri),
-      lnum = r.item.range.start.line + 1,
-      col = r.item.range.start.character + 1,
-      text = text,
-    })
   end
 
   vim.fn.setqflist({}, ' ', { title = title, items = qf_items })
@@ -214,10 +284,10 @@ function M.run(direction, opts)
     ---@type CallHierarchyStats
     local stats = {}
 
-    recurse(client, root, direction, 0, max_depth, max_fanout, {}, results, stats, function()
+    recurse(client, root, direction, 0, max_depth, max_fanout, {}, {}, {}, results, stats, function()
       vim.schedule(function()
         local title = direction == 'incoming' and 'Incoming Calls' or 'Outgoing Calls'
-        render_qf(results, title)
+        render_qf(results, title, direction)
 
         if stats.hit_depth_limit then
           vim.notify(
@@ -243,6 +313,7 @@ M._internal = {
   recurse = recurse,
   render_qf = render_qf,
   node_key = node_key,
+  build_labeler = build_labeler,
 }
 
 return M
