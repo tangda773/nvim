@@ -163,6 +163,9 @@ zinit light zsh-users/zsh-history-substring-search
 # ==============================================================
 # 7. 工具初始化（需要在 compinit 之後）
 # ==============================================================
+#
+# 移除從父 shell 繼承的 fnm 目錄，避免巢狀 shell 時 PATH 越來越長
+path=(${path:#*/fnm_multishells/*})
 
 # fnm 環境（--use-on-cd：進入有 .nvmrc / .node-version 的目錄自動切換版本）
 eval "$(fnm env --use-on-cd --version-file-strategy recursive --shell zsh)"
